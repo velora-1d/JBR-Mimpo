@@ -1,0 +1,10 @@
+
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Simplified representation of the logo -->
+  <circle cx="256" cy="180" r="100" fill="#4CAF50"/>
+  <path d="M256 80C210.7 80 174 124.8 174 180C174 235.2 210.7 280 256 280C301.3 280 338 235.2 338 180C338 124.8 301.3 80 256 80Z" stroke="white" stroke-width="4"/>
+  <path d="M156 180C156 180 200 140 256 140C312 140 356 180 356 180" stroke="white" stroke-width="4"/>
+  <path d="M156 180C156 180 200 220 256 220C312 220 356 180 356 180" stroke="white" stroke-width="4"/>
+  <text x="256" y="380" font-family="Arial" font-size="64" font-weight="bold" fill="#2E7D32" text-anchor="middle">Jabbar23</text>
+  <text x="256" y="440" font-family="Arial" font-size="24" fill="#689F38" text-anchor="middle">internet service provider</text>
+</svg>
