@@ -1,0 +1,24 @@
+# Root .gitignore
+JBR MImpo Bahan/
+.gemini/
+.DS_Store
+.vscode/
+.idea/
+.env
+.env.local
+node_modules/
+dist/
+build/
+bin/
+obj/
+.flutter-plugins
+.flutter-plugins-dependencies
+.dart_tool/
+.packages
+.pub/
+.pub-cache/
+**/node_modules/
+**/build/
+**/dist/
+**/bin/
+**/obj/

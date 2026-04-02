@@ -1,0 +1,42 @@
+{
+  "name": "jbr-mimpo",
+  "description": "Dashboard Admin dan App Mobile JBR Mimpo dengan Backend Golang",
+  "version": "1.0.0",
+  "lastUpdated": "2026-04-02",
+
+  "stack": {
+    "frontend": "next.js-14",
+    "backend": "golang-gin",
+    "database": "postgresql-16",
+    "orm": "gorm",
+    "auth": "jwt-otp-wa",
+    "realtime": "websocket",
+    "mobile": "flutter-3"
+  },
+
+  "mode": "api+frontend+mobile",
+  "platform": ["web", "mobile"],
+  "multiTenant": false,
+  "tenantStrategy": null,
+
+  "scale": "medium",
+  "team": "solo",
+
+  "hosting": {
+    "development": "local",
+    "staging": null,
+    "production": "vps-docker"
+  },
+
+  "infraBudget": "pro-tier",
+
+  "activeRules": [
+    "golang-be",
+    "nextjs-frontend",
+    "flutter-mobile",
+    "postgresql",
+    "redis"
+  ],
+
+  "notes": "Project JBR Mimpo (ISP Mobile App). Referensi brief: PROJECT_BRIEF_JABBAR23.md."
+}
