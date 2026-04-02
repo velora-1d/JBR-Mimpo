@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&amp;family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&amp;family=JetBrains+Mono:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;family=Manrope:wght@400;500;600&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "outline": "#6c7a71",
+              "on-tertiary": "#ffffff",
+              "tertiary-container": "#71a1ff",
+              "surface": "#faf8ff",
+              "on-surface": "#131b2e",
+              "on-tertiary-fixed-variant": "#004395",
+              "on-primary-container": "#00422b",
+              "on-error": "#ffffff",
+              "error": "#ba1a1a",
+              "on-primary": "#ffffff",
+              "surface-variant": "#dae2fd",
+              "surface-tint": "#006c49",
+              "secondary-fixed-dim": "#68dba9",
+              "secondary-container": "#82f5c1",
+              "on-surface-variant": "#3c4a42",
+              "primary-fixed-dim": "#4edea3",
+              "on-primary-fixed": "#002113",
+              "surface-container-high": "#e2e7ff",
+              "secondary": "#006c4a",
+              "outline-variant": "#bbcabf",
+              "surface-container-highest": "#dae2fd",
+              "inverse-surface": "#283044",
+              "surface-container": "#eaedff",
+              "primary-fixed": "#6ffbbe",
+              "inverse-primary": "#4edea3",
+              "secondary-fixed": "#85f8c4",
+              "on-primary-fixed-variant": "#005236",
+              "on-secondary-container": "#00714e",
+              "on-background": "#131b2e",
+              "on-secondary-fixed": "#002114",
+              "tertiary-fixed-dim": "#adc6ff",
+              "tertiary-fixed": "#d8e2ff",
+              "error-container": "#ffdad6",
+              "primary": "#006c49",
+              "background": "#faf8ff",
+              "on-secondary-fixed-variant": "#005137",
+              "on-tertiary-fixed": "#001a42",
+              "on-error-container": "#93000a",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#00367a",
+              "on-secondary": "#ffffff",
+              "primary-container": "#10b981",
+              "tertiary": "#005ac2",
+              "surface-dim": "#d2d9f4",
+              "surface-bright": "#faf8ff",
+              "surface-container-low": "#f2f3ff",
+              "inverse-on-surface": "#eef0ff"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Manrope"],
+              "label": ["Space Grotesk"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "3xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .mono-text {
+        font-family: 'JetBrains Mono', monospace;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen font-body">
+<!-- TopAppBar -->
+<header class="bg-[#faf8ff] dark:bg-slate-950 fixed top-0 w-full z-50 flex items-center justify-between px-6 py-4 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-500 dark:text-emerald-400">arrow_back</span>
+<h1 class="text-xl font-bold text-emerald-600 dark:text-emerald-400 font-headline">Promo Spesial</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:bg-slate-100 dark:hover:bg-slate-800 p-2 rounded-full transition-transform duration-200 active:scale-95">
+<span class="material-symbols-outlined text-emerald-500 dark:text-emerald-400">search</span>
+</button>
+</div>
+</header>
+<main class="pt-24 pb-32 px-4 space-y-6">
+<!-- Search & Filter Bar -->
+<section class="flex gap-3">
+<div class="flex-1 flex items-center bg-surface-container-highest rounded-2xl px-4 py-3 gap-3 focus-within:ring-2 focus-within:ring-tertiary transition-all">
+<span class="material-symbols-outlined text-outline-variant">search</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-sm font-medium" placeholder="Cari promo menarik..." type="text"/>
+</div>
+<button class="bg-surface-container-highest p-3.5 rounded-2xl text-primary hover:bg-primary-container/20 transition-colors">
+<span class="material-symbols-outlined">tune</span>
+</button>
+</section>
+<!-- Category Pills (Design Extension) -->
+<section class="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 no-scrollbar">
+<span class="px-5 py-2 bg-primary text-on-primary rounded-full text-sm font-bold whitespace-nowrap">Semua Promo</span>
+<span class="px-5 py-2 bg-surface-container-low text-on-surface-variant rounded-full text-sm font-medium whitespace-nowrap">Internet</span>
+<span class="px-5 py-2 bg-surface-container-low text-on-surface-variant rounded-full text-sm font-medium whitespace-nowrap">Hiburan</span>
+<span class="px-5 py-2 bg-surface-container-low text-on-surface-variant rounded-full text-sm font-medium whitespace-nowrap">Pembayaran</span>
+</section>
+<!-- Promo Cards List -->
+<div class="space-y-6">
+<!-- Promo Card 1: Upgrade Speed -->
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.04)] group transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<img alt="Upgrade Speed Promo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Futuristic high-speed fiber optic cables glowing with electric blue and emerald green lights in a dark server room environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHE8VyGD8o7QhhQ0WAuZCWP5NKktJFWrVqfAy6BK_1DeZBKtv-hLCu67GKcLrdX-tmJw1ZzZTVA2ft_0zg4cXDspxLvqRWdVYif2087eWShzSJDrQz6JHmS5kGRQlSSXhJZSlIn0sDVzRc3LyJnHu_O8GH9ZVaYNpBkFl5Q1s9_dBuBbibOAxhy4Z0_VdjDv9ptVI7NCvapAssGCCAbld_41-Dl1rFg7B0GYisyMKtxCS-7vSO7beln06Qq248qgvlsYM8veqHhAJ-"/>
+<div class="absolute top-4 left-4">
+<div class="bg-emerald-100/90 backdrop-blur-md text-emerald-700 px-4 py-1.5 rounded-full flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">timer</span>
+<span class="mono-text font-bold text-xs tracking-wider">02 : 14 : 55</span>
+</div>
+</div>
+<div class="absolute bottom-4 right-4">
+<span class="bg-tertiary text-on-tertiary px-3 py-1 rounded-lg font-label text-[10px] font-bold uppercase tracking-widest">Flash Sale</span>
+</div>
+</div>
+<div class="p-5 space-y-4">
+<div>
+<h3 class="font-headline text-lg font-bold text-on-surface leading-tight">Turbo Upgrade: Naik ke 100Mbps</h3>
+<p class="text-sm text-on-surface-variant mt-1">Nikmati kecepatan internet tanpa batas dengan potongan harga hingga 50% untuk 3 bulan pertama.</p>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="flex flex-col">
+<span class="text-xs text-outline line-through">Rp 450.000</span>
+<span class="text-xl font-bold text-primary font-headline">Rp 225.000</span>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-2xl font-bold text-sm hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20">Lihat Detail</button>
+</div>
+</div>
+</div>
+<!-- Promo Card 2: Bill Discount -->
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.04)] group transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<img alt="Bill Discount Promo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Abstract vibrant composition of floating digital coins and credit cards with emerald gradients and soft geometric shapes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1QzpcEM0M84y87NkXc46OZuaSri-ERavaeYSBRPFYM9j0TE7XsBFD84mbh0dLOr7ZtthBl7kmPmTYp6d0rukFi4iOcqqiUSMaVcpSU137r3K4RUkLDMesmDWwd0ev1A5olBsJD8yt6tMf2PG_suMnjBStq1r0f6YXsyIWxl_p49feEodCkzRs0sE0Q5Dmz0l_AK17SCuYOhPF-vGHBx5mrjpqLUo5Qa53ZrnuHbyF_LEPA5rrgcYTKmFuCrLAvmVngRY-Zuy7mPMH"/>
+<div class="absolute top-4 left-4">
+<div class="bg-emerald-100/90 backdrop-blur-md text-emerald-700 px-4 py-1.5 rounded-full flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">timer</span>
+<span class="mono-text font-bold text-xs tracking-wider">08 : 42 : 10</span>
+</div>
+</div>
+</div>
+<div class="p-5 space-y-4">
+<div>
+<h3 class="font-headline text-lg font-bold text-on-surface leading-tight">Cashback Tagihan Akhir Bulan</h3>
+<p class="text-sm text-on-surface-variant mt-1">Gunakan kode promo <span class="font-bold text-tertiary">HEMATJBR</span> untuk diskon tagihan instan sebesar Rp 50rb.</p>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="flex flex-col">
+<span class="text-xs text-outline">Potongan s/d</span>
+<span class="text-xl font-bold text-primary font-headline">Rp 50.000</span>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-2xl font-bold text-sm hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20">Lihat Detail</button>
+</div>
+</div>
+</div>
+<!-- Promo Card 3: New Sub (Design extension) -->
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.04)] group transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<img alt="New Subscriber Promo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Happy family sitting in a bright modern living room using multiple digital devices together with warm sunlight streaming through large windows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD__iztV8hbFwQXDnt1z_x2p5SR8xY7Kt_6ti1pH8stvtzYIU-Ep4tQqtytuh-tBvP7m4clw4mgVBXVHZvN5Sp5KjDLbepfp6c1AXhe_unSjCc22Lc1VSoXMftmJq00iPWrPPyFpvl6r7JASe0fPvYp_8Uxg8a-zNtTa1CKaHkuiuOpoZCVfFxWb8X7oASVLBxpmUMAzGaw9zk2k-jC6Bh7wjHlmYqz4lVjrVi0TJoQc39wSA4yKn-dbL6eS1tyMi3uZcSLoxiOXOAr"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-4 left-4 text-white">
+<p class="text-xs font-medium opacity-80">Eksklusif Pelanggan Baru</p>
+<h4 class="text-lg font-bold">Gratis Pasang &amp; Router 5G</h4>
+</div>
+</div>
+<div class="p-5">
+<div class="flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-200 flex items-center justify-center text-[10px] font-bold">JD</div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-emerald-200 flex items-center justify-center text-[10px] font-bold">SK</div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-blue-200 flex items-center justify-center text-[10px] font-bold">+12</div>
+</div>
+<p class="text-[10px] text-on-surface-variant font-medium">124 orang sudah klaim</p>
+</div>
+<button class="w-full mt-4 bg-surface-container-low text-primary py-3 rounded-2xl font-bold text-sm hover:bg-primary-container/20 transition-all">Lihat Syarat &amp; Ketentuan</button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-3xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)] flex justify-around items-center px-4 pb-6 pt-3">
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-emerald-500 transition-colors scale-98 active:translate-y-0.5 transition-all">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[10px] font-medium font-body mt-1">Beranda</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 rounded-2xl px-5 py-2 scale-98 active:translate-y-0.5 transition-all">
+<span class="material-symbols-outlined" data-icon="local_offer" style="font-variation-settings: 'FILL' 1;">local_offer</span>
+<span class="text-[10px] font-medium font-body mt-1">Promo</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-emerald-500 transition-colors scale-98 active:translate-y-0.5 transition-all">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+<span class="text-[10px] font-medium font-body mt-1">Bantuan</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-emerald-500 transition-colors scale-98 active:translate-y-0.5 transition-all">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] font-medium font-body mt-1">Akun</span>
+</div>
+</nav>
+</body></html>

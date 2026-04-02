@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JBR Minpo - Berita &amp; Informasi</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=DM+Sans:wght@400;500;700&amp;family=JetBrains+Mono&amp;family=Plus+Jakarta+Sans:wght@700&amp;family=Manrope:wght@400;500;600&amp;family=Space+Grotesk:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        .glass-glow {
+            box-shadow: inset 0 1px 1px 0 rgba(111, 251, 190, 0.3);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "surface-container-lowest": "#ffffff",
+                "secondary-container": "#82f5c1",
+                "surface-container-high": "#e2e7ff",
+                "outline": "#6c7a71",
+                "on-surface-variant": "#3c4a42",
+                "on-secondary": "#ffffff",
+                "on-error": "#ffffff",
+                "tertiary-fixed-dim": "#adc6ff",
+                "primary-container": "#10b981",
+                "on-secondary-fixed-variant": "#005137",
+                "on-secondary-container": "#00714e",
+                "tertiary-fixed": "#d8e2ff",
+                "on-tertiary-fixed-variant": "#004395",
+                "surface-container": "#eaedff",
+                "tertiary": "#005ac2",
+                "on-tertiary": "#ffffff",
+                "surface-variant": "#dae2fd",
+                "surface-container-highest": "#dae2fd",
+                "primary": "#006c49",
+                "inverse-surface": "#283044",
+                "on-primary-fixed-variant": "#005236",
+                "error-container": "#ffdad6",
+                "background": "#faf8ff",
+                "surface-dim": "#d2d9f4",
+                "surface-container-low": "#f2f3ff",
+                "secondary": "#006c4a",
+                "secondary-fixed-dim": "#68dba9",
+                "error": "#ba1a1a",
+                "inverse-primary": "#4edea3",
+                "on-surface": "#131b2e",
+                "on-tertiary-container": "#00367a",
+                "surface-tint": "#006c49",
+                "on-secondary-fixed": "#002114",
+                "tertiary-container": "#71a1ff",
+                "on-primary-fixed": "#002113",
+                "on-primary-container": "#00422b",
+                "secondary-fixed": "#85f8c4",
+                "on-primary": "#ffffff",
+                "on-tertiary-fixed": "#001a42",
+                "outline-variant": "#bbcabf",
+                "inverse-on-surface": "#eef0ff",
+                "primary-fixed-dim": "#4edea3",
+                "primary-fixed": "#6ffbbe",
+                "surface": "#faf8ff",
+                "on-error-container": "#93000a",
+                "on-background": "#131b2e",
+                "surface-bright": "#faf8ff"
+              },
+              fontFamily: {
+                "headline": ["Sora", "Plus Jakarta Sans"],
+                "body": ["DM Sans", "Manrope"],
+                "label": ["JetBrains Mono", "Space Grotesk"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body antialiased pb-32">
+<!-- Top Navigation Anchor -->
+<header class="bg-emerald-50/80 dark:bg-slate-950/80 backdrop-blur-xl fixed top-0 w-full z-50 shadow-sm dark:shadow-none flex items-center justify-between px-6 h-16 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-600 dark:text-emerald-400" data-icon="menu">menu</span>
+<h1 class="text-xl font-bold tracking-tight text-emerald-700 dark:text-emerald-400 font-headline">JBR Minpo</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-emerald-600 dark:text-emerald-400 hover:opacity-80 transition-opacity active:scale-90 duration-200" data-icon="notifications">notifications</span>
+</div>
+</header>
+<main class="mt-20 px-4 flex flex-col gap-6">
+<!-- Search & Filter Section -->
+<section class="flex flex-col gap-4">
+<div class="relative group">
+<input class="w-full h-14 pl-12 pr-4 bg-surface-container-lowest border-none rounded-xl shadow-sm text-on-surface focus:ring-2 focus:ring-primary-container transition-all font-body" placeholder="Cari info..." type="text"/>
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+</div>
+<!-- Filter Chips -->
+<div class="flex overflow-x-auto gap-3 pb-2 no-scrollbar -mx-4 px-4">
+<button class="flex-none px-6 py-2.5 rounded-full bg-primary-container text-on-primary font-headline text-sm font-bold shadow-sm">Semua</button>
+<button class="flex-none px-6 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant font-headline text-sm font-bold hover:bg-surface-container-highest transition-colors">Gangguan</button>
+<button class="flex-none px-6 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant font-headline text-sm font-bold hover:bg-surface-container-highest transition-colors">Maintenance</button>
+<button class="flex-none px-6 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant font-headline text-sm font-bold hover:bg-surface-container-highest transition-colors">Info Umum</button>
+</div>
+</section>
+<!-- List Content -->
+<div class="flex flex-col gap-5">
+<!-- Card 2 (Pinned) - High Priority -->
+<article class="bg-emerald-50 dark:bg-emerald-950/20 rounded-2xl p-5 shadow-[0_8px_20px_-10px_rgba(16,185,129,0.15)] border-l-4 border-primary relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label text-[10px] font-bold uppercase tracking-wider">Info Umum</span>
+<span class="material-symbols-outlined text-primary text-lg" data-icon="push_pin" style="font-variation-settings: 'FILL' 1;">push_pin</span>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-12 h-12 flex-none rounded-xl bg-white flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="card_giftcard" style="font-variation-settings: 'FILL' 1;">card_giftcard</span>
+</div>
+<div class="flex flex-col">
+<h2 class="text-lg font-headline font-bold leading-tight text-on-surface mb-2">Promo Upgrade Kecepatan</h2>
+<p class="text-sm font-body text-on-surface-variant line-clamp-2">Dapatkan upgrade kecepatan hingga 100Mbps dengan harga spesial untuk seluruh pelanggan setia JBR Minpo.</p>
+<p class="text-[11px] font-label text-outline mt-3 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span> 
+                            SELAMANYA
+                        </p>
+</div>
+</div>
+<!-- Decorative element -->
+<div class="absolute -right-6 -bottom-6 w-24 h-24 bg-primary/5 rounded-full blur-2xl"></div>
+</article>
+<!-- Card 1 (Maintenance) -->
+<article class="bg-surface-container-lowest rounded-2xl p-5 shadow-sm border border-outline-variant/10 active:scale-98 transition-all">
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 rounded-full bg-tertiary-container/30 text-tertiary font-label text-[10px] font-bold uppercase tracking-wider">Maintenance</span>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-12 h-12 flex-none rounded-xl bg-surface-container-low flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary text-2xl" data-icon="build" style="font-variation-settings: 'FILL' 1;">build</span>
+</div>
+<div class="flex flex-col">
+<h2 class="text-lg font-headline font-bold leading-tight text-on-surface mb-1">Pemeliharaan Jaringan Area Jakarta Selatan</h2>
+<div class="flex items-center gap-3 mt-2">
+<span class="text-[11px] font-label text-on-tertiary-container bg-tertiary-fixed px-2 py-0.5 rounded">Kamis, 24 Okt</span>
+<span class="text-[11px] font-label text-outline">00:00 - 04:00 WIB</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 3 (Gangguan) -->
+<article class="bg-surface-container-lowest rounded-2xl p-5 shadow-sm border border-outline-variant/10">
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 rounded-full bg-error-container text-on-error-container font-label text-[10px] font-bold uppercase tracking-wider">Gangguan</span>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-12 h-12 flex-none rounded-xl bg-error-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-error text-2xl" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div class="flex flex-col">
+<h2 class="text-lg font-headline font-bold leading-tight text-on-surface mb-1">Laporan Gangguan Massal Bekasi</h2>
+<p class="text-sm font-body text-on-surface-variant">Tim teknis sedang melakukan pengecekan kabel backbone yang terdampak pekerjaan jalan di area Harapan Indah.</p>
+<p class="text-[11px] font-label text-outline mt-3">Sedang Ditangani • Diperbarui 5 menit yang lalu</p>
+</div>
+</div>
+</article>
+<!-- Placeholder for Infinite Scroll -->
+<div class="py-8 flex flex-col items-center justify-center gap-3">
+<div class="flex gap-1.5">
+<div class="w-2 h-2 rounded-full bg-primary-container animate-bounce"></div>
+<div class="w-2 h-2 rounded-full bg-primary-container animate-bounce [animation-delay:-0.15s]"></div>
+<div class="w-2 h-2 rounded-full bg-primary-container animate-bounce [animation-delay:-0.3s]"></div>
+</div>
+<span class="text-xs font-label text-outline uppercase tracking-widest">Memuat Informasi Lainnya</span>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pt-3 pb-8 bg-white/70 dark:bg-slate-900/70 backdrop-blur-2xl rounded-t-[2rem] border-t border-white/20 shadow-[0_-8px_30px_rgb(0,0,0,0.04)]">
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-emerald-500 transition-colors scale-98 active:translate-y-1 transition-all">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="Sora text-[10px] font-bold uppercase tracking-wider mt-1">Home</span>
+</div>
+<!-- Active Item (Berita) -->
+<div class="flex flex-col items-center justify-center text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 rounded-2xl px-4 py-2 scale-98 active:translate-y-1 transition-all">
+<span class="material-symbols-outlined" data-icon="campaign">campaign</span>
+<span class="Sora text-[10px] font-bold uppercase tracking-wider mt-1">Berita</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-emerald-500 transition-colors scale-98 active:translate-y-1 transition-all">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="Sora text-[10px] font-bold uppercase tracking-wider mt-1">Layanan</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-emerald-500 transition-colors scale-98 active:translate-y-1 transition-all">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="Sora text-[10px] font-bold uppercase tracking-wider mt-1">Profil</span>
+</div>
+</nav>
+<!-- Custom Gradient Textures for Ethereal look -->
+<div class="fixed inset-0 pointer-events-none -z-10">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-[0.03]" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBWlEqeVZa9ewNOnxeEkaMGfeqrbH8bRMJ1g03DE4hNBGoKbNezWa02McEzcjBO4FFXVDRAOQwQK0ECbDQMgsGUZ6iXjAwecVFdPV7DBfdOgkqhbBHwZYPmBtWGYkVoSdb0aul5Nwd8IaLZPouYH6yjzdbArhR1-LpJjycgE7FqS4U0qIuBwhVRFHA5IgSTSae_o8yX5byFQDR6gPIQmTFH9F0w1oYoO1bQoKDVhFZdwDsAJNIs_4f5p3QvQo13bwudNW5xlzeFg5Nc')"></div>
+<div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 rounded-full blur-[100px]"></div>
+<div class="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-tertiary/5 rounded-full blur-[100px]"></div>
+</div>
+</body></html>

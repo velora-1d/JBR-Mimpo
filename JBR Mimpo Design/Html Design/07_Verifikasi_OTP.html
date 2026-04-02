@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;family=JetBrains+Mono:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Manrope:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-variant": "#dae2fd",
+                        "surface-container": "#eaedff",
+                        "tertiary-fixed-dim": "#adc6ff",
+                        "surface-container-low": "#f2f3ff",
+                        "on-primary": "#ffffff",
+                        "background": "#faf8ff",
+                        "surface": "#faf8ff",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#85f8c4",
+                        "inverse-primary": "#4edea3",
+                        "tertiary-fixed": "#d8e2ff",
+                        "primary-fixed": "#6ffbbe",
+                        "on-secondary-fixed-variant": "#005137",
+                        "surface-bright": "#faf8ff",
+                        "secondary-container": "#82f5c1",
+                        "tertiary": "#005ac2",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#71a1ff",
+                        "surface-tint": "#006c49",
+                        "on-surface-variant": "#3c4a42",
+                        "secondary-fixed-dim": "#68dba9",
+                        "primary-container": "#10b981",
+                        "outline": "#6c7a71",
+                        "on-secondary-container": "#00714e",
+                        "primary": "#006c49",
+                        "outline-variant": "#bbcabf",
+                        "secondary": "#006c4a",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#004395",
+                        "surface-container-highest": "#dae2fd",
+                        "on-tertiary-fixed": "#001a42",
+                        "on-primary-container": "#00422b",
+                        "inverse-on-surface": "#eef0ff",
+                        "on-surface": "#131b2e",
+                        "on-primary-fixed-variant": "#005236",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#002114",
+                        "on-primary-fixed": "#002113",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#00367a",
+                        "on-background": "#131b2e",
+                        "primary-fixed-dim": "#4edea3",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e2e7ff",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#d2d9f4",
+                        "inverse-surface": "#283044"
+                    },
+                    fontFamily: {
+                        "headline": ["Sora", "Plus Jakarta Sans", "sans-serif"],
+                        "body": ["DM Sans", "Manrope", "sans-serif"],
+                        "label": ["JetBrains Mono", "Space Grotesk", "monospace"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "16px",
+                        "xl": "24px",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(218, 226, 253, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(111, 251, 190, 0.3);
+        }
+        .otp-input-active {
+            border: 2px solid #10b981;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 bg-[#faf8ff] dark:bg-slate-950 flex items-center px-6 h-16 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined text-emerald-600 dark:text-emerald-400">arrow_back</span>
+</button>
+<h1 class="text-emerald-600 font-bold font-headline text-lg tracking-tight">Verifikasi</h1>
+</div>
+</header>
+<main class="flex-1 max-w-md mx-auto w-full px-6 pt-4 pb-12">
+<!-- Upper Section: Illustration -->
+<section class="flex flex-col items-center mb-10 text-center">
+<div class="relative w-64 h-64 mb-8">
+<!-- 3D Illustration Placeholder Simulation -->
+<div class="absolute inset-0 bg-gradient-to-tr from-primary-container/20 to-tertiary-container/10 rounded-full blur-3xl opacity-50"></div>
+<img alt="Illustration" class="relative z-10 w-full h-full object-contain" data-alt="premium 3D glossy emerald green smartphone with a large floating glassy checkmark icon soft claymorphism style bright studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv37mfXRxOuAl51kjWVDjgacsvWVzDtFJ24iUG-LDA4MsQopdKF-HR7ELFAiG3ez7wunl4g9Mi4JuLPnoFeWYYDQhIUb54JyK_UpzL4DKI6zLfAQQbtvw4_JTBfIg_W-d-F9EOKEBewM-n1vNnOPBdlBjY-Vjw_0RyuNRgdIbTM6tmZnWYuE0pnaPg5baAG3IXfkphINO6IdFWz8KaECLbV8kRMeFGBxstu1l_HUh5gRb111LecBydQhmPQfiPfjAP775aR5VFfVfW"/>
+</div>
+<h2 class="font-headline font-bold text-2xl text-on-background mb-3 tracking-tight">
+                Verifikasi Nomor Kamu
+            </h2>
+<p class="text-on-surface-variant text-sm px-4">
+                Kode OTP dikirim via WhatsApp ke <span class="font-bold text-on-surface">0812****</span>
+</p>
+</section>
+<!-- OTP Input Section -->
+<section class="mb-10">
+<div class="flex justify-between gap-2 max-w-sm mx-auto">
+<!-- Box 1 Active -->
+<div class="w-12 h-14 md:w-14 md:h-16 flex items-center justify-center rounded-lg bg-surface-container-highest otp-input-active">
+<span class="font-label text-2xl font-bold text-primary">8</span>
+</div>
+<!-- Box 2 -->
+<div class="w-12 h-14 md:w-14 md:h-16 flex items-center justify-center rounded-lg bg-surface-container-low transition-all border border-transparent">
+<span class="font-label text-2xl font-bold text-on-surface">3</span>
+</div>
+<!-- Box 3 -->
+<div class="w-12 h-14 md:w-14 md:h-16 flex items-center justify-center rounded-lg bg-surface-container-low">
+<span class="font-label text-2xl font-bold text-on-surface-variant opacity-30">|</span>
+</div>
+<!-- Box 4 -->
+<div class="w-12 h-14 md:w-14 md:h-16 flex items-center justify-center rounded-lg bg-surface-container-low"></div>
+<!-- Box 5 -->
+<div class="w-12 h-14 md:w-14 md:h-16 flex items-center justify-center rounded-lg bg-surface-container-low"></div>
+<!-- Box 6 -->
+<div class="w-12 h-14 md:w-14 md:h-16 flex items-center justify-center rounded-lg bg-surface-container-low"></div>
+</div>
+</section>
+<!-- Actions Section -->
+<section class="flex flex-col items-center gap-6">
+<div class="flex flex-col items-center gap-1">
+<span class="font-label text-primary font-bold text-lg tracking-widest">00:59</span>
+<p class="text-xs text-on-surface-variant">Mohon tunggu sebelum mengirim ulang</p>
+</div>
+<button class="text-tertiary font-semibold text-sm hover:opacity-80 transition-opacity active:scale-95">
+                Kirim Ulang Kode
+            </button>
+</section>
+</main>
+<!-- Bottom Actions -->
+<footer class="mt-auto px-6 pb-10 max-w-md mx-auto w-full">
+<button class="w-full bg-primary-container text-on-primary-container font-headline font-bold py-4 rounded-lg shadow-[0_8px_20px_rgba(16,185,129,0.15)] active:scale-98 transition-all duration-150">
+            Verifikasi
+        </button>
+<p class="text-center text-[10px] text-on-surface-variant mt-6 px-8 leading-relaxed">
+            Dengan melanjutkan, kamu menyetujui <span class="text-primary font-medium">Syarat &amp; Ketentuan</span> serta <span class="text-primary font-medium">Kebijakan Privasi</span> JBR Minpo.
+        </p>
+</footer>
+<!-- No BottomNavBar rendered as per "Destination Rule" (Task-Focused OTP screen hides global nav) -->
+</body></html>

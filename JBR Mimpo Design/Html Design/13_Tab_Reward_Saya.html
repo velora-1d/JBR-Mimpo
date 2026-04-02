@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Loyalty &amp; Rewards</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=DM+Sans:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;family=Manrope:wght@400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error": "#ffffff",
+              "surface": "#faf8ff",
+              "on-secondary-container": "#00714e",
+              "surface-dim": "#d2d9f4",
+              "surface-tint": "#006c49",
+              "on-primary-fixed": "#002113",
+              "on-secondary-fixed": "#002114",
+              "secondary-fixed-dim": "#68dba9",
+              "on-surface-variant": "#3c4a42",
+              "secondary": "#006c4a",
+              "on-primary": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-fixed-variant": "#004395",
+              "error-container": "#ffdad6",
+              "surface-container-low": "#f2f3ff",
+              "secondary-container": "#82f5c1",
+              "primary": "#006c49",
+              "primary-fixed": "#6ffbbe",
+              "on-tertiary-fixed": "#001a42",
+              "tertiary-fixed-dim": "#adc6ff",
+              "on-error-container": "#93000a",
+              "inverse-surface": "#283044",
+              "primary-container": "#10b981",
+              "outline": "#6c7a71",
+              "surface-container": "#eaedff",
+              "surface-variant": "#dae2fd",
+              "on-secondary": "#ffffff",
+              "secondary-fixed": "#85f8c4",
+              "inverse-primary": "#4edea3",
+              "on-tertiary-container": "#00367a",
+              "on-surface": "#131b2e",
+              "error": "#ba1a1a",
+              "tertiary": "#005ac2",
+              "surface-container-highest": "#dae2fd",
+              "primary-fixed-dim": "#4edea3",
+              "tertiary-fixed": "#d8e2ff",
+              "on-tertiary": "#ffffff",
+              "surface-container-high": "#e2e7ff",
+              "on-primary-container": "#00422b",
+              "background": "#faf8ff",
+              "on-primary-fixed-variant": "#005236",
+              "outline-variant": "#bbcabf",
+              "tertiary-container": "#71a1ff",
+              "on-secondary-fixed-variant": "#005137",
+              "on-background": "#131b2e",
+              "surface-bright": "#faf8ff",
+              "inverse-on-surface": "#eef0ff"
+            },
+            fontFamily: {
+              "headline": ["Sora", "Plus Jakarta Sans"],
+              "body": ["DM Sans", "Manrope"],
+              "label": ["JetBrains Mono", "Space Grotesk"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(111, 251, 190, 0.3);
+      }
+      body {
+        font-family: 'DM Sans', sans-serif;
+        background-color: #faf8ff;
+      }
+      h1, h2, h3 {
+        font-family: 'Sora', sans-serif;
+      }
+      .mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#faf8ff] dark:bg-slate-950 flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-slate-500 hover:bg-slate-100 p-2 rounded-full transition-colors active:scale-95" data-icon="arrow_back">arrow_back</button>
+<h1 class="text-xl font-bold text-emerald-600 dark:text-emerald-400">Loyalty &amp; Rewards</h1>
+</div>
+<button class="material-symbols-outlined text-slate-500 hover:bg-slate-100 p-2 rounded-full transition-colors active:scale-95" data-icon="notifications">notifications</button>
+</header>
+<main class="mt-20 px-4 space-y-8">
+<!-- Hero: Points Card -->
+<section class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary to-emerald-700 p-6 shadow-xl shadow-primary/20">
+<div class="relative z-10 flex flex-col items-center justify-center text-center py-4">
+<div class="mb-4 bg-white/20 p-4 rounded-full backdrop-blur-md">
+<span class="material-symbols-outlined text-6xl text-white" data-icon="generating_tokens" style="font-variation-settings: 'FILL' 1;">generating_tokens</span>
+</div>
+<h2 class="text-white/80 text-sm font-semibold tracking-widest uppercase mb-1">Total Saldo Kamu</h2>
+<div class="flex items-center gap-2">
+<span class="text-4xl font-extrabold text-white">2,500</span>
+<span class="text-xl font-bold text-primary-fixed">Poin</span>
+</div>
+<div class="mt-6 flex gap-3">
+<button class="bg-white/90 text-primary px-6 py-2 rounded-full font-bold text-sm shadow-lg hover:bg-white transition-all active:scale-95">
+                        Riwayat
+                    </button>
+<button class="bg-primary-fixed/30 border border-white/30 text-white px-6 py-2 rounded-full font-bold text-sm backdrop-blur-sm transition-all active:scale-95">
+                        Cara Dapat
+                    </button>
+</div>
+</div>
+<!-- Decorative elements -->
+<div class="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-10 -left-10 w-40 h-40 bg-emerald-400/20 rounded-full blur-3xl"></div>
+</section>
+<!-- Section 1: Leaderboard Minggu Ini -->
+<section>
+<div class="flex justify-between items-end mb-4">
+<h3 class="text-lg font-bold text-on-surface">Leaderboard Minggu Ini</h3>
+<span class="text-primary text-xs font-bold uppercase tracking-wider">Lihat Semua</span>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide no-scrollbar -mx-4 px-4">
+<!-- Rank 2 -->
+<div class="min-w-[140px] flex-shrink-0 flex flex-col items-center bg-surface-container-low p-4 rounded-xl relative mt-4">
+<div class="absolute -top-4 w-12 h-12 rounded-full border-2 border-slate-200 overflow-hidden shadow-md">
+<img class="w-full h-full object-cover" data-alt="portrait of a smiling young man in urban setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXmVPg1f9HyFbMFiM7Rv1enpYtL1Aq6FgOEFfpMyuN9cuKAEBZHItAa-ecn7mRxwcNbp4E41_seghM9-WlU6jH71Dqe64S2N88jP_G4x00QP6m85Ip3dbqbWrVYGQgKsVSqwzdhcFLgYa54INGEZg_UBiCEwGHOiieZJp3qAhivf7uWaSd6romQJnenzixmal1dcoFlYk2aJJ5gpjiBT-tcLmpgHHc7CZlPw5JEt6MH-eWy7eGt2DQVjmBr58dR9ZFGqZORWnP4j1O"/>
+</div>
+<div class="mt-8 text-center">
+<p class="text-sm font-bold text-on-surface">Andra R.</p>
+<p class="mono text-xs text-secondary font-bold">1,820 pts</p>
+<div class="mt-2 bg-slate-200 text-slate-600 text-[10px] font-bold px-2 py-0.5 rounded-full">RANK 2</div>
+</div>
+</div>
+<!-- Rank 1 -->
+<div class="min-w-[160px] flex-shrink-0 flex flex-col items-center bg-white border-2 border-primary/20 p-5 rounded-2xl relative shadow-lg shadow-primary/5">
+<div class="absolute -top-6 w-16 h-16 rounded-full border-4 border-primary-fixed overflow-hidden shadow-lg">
+<img class="w-full h-full object-cover" data-alt="happy confident professional woman outdoors during daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEq7SCMV6Fj-7D0KLLwTmDgphJVrdM7L823MXFoc6xbxDQe8ZfXQ84r9YKoaJr1k5gtXgLNyOKcm4Y5Bx2xsqaNE2RO1h99ZB9cQaM2pcPPfqW33JMZCvoIzTIRJ9AaVbwv8HipU73DJ9JP_Qn6oTysjLasIZYyndHBw-l9DENgbYCuGL7Kwx77oG4o04TPKbg8jZPGiO2cIWEBSNmB4Vbnd8HSwffyQ_4RLiKt2ERRLrOcQ2Nz7nQX-W1KoiGBfOvngAa0TQhekuR"/>
+</div>
+<div class="absolute -top-8 right-10">
+<span class="material-symbols-outlined text-yellow-400 text-3xl" data-icon="workspace_premium" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div class="mt-10 text-center">
+<p class="text-base font-bold text-on-surface">Siska W.</p>
+<p class="mono text-sm text-primary font-bold">2,150 pts</p>
+<div class="mt-2 bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter shadow-sm">Juara 1</div>
+</div>
+</div>
+<!-- Rank 3 -->
+<div class="min-w-[140px] flex-shrink-0 flex flex-col items-center bg-surface-container-low p-4 rounded-xl relative mt-4">
+<div class="absolute -top-4 w-12 h-12 rounded-full border-2 border-slate-200 overflow-hidden shadow-md">
+<img class="w-full h-full object-cover" data-alt="portrait of a smiling man with a beard, natural warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC63T_wAJR3TyOpfS-7nKbcFE0EX9FtlRdR0ZVrsZJWA5NhX3DvnG1BLD7yl1-VbwNJSk7Q2qhlF0QVCcwdZvnd5189IJJJP8iZdP9uJU6WG34SiJXx9LHoAZ1tV0gCpbJxF62GMgrH00oNh05geP2mEKHABHHPgcERJprZgV-Mhyf-3M2cFSDm3b2LvF3Zzcs0_4_2J2TOXhVULkU67Zp58unqrlEMMb4LJMaIM1B5fbPMbyWPQ--gq07cIFQX_KtKtx5Sruq7TeW2"/>
+</div>
+<div class="mt-8 text-center">
+<p class="text-sm font-bold text-on-surface">Budi T.</p>
+<p class="mono text-xs text-secondary font-bold">1,640 pts</p>
+<div class="mt-2 bg-orange-100 text-orange-700 text-[10px] font-bold px-2 py-0.5 rounded-full">RANK 3</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Tukar Poin Grid -->
+<section>
+<div class="flex justify-between items-end mb-6">
+<div>
+<h3 class="text-lg font-bold text-on-surface">Tukar Poin</h3>
+<p class="text-xs text-slate-500 font-medium">Gunakan poinmu untuk hadiah eksklusif</p>
+</div>
+<span class="material-symbols-outlined text-primary" data-icon="filter_list">filter_list</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Item 1 -->
+<div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col">
+<div class="w-full h-28 bg-emerald-50 rounded-xl flex items-center justify-center mb-4 overflow-hidden relative group">
+<span class="material-symbols-outlined text-5xl text-primary" data-icon="wifi_tethering" style="font-variation-settings: 'FILL' 1;">wifi_tethering</span>
+<div class="absolute top-2 right-2 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-md">HOT</div>
+</div>
+<h4 class="font-bold text-sm text-on-surface leading-tight mb-1">Gratis Internet 1 Bln</h4>
+<p class="mono text-xs font-bold text-secondary mb-4">500 Pts</p>
+<button class="w-full bg-emerald-600 text-white py-2 rounded-xl text-xs font-bold transition-all active:scale-95 hover:bg-emerald-700">Tukar</button>
+</div>
+<!-- Item 2 -->
+<div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col">
+<div class="w-full h-28 bg-orange-50 rounded-xl flex items-center justify-center mb-4 overflow-hidden relative">
+<span class="material-symbols-outlined text-5xl text-orange-500" data-icon="coffee" style="font-variation-settings: 'FILL' 1;">coffee</span>
+</div>
+<h4 class="font-bold text-sm text-on-surface leading-tight mb-1">Voucher Kopi</h4>
+<p class="mono text-xs font-bold text-secondary mb-4">150 Pts</p>
+<button class="w-full bg-emerald-600 text-white py-2 rounded-xl text-xs font-bold transition-all active:scale-95 hover:bg-emerald-700">Tukar</button>
+</div>
+<!-- Item 3 -->
+<div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col">
+<div class="w-full h-28 bg-blue-50 rounded-xl flex items-center justify-center mb-4 overflow-hidden relative">
+<span class="material-symbols-outlined text-5xl text-blue-500" data-icon="shopping_bag" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+</div>
+<h4 class="font-bold text-sm text-on-surface leading-tight mb-1">Merchandise JBR</h4>
+<p class="mono text-xs font-bold text-secondary mb-4">800 Pts</p>
+<button class="w-full bg-emerald-600 text-white py-2 rounded-xl text-xs font-bold transition-all active:scale-95 hover:bg-emerald-700">Tukar</button>
+</div>
+<!-- Item 4 -->
+<div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col">
+<div class="w-full h-28 bg-purple-50 rounded-xl flex items-center justify-center mb-4 overflow-hidden relative">
+<span class="material-symbols-outlined text-5xl text-purple-500" data-icon="confirmation_number" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+</div>
+<h4 class="font-bold text-sm text-on-surface leading-tight mb-1">Voucher Bioskop</h4>
+<p class="mono text-xs font-bold text-secondary mb-4">300 Pts</p>
+<button class="w-full bg-emerald-600 text-white py-2 rounded-xl text-xs font-bold transition-all active:scale-95 hover:bg-emerald-700">Tukar</button>
+</div>
+</div>
+</section>
+<!-- Bonus: Daily Check-in Card -->
+<section class="bg-surface-container-high rounded-3xl p-6 flex items-center justify-between">
+<div class="flex-1 pr-4">
+<h3 class="font-bold text-on-surface">Daily Check-in</h3>
+<p class="text-xs text-slate-600 mt-1">Dapatkan +10 Poin gratis setiap hari kamu membuka aplikasi.</p>
+<button class="mt-4 bg-primary px-4 py-2 rounded-lg text-white text-xs font-bold shadow-md shadow-primary/20">Ambil Sekarang</button>
+</div>
+<div class="w-20 h-20 bg-primary-container/20 rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="calendar_today">calendar_today</span>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl z-50 rounded-t-[32px] border-t border-white/20 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-1.5 hover:opacity-80" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-headline font-bold text-[10px] uppercase tracking-wider">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-1.5 hover:opacity-80" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="info">info</span>
+<span class="font-headline font-bold text-[10px] uppercase tracking-wider">Info</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-1.5 hover:opacity-80" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="local_offer">local_offer</span>
+<span class="font-headline font-bold text-[10px] uppercase tracking-wider">Promo</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-1.5 hover:opacity-80" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="contact_support">contact_support</span>
+<span class="font-headline font-bold text-[10px] uppercase tracking-wider">Support</span>
+</a>
+<!-- ACTIVE: Akun / Reward tab logic mapping -->
+<a class="flex flex-col items-center justify-center bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 rounded-2xl px-3 py-1.5 scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-headline font-bold text-[10px] uppercase tracking-wider">Akun</span>
+</a>
+</nav>
+</body></html>

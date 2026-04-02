@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JBR Minpo - Keamanan Akun</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&amp;family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@700&amp;family=Manrope:wght@400;500;600&amp;family=Space+Grotesk:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-dim": "#d2d9f4",
+              "primary-fixed-dim": "#4edea3",
+              "on-error": "#ffffff",
+              "surface-container": "#eaedff",
+              "outline-variant": "#bbcabf",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#00714e",
+              "error": "#ba1a1a",
+              "on-background": "#131b2e",
+              "primary-container": "#10b981",
+              "on-error-container": "#93000a",
+              "tertiary-fixed": "#d8e2ff",
+              "surface-container-low": "#f2f3ff",
+              "tertiary": "#005ac2",
+              "inverse-primary": "#4edea3",
+              "on-tertiary-fixed": "#001a42",
+              "secondary-fixed": "#85f8c4",
+              "on-secondary-fixed-variant": "#005137",
+              "surface-container-lowest": "#ffffff",
+              "background": "#faf8ff",
+              "on-surface": "#131b2e",
+              "on-primary-fixed": "#002113",
+              "on-tertiary": "#ffffff",
+              "on-primary-container": "#00422b",
+              "surface-bright": "#faf8ff",
+              "on-surface-variant": "#3c4a42",
+              "secondary-container": "#82f5c1",
+              "outline": "#6c7a71",
+              "tertiary-fixed-dim": "#adc6ff",
+              "primary-fixed": "#6ffbbe",
+              "tertiary-container": "#71a1ff",
+              "secondary-fixed-dim": "#68dba9",
+              "secondary": "#006c4a",
+              "surface-variant": "#dae2fd",
+              "on-tertiary-container": "#00367a",
+              "primary": "#006c49",
+              "on-tertiary-fixed-variant": "#004395",
+              "inverse-on-surface": "#eef0ff",
+              "surface": "#faf8ff",
+              "surface-tint": "#006c49",
+              "on-primary-fixed-variant": "#005236",
+              "on-secondary-fixed": "#002114",
+              "inverse-surface": "#283044",
+              "surface-container-highest": "#dae2fd",
+              "error-container": "#ffdad6",
+              "surface-container-high": "#e2e7ff",
+              "on-secondary": "#ffffff"
+            },
+            fontFamily: {
+              "sora": ["Sora"],
+              "dm-sans": ["DM Sans"],
+              "jetbrains-mono": ["JetBrains Mono"],
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Manrope"],
+              "label": ["Space Grotesk"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .clay-shadow {
+        box-shadow: inset 2px 2px 4px rgba(255,255,255,0.4), inset -2px -2px 4px rgba(0,0,0,0.1);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-dm-sans text-on-surface antialiased pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 w-full backdrop-blur-md bg-white/70 dark:bg-gray-950/70">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="close-up portrait of a young professional man with a friendly expression, soft studio lighting, clean background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgRX_SoYRKkMkyH5IysWhbBc4uT616_O7AX7siRtbI-ZPQWngYshaoBi_zPnj8sBIm17ip3ChcLdoxyXsLFi099Ib8n3lKPgC-seaTjMbsaEbNf502iuAx1vT5k_3Nae3JLWW4invwi8wOf1KGeZGLb3nuTStpznXM3AfEPmT83-dHBpZwChP6syO3u3I1ZkTDe8BQomhALyDetUKXb7lTgJEoSJZ_rWVB6ORwu4gf4Swweem7zH3lj45bGlBBaQOP8zXPAGz3Dqpk"/>
+</div>
+<h1 class="text-xl font-bold font-sora text-emerald-600 dark:text-emerald-400">JBR Minpo</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50/50 p-2 rounded-full transition-colors active:scale-95">
+                support_agent
+            </button>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-md mx-auto">
+<!-- Hero Section: Security Shield -->
+<section class="flex flex-col items-center justify-center mb-10 text-center relative">
+<div class="relative w-48 h-48 flex items-center justify-center mb-4">
+<!-- Glowing emerald particles effect (simulated with gradients) -->
+<div class="absolute inset-0 bg-primary-container/20 blur-3xl rounded-full scale-110"></div>
+<div class="absolute inset-4 bg-primary/10 blur-2xl rounded-full"></div>
+<!-- 3D Glossy Shield -->
+<div class="relative z-10 w-32 h-32 bg-gradient-to-br from-primary-fixed to-primary-container rounded-[2rem] clay-shadow flex items-center justify-center border-t border-white/50">
+<span class="material-symbols-outlined text-white text-7xl" style="font-variation-settings: 'FILL' 1;">
+                        shield_with_heart
+                    </span>
+<!-- Sparkle accents -->
+<div class="absolute -top-2 -right-2 w-4 h-4 bg-white rounded-full blur-sm opacity-80"></div>
+<div class="absolute bottom-4 left-2 w-2 h-2 bg-primary-fixed-dim rounded-full"></div>
+</div>
+</div>
+<h2 class="font-sora text-2xl font-bold text-on-background mb-2">Keamanan Akun</h2>
+<p class="text-on-surface-variant text-sm px-4">Pantau aktivitas login dan amankan akun Anda dari akses yang tidak sah.</p>
+</section>
+<!-- Device List Section -->
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="font-sora font-bold text-lg text-on-surface">Perangkat Terhubung</h3>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-xs font-bold rounded-full">3 Aktif</span>
+</div>
+<div class="space-y-4">
+<!-- Device Card: iPhone (Active) -->
+<div class="surface-container-low p-4 rounded-2xl flex items-center gap-4 border border-outline-variant/15">
+<div class="w-14 h-14 bg-white rounded-xl clay-shadow flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">
+                            smartphone
+                        </span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-1">
+<span class="font-sora font-bold text-on-background">iPhone 14</span>
+<span class="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Aktif</span>
+</div>
+<div class="font-jetbrains-mono text-[11px] text-on-surface-variant flex flex-col gap-0.5">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">location_on</span>
+                                Jakarta, Indonesia
+                            </span>
+<span class="opacity-60">IP: 192.168.1.45</span>
+</div>
+</div>
+</div>
+<!-- Device Card: Macbook Pro -->
+<div class="surface-container-low p-4 rounded-2xl flex items-center gap-4 border border-outline-variant/15">
+<div class="w-14 h-14 bg-white rounded-xl clay-shadow flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">
+                            laptop_mac
+                        </span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-1">
+<span class="font-sora font-bold text-on-background">Macbook Pro</span>
+<span class="font-jetbrains-mono text-[10px] text-on-surface-variant">2 jam lalu</span>
+</div>
+<div class="font-jetbrains-mono text-[11px] text-on-surface-variant flex flex-col gap-0.5">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">location_on</span>
+                                Bandung, Indonesia
+                            </span>
+<span class="opacity-60">IP: 10.20.44.12</span>
+</div>
+</div>
+</div>
+<!-- Device Card: Chrome Windows -->
+<div class="surface-container-low p-4 rounded-2xl flex items-center gap-4 border border-outline-variant/15">
+<div class="w-14 h-14 bg-white rounded-xl clay-shadow flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">
+                            browser_updated
+                        </span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-1">
+<span class="font-sora font-bold text-on-background">Chrome Windows</span>
+<span class="font-jetbrains-mono text-[10px] text-on-surface-variant">Kemarin</span>
+</div>
+<div class="font-jetbrains-mono text-[11px] text-on-surface-variant flex flex-col gap-0.5">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">location_on</span>
+                                Bekasi, Indonesia
+                            </span>
+<span class="opacity-60">IP: 172.16.254.1</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Security Actions -->
+<section class="mt-10 mb-8">
+<button class="w-full py-4 border-2 border-error text-error font-sora font-bold rounded-2xl hover:bg-error/5 transition-colors flex items-center justify-center gap-2 active:scale-95">
+<span class="material-symbols-outlined">logout</span>
+                Logout dari Semua Perangkat
+            </button>
+<p class="text-center mt-4 text-on-surface-variant text-[11px] px-6">
+                Tindakan ini akan mengakhiri semua sesi aktif kecuali perangkat yang Anda gunakan saat ini.
+            </p>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center pb-6 pt-3 px-4 backdrop-blur-xl border-t border-white/20 bg-white/80 dark:bg-gray-900/80 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-50">
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-5 py-1.5 hover:text-emerald-500 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-dm-sans text-[10px] font-medium tracking-wide">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-5 py-1.5 hover:text-emerald-500 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="signal_cellular_alt">signal_cellular_alt</span>
+<span class="font-dm-sans text-[10px] font-medium tracking-wide">Usage</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-5 py-1.5 hover:text-emerald-500 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="font-dm-sans text-[10px] font-medium tracking-wide">Support</span>
+</a>
+<!-- Active Tab: Account (Closest match to Account Security) -->
+<a class="flex flex-col items-center justify-center bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-100 rounded-2xl px-5 py-1.5 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-dm-sans text-[10px] font-medium tracking-wide">Account</span>
+</a>
+</nav>
+</body></html>

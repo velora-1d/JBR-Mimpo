@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;family=Manrope:wght@400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface": "#faf8ff",
+                        "tertiary-fixed-dim": "#adc6ff",
+                        "surface-tint": "#006c49",
+                        "error-container": "#ffdad6",
+                        "background": "#faf8ff",
+                        "on-primary-fixed-variant": "#005236",
+                        "on-surface": "#131b2e",
+                        "inverse-surface": "#283044",
+                        "primary-container": "#10b981",
+                        "surface-container-highest": "#dae2fd",
+                        "primary-fixed": "#6ffbbe",
+                        "on-primary": "#ffffff",
+                        "outline": "#6c7a71",
+                        "on-secondary-container": "#00714e",
+                        "tertiary": "#005ac2",
+                        "on-background": "#131b2e",
+                        "surface-dim": "#d2d9f4",
+                        "on-secondary-fixed-variant": "#005137",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#82f5c1",
+                        "primary-fixed-dim": "#4edea3",
+                        "on-primary-container": "#00422b",
+                        "tertiary-fixed": "#d8e2ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#faf8ff",
+                        "on-primary-fixed": "#002113",
+                        "secondary": "#006c4a",
+                        "tertiary-container": "#71a1ff",
+                        "on-tertiary-container": "#00367a",
+                        "on-surface-variant": "#3c4a42",
+                        "surface-container-high": "#e2e7ff",
+                        "surface-container-low": "#f2f3ff",
+                        "on-secondary-fixed": "#002114",
+                        "outline-variant": "#bbcabf",
+                        "inverse-primary": "#4edea3",
+                        "surface-variant": "#dae2fd",
+                        "surface-container": "#eaedff",
+                        "secondary-fixed-dim": "#68dba9",
+                        "on-tertiary-fixed-variant": "#004395",
+                        "inverse-on-surface": "#eef0ff",
+                        "secondary-fixed": "#85f8c4",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#006c49",
+                        "on-tertiary-fixed": "#001a42",
+                        "error": "#ba1a1a"
+                    },
+                    fontFamily: {
+                        "headline": ["Sora"],
+                        "body": ["DM Sans"],
+                        "label": ["JetBrains Mono"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "16px", "xl": "24px", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(218, 226, 253, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(111, 251, 190, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface min-h-screen flex flex-col">
+<!-- Top Navigation Header -->
+<header class="w-full top-0 sticky z-50 bg-[#faf8ff] dark:bg-slate-950">
+<div class="flex justify-between items-center px-4 py-3 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-3">
+<button class="hover:bg-emerald-50/50 dark:hover:bg-emerald-900/20 transition-colors p-2 rounded-full active:scale-95 duration-200 ease-in-out">
+<span class="material-symbols-outlined text-emerald-600 dark:text-emerald-400">arrow_back</span>
+</button>
+<h1 class="text-xl font-bold text-emerald-600 dark:text-emerald-400 font-headline">Support</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-600 dark:text-emerald-400">contact_support</span>
+</div>
+</div>
+</header>
+<main class="flex-grow w-full max-w-2xl mx-auto px-4 py-6 space-y-8">
+<!-- Live Status Section -->
+<section class="relative overflow-hidden rounded-xl bg-surface-container-low p-4">
+<div class="absolute top-0 right-0 p-6 opacity-10">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">speed</span>
+</div>
+<div class="relative z-10 flex flex-col gap-1">
+<span class="text-xs font-label uppercase tracking-widest text-primary font-bold">Live Tracking</span>
+<h2 class="text-2xl font-headline font-bold text-on-surface">Teknisi Budi sedang menuju lokasi</h2>
+<p class="text-sm text-on-surface-variant">Estimasi tiba dalam <span class="font-label text-tertiary font-bold">12 Menit</span></p>
+</div>
+<div class="mt-6 flex items-center gap-4 bg-surface-container-lowest p-3 rounded-lg shadow-sm border border-outline-variant/10">
+<div class="h-12 w-12 rounded-full overflow-hidden flex-shrink-0">
+<img class="h-full w-full object-cover" data-alt="professional technician in a neat uniform smiling for a profile picture with soft daylight lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJwyeH3EZSv12EUu9a40D-l1sSkmfjlv571NuARf8rrgkaeTdpLRQWiW0v6vy46TojEBBKSRXxAcwNJg-_WGHzA8x8BIiRMBOcjVvWpSj5bxxavaz05XWHdguQX_E4rcrWZmjE5-bxTi2X7OcZepXcwJ4nn1H8uEWvc0-5sYDut33WXvkz3khDMNqkhDRkEigFmV_UoAFlY5NhpHCUJjFRnknvyN92VhNV7ba6LlD7wuAz1C5uWItzpzoEZPX_kMoIGA86n5_Si5QG"/>
+</div>
+<div class="flex-grow">
+<p class="text-sm font-bold font-headline">Budi Santoso</p>
+<p class="text-xs text-on-surface-variant">Senior Field Engineer</p>
+</div>
+<div class="flex gap-2">
+<button class="h-10 w-10 flex items-center justify-center rounded-full bg-primary text-on-primary shadow-lg hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">call</span>
+</button>
+<button class="h-10 w-10 flex items-center justify-center rounded-full bg-secondary-container text-on-secondary-container hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">chat</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Vertical Stepper / Timeline -->
+<section class="px-4">
+<div class="relative">
+<!-- Vertical Line -->
+<div class="absolute left-4 top-2 bottom-2 w-0.5 bg-outline-variant/30"></div>
+<div class="space-y-10">
+<!-- Step 1: Completed -->
+<div class="relative flex items-start gap-6 group">
+<div class="z-10 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-on-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+<div class="flex flex-col gap-1">
+<p class="font-headline font-bold text-on-surface text-sm">Tiket Diterima</p>
+<p class="text-xs text-on-surface-variant">Laporan Anda #TKT-8829 telah diverifikasi oleh sistem.</p>
+<p class="font-label text-[10px] text-outline mt-1">10:00 AM</p>
+</div>
+</div>
+<!-- Step 2: Completed -->
+<div class="relative flex items-start gap-6 group">
+<div class="z-10 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-on-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+<div class="flex flex-col gap-1">
+<p class="font-headline font-bold text-on-surface text-sm">Alokasi Teknisi</p>
+<p class="text-xs text-on-surface-variant">Teknisi ahli telah ditugaskan untuk menangani kendala Anda.</p>
+<p class="font-label text-[10px] text-outline mt-1">10:15 AM</p>
+</div>
+</div>
+<!-- Step 3: Active (Glowing) -->
+<div class="relative flex items-start gap-6 group">
+<div class="z-10 flex h-8 w-8 items-center justify-center rounded-full bg-primary ring-4 ring-primary-fixed animate-pulse">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">directions_car</span>
+</div>
+<div class="flex flex-col gap-1">
+<p class="font-headline font-bold text-primary text-sm">Sedang Menuju Lokasi</p>
+<p class="text-xs text-on-surface font-medium">Budi sedang dalam perjalanan melalui Jl. Sudirman.</p>
+<p class="font-label text-[10px] text-tertiary font-bold mt-1">LIVE UPDATING</p>
+</div>
+</div>
+<!-- Step 4: Pending -->
+<div class="relative flex items-start gap-6 group opacity-50">
+<div class="z-10 flex h-8 w-8 items-center justify-center rounded-full bg-surface-container-highest text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">build</span>
+</div>
+<div class="flex flex-col gap-1">
+<p class="font-headline font-bold text-on-surface text-sm">Proses Perbaikan</p>
+<p class="text-xs text-on-surface-variant">Estimasi pengerjaan memakan waktu sekitar 30-45 menit.</p>
+</div>
+</div>
+<!-- Step 5: Pending -->
+<div class="relative flex items-start gap-6 group opacity-50">
+<div class="z-10 flex h-8 w-8 items-center justify-center rounded-full bg-surface-container-highest text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">verified</span>
+</div>
+<div class="flex flex-col gap-1">
+<p class="font-headline font-bold text-on-surface text-sm">Selesai &amp; Konfirmasi</p>
+<p class="text-xs text-on-surface-variant">Verifikasi koneksi setelah perbaikan selesai dilakukan.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Ratings Section -->
+<section class="glass-card rounded-xl p-4 mt-12 mb-24">
+<div class="text-center space-y-4">
+<div class="space-y-1">
+<h3 class="font-headline font-bold text-on-surface">Bantu kami berkembang</h3>
+<p class="text-xs text-on-surface-variant">Berikan rating untuk layanan perbaikan hari ini.</p>
+</div>
+<div class="flex justify-center gap-3 py-2">
+<button class="group">
+<span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim hover:text-tertiary transition-colors" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+<button class="group">
+<span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim hover:text-tertiary transition-colors" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+<button class="group">
+<span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim hover:text-tertiary transition-colors" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+<button class="group">
+<span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim hover:text-tertiary transition-colors" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+<button class="group">
+<span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim hover:text-tertiary transition-colors" style="font-variation-settings: 'FILL' 0;">star</span>
+</button>
+</div>
+<div class="w-full">
+<button class="w-full py-3 bg-primary text-on-primary font-headline font-bold rounded-lg shadow-md hover:opacity-90 active:scale-95 transition-all">
+                        Kirim Feedback
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#faf8ff]/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)] rounded-t-[32px] border-t border-emerald-500/10">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-1.5 hover:text-emerald-500 dark:hover:text-emerald-300" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-headline text-[10px] font-bold uppercase tracking-wider mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-1.5 hover:text-emerald-500 dark:hover:text-emerald-300" href="#">
+<span class="material-symbols-outlined" data-icon="signal_cellular_alt">signal_cellular_alt</span>
+<span class="font-headline text-[10px] font-bold uppercase tracking-wider mt-1">Usage</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-200 rounded-2xl px-5 py-1.5 transition-all scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="support_agent" style="font-variation-settings: 'FILL' 1;">support_agent</span>
+<span class="font-headline text-[10px] font-bold uppercase tracking-wider mt-1">Support</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-1.5 hover:text-emerald-500 dark:hover:text-emerald-300" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-headline text-[10px] font-bold uppercase tracking-wider mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

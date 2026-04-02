@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Support Tickets - Ethereal ISP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;family=JetBrains+Mono:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;family=Manrope:wght@400;500;600&amp;family=Space+Grotesk:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface": "#faf8ff",
+                        "tertiary-fixed-dim": "#adc6ff",
+                        "surface-tint": "#006c49",
+                        "error-container": "#ffdad6",
+                        "background": "#faf8ff",
+                        "on-primary-fixed-variant": "#005236",
+                        "on-surface": "#131b2e",
+                        "inverse-surface": "#283044",
+                        "primary-container": "#10b981",
+                        "surface-container-highest": "#dae2fd",
+                        "primary-fixed": "#6ffbbe",
+                        "on-primary": "#ffffff",
+                        "outline": "#6c7a71",
+                        "on-secondary-container": "#00714e",
+                        "tertiary": "#005ac2",
+                        "on-background": "#131b2e",
+                        "surface-dim": "#d2d9f4",
+                        "on-secondary-fixed-variant": "#005137",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#82f5c1",
+                        "primary-fixed-dim": "#4edea3",
+                        "on-primary-container": "#00422b",
+                        "tertiary-fixed": "#d8e2ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#faf8ff",
+                        "on-primary-fixed": "#002113",
+                        "secondary": "#006c4a",
+                        "tertiary-container": "#71a1ff",
+                        "on-tertiary-container": "#00367a",
+                        "on-surface-variant": "#3c4a42",
+                        "surface-container-high": "#e2e7ff",
+                        "surface-container-low": "#f2f3ff",
+                        "on-secondary-fixed": "#002114",
+                        "outline-variant": "#bbcabf",
+                        "inverse-primary": "#4edea3",
+                        "surface-variant": "#dae2fd",
+                        "surface-container": "#eaedff",
+                        "secondary-fixed-dim": "#68dba9",
+                        "on-tertiary-fixed-variant": "#004395",
+                        "inverse-on-surface": "#eef0ff",
+                        "secondary-fixed": "#85f8c4",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#006c49",
+                        "on-tertiary-fixed": "#001a42",
+                        "error": "#ba1a1a"
+                    },
+                    fontFamily: {
+                        "headline": ["Sora", "Plus Jakarta Sans"],
+                        "body": ["DM Sans", "Manrope"],
+                        "label": ["JetBrains Mono", "Space Grotesk"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: #faf8ff;
+            color: #131b2e;
+        }
+        .glass-card {
+            background: rgba(218, 226, 253, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface selection:bg-primary-fixed">
+<!-- Top Navigation Anchor -->
+<nav class="w-full top-0 sticky bg-[#faf8ff] z-50">
+<div class="flex justify-between items-center px-4 py-3 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="hover:bg-emerald-50/50 p-2 rounded-full transition-colors Active:scale-95 duration-200">
+<span class="material-symbols-outlined text-emerald-600">arrow_back</span>
+</button>
+<h1 class="text-xl font-bold text-emerald-600 font-headline">Support</h1>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex gap-8">
+<a class="text-slate-500 hover:text-emerald-500 font-body transition-colors" href="#">Home</a>
+<a class="text-slate-500 hover:text-emerald-500 font-body transition-colors" href="#">Usage</a>
+<a class="text-emerald-700 font-bold font-body" href="#">Support</a>
+<a class="text-slate-500 hover:text-emerald-500 font-body transition-colors" href="#">Profile</a>
+</div>
+<button class="hover:bg-emerald-50/50 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined text-emerald-600">contact_support</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="max-w-xl mx-auto px-4 pt-6 pb-32">
+<!-- Hero Section -->
+<header class="mb-8">
+<div class="flex items-center justify-between mb-2">
+<h2 class="text-2xl font-extrabold font-headline text-on-surface">Ticket Status</h2>
+<span class="material-symbols-outlined text-primary" data-icon="history_edu">history_edu</span>
+</div>
+<p class="text-on-surface-variant font-body">Manage and track your technical inquiries and service requests.</p>
+</header>
+<!-- Tabs Container -->
+<div class="mb-8 flex border-b border-outline-variant/30 overflow-hidden">
+<button class="flex-1 py-4 text-center font-headline font-bold text-emerald-700 relative transition-colors">
+                Aktif
+                <div class="absolute bottom-0 left-0 w-full h-1 bg-primary-container rounded-t-full"></div>
+</button>
+<button class="flex-1 py-4 text-center font-headline font-bold text-slate-400 hover:text-emerald-600 transition-colors">
+                Selesai
+            </button>
+</div>
+<!-- Ticket List Asymmetric Layout -->
+<div class="space-y-6">
+<!-- Ticket Card 1: Diproses -->
+<div class="glass-card rounded-[2rem] p-4 flex flex-col gap-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative group overflow-hidden">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-emerald-500/5 rounded-full blur-2xl group-hover:bg-emerald-500/10 transition-all"></div>
+<div class="flex justify-between items-start">
+<div class="space-y-1">
+<span class="font-label text-xs tracking-tight text-on-primary-fixed-variant bg-primary-fixed/30 px-3 py-1 rounded-full">TKT-2024-0892</span>
+<h3 class="text-lg font-bold font-headline text-on-surface leading-tight pt-2">Slow Connection Speed in Bedroom</h3>
+</div>
+<span class="material-symbols-outlined text-tertiary" data-icon="wifi_off">wifi_off</span>
+</div>
+<div class="flex items-center gap-3 py-2 border-y border-outline-variant/10">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Professional technician headshot with a friendly smile wearing a technical uniform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPcOtXl-ZriXCF-d4G_KR8xFqCjRPTQVykgOsoc5iMMo-n6L7xvAxRTSCKOyeFYpV_XMxwcR-lBfv6G9iQFQeD2LrST8TTUmTPzppjslwGYjNDoLfC3c0XLX7bd45AdGA5RFH3PNVJcmM6PNTTN0jWr3i3U4nIUKQa8rjskwE0FbJ7tTOFnd6loyaJuMqanogRUl0InGDqKj6VCZrBZMLIN2GK0cGisPtxgnNw8dBp7oEdki9GypImtszRLZwAZj48xcHjQoCuT0CB"/>
+</div>
+<div class="flex flex-col">
+<span class="text-xs text-on-surface-variant font-body">Assigned Technician</span>
+<span class="text-sm font-bold font-headline text-on-surface">Andra Wijaya</span>
+</div>
+</div>
+<div class="flex justify-between items-center mt-2">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+<span class="text-xs font-body">12 May 2024, 09:45 AM</span>
+</div>
+<div class="px-4 py-1.5 rounded-xl bg-tertiary-container/30 text-on-tertiary-container flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="text-xs font-bold font-headline">Diproses</span>
+</div>
+</div>
+</div>
+<!-- Ticket Card 2: Menunggu -->
+<div class="bg-surface-container-low rounded-[2rem] p-4 flex flex-col gap-4 border border-transparent hover:border-emerald-500/20 transition-all">
+<div class="flex justify-between items-start">
+<div class="space-y-1">
+<span class="font-label text-xs tracking-tight text-on-surface-variant bg-surface-variant px-3 py-1 rounded-full">TKT-2024-1104</span>
+<h3 class="text-lg font-bold font-headline text-on-surface leading-tight pt-2">Upgrade to Ultra-Fast 1Gbps Plan</h3>
+</div>
+<span class="material-symbols-outlined text-primary" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<div class="bg-surface-container-lowest/80 rounded-2xl p-3 flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<span class="text-xs text-on-surface-variant font-body">Request Type</span>
+<span class="text-xs font-bold font-headline text-primary">Billing &amp; Upgrade</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs text-on-surface-variant font-body">Estimated Response</span>
+<span class="text-xs font-bold font-label">~2 Hours</span>
+</div>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-base">schedule</span>
+<span class="text-xs font-body">Today, 02:15 PM</span>
+</div>
+<div class="px-4 py-1.5 rounded-xl bg-surface-dim text-on-surface-variant flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-slate-400"></span>
+<span class="text-xs font-bold font-headline">Menunggu</span>
+</div>
+</div>
+</div>
+<!-- Ticket Card 3: New Ticket Placeholder/CTA -->
+<div class="border-2 border-dashed border-emerald-500/20 rounded-[2rem] p-6 flex flex-col items-center justify-center gap-3 group hover:bg-emerald-50/30 transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">add</span>
+</div>
+<div class="text-center">
+<p class="font-bold font-headline text-on-surface">Butuh bantuan lain?</p>
+<p class="text-sm text-on-surface-variant font-body">Buat tiket baru untuk masalah teknis</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Shell -->
+<div class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#faf8ff]/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-t-[32px] border-t border-emerald-500/10 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] md:hidden">
+<a class="flex flex-col items-center justify-center text-slate-400 px-5 py-1.5 hover:text-emerald-500 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[10px] font-bold uppercase tracking-wider font-label mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-5 py-1.5 hover:text-emerald-500 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="signal_cellular_alt">signal_cellular_alt</span>
+<span class="text-[10px] font-bold uppercase tracking-wider font-label mt-1">Usage</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-emerald-100 text-emerald-700 rounded-2xl px-5 py-1.5 Active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="support_agent" style="font-variation-settings: 'FILL' 1;">support_agent</span>
+<span class="text-[10px] font-bold uppercase tracking-wider font-label mt-1">Support</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-5 py-1.5 hover:text-emerald-500 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] font-bold uppercase tracking-wider font-label mt-1">Profile</span>
+</a>
+</div>
+</body></html>

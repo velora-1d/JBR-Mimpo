@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@700&amp;family=Manrope:wght@400;500;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-high": "#e2e7ff",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#bbcabf",
+                        "on-background": "#131b2e",
+                        "primary": "#006c49",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#006c49",
+                        "secondary": "#006c4a",
+                        "on-secondary-container": "#00714e",
+                        "on-primary-fixed": "#002113",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#005137",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#005ac2",
+                        "primary-container": "#10b981",
+                        "tertiary-fixed": "#d8e2ff",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#283044",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#002114",
+                        "on-tertiary-fixed-variant": "#004395",
+                        "inverse-on-surface": "#eef0ff",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#4edea3",
+                        "on-surface-variant": "#3c4a42",
+                        "surface-dim": "#d2d9f4",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#71a1ff",
+                        "on-tertiary-fixed": "#001a42",
+                        "surface-container-low": "#f2f3ff",
+                        "surface-variant": "#dae2fd",
+                        "surface-bright": "#faf8ff",
+                        "on-primary-container": "#00422b",
+                        "surface": "#faf8ff",
+                        "secondary-container": "#82f5c1",
+                        "secondary-fixed-dim": "#68dba9",
+                        "tertiary-fixed-dim": "#adc6ff",
+                        "on-tertiary-container": "#00367a",
+                        "outline": "#6c7a71",
+                        "on-primary-fixed-variant": "#005236",
+                        "secondary-fixed": "#85f8c4",
+                        "primary-fixed-dim": "#4edea3",
+                        "on-surface": "#131b2e",
+                        "surface-container-highest": "#dae2fd",
+                        "primary-fixed": "#6ffbbe",
+                        "surface-container": "#eaedff",
+                        "background": "#faf8ff"
+                    },
+                    fontFamily: {
+                        "headline": ["Sora", "Plus Jakarta Sans"],
+                        "body": ["DM Sans", "Manrope"],
+                        "label": ["JetBrains Mono", "Space Grotesk"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "3xl": "1.5rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-effect {
+            background: rgba(250, 248, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .inner-glow {
+            box-shadow: inset 0 1px 1px 0 rgba(111, 251, 190, 0.3);
+        }
+        .ambient-shadow {
+            box-shadow: 0 40px 40px -5px rgba(19, 27, 46, 0.06);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body min-h-screen pb-32">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 flex items-center px-6 h-16 bg-[#faf8ff]/80 dark:bg-slate-900/80 backdrop-blur-xl">
+<div class="flex items-center justify-between w-full max-w-7xl mx-auto">
+<div class="text-lg font-bold text-emerald-600 dark:text-emerald-400 font-headline tracking-tighter">
+                JBR Minpo
+            </div>
+<div class="flex-grow flex justify-center px-4">
+<span class="text-on-surface font-medium text-sm">Halo, Ahmad 👋</span>
+</div>
+<div class="relative w-10 h-10 flex items-center justify-center rounded-xl bg-surface-container-low hover:bg-emerald-50/50 transition-colors">
+<span class="material-symbols-outlined text-emerald-600" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2.5 h-2.5 bg-error rounded-full border-2 border-white"></span>
+</div>
+</div>
+</nav>
+<main class="pt-20 px-5 space-y-8 max-w-md mx-auto">
+<!-- Banner Section -->
+<section class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-primary-container h-48 flex items-center p-6 text-on-primary shadow-lg">
+<div class="relative z-10 w-2/3">
+<h2 class="font-headline font-bold text-2xl leading-tight">Diskon Paket 50%</h2>
+<p class="text-sm opacity-90 mt-2 font-body">Upgrade kecepatan internetmu hari ini!</p>
+<button class="mt-4 bg-white text-primary px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider inner-glow transition-transform active:scale-95">
+                    Ambil Promo
+                </button>
+</div>
+<div class="absolute right-[-20px] top-[-10px] opacity-40">
+<img alt="3D abstract shapes" class="w-40 h-40 object-contain" data-alt="3D abstract emerald green geometric floating spheres and rings with a soft glossy texture on a vibrant gradient background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkRUQzfNgNFatXHRaCF8J1UJ4pImI6ubr1oj4JyynGLL4guMvaNNRbRFmVjxHI9uZhfuoCPzH3lRV-z_OfsmKr24zISUnlELI7U_N8bi0fgtmAODbffxuQP9nPaI6dLVZVHXlzid26ZO1daoHyhasV8sNUv9vCQeCVTrl8gpAo8HzvhkKB4MeiB84RhLD0IdE_0vJ3mwAtue4OgL3WkoT5mHupzPYW_dipi84Qq8qQGJ36ZB1K8xGg7IwM6uA20aW0bXwdi2JiH36x"/>
+</div>
+</section>
+<!-- Status Section -->
+<section class="glass-effect rounded-3xl p-6 ambient-shadow">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="text-on-surface-variant font-headline font-semibold text-xs uppercase tracking-widest">Status Paket Aktif</h3>
+<h4 class="text-xl font-headline font-bold text-on-surface mt-1">Family Plan</h4>
+</div>
+<div class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-label font-bold flex items-center gap-1.5">
+<span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+                    AKTIF
+                </div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low rounded-2xl p-4">
+<span class="material-symbols-outlined text-emerald-600 text-3xl mb-2" data-icon="settings_input_antenna">settings_input_antenna</span>
+<p class="text-[10px] text-on-surface-variant font-label uppercase">Kecepatan</p>
+<p class="text-lg font-label font-bold text-on-surface">50<span class="text-xs ml-0.5">Mbps</span></p>
+</div>
+<div class="bg-surface-container-low rounded-2xl p-4">
+<span class="material-symbols-outlined text-tertiary text-3xl mb-2" data-icon="cloud_download">cloud_download</span>
+<p class="text-[10px] text-on-surface-variant font-label uppercase">Sisa Kuota</p>
+<p class="text-lg font-label font-bold text-on-surface">UNLIMITED</p>
+</div>
+</div>
+</section>
+<!-- Quick Actions -->
+<section class="grid grid-cols-2 gap-4">
+<button class="flex flex-col items-center justify-center gap-3 bg-primary text-on-primary p-6 rounded-3xl shadow-lg transition-transform active:scale-95 group">
+<div class="bg-white/20 p-3 rounded-2xl group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl" data-icon="report_problem">report_problem</span>
+</div>
+<span class="font-headline font-bold text-sm">Lapor Gangguan</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-3 bg-white border-2 border-tertiary/20 text-tertiary p-6 rounded-3xl transition-transform active:scale-95 group">
+<div class="bg-tertiary/10 p-3 rounded-2xl group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl" data-icon="card_giftcard">card_giftcard</span>
+</div>
+<span class="font-headline font-bold text-sm">Lihat Promo</span>
+</button>
+</section>
+<!-- News Section -->
+<section>
+<div class="flex justify-between items-end mb-4">
+<h3 class="font-headline font-bold text-lg">Pengumuman Terbaru</h3>
+<a class="text-primary font-bold text-xs" href="#">Lihat Semua</a>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x">
+<div class="flex-shrink-0 w-72 bg-surface-container-lowest rounded-3xl overflow-hidden snap-start shadow-sm">
+<img alt="News 1" class="w-full h-32 object-cover" data-alt="Modern high-tech data center with glowing blue server lights and sleek futuristic architectural lines in a cinematic style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGG9g3TCdYGJTh_hxjEkMDSABBuwLp5CzcIlX73DEkEVnuZi1d__yyCc_nZkiy61ld63uBkKQqAJluuMgdkuNKmvbQ9d4bgy7A1E3-S5aYpg1TkpLEzl_ceqbAmH5ATGQyQRIofPHJ1-qLA9xgxlB8RqXstFBJ4YmtOH-u5b9oR6cuFDZXO3lgF8GtV6R6cHS8Ud0wfkQ71J3tJ9TN8Si0C9UDPJdo2q_murv47U9XkEc37LDYT9cBs9YzYR-uoidtjN4MY2yX1P3i"/>
+<div class="p-4">
+<span class="text-[10px] font-label text-tertiary font-bold uppercase tracking-tighter">Maintenance</span>
+<h4 class="font-headline font-bold text-sm mt-1 leading-snug">Peningkatan Jaringan Area Jakarta Selatan</h4>
+<p class="text-xs text-on-surface-variant mt-2 font-body">Kamis, 24 Okt • 01:00 - 04:00 WIB</p>
+</div>
+</div>
+<div class="flex-shrink-0 w-72 bg-surface-container-lowest rounded-3xl overflow-hidden snap-start shadow-sm">
+<img alt="News 2" class="w-full h-32 object-cover" data-alt="Cozy modern living room with soft ambient lighting and a high-end router glowing on a wooden side table with artistic plants" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl_tPXRbX1n0aSYn9X-FYsUhgvajfcl2UOlE9hdd6GlUVaKTVKU3wVMBwEVkIEdVOsfy9tZlGZB73srjDUqoVShJ7LST8HPtRVs55ZcK4FZVzcjbrk8xZGiV1ehA9AePxhpN8OSs-1wpDH-FbV3wXTMaTMvt_C0W4nk3flh_AyMiNy16B82lMG_n8BjjJ2ZDJmllKOmd2qG_Jx8AE-_YynQZpqtHF0G2eo7DuYiv3Lnr9Es5ZC_O50Wq7QvxEJgIrcYPF8E1gxLkfy"/>
+<div class="p-4">
+<span class="text-[10px] font-label text-primary font-bold uppercase tracking-tighter">Tips &amp; Trick</span>
+<h4 class="font-headline font-bold text-sm mt-1 leading-snug">Optimalkan Sinyal Wi-Fi di Rumah Anda</h4>
+<p class="text-xs text-on-surface-variant mt-2 font-body">Tips menempatkan router agar sinyal stabil.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#faf8ff]/70 dark:bg-slate-950/70 backdrop-blur-2xl rounded-t-[32px] shadow-[0_-8px_30px_rgb(0,0,0,0.04)] border-t border-emerald-500/10">
+<!-- Home (Active) -->
+<a class="flex flex-col items-center justify-center bg-emerald-100/80 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-100 rounded-2xl px-4 py-1.5 transition-all scale-90 duration-150 transform-gpu" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label text-[10px] font-bold tracking-tight mt-0.5">Home</span>
+</a>
+<!-- Info -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-1.5 hover:text-emerald-500 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="info">info</span>
+<span class="font-label text-[10px] font-bold tracking-tight mt-0.5">Info</span>
+</a>
+<!-- Promo -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-1.5 hover:text-emerald-500 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="local_offer">local_offer</span>
+<span class="font-label text-[10px] font-bold tracking-tight mt-0.5">Promo</span>
+</a>
+<!-- Support -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-1.5 hover:text-emerald-500 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="font-label text-[10px] font-bold tracking-tight mt-0.5">Support</span>
+</a>
+<!-- Akun -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-1.5 hover:text-emerald-500 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label text-[10px] font-bold tracking-tight mt-0.5">Akun</span>
+</a>
+</nav>
+</body></html>

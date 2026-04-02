@@ -1,0 +1,157 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>JBR Minpo | Splash</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700&amp;family=DM+Sans:wght@400;500&amp;family=JetBrains+Mono&amp;family=Plus+Jakarta+Sans:wght@700&amp;family=Manrope:wght@400&amp;family=Space+Grotesk:wght@400&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#e2e7ff",
+              "surface-dim": "#d2d9f4",
+              "secondary-container": "#82f5c1",
+              "on-tertiary-fixed-variant": "#004395",
+              "primary-fixed-dim": "#4edea3",
+              "on-secondary-fixed": "#002114",
+              "error-container": "#ffdad6",
+              "on-secondary-container": "#00714e",
+              "on-primary": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed": "#6ffbbe",
+              "on-error": "#ffffff",
+              "surface-bright": "#faf8ff",
+              "on-tertiary-fixed": "#001a42",
+              "inverse-on-surface": "#eef0ff",
+              "tertiary": "#005ac2",
+              "on-primary-fixed": "#002113",
+              "primary-container": "#10b981",
+              "outline": "#6c7a71",
+              "on-surface": "#131b2e",
+              "surface-container-highest": "#dae2fd",
+              "on-surface-variant": "#3c4a42",
+              "primary": "#006c49",
+              "surface-container-low": "#f2f3ff",
+              "inverse-primary": "#4edea3",
+              "tertiary-container": "#71a1ff",
+              "background": "#faf8ff",
+              "surface-tint": "#006c49",
+              "on-secondary": "#ffffff",
+              "surface-variant": "#dae2fd",
+              "on-background": "#131b2e",
+              "surface-container": "#eaedff",
+              "outline-variant": "#bbcabf",
+              "tertiary-fixed": "#d8e2ff",
+              "on-error-container": "#93000a",
+              "on-primary-fixed-variant": "#005236",
+              "secondary": "#006c4a",
+              "error": "#ba1a1a",
+              "on-tertiary-container": "#00367a",
+              "tertiary-fixed-dim": "#adc6ff",
+              "secondary-fixed": "#85f8c4",
+              "inverse-surface": "#283044",
+              "surface": "#faf8ff",
+              "on-primary-container": "#00422b",
+              "secondary-fixed-dim": "#68dba9",
+              "on-secondary-fixed-variant": "#005137",
+              "on-tertiary": "#ffffff"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Manrope"],
+              "label": ["Space Grotesk"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.glass-morphism {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1)
+    }
+.vignette {
+    background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.4) 100%)
+    }
+.grain {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuD1qFfiSsUwP2f2FDXJ2xb1hee9YCVTJsrSyL6yYa17tnbRHrEQl7yDdJXod16b-B01l-GkM97oKxPkg8HhAi3H9ZF-FDvcMoeINv955JEjRstegFUSFHL4UTbFvRGDEZ2Wiof-3w4hQgi0tJDB54FerlweyhhNIX6XLbh6ElFqLmw5YovuZRIhb2ZKAunFrT9JoE5eFd8G9n5xITxBA1OVjLjQ732CpGj2xsrr4yR-ReKHoIAwoYgkCHmFaU4vOIm75cpkljIAo4GN);
+    opacity: 0.03
+    }
+.loading-glow {
+    box-shadow: 0 0 15px 2px rgba(16, 185, 129, 0.6)
+    }
+.text-glow {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3)
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-primary overflow-hidden">
+<!-- Deep Emerald Gradient Background -->
+<div class="fixed inset-0 bg-gradient-to-b from-[#00422b] via-[#002113] to-[#001a0d] flex items-center justify-center">
+<!-- Vignette Layer -->
+<div class="absolute inset-0 vignette"></div>
+<!-- Texture/Grain Layer -->
+<div class="absolute inset-0 grain"></div>
+<!-- Asymmetric Silhouettes: Fiber Optic Lines -->
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<svg class="w-full h-full" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+<path d="M-100,200 Q400,400 1100,100" fill="none" stroke="#10b981" stroke-width="0.5"></path>
+<path d="M-50,600 Q500,300 1050,700" fill="none" stroke="#10b981" stroke-width="0.5"></path>
+<path d="M200,1100 Q600,500 800,-100" fill="none" stroke="#10b981" stroke-width="0.5"></path>
+</svg>
+</div>
+<!-- Main Content Container -->
+<div class="relative z-10 flex flex-col items-center justify-center w-full max-w-lg px-8 text-center">
+<!-- Centerpiece Mascot -->
+<div class="relative mb-12">
+<!-- Ambient 3D Glow behind mascot -->
+<div class="absolute inset-0 bg-primary-container/20 blur-[80px] rounded-full scale-150"></div>
+<div class="relative w-64 h-64 md:w-80 md:h-80 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+<img alt="Sleek white and emerald minimalist mascot robot with soft curves and glowing digital eyes, high-end octane render 3D style" class="w-full h-full object-contain" data-alt="A futuristic white and emerald green companion robot with floating limbs and glowing core, smooth high-gloss finish in a dark void" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtO--OCBrj15cMKViLji7kWOu6NWJU3hrp4tHDIstRFEXQJsZQh83ea7qQsErqL6txdCRLeiNvHT-6fkbuCmnBM_v_Xo4UCiNVJ4xSrRkbZSd6oKElveCHwvZ2FBYjXOKtdJ86BXA2sZau-OY5ulKgTsFpLZRR1sKGvUbgcdGHa0TASemAemea8OSyB6C_ZYayho9-0QHtqIZOKbCJVhvk59py31n99Z9x1aGfTzk3zJEmxMifiCKnVBj5b8Bvk3shygjbHXfLd7XO" style="">
+</div>
+</div>
+<!-- Branding Section -->
+<div class="space-y-2 mb-16">
+<h1 class="font-['Sora'] font-bold text-4xl md:text-5xl text-white tracking-[0.2em] text-glow uppercase" style="">
+                    JBR MINPO</h1>
+<p class="font-['JetBrains_Mono'] text-primary-fixed-dim text-[10px] tracking-[0.5em] opacity-80 uppercase" style="">
+                    PUSAT INFORMASI</p>
+</div>
+<!-- Loading System -->
+<div class="w-full max-w-xs space-y-4">
+<div class="relative h-[2px] w-full bg-white/10 rounded-full overflow-hidden">
+<!-- Progress Bar (75%) -->
+<div class="absolute top-0 left-0 h-full w-3/4 bg-primary-container loading-glow transition-all duration-1000 ease-out"></div>
+</div>
+<div class="flex justify-between items-center px-1">
+<span class="font-['JetBrains_Mono'] text-[10px] text-primary-fixed-dim/60 uppercase tracking-tighter" style="">SABAR YA GANTENG ...&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SABAR YA CANTIK....</span>
+<span class="font-['JetBrains_Mono'] text-[10px] text-primary-fixed-dim tracking-widest" style="">75%</span>
+</div>
+</div>
+</div>
+<!-- Background Floating Glass Elements (Figma Aesthetic) -->
+<div class="absolute top-1/4 -left-20 w-64 h-64 glass-morphism rounded-full opacity-20 rotate-12 blur-sm"></div>
+<div class="absolute bottom-1/4 -right-20 w-80 h-80 glass-morphism rounded-[64px] opacity-10 -rotate-12 blur-md"></div>
+<!-- Bottom Information -->
+<div class="absolute bottom-12 left-0 w-full flex flex-col items-center gap-4">
+<div class="flex items-center gap-2 px-4 py-2 glass-morphism rounded-full">
+<span class="material-symbols-outlined text-primary-fixed text-sm" data-icon="verified_user" style="">verified_user</span>
+<span class="font-['Manrope'] text-[10px] text-white/70 tracking-widest uppercase" style="">REWARD MENUNGGUMU..</span>
+</div>
+</div>
+</div>
+<!-- Hidden Shell Elements Suppression (as per logic) -->
+<!-- Navigation is suppressed for Splash Screen intent -->
+</body></html>
