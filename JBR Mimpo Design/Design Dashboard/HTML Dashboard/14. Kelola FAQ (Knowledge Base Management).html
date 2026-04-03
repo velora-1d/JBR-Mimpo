@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Sora', sans-serif; }
+        .mono { font-family: 'JetBrains+Mono', monospace; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for deep sea aesthetic */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #070e1d; }
+        ::-webkit-scrollbar-thumb { background: #1b263b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #69f6b8; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-dim": "#47edc4",
+                        "primary-container": "#06b77f",
+                        "surface-container-highest": "#1b263b",
+                        "inverse-on-surface": "#4e5566",
+                        "tertiary-fixed": "#00dcfd",
+                        "tertiary-container": "#00dcfd",
+                        "outline": "#6e7588",
+                        "tertiary": "#77e6ff",
+                        "primary-fixed-dim": "#58e7ab",
+                        "primary-fixed": "#69f6b8",
+                        "on-primary-container": "#002919",
+                        "on-primary-fixed": "#00452d",
+                        "inverse-primary": "#006d4a",
+                        "surface-container-lowest": "#000000",
+                        "on-secondary": "#005d4a",
+                        "on-error": "#490006",
+                        "surface-bright": "#212c43",
+                        "on-secondary-fixed": "#004939",
+                        "on-background": "#dfe5fa",
+                        "surface-container-high": "#161f33",
+                        "on-tertiary-container": "#004955",
+                        "on-primary": "#005a3c",
+                        "error": "#ff716c",
+                        "surface-dim": "#070e1d",
+                        "secondary-fixed-dim": "#47edc4",
+                        "tertiary-dim": "#00cdeb",
+                        "on-surface": "#dfe5fa",
+                        "primary-dim": "#58e7ab",
+                        "surface-container": "#11192b",
+                        "background": "#070e1d",
+                        "secondary-fixed": "#5afcd2",
+                        "inverse-surface": "#f9f9ff",
+                        "error-dim": "#d7383b",
+                        "secondary": "#5afcd2",
+                        "secondary-container": "#006b56",
+                        "outline-variant": "#414859",
+                        "on-tertiary-fixed-variant": "#005360",
+                        "on-secondary-fixed-variant": "#006853",
+                        "on-tertiary": "#005360",
+                        "tertiary-fixed-dim": "#00cdeb",
+                        "surface": "#070e1d",
+                        "surface-tint": "#69f6b8",
+                        "surface-container-low": "#0b1323",
+                        "primary": "#69f6b8",
+                        "on-surface-variant": "#a4abbf",
+                        "on-primary-fixed-variant": "#006544",
+                        "on-tertiary-fixed": "#00343c",
+                        "on-secondary-container": "#defff2",
+                        "error-container": "#9f0519",
+                        "surface-variant": "#1b263b",
+                        "on-error-container": "#ffa8a3"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface-dim text-on-surface flex overflow-hidden">
+<!-- SideNavBar Component -->
+<aside class="flex flex-col h-screen py-6 bg-[#070e1d] h-full w-64 fixed left-0 top-0">
+<div class="px-6 mb-8">
+<h1 class="text-2xl font-black text-[#69f6b8] tracking-tighter">JBR Minpo</h1>
+<p class="text-[10px] text-slate-400 font-medium tracking-widest uppercase opacity-60">Admin Ops v2.4</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center px-6 py-3 space-x-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm">Command Center</span>
+</a>
+<a class="flex items-center px-6 py-3 space-x-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">confirmation_number</span>
+<span class="text-sm">Ticketing</span>
+</a>
+<a class="flex items-center px-6 py-3 space-x-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings_input_component</span>
+<span class="text-sm">Network Health</span>
+</a>
+<!-- Active Tab: FAQ Manager -->
+<a class="flex items-center px-6 py-3 space-x-3 text-[#69f6b8] font-bold border-r-4 border-[#69f6b8] bg-[#11192b]/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">quiz</span>
+<span class="text-sm">FAQ Manager</span>
+</a>
+<a class="flex items-center px-6 py-3 space-x-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">database</span>
+<span class="text-sm">Customer Database</span>
+</a>
+<a class="flex items-center px-6 py-3 space-x-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="text-sm">CS Chat</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full py-2.5 px-4 rounded-xl bg-primary-container text-on-primary-container font-bold text-sm flex items-center justify-center space-x-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">bolt</span>
+<span>System Alert</span>
+</button>
+<div class="mt-6 border-t border-white/5 pt-6 space-y-1">
+<a class="flex items-center px-4 py-2 space-x-3 text-slate-400 font-medium hover:text-[#5afcd2]" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-xs">Settings</span>
+</a>
+<a class="flex items-center px-4 py-2 space-x-3 text-slate-400 font-medium hover:text-error" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-xs">Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-64 min-h-screen flex flex-col relative bg-surface-dim">
+<!-- TopNavBar Component -->
+<header class="flex justify-between items-center w-full px-8 h-16 sticky top-0 z-50 bg-[#070e1d]/80 backdrop-blur-xl">
+<div class="flex items-center space-x-8">
+<h2 class="text-xl font-bold text-[#69f6b8] tracking-tight">FAQ Knowledge Base</h2>
+<div class="hidden md:flex space-x-6">
+<a class="text-[#69f6b8] border-b-2 border-[#69f6b8] pb-1 text-sm" href="#">Global View</a>
+<a class="text-slate-400 hover:text-[#5afcd2] text-sm transition-opacity" href="#">Live Metrics</a>
+<a class="text-slate-400 hover:text-[#5afcd2] text-sm transition-opacity" href="#">Incident Logs</a>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<div class="relative group">
+<input class="bg-surface-container-highest border-none rounded-xl text-sm py-2 pl-10 pr-4 w-64 focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-dim transition-all outline-none" placeholder="Search knowledge base..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2 text-slate-400 text-lg">search</span>
+</div>
+<div class="flex items-center space-x-3 text-slate-400">
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors"><span class="material-symbols-outlined">notifications_active</span></button>
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors"><span class="material-symbols-outlined">dns</span></button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-primary/20">
+<img class="w-full h-full object-cover" data-alt="professional admin user headshot portrait in soft studio lighting with a neutral dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUm1xqBiMwHkOFL0n_bRBsDsrKrhFX8NZ2uB96iqn4J3Q2rGw1Qpv_Z55cn10s0n6UwjFIKFM8IMyUy2um5-_MG_WRBYceu_Yj_3Vsqp8PCwhN-xUAowYzRCNJCPKaqtYNpq1FYIrQ8mB6Qz6348Pp1FYNTrax8ZlMuXvhu3Rxf6Yy7dOwwKLucZWJ2Vn-4IwxT_tLfg2HVJc0qwupSEdITmHfh4wqcyZd8NU24dJLvWdpImughejRC3lXKdGGH5PtfOSze_vQkUU"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Dashboard Content -->
+<section class="p-8 space-y-8 flex-1 overflow-y-auto">
+<!-- Header Action Row -->
+<div class="flex justify-between items-end">
+<div>
+<h3 class="text-3xl font-extrabold tracking-tighter text-on-surface">Knowledge Management</h3>
+<p class="text-slate-400 mt-1 text-sm font-medium">Manage and reorder automated response logic for the JBR neural chat engine.</p>
+</div>
+<div class="flex space-x-3">
+<button class="flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-surface-container-high border border-outline-variant/10 text-on-surface font-semibold hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined text-primary">sync</span>
+<span>Sync to AI Chatbot</span>
+</button>
+<button class="flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-primary text-on-primary font-bold hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-primary/10">
+<span class="material-symbols-outlined">add</span>
+<span>Create New FAQ</span>
+</button>
+</div>
+</div>
+<!-- Bento Stats Overview -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="p-6 rounded-2xl bg-surface-container border-outline-variant/5">
+<p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Total Knowledge</p>
+<div class="flex items-baseline space-x-2 mt-2">
+<span class="text-4xl font-black text-on-surface tracking-tighter mono">1,284</span>
+<span class="text-primary text-xs font-bold">+12%</span>
+</div>
+</div>
+<div class="p-6 rounded-2xl bg-surface-container border-outline-variant/5">
+<p class="text-slate-400 text-xs font-bold uppercase tracking-widest">AI Success Rate</p>
+<div class="flex items-baseline space-x-2 mt-2">
+<span class="text-4xl font-black text-secondary-dim tracking-tighter mono">94.2%</span>
+<span class="material-symbols-outlined text-secondary-dim text-sm" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+</div>
+</div>
+<div class="p-6 rounded-2xl bg-surface-container border-outline-variant/5">
+<p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Pending Review</p>
+<div class="flex items-baseline space-x-2 mt-2">
+<span class="text-4xl font-black text-tertiary tracking-tighter mono">18</span>
+<span class="text-slate-500 text-xs font-bold">Priority</span>
+</div>
+</div>
+<div class="p-6 rounded-2xl bg-surface-container border-outline-variant/5 overflow-hidden relative group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Last Sync</p>
+<div class="flex items-baseline space-x-2 mt-2">
+<span class="text-xl font-bold text-on-surface tracking-tight">2 mins ago</span>
+</div>
+<div class="mt-2 h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Table Container -->
+<div class="bg-surface-container rounded-2xl overflow-hidden border border-outline-variant/5">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high/50 border-b border-outline-variant/10">
+<th class="px-6 py-4 w-12"></th>
+<th class="px-6 py-4 text-xs font-black uppercase tracking-widest text-slate-400">Pertanyaan</th>
+<th class="px-6 py-4 text-xs font-black uppercase tracking-widest text-slate-400">Kategori</th>
+<th class="px-6 py-4 text-xs font-black uppercase tracking-widest text-slate-400">Sumber</th>
+<th class="px-6 py-4 text-xs font-black uppercase tracking-widest text-slate-400">Status</th>
+<th class="px-6 py-4 text-right"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-bright transition-colors group cursor-move">
+<td class="px-6 py-5 text-slate-600 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">drag_indicator</span>
+</td>
+<td class="px-6 py-5">
+<p class="font-semibold text-on-surface">Bagaimana cara mereset router JBR v2?</p>
+<p class="text-xs text-slate-400 mt-0.5 mono opacity-60">ID-77291-KB</p>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full bg-tertiary/10 text-tertiary text-[10px] font-bold uppercase tracking-tighter">Network Setup</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm text-slate-400">person</span>
+<span class="text-sm font-medium text-slate-300">Admin</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center space-x-2">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="text-xs font-bold text-primary tracking-tighter uppercase">Active</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-slate-400 hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-bright transition-colors group cursor-move">
+<td class="px-6 py-5 text-slate-600 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">drag_indicator</span>
+</td>
+<td class="px-6 py-5">
+<p class="font-semibold text-on-surface">Estimasi perbaikan kabel serat optik wilayah Jakarta Selatan?</p>
+<p class="text-xs text-slate-400 mt-0.5 mono opacity-60">ID-88210-KB</p>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-tighter">Infrastructure</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm text-slate-400">smart_toy</span>
+<span class="text-sm font-medium text-slate-300">Auto</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center space-x-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-xs font-bold text-primary tracking-tighter uppercase">Active</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-slate-400 hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 (Inactive) -->
+<tr class="hover:bg-surface-bright transition-colors group cursor-move">
+<td class="px-6 py-5 text-slate-600 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">drag_indicator</span>
+</td>
+<td class="px-6 py-5">
+<p class="font-semibold text-on-surface opacity-50 italic line-through">Promosi diskon member baru Q3 2023</p>
+<p class="text-xs text-slate-400 mt-0.5 mono opacity-60">ID-12003-KB</p>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full bg-surface-container-highest text-slate-500 text-[10px] font-bold uppercase tracking-tighter">Billing</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center space-x-2 opacity-50">
+<span class="material-symbols-outlined text-sm text-slate-400">person</span>
+<span class="text-sm font-medium text-slate-300">Admin</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center space-x-2">
+<div class="w-2 h-2 rounded-full bg-slate-600"></div>
+<span class="text-xs font-bold text-slate-500 tracking-tighter uppercase">Inactive</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-slate-400 hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-bright transition-colors group cursor-move">
+<td class="px-6 py-5 text-slate-600 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">drag_indicator</span>
+</td>
+<td class="px-6 py-5">
+<p class="font-semibold text-on-surface">Bagaimana cara cek sisa kuota bandwidth?</p>
+<p class="text-xs text-slate-400 mt-0.5 mono opacity-60">ID-99238-KB</p>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full bg-secondary-dim/10 text-secondary-dim text-[10px] font-bold uppercase tracking-tighter">General</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm text-slate-400">smart_toy</span>
+<span class="text-sm font-medium text-slate-300">Auto</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center space-x-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-xs font-bold text-primary tracking-tighter uppercase">Active</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-slate-400 hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+<!-- Create/Edit Modal Overlay (Simulated) -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-surface-lowest/80 backdrop-blur-md">
+<div class="bg-surface-bright w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl border border-outline-variant/10">
+<!-- Modal Header -->
+<div class="p-6 border-b border-outline-variant/10 flex justify-between items-center bg-surface-container">
+<div>
+<h2 class="text-xl font-extrabold text-on-surface">Edit Knowledge Node</h2>
+<p class="text-xs text-slate-400 font-medium mono">NODE_REF: #ID-77291-KB</p>
+</div>
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Modal Body -->
+<div class="p-8 space-y-6 max-h-[716px] overflow-y-auto">
+<!-- Status Toggle -->
+<div class="flex items-center justify-between p-4 bg-surface-container-highest rounded-2xl">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-primary">power_settings_new</span>
+<div>
+<p class="text-sm font-bold text-on-surface">Node Visibility</p>
+<p class="text-xs text-slate-400">If disabled, this FAQ will be hidden from the AI Chatbot.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-dim peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="text-xs font-black uppercase tracking-widest text-slate-400 px-1">Kategori</label>
+<select class="w-full bg-surface-container-highest border-none rounded-xl text-sm py-3 px-4 focus:ring-2 focus:ring-primary outline-none appearance-none">
+<option>Network Setup</option>
+<option>Billing</option>
+<option>Infrastructure</option>
+<option>General</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-black uppercase tracking-widest text-slate-400 px-1">Sumber Data</label>
+<select class="w-full bg-surface-container-highest border-none rounded-xl text-sm py-3 px-4 focus:ring-2 focus:ring-primary outline-none appearance-none">
+<option>Admin Manual</option>
+<option>System Auto-Generate</option>
+</select>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-black uppercase tracking-widest text-slate-400 px-1">Pertanyaan Utama</label>
+<input class="w-full bg-surface-container-highest border-none rounded-xl text-sm py-3 px-4 focus:ring-2 focus:ring-primary outline-none" type="text" value="Bagaimana cara mereset router JBR v2?"/>
+</div>
+<!-- Simulated Tiptap Editor -->
+<div class="space-y-2">
+<label class="text-xs font-black uppercase tracking-widest text-slate-400 px-1">Jawaban (Neural Logic)</label>
+<div class="border border-outline-variant/10 rounded-2xl overflow-hidden bg-surface-container-highest">
+<!-- Toolbar -->
+<div class="flex items-center p-2 space-x-1 border-b border-outline-variant/10 bg-surface-container">
+<button class="p-1.5 hover:bg-surface-container-high rounded text-slate-400"><span class="material-symbols-outlined text-sm">format_bold</span></button>
+<button class="p-1.5 hover:bg-surface-container-high rounded text-slate-400"><span class="material-symbols-outlined text-sm">format_italic</span></button>
+<button class="p-1.5 hover:bg-surface-container-high rounded text-slate-400"><span class="material-symbols-outlined text-sm">format_list_bulleted</span></button>
+<button class="p-1.5 hover:bg-surface-container-high rounded text-slate-400"><span class="material-symbols-outlined text-sm">link</span></button>
+<div class="h-4 w-px bg-outline-variant/20 mx-1"></div>
+<button class="p-1.5 hover:bg-surface-container-high rounded text-slate-400"><span class="material-symbols-outlined text-sm">code</span></button>
+</div>
+<!-- Content Area -->
+<div class="p-4 min-h-[160px] text-sm text-slate-300 leading-relaxed">
+<p>Untuk mereset router <strong>JBR Minpo v2</strong>, silakan ikuti langkah berikut:</p>
+<ul class="list-disc ml-4 mt-2 space-y-1">
+<li>Cari tombol reset kecil di bagian belakang perangkat.</li>
+<li>Gunakan jarum atau paperclip untuk menekan tombol selama 10 detik.</li>
+<li>Tunggu hingga lampu indikator <span class="text-primary mono">LED 3</span> berkedip hijau.</li>
+</ul>
+<p class="mt-4">Jangan mematikan daya selama proses reset berlangsung.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="p-6 border-t border-outline-variant/10 flex justify-end space-x-4 bg-surface-container">
+<button class="px-6 py-2.5 rounded-xl text-slate-400 font-semibold hover:bg-surface-container-high transition-colors text-sm">Discard Changes</button>
+<button class="px-8 py-2.5 rounded-xl bg-primary text-on-primary font-bold hover:opacity-90 active:scale-95 transition-all text-sm shadow-lg shadow-primary/20">Commit to Node</button>
+</div>
+</div>
+</div>
+</body></html>

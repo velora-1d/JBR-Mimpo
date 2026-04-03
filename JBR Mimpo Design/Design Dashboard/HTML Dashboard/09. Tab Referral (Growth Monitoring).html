@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JBR Minpo Command Center - Referral Tracking</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&amp;family=JetBrains+Mono:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body {
+            background-color: #070e1d;
+            font-family: 'Inter', sans-serif;
+        }
+        .emerald-glow {
+            box-shadow: 0 0 20px rgba(105, 246, 184, 0.15);
+        }
+        .glass-panel {
+            background: rgba(27, 38, 59, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#00dcfd",
+                        "tertiary": "#77e6ff",
+                        "surface": "#070e1d",
+                        "inverse-on-surface": "#4e5566",
+                        "surface-tint": "#69f6b8",
+                        "surface-container-lowest": "#000000",
+                        "secondary-dim": "#47edc4",
+                        "on-primary": "#005a3c",
+                        "surface-container": "#11192b",
+                        "tertiary-dim": "#00cdeb",
+                        "background": "#070e1d",
+                        "on-secondary-fixed": "#004939",
+                        "on-tertiary-fixed": "#00343c",
+                        "tertiary-container": "#00dcfd",
+                        "inverse-surface": "#f9f9ff",
+                        "primary-container": "#06b77f",
+                        "surface-bright": "#212c43",
+                        "on-primary-container": "#002919",
+                        "secondary-container": "#006b56",
+                        "primary-dim": "#58e7ab",
+                        "surface-container-high": "#161f33",
+                        "tertiary-fixed-dim": "#00cdeb",
+                        "secondary": "#5afcd2",
+                        "on-primary-fixed-variant": "#006544",
+                        "secondary-fixed-dim": "#47edc4",
+                        "error": "#ff716c",
+                        "outline": "#6e7588",
+                        "on-secondary": "#005d4a",
+                        "surface-variant": "#1b263b",
+                        "on-tertiary-container": "#004955",
+                        "on-secondary-fixed-variant": "#006853",
+                        "inverse-primary": "#006d4a",
+                        "surface-dim": "#070e1d",
+                        "on-tertiary-fixed-variant": "#005360",
+                        "on-surface-variant": "#a4abbf",
+                        "secondary-fixed": "#5afcd2",
+                        "on-error-container": "#ffa8a3",
+                        "on-surface": "#dfe5fa",
+                        "surface-container-highest": "#1b263b",
+                        "primary-fixed": "#69f6b8",
+                        "on-secondary-container": "#defff2",
+                        "outline-variant": "#414859",
+                        "on-background": "#dfe5fa",
+                        "on-error": "#490006",
+                        "primary": "#69f6b8",
+                        "surface-container-low": "#0b1323",
+                        "error-dim": "#d7383b",
+                        "on-primary-fixed": "#00452d",
+                        "on-tertiary": "#005360",
+                        "primary-fixed-dim": "#58e7ab",
+                        "error-container": "#9f0519"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary selection:text-on-primary">
+<!-- Sidebar (Shared Component) -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-[#11192b] flex flex-col h-full py-8 border-r border-[#161f33] z-50">
+<div class="px-6 mb-10 flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center emerald-glow">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">shield_person</span>
+</div>
+<div>
+<h1 class="text-[#69f6b8] font-black font-['Sora'] text-sm tracking-tight">Command Center</h1>
+<p class="font-['JetBrains_Mono'] text-[10px] uppercase tracking-widest text-slate-500">Emerald Sentinel v2</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-slate-400 hover:text-[#5afcd2] px-4 py-3 flex items-center gap-4 transition-all font-['JetBrains_Mono'] text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-lg">loyalty</span>
+<span>Promo Catalog</span>
+</a>
+<a class="text-slate-400 hover:text-[#5afcd2] px-4 py-3 flex items-center gap-4 transition-all font-['JetBrains_Mono'] text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-lg">redeem</span>
+<span>Reward Management</span>
+</a>
+<a class="text-slate-400 hover:text-[#5afcd2] px-4 py-3 flex items-center gap-4 transition-all font-['JetBrains_Mono'] text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-lg">casino</span>
+<span>Lottery Draw</span>
+</a>
+<a class="bg-[#161f33] text-[#69f6b8] border-r-4 border-[#69f6b8] px-4 py-3 flex items-center gap-4 transition-all font-['JetBrains_Mono'] text-xs uppercase tracking-widest translate-x-1" href="#">
+<span class="material-symbols-outlined text-lg">share</span>
+<span>Referral Tracking</span>
+</a>
+<a class="text-slate-400 hover:text-[#5afcd2] px-4 py-3 flex items-center gap-4 transition-all font-['JetBrains_Mono'] text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-lg">account_balance_wallet</span>
+<span>Point Adjustment</span>
+</a>
+</nav>
+<div class="mt-auto px-4 space-y-4">
+<button class="w-full bg-[#69f6b8] text-[#005a3c] font-bold py-3 rounded-xl flex items-center justify-center gap-2 hover:brightness-110 transition-all active:scale-95 shadow-lg shadow-primary/10">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-['Sora'] text-xs uppercase tracking-wider">New Campaign</span>
+</button>
+<div class="border-t border-[#161f33] pt-4 space-y-1">
+<a class="text-slate-400 hover:text-[#5afcd2] px-4 py-2 flex items-center gap-4 transition-all font-['JetBrains_Mono'] text-[10px] uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm">help_outline</span>
+<span>Support</span>
+</a>
+<a class="text-slate-400 hover:text-[#5afcd2] px-4 py-2 flex items-center gap-4 transition-all font-['JetBrains_Mono'] text-[10px] uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Top Bar (Shared Component) -->
+<header class="fixed top-0 right-0 left-64 h-16 bg-[#070e1d]/80 backdrop-blur-xl z-40 flex justify-between items-center px-8 border-b border-[#161f33]/30">
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="absolute inset-y-0 left-3 flex items-center text-slate-500 group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">search</span>
+</span>
+<input class="bg-[#11192b] border-none rounded-full pl-10 pr-4 py-1.5 text-xs font-['JetBrains_Mono'] w-64 focus:ring-1 focus:ring-primary transition-all" placeholder="Search parameters..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-400 hover:bg-[#161f33] rounded-lg transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-400 hover:bg-[#161f33] rounded-lg transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-[1px] bg-[#161f33] mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-xs font-bold font-['Sora'] text-on-surface">Admin_09</p>
+<p class="text-[10px] text-primary font-['JetBrains_Mono']">Online</p>
+</div>
+<img alt="Administrator Profile" class="w-10 h-10 rounded-xl object-cover ring-2 ring-primary/20" data-alt="close-up portrait of a tech administrator with cool studio lighting and blue highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1j8jw3RG9agxN4_9uIBZkK9kZeCQ-b02P6z0OCTGntNcBAV5_IuSwKVvAZVpBZWVt49XMT5oVbqR1T2XJWO8XcgJb-owCbcaFdY7V8X5GbyjLJv0L3F5O-_3rry7qxziDl2AmCpfXNU7ZZCHLdNZ_ccR1UO64oVCGeyIq0vB2RhaVwTLkZCz0T2DV6qOfmHzEyQAolyjo3x6WfvitNAuY0IYVftGvpDMonqpba6OExPwPQMBYc-jLYJP0zqMJGIisC5VmawLPuSQ"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 pt-24 pb-12 px-8 min-h-screen">
+<!-- Header Section -->
+<div class="mb-8 flex justify-between items-end">
+<div>
+<h2 class="text-3xl font-bold font-['Sora'] tracking-tight text-on-surface">Growth Monitoring</h2>
+<p class="text-slate-400 font-['JetBrains_Mono'] text-sm mt-1">Live Referral Acquisition Pipeline</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 bg-surface-container text-xs font-['JetBrains_Mono'] uppercase tracking-widest text-slate-400 rounded-lg hover:text-primary transition-colors border border-outline-variant/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">download</span>
+                    Export CSV
+                </button>
+<button class="px-4 py-2 bg-surface-container text-xs font-['JetBrains_Mono'] uppercase tracking-widest text-slate-400 rounded-lg hover:text-primary transition-colors border border-outline-variant/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                    Filter
+                </button>
+</div>
+</div>
+<!-- 4 Stat Cards: Bento-ish Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+<!-- Card 1: Total Referral -->
+<div class="surface-container rounded-xl p-6 relative overflow-hidden group hover:bg-surface-container-high transition-colors">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary/5 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary">groups</span>
+</div>
+<span class="text-[10px] font-['JetBrains_Mono'] text-primary bg-primary/5 px-2 py-0.5 rounded-full">+12.5%</span>
+</div>
+<p class="text-slate-500 text-xs uppercase tracking-widest font-['JetBrains_Mono'] mb-1">Total Referral</p>
+<h3 class="text-3xl font-bold font-['Sora'] tracking-tight text-on-surface">
+                    12,842
+                </h3>
+</div>
+<!-- Card 2: Berhasil -->
+<div class="surface-container rounded-xl p-6 relative overflow-hidden group hover:bg-surface-container-high transition-colors">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-secondary/5 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary/10 rounded-lg">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+</div>
+<span class="text-[10px] font-['JetBrains_Mono'] text-secondary bg-secondary/5 px-2 py-0.5 rounded-full">88% Rate</span>
+</div>
+<p class="text-slate-500 text-xs uppercase tracking-widest font-['JetBrains_Mono'] mb-1">Berhasil</p>
+<h3 class="text-3xl font-bold font-['Sora'] tracking-tight text-on-surface">
+                    11,301
+                </h3>
+</div>
+<!-- Card 3: Pending -->
+<div class="surface-container rounded-xl p-6 relative overflow-hidden group hover:bg-surface-container-high transition-colors">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-tertiary/5 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-tertiary/10 rounded-lg">
+<span class="material-symbols-outlined text-tertiary">hourglass_empty</span>
+</div>
+<span class="text-[10px] font-['JetBrains_Mono'] text-tertiary bg-tertiary/5 px-2 py-0.5 rounded-full">Active</span>
+</div>
+<p class="text-slate-500 text-xs uppercase tracking-widest font-['JetBrains_Mono'] mb-1">Pending</p>
+<h3 class="text-3xl font-bold font-['Sora'] tracking-tight text-on-surface">
+                    1,541
+                </h3>
+</div>
+<!-- Card 4: Total Reward -->
+<div class="surface-container rounded-xl p-6 relative overflow-hidden group hover:bg-surface-container-high transition-colors">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary-container/10 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary-container/20 rounded-lg">
+<span class="material-symbols-outlined text-primary">payments</span>
+</div>
+<span class="text-[10px] font-['JetBrains_Mono'] text-primary-container bg-primary-container/10 px-2 py-0.5 rounded-full">Payout</span>
+</div>
+<p class="text-slate-500 text-xs uppercase tracking-widest font-['JetBrains_Mono'] mb-1">Total Reward</p>
+<h3 class="text-3xl font-bold font-['Sora'] tracking-tight text-on-surface">
+                    IDR 850M
+                </h3>
+</div>
+</div>
+<!-- Table Data Section -->
+<div class="surface-container rounded-2xl overflow-hidden border border-outline-variant/10">
+<div class="p-6 border-b border-outline-variant/10 flex justify-between items-center bg-[#161f33]/30">
+<h4 class="font-['Sora'] font-semibold text-on-surface">Recent Referral Activity</h4>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[10px] font-['JetBrains_Mono'] text-slate-400 uppercase tracking-widest">Real-time Stream</span>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-6 py-4 text-[10px] font-['JetBrains_Mono'] uppercase tracking-[0.2em] text-slate-500">Nama Pengajak</th>
+<th class="px-6 py-4 text-[10px] font-['JetBrains_Mono'] uppercase tracking-[0.2em] text-slate-500">Nama yang Diajak</th>
+<th class="px-6 py-4 text-[10px] font-['JetBrains_Mono'] uppercase tracking-[0.2em] text-slate-500">Kode Referral</th>
+<th class="px-6 py-4 text-[10px] font-['JetBrains_Mono'] uppercase tracking-[0.2em] text-slate-500">Status</th>
+<th class="px-6 py-4 text-[10px] font-['JetBrains_Mono'] uppercase tracking-[0.2em] text-slate-500">Tanggal Daftar</th>
+<th class="px-6 py-4 text-[10px] font-['JetBrains_Mono'] uppercase tracking-[0.2em] text-slate-500 text-center">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center font-['Sora'] text-[10px] text-primary">AK</div>
+<span class="text-sm font-medium text-on-surface">Aditya Kusuma</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-300">Rizky Pratama</td>
+<td class="px-6 py-4">
+<span class="font-['JetBrains_Mono'] text-xs text-primary bg-primary/5 px-2 py-1 rounded border border-primary/10">JBR-ADIT-2024</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary">
+<span class="w-1 h-1 rounded-full bg-primary"></span>
+                                    Rewarded
+                                </span>
+</td>
+<td class="px-6 py-4 text-xs font-['JetBrains_Mono'] text-slate-500">2024.05.12 14:22</td>
+<td class="px-6 py-4 text-center">
+<button class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all flex items-center justify-center mx-auto">
+<span class="material-symbols-outlined text-lg">chat</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center font-['Sora'] text-[10px] text-primary">SN</div>
+<span class="text-sm font-medium text-on-surface">Siti Nurhaliza</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-300">Ahmad Dhani</td>
+<td class="px-6 py-4">
+<span class="font-['JetBrains_Mono'] text-xs text-primary bg-primary/5 px-2 py-1 rounded border border-primary/10">JBR-SITI-XP99</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-tertiary/10 text-tertiary">
+<span class="w-1 h-1 rounded-full bg-tertiary"></span>
+                                    Pending
+                                </span>
+</td>
+<td class="px-6 py-4 text-xs font-['JetBrains_Mono'] text-slate-500">2024.05.12 12:05</td>
+<td class="px-6 py-4 text-center">
+<button class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all flex items-center justify-center mx-auto">
+<span class="material-symbols-outlined text-lg">chat</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center font-['Sora'] text-[10px] text-primary">BP</div>
+<span class="text-sm font-medium text-on-surface">Bambang Pamungkas</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-300">Isyana Saraswati</td>
+<td class="px-6 py-4">
+<span class="font-['JetBrains_Mono'] text-xs text-primary bg-primary/5 px-2 py-1 rounded border border-primary/10">JBR-BAMB-7721</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary">
+<span class="w-1 h-1 rounded-full bg-primary"></span>
+                                    Rewarded
+                                </span>
+</td>
+<td class="px-6 py-4 text-xs font-['JetBrains_Mono'] text-slate-500">2024.05.11 23:45</td>
+<td class="px-6 py-4 text-center">
+<button class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all flex items-center justify-center mx-auto">
+<span class="material-symbols-outlined text-lg">chat</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center font-['Sora'] text-[10px] text-primary">DR</div>
+<span class="text-sm font-medium text-on-surface">Dewi Rezer</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-300">Gading Marten</td>
+<td class="px-6 py-4">
+<span class="font-['JetBrains_Mono'] text-xs text-primary bg-primary/5 px-2 py-1 rounded border border-primary/10">JBR-DEWI-LOCO</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-tertiary/10 text-tertiary">
+<span class="w-1 h-1 rounded-full bg-tertiary"></span>
+                                    Pending
+                                </span>
+</td>
+<td class="px-6 py-4 text-xs font-['JetBrains_Mono'] text-slate-500">2024.05.11 18:12</td>
+<td class="px-6 py-4 text-center">
+<button class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all flex items-center justify-center mx-auto">
+<span class="material-symbols-outlined text-lg">chat</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center font-['Sora'] text-[10px] text-primary">MS</div>
+<span class="text-sm font-medium text-on-surface">Maulana Syarif</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-300">Reza Rahadian</td>
+<td class="px-6 py-4">
+<span class="font-['JetBrains_Mono'] text-xs text-primary bg-primary/5 px-2 py-1 rounded border border-primary/10">JBR-MAUL-ALPHA</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary">
+<span class="w-1 h-1 rounded-full bg-primary"></span>
+                                    Rewarded
+                                </span>
+</td>
+<td class="px-6 py-4 text-xs font-['JetBrains_Mono'] text-slate-500">2024.05.11 09:30</td>
+<td class="px-6 py-4 text-center">
+<button class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all flex items-center justify-center mx-auto">
+<span class="material-symbols-outlined text-lg">chat</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination-like Footer -->
+<div class="p-4 bg-surface-container-low/30 border-t border-outline-variant/5 flex justify-between items-center">
+<p class="text-[10px] font-['JetBrains_Mono'] text-slate-500 uppercase">Showing 5 of 12,842 nodes</p>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded bg-[#161f33] text-slate-400 hover:text-primary transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded bg-primary text-on-primary flex items-center justify-center font-bold text-xs">1</button>
+<button class="w-8 h-8 rounded bg-[#161f33] text-slate-400 hover:text-primary transition-colors flex items-center justify-center font-bold text-xs">2</button>
+<button class="w-8 h-8 rounded bg-[#161f33] text-slate-400 hover:text-primary transition-colors flex items-center justify-center font-bold text-xs">3</button>
+<button class="w-8 h-8 rounded bg-[#161f33] text-slate-400 hover:text-primary transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- System Graph (Asymmetric Component) -->
+<div class="mt-8 grid grid-cols-3 gap-8">
+<div class="col-span-2 surface-container rounded-2xl p-6 h-48 relative overflow-hidden flex flex-col justify-end">
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<img class="w-full h-full object-cover" data-alt="futuristic cyber circuit board pattern with glowing cyan lines and digital data streams" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdzzNOb9ZRp5js_eMlcR68VpkobNmkMmHjSwHXvx-GtxgudP-HojTdW7npV2z5xpOHnVBpqDniSrvcMVbqcq2TOkOy5G2ooLWfV97UzHsWzN7DvEw_DOKe6DBDhOLPJuVCJByY_z0E1LRb5OhVGH9J-upt8GuGVfmBTagJ9l8tErtTgezX2ZVW3QgQoa4g2mdaWYNcmfCpqmLmH5fuabnNHyVoNYr8E0Oz_vXmIvPvYnsG3yQnEkg42vxjfJkz5fCg99Tqwkp8T_0"/>
+</div>
+<div class="relative z-10">
+<h5 class="text-xs font-['JetBrains_Mono'] uppercase tracking-[0.3em] text-primary mb-2">Network Health</h5>
+<div class="flex items-end gap-1 h-12">
+<div class="w-2 bg-primary/20 h-[40%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/40 h-[60%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/30 h-[50%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/60 h-[80%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/20 h-[30%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/50 h-[70%] rounded-t-sm"></div>
+<div class="w-2 bg-primary/90 h-[95%] rounded-t-sm animate-pulse"></div>
+<div class="w-2 bg-primary/40 h-[55%] rounded-t-sm"></div>
+<div class="w-2 bg-primary h-full rounded-t-sm"></div>
+<div class="w-2 bg-primary/30 h-[40%] rounded-t-sm"></div>
+</div>
+<p class="text-[10px] text-slate-500 mt-2 font-['JetBrains_Mono']">Referral nodes synchronizing across 12 distributed clusters.</p>
+</div>
+</div>
+<div class="col-span-1 bg-gradient-to-br from-primary-container to-secondary-container rounded-2xl p-6 flex flex-col justify-between group cursor-pointer hover:scale-[1.02] transition-transform">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-3xl text-on-primary-container" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="material-symbols-outlined text-on-primary-container/50 group-hover:translate-x-2 transition-transform">arrow_forward</span>
+</div>
+<div>
+<h4 class="text-on-primary-container font-bold font-['Sora'] text-lg">AI Performance Audit</h4>
+<p class="text-on-primary-container/80 text-xs">Run heuristic check on referral fraud patterns.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Element -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="group flex items-center gap-3 bg-surface-bright p-1 pr-6 rounded-full border border-primary/20 shadow-2xl hover:border-primary transition-all duration-300">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<div class="text-left">
+<p class="text-[10px] font-['JetBrains_Mono'] uppercase tracking-widest text-primary leading-none">Minpo Engine</p>
+<p class="text-xs font-bold text-on-surface">Accelerate Growth</p>
+</div>
+</button>
+</div>
+</body></html>

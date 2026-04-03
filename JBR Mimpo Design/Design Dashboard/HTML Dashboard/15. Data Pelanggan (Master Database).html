@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Master Customer Database | JBR Minpo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Sora', sans-serif;
+            background-color: #070e1d;
+            color: #dfe5fa;
+            overflow: hidden;
+        }
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        /* Custom Scrollbar for the Emerald Sentinel look */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #070e1d; }
+        ::-webkit-scrollbar-thumb { background: #1b263b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #69f6b8; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-dim": "#47edc4",
+                      "primary-container": "#06b77f",
+                      "surface-container-highest": "#1b263b",
+                      "inverse-on-surface": "#4e5566",
+                      "tertiary-fixed": "#00dcfd",
+                      "tertiary-container": "#00dcfd",
+                      "outline": "#6e7588",
+                      "tertiary": "#77e6ff",
+                      "primary-fixed-dim": "#58e7ab",
+                      "primary-fixed": "#69f6b8",
+                      "on-primary-container": "#002919",
+                      "on-primary-fixed": "#00452d",
+                      "inverse-primary": "#006d4a",
+                      "surface-container-lowest": "#000000",
+                      "on-secondary": "#005d4a",
+                      "on-error": "#490006",
+                      "surface-bright": "#212c43",
+                      "on-secondary-fixed": "#004939",
+                      "on-background": "#dfe5fa",
+                      "surface-container-high": "#161f33",
+                      "on-tertiary-container": "#004955",
+                      "on-primary": "#005a3c",
+                      "error": "#ff716c",
+                      "surface-dim": "#070e1d",
+                      "secondary-fixed-dim": "#47edc4",
+                      "tertiary-dim": "#00cdeb",
+                      "on-surface": "#dfe5fa",
+                      "primary-dim": "#58e7ab",
+                      "surface-container": "#11192b",
+                      "background": "#070e1d",
+                      "secondary-fixed": "#5afcd2",
+                      "inverse-surface": "#f9f9ff",
+                      "error-dim": "#d7383b",
+                      "secondary": "#5afcd2",
+                      "secondary-container": "#006b56",
+                      "outline-variant": "#414859",
+                      "on-tertiary-fixed-variant": "#005360",
+                      "on-secondary-fixed-variant": "#006853",
+                      "on-tertiary": "#005360",
+                      "tertiary-fixed-dim": "#00cdeb",
+                      "surface": "#070e1d",
+                      "surface-tint": "#69f6b8",
+                      "surface-container-low": "#0b1323",
+                      "primary": "#69f6b8",
+                      "on-surface-variant": "#a4abbf",
+                      "on-primary-fixed-variant": "#006544",
+                      "on-tertiary-fixed": "#00343c",
+                      "on-secondary-container": "#defff2",
+                      "error-container": "#9f0519",
+                      "surface-variant": "#1b263b",
+                      "on-error-container": "#ffa8a3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              }
+            },
+          }
+        }
+      </script>
+</head>
+<body class="bg-background text-on-surface h-screen flex overflow-hidden">
+<!-- Sidebar - Shared Component: SideNavBar -->
+<aside class="bg-[#070e1d] h-full w-64 fixed left-0 top-0 flex flex-col py-6 z-40">
+<div class="px-6 mb-8">
+<h1 class="text-2xl font-black text-[#69f6b8] tracking-tighter">JBR Minpo</h1>
+<p class="text-xs text-slate-500 font-medium mono uppercase tracking-widest mt-1">Admin Ops v2.4</p>
+</div>
+<nav class="flex-1 space-y-1 px-3">
+<a class="flex items-center px-4 py-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="text-sm">Command Center</span>
+</a>
+<a class="flex items-center px-4 py-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined mr-3">confirmation_number</span>
+<span class="text-sm">Ticketing</span>
+</a>
+<a class="flex items-center px-4 py-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined mr-3">settings_input_component</span>
+<span class="text-sm">Network Health</span>
+</a>
+<a class="flex items-center px-4 py-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined mr-3">quiz</span>
+<span class="text-sm">FAQ Manager</span>
+</a>
+<a class="flex items-center px-4 py-3 text-[#69f6b8] font-bold border-r-4 border-[#69f6b8] bg-[#11192b]/50 rounded-l-xl group" href="#">
+<span class="material-symbols-outlined mr-3">database</span>
+<span class="text-sm">Customer Database</span>
+</a>
+<a class="flex items-center px-4 py-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined mr-3">chat_bubble</span>
+<span class="text-sm">CS Chat</span>
+</a>
+</nav>
+<div class="px-3 mt-auto space-y-1">
+<div class="px-4 py-3 bg-[#11192b] rounded-xl mb-4">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] uppercase font-bold text-primary tracking-widest">System Alert</span>
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+</div>
+<p class="text-[11px] text-slate-400 leading-tight">Database integrity 99.9% optimized.</p>
+</div>
+<a class="flex items-center px-4 py-2 text-slate-400 hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined mr-3 text-xl">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+<a class="flex items-center px-4 py-2 text-slate-400 hover:text-error transition-colors" href="#">
+<span class="material-symbols-outlined mr-3 text-xl">logout</span>
+<span class="text-sm">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 flex flex-col h-full bg-[#070e1d]">
+<!-- Header - Shared Component: TopNavBar -->
+<header class="flex justify-between items-center w-full px-8 h-16 sticky top-0 z-30 bg-[#070e1d]/80 backdrop-blur-xl">
+<div class="flex items-center space-x-8">
+<h2 class="text-xl font-bold text-[#69f6b8] tracking-tight">Command Center</h2>
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-lg">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search Master Database..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-6">
+<div class="hidden md:flex space-x-6 text-sm font-medium">
+<a class="text-slate-400 hover:text-[#5afcd2] transition-opacity" href="#">Global View</a>
+<a class="text-slate-400 hover:text-[#5afcd2] transition-opacity" href="#">Live Metrics</a>
+<a class="text-slate-400 hover:text-[#5afcd2] transition-opacity" href="#">Incident Logs</a>
+</div>
+<div class="flex items-center space-x-4 border-l border-slate-800 pl-6">
+<button class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors">notifications_active</button>
+<button class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors">dns</button>
+<div class="h-8 w-8 rounded-full bg-surface-container-high border border-primary/20 flex items-center justify-center overflow-hidden">
+<img alt="Admin User Profile" class="w-full h-full object-cover" data-alt="professional male admin profile picture with neutral background and soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKzCYwwxRsN3ULCgrJ9-1vGaMQk7iLRPl5RQA41JXR3DGh-5AXwPubraP03gpjRCLYPIvY7oHTK32R6LIqksHD7riMKHkVqXRhfim3qV9aOIQ-IEx23Rq3kx80Tp_OYSReWx_6fLU0AxRqiTKaKDtU8n4KxUBz-qvv38zFlZcnYccnjDV6apqi-QSEQIu5Jo1oWL8dYErtYAOxkDVv4YcweFrd4PavBU2CwzKYJ19F6CuuFczOlTWoq_rLac5xmExt250iabg-I68"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Functional Dashboard Canvas -->
+<div class="flex-1 overflow-hidden flex">
+<!-- Left Sidebar Filters -->
+<div class="w-72 bg-[#11192b] p-6 flex flex-col gap-6 overflow-y-auto">
+<div>
+<h3 class="text-xs font-bold uppercase tracking-widest text-primary mb-4">Filter Segment</h3>
+<div class="space-y-2">
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface-container-highest/40 hover:bg-surface-container-highest cursor-pointer border border-transparent hover:border-primary/10 transition-all">
+<span class="text-sm">VIP Access</span>
+<input class="rounded bg-background border-slate-700 text-primary focus:ring-primary ring-offset-background" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface-container-highest/40 hover:bg-surface-container-highest cursor-pointer border border-transparent hover:border-primary/10 transition-all">
+<span class="text-sm">Enterprise</span>
+<input checked="" class="rounded bg-background border-slate-700 text-primary focus:ring-primary ring-offset-background" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface-container-highest/40 hover:bg-surface-container-highest cursor-pointer border border-transparent hover:border-primary/10 transition-all">
+<span class="text-sm">Residential</span>
+<input class="rounded bg-background border-slate-700 text-primary focus:ring-primary ring-offset-background" type="checkbox"/>
+</label>
+</div>
+</div>
+<div>
+<h3 class="text-xs font-bold uppercase tracking-widest text-primary mb-4">Service Area</h3>
+<select class="w-full bg-surface-container-highest border-none rounded-xl py-3 text-sm focus:ring-2 focus:ring-primary/20">
+<option>Semua Area</option>
+<option>Jakarta Selatan</option>
+<option>Jakarta Pusat</option>
+<option>Tangerang Kota</option>
+</select>
+</div>
+<div>
+<h3 class="text-xs font-bold uppercase tracking-widest text-primary mb-4">Subscription Status</h3>
+<div class="grid grid-cols-2 gap-2">
+<button class="py-2 text-xs font-bold rounded-lg bg-primary text-on-primary">Active</button>
+<button class="py-2 text-xs font-bold rounded-lg bg-surface-container-highest text-slate-400">Suspended</button>
+<button class="py-2 text-xs font-bold rounded-lg bg-surface-container-highest text-slate-400">Grace</button>
+<button class="py-2 text-xs font-bold rounded-lg bg-surface-container-highest text-slate-400">Churned</button>
+</div>
+</div>
+<div class="mt-auto pt-6 border-t border-slate-800/50">
+<button class="w-full py-4 bg-primary text-on-primary font-bold rounded-xl flex items-center justify-center space-x-2 group">
+<span class="material-symbols-outlined text-lg">download</span>
+<span>Export Excel</span>
+</button>
+<p class="text-[10px] text-center text-slate-500 mt-3 italic">*Only selected columns will be exported</p>
+</div>
+</div>
+<!-- Table Section -->
+<div class="flex-1 overflow-x-auto p-8 relative">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h1 class="text-3xl font-extrabold tracking-tight">Master Database</h1>
+<p class="text-slate-400 mt-1">Found 1,284 verified customers across 12 zones.</p>
+</div>
+<div class="flex space-x-3">
+<button class="p-3 bg-surface-container-high rounded-xl text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="p-3 bg-surface-container-high rounded-xl text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">view_column</span>
+</button>
+</div>
+</div>
+<!-- Dense Table Layout -->
+<div class="bg-surface-container-low/50 rounded-2xl overflow-hidden border border-outline-variant/10">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container text-xs font-bold uppercase tracking-widest text-slate-500">
+<tr>
+<th class="px-6 py-5">Nama / Identity</th>
+<th class="px-6 py-5">No. WhatsApp</th>
+<th class="px-6 py-5">Area</th>
+<th class="px-6 py-5">Paket Aktif</th>
+<th class="px-6 py-5">Saldo Poin</th>
+<th class="px-6 py-5">Status</th>
+<th class="px-6 py-5">Joined</th>
+<th class="px-6 py-5">Tiket</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<!-- Row 1 (Selected/Active State) -->
+<tr class="bg-surface-container-high/40 hover:bg-surface-container-high transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-primary/40 p-0.5 overflow-hidden">
+<img alt="User Avatar" class="w-full h-full object-cover rounded-full" data-alt="portrait of a middle-aged professional man with glasses smiling gently against a blurred office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW4grrr9bsii6USXjq0Ood9gdx9liC5uIZVzvrQpJpswBtYL4kzE8UrhboeClX1DrADSJy5bEi-5SibQE1vspa_MrsoAzzdwWVvCrOp8PLr-NrZkfwEW51Af9v3Pzmm8HvSoQXTQhKIjSiz0TjOO-eOIr4iN3nigA0ywzs7JRDkAb3AblGbcwZYHX1e-rxjElb9llLijW6NnjJ-7-rb10YVj5AA3h9emCeTaxETEwseeIdRvLaWLElDhu9Wx6dEOtTOMLO6GejzbM"/>
+</div>
+<div>
+<div class="font-bold text-on-surface group-hover:text-primary transition-colors">Aditya Pratama</div>
+<div class="text-[10px] text-slate-500 mono">ID: CUST-882193</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 mono text-sm text-slate-300">+62 812-9844-3211</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-surface-container text-[11px] font-bold rounded-lg border border-slate-700">JKT-SOUTH</span>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm font-semibold">Emerald-Fiber 100Mbps</div>
+<div class="text-[10px] text-slate-500">Cycle: 15th monthly</div>
+</td>
+<td class="px-6 py-4 mono text-[#69f6b8] font-bold">14,250</td>
+<td class="px-6 py-4">
+<div class="flex items-center space-x-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-xs font-bold text-primary">Active</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs text-slate-400 mono">12/04/2022</td>
+<td class="px-6 py-4">
+<span class="text-xs font-bold bg-surface-container px-3 py-1 rounded-full">02</span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-high transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-slate-700 p-0.5 overflow-hidden">
+<img alt="User Avatar" class="w-full h-full object-cover rounded-full" data-alt="professional woman in corporate attire looking confident at the camera with soft warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCv3sHfOuKrE0FGvG-N-rkYjqmIzpFBEa9vMFt9atHShJvBavc5ij72SrYF5EFb_N1fArvKzNDapva4A5zumdLRq2EyhJbwcDYL8RUhe9LMR_yHYkMa9zwB1TmbAK9jxPKuzXj2VYU_zmuCVt7bgi2EAEeuqMJ0uRUlNwHCxRc4DoDU3nL5rHBg9U-F20UJTQ5t5L20V1iZEv1gLQGmaUeMALSles0N-by3y4NqsZ6Maj99UXvTBzC7wqHxB5WSuviLdyoV12W1n98"/>
+</div>
+<div>
+<div class="font-bold text-on-surface group-hover:text-primary transition-colors">Sarah Wijaya</div>
+<div class="text-[10px] text-slate-500 mono">ID: CUST-992011</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 mono text-sm text-slate-300">+62 821-4432-1109</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-surface-container text-[11px] font-bold rounded-lg border border-slate-700">TNG-KOTA</span>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm font-semibold">Standard-Fiber 30Mbps</div>
+<div class="text-[10px] text-slate-500">Cycle: 01st monthly</div>
+</td>
+<td class="px-6 py-4 mono text-[#69f6b8] font-bold">820</td>
+<td class="px-6 py-4">
+<div class="flex items-center space-x-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-xs font-bold text-primary">Active</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs text-slate-400 mono">08/11/2023</td>
+<td class="px-6 py-4">
+<span class="text-xs font-bold bg-surface-container px-3 py-1 rounded-full">14</span>
+</td>
+</tr>
+<!-- Row 3 (Suspended State) -->
+<tr class="hover:bg-surface-container-high transition-colors cursor-pointer group opacity-80">
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-slate-700 p-0.5 overflow-hidden grayscale">
+<img alt="User Avatar" class="w-full h-full object-cover rounded-full" data-alt="smiling young man wearing a headset in a creative studio environment with neon light accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkPMAFAL9nhrLjT6k0dfQj7YXF3RQ-bQqtqACqT24Tgt50esbtJyvqL9LOIx5afIEypKvkaoyzrKgtViclowmR-kk-9O2FDdhnYW8OV3uUCJRfuvWUHtKHISi8ZhimKtR9ZtC1n4feZz22OEUwpa45uA-w-TrOEHdJHY0joprCxDlDjIk6hfcPCD526IPCNN_W_kJcTW8g_2oGjKdSKor0B_WgJvSAs8IyU5kvAiIOJ0IHCc_WiN1F0y1ofN3UzgNtcd1A_TUDong"/>
+</div>
+<div>
+<div class="font-bold text-on-surface group-hover:text-primary transition-colors">Budi Santoso</div>
+<div class="text-[10px] text-slate-500 mono">ID: CUST-774120</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 mono text-sm text-slate-300">+62 856-1112-9983</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-surface-container text-[11px] font-bold rounded-lg border border-slate-700">JKT-CENTER</span>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm font-semibold">Diamond-Fiber 200Mbps</div>
+<div class="text-[10px] text-slate-500">Cycle: 20th monthly</div>
+</td>
+<td class="px-6 py-4 mono text-[#69f6b8] font-bold">5,410</td>
+<td class="px-6 py-4">
+<div class="flex items-center space-x-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="text-xs font-bold text-error">Suspended</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs text-slate-400 mono">21/01/2021</td>
+<td class="px-6 py-4">
+<span class="text-xs font-bold bg-surface-container px-3 py-1 rounded-full">00</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Floating Side Panel (Profile Detail) -->
+<div class="absolute right-0 top-0 bottom-0 w-[500px] bg-surface-bright/40 backdrop-blur-3xl shadow-2xl border-l border-primary/10 flex flex-col transform transition-transform duration-500 z-20">
+<div class="p-8 h-full overflow-y-auto custom-scrollbar">
+<div class="flex justify-between items-start mb-8">
+<button class="p-2 bg-background/50 rounded-full hover:bg-background transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+<button class="px-4 py-2 bg-error-container/20 text-error text-xs font-bold rounded-lg border border-error/20 hover:bg-error-container hover:text-on-error transition-all">Deactivate Account</button>
+</div>
+<!-- Profile Header -->
+<div class="text-center mb-10">
+<div class="relative inline-block">
+<div class="w-28 h-28 rounded-full border-4 border-primary p-1 mx-auto mb-4">
+<img alt="Aditya Profile" class="w-full h-full object-cover rounded-full" data-alt="close up detailed professional headshot of a smiling man with a blur sea green background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvlkkKbcTjiR1jW_3iBwGT1fAwJydEbT2_r0yCa9ybhng87TOGOMX0DlXO01Y0yrjlSKTMTDmh1MBhkMTfHD9dYGHGdUDZtiLiJAuEBcdODlRmHQBYPjt_KQw04fiT2En132ZbPTNwAISHn-J379ALIbK7N6XOwO2XLY_bOuIX2erjWQlWgdv8YawoZcevNAdRDrItao8PzmfQNC5n4uookU3UXj3qryPAZAdbUizCfH8quHPM-Gxyho8uxVd8O2aCliZt8xoivyk"/>
+</div>
+<span class="absolute bottom-6 right-2 w-6 h-6 bg-primary border-4 border-surface-bright rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[12px] text-on-primary font-bold">check</span>
+</span>
+</div>
+<h2 class="text-2xl font-bold tracking-tight">Aditya Pratama</h2>
+<p class="text-slate-400 mono text-sm mb-4">ID: CUST-882193 • Jakarta Selatan</p>
+<div class="flex justify-center space-x-2">
+<button class="px-4 py-2 bg-primary text-on-primary rounded-xl text-xs font-bold flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm">chat</span>
+<span>Send Message</span>
+</button>
+<button class="p-2 bg-surface-container-highest rounded-xl text-slate-400">
+<span class="material-symbols-outlined">call</span>
+</button>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-surface-container-high p-4 rounded-2xl border border-outline-variant/10">
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1 block">Saldo Poin</span>
+<div class="text-2xl font-black text-primary mono">14,250 <span class="text-xs text-primary/60">pts</span></div>
+</div>
+<div class="bg-surface-container-high p-4 rounded-2xl border border-outline-variant/10">
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1 block">Total Tiket</span>
+<div class="text-2xl font-black text-on-surface mono">32 <span class="text-xs text-slate-500">total</span></div>
+</div>
+</div>
+<!-- History Tabs -->
+<div class="space-y-6">
+<div>
+<h3 class="text-xs font-bold uppercase tracking-widest text-primary mb-4 flex items-center justify-between">
+<span>Ticket History</span>
+<span class="text-[10px] text-slate-500">View All</span>
+</h3>
+<div class="space-y-3">
+<div class="p-3 bg-surface-container-high/60 rounded-xl flex items-center justify-between hover:bg-surface-container-high transition-all cursor-pointer">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-lg bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">router</span>
+</div>
+<div>
+<div class="text-xs font-bold">Wi-Fi Connection Loss</div>
+<div class="text-[9px] text-slate-500">22 Oct 2023 • Resolved</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-600 text-sm">chevron_right</span>
+</div>
+<div class="p-3 bg-surface-container-high/60 rounded-xl flex items-center justify-between hover:bg-surface-container-high transition-all cursor-pointer">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-lg bg-error-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-error text-sm">payments</span>
+</div>
+<div>
+<div class="text-xs font-bold">Billing Discrepancy</div>
+<div class="text-[9px] text-slate-500">14 Sep 2023 • Closed</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-600 text-sm">chevron_right</span>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-xs font-bold uppercase tracking-widest text-primary mb-4 flex items-center justify-between">
+<span>Chat Transcript</span>
+<span class="text-[10px] text-slate-500">Full Archive</span>
+</h3>
+<div class="space-y-4 px-2">
+<div class="flex flex-col items-end">
+<div class="bg-primary-container text-on-primary-container p-3 rounded-2xl rounded-tr-none text-xs leading-relaxed max-w-[85%]">
+                                            Halo Aditya, ada yang bisa kami bantu terkait layanan Emerald-Fiber Anda?
+                                        </div>
+<span class="text-[9px] text-slate-600 mt-1 mono">CS-Agent • 10:24 AM</span>
+</div>
+<div class="flex flex-col items-start">
+<div class="bg-surface-container-highest p-3 rounded-2xl rounded-tl-none text-xs leading-relaxed max-w-[85%] border border-outline-variant/10">
+                                            Iya nih, dari tadi pagi internetnya lemot banget. Udah coba restart router tapi masih sama.
+                                        </div>
+<span class="text-[9px] text-slate-600 mt-1 mono">Customer • 10:26 AM</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

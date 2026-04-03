@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JBR Minpo - Kelola Informasi</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;family=Inter:wght@400;500&amp;family=Space+Grotesk:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#004955",
+                        "on-tertiary": "#005360",
+                        "surface-container-lowest": "#000000",
+                        "outline": "#6e7588",
+                        "on-secondary-fixed": "#004939",
+                        "secondary-container": "#006b56",
+                        "on-secondary": "#005d4a",
+                        "on-tertiary-fixed-variant": "#005360",
+                        "on-secondary-container": "#defff2",
+                        "surface-container-high": "#161f33",
+                        "surface-tint": "#69f6b8",
+                        "primary-fixed-dim": "#58e7ab",
+                        "secondary": "#5afcd2",
+                        "on-surface-variant": "#a4abbf",
+                        "on-tertiary-fixed": "#00343c",
+                        "on-primary-fixed": "#00452d",
+                        "surface-dim": "#070e1d",
+                        "surface-container-highest": "#1b263b",
+                        "error-dim": "#d7383b",
+                        "inverse-on-surface": "#4e5566",
+                        "tertiary-fixed": "#00dcfd",
+                        "tertiary-fixed-dim": "#00cdeb",
+                        "tertiary": "#77e6ff",
+                        "outline-variant": "#414859",
+                        "inverse-surface": "#f9f9ff",
+                        "secondary-fixed-dim": "#47edc4",
+                        "tertiary-container": "#00dcfd",
+                        "surface-container": "#11192b",
+                        "inverse-primary": "#006d4a",
+                        "error-container": "#9f0519",
+                        "on-primary-fixed-variant": "#006544",
+                        "primary-dim": "#58e7ab",
+                        "on-primary": "#005a3c",
+                        "on-error": "#490006",
+                        "primary": "#69f6b8",
+                        "secondary-dim": "#47edc4",
+                        "surface-variant": "#1b263b",
+                        "on-surface": "#dfe5fa",
+                        "error": "#ff716c",
+                        "surface": "#070e1d",
+                        "on-secondary-fixed-variant": "#006853",
+                        "on-background": "#dfe5fa",
+                        "surface-bright": "#212c43",
+                        "tertiary-dim": "#00cdeb",
+                        "primary-container": "#06b77f",
+                        "primary-fixed": "#69f6b8",
+                        "on-error-container": "#ffa8a3",
+                        "surface-container-low": "#0b1323",
+                        "secondary-fixed": "#5afcd2",
+                        "background": "#070e1d",
+                        "on-primary-container": "#002919"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Space Grotesk"],
+                        "sora": ["Sora"],
+                        "mono": ["JetBrains Mono"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #070e1d;
+            color: #dfe5fa;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(27, 38, 59, 0.4);
+            backdrop-filter: blur(20px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #414859;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+<!-- SideNavBar Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-950 flex flex-col py-8 px-4 z-40">
+<div class="mb-10 px-4">
+<h1 class="text-emerald-400 font-bold font-sora text-xl flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+                Minpo Sentinel
+            </h1>
+<p class="text-[10px] text-slate-500 font-mono tracking-widest mt-1 uppercase">Active Protocol: v4.2</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 text-slate-500 hover:text-slate-300 px-4 py-3 hover:bg-slate-900 transition-all font-sora font-medium text-xs" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Command Center
+            </a>
+<a class="flex items-center gap-3 text-slate-500 hover:text-slate-300 px-4 py-3 hover:bg-slate-900 transition-all font-sora font-medium text-xs" href="#">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+                Traffic Analysis
+            </a>
+<a class="flex items-center gap-3 text-slate-500 hover:text-slate-300 px-4 py-3 hover:bg-slate-900 transition-all font-sora font-medium text-xs" href="#">
+<span class="material-symbols-outlined" data-icon="list_alt">list_alt</span>
+                Asset Registry
+            </a>
+<!-- Active Tab: Announcements -->
+<a class="flex items-center gap-3 bg-emerald-500/10 text-emerald-400 rounded-lg px-4 py-3 border-r-2 border-emerald-400 font-sora font-medium text-xs" href="#">
+<span class="material-symbols-outlined" data-icon="campaign" style="font-variation-settings: 'FILL' 1;">campaign</span>
+                Announcements
+            </a>
+<a class="flex items-center gap-3 text-slate-500 hover:text-slate-300 px-4 py-3 hover:bg-slate-900 transition-all font-sora font-medium text-xs" href="#">
+<span class="material-symbols-outlined" data-icon="monitor_heart">monitor_heart</span>
+                System Health
+            </a>
+</nav>
+<div class="mt-auto pt-6 border-t border-slate-900/50">
+<button class="w-full mb-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-2.5 rounded-lg text-xs flex items-center justify-center gap-2 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                New Announcement
+            </button>
+<div class="space-y-1">
+<a class="flex items-center gap-3 text-slate-500 hover:text-slate-300 px-4 py-2 font-sora font-medium text-[10px]" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="help_outline">help_outline</span>
+                    Support
+                </a>
+<a class="flex items-center gap-3 text-slate-500 hover:text-slate-300 px-4 py-2 font-sora font-medium text-[10px]" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="terminal">terminal</span>
+                    Terminal
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen flex flex-col">
+<!-- TopNavBar Shell -->
+<header class="bg-slate-900/40 backdrop-blur-xl sticky top-0 z-50 flex justify-between items-center w-full px-8 py-3 shadow-sm shadow-emerald-900/10">
+<div class="flex items-center gap-8">
+<div class="text-xl font-bold tracking-tighter text-emerald-400 font-sora">
+                    JBR Minpo
+                </div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-400 font-medium font-sora tracking-tight text-sm hover:text-emerald-300 transition-colors" href="#">Network</a>
+<a class="text-slate-400 font-medium font-sora tracking-tight text-sm hover:text-emerald-300 transition-colors" href="#">Security</a>
+<a class="text-slate-400 font-medium font-sora tracking-tight text-sm hover:text-emerald-300 transition-colors" href="#">Logs</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-emerald-400 transition-colors" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-emerald-500 rounded-full border-2 border-slate-900"></span>
+</div>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-emerald-400 transition-colors" data-icon="settings">settings</span>
+<div class="h-8 w-8 rounded-full border-2 border-emerald-500/30 overflow-hidden">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="close-up portrait of professional man in dark lighting with soft emerald glow reflection on his face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsyxmvwXN4wfrexJAV-EEuMPkVqTiUvQ66zrsdlsd9k_jsuC_5WMcgpUzxAGa4UJerqj7RsYqB55Kj1Z80_qBKSgyOGTMVKa1fyVgoJI96cQYd0to1tnP3kPEM8xS4z25C_Z14bixfhqtJjR68TilmRYMpqdVj1pCJrr3bONrdf4w6a0uVV22Q0szqEM9MgEHo2AmcJlpn6Vp2dx_ZIMGT60JoQ0fszuUH_Fr1oX4jlVcty6piO-rk0L_r8eQfo4n4NR68maGNJSM"/>
+</div>
+</div>
+</header>
+<!-- Canvas Content -->
+<div class="p-8 flex-1 space-y-8">
+<!-- Page Header Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="space-y-1">
+<h2 class="text-3xl font-sora font-extrabold tracking-tight text-on-surface">Kelola Informasi</h2>
+<p class="text-sm text-on-surface-variant font-body">Manajemen publikasi konten, gangguan, dan pemeliharaan sistem.</p>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<div class="relative min-w-[280px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm" data-icon="search">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-xl pl-10 pr-4 py-2.5 text-sm focus:ring-2 focus:ring-primary-container text-on-surface placeholder:text-outline transition-all" placeholder="Cari judul..." type="text"/>
+</div>
+<select class="bg-surface-container-highest border-none rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary-container text-on-surface appearance-none pr-10 cursor-pointer">
+<option value="">Semua Kategori</option>
+<option value="gangguan">Gangguan</option>
+<option value="maintenance">Maintenance</option>
+<option value="umum">Umum</option>
+</select>
+<button class="bg-primary-container hover:bg-primary text-on-primary-container font-bold px-6 py-2.5 rounded-xl text-sm flex items-center gap-2 transition-all shadow-lg shadow-primary-container/20">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+                        Buat Pengumuman
+                    </button>
+</div>
+</div>
+<!-- Bento Stats Snapshot (Optional visual layer) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="bg-surface-container p-4 rounded-xl border border-outline-variant/10">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] uppercase font-label tracking-widest text-outline">Published</span>
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
+</div>
+<div class="text-2xl font-mono text-on-surface">124</div>
+</div>
+<div class="bg-surface-container p-4 rounded-xl border border-outline-variant/10">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] uppercase font-label tracking-widest text-outline">Scheduled</span>
+<span class="material-symbols-outlined text-tertiary text-sm" data-icon="schedule">schedule</span>
+</div>
+<div class="text-2xl font-mono text-on-surface">12</div>
+</div>
+<div class="bg-surface-container p-4 rounded-xl border border-outline-variant/10">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] uppercase font-label tracking-widest text-outline">Drafts</span>
+<span class="material-symbols-outlined text-outline text-sm" data-icon="drafts">drafts</span>
+</div>
+<div class="text-2xl font-mono text-on-surface">08</div>
+</div>
+<div class="bg-surface-container p-4 rounded-xl border border-outline-variant/10">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] uppercase font-label tracking-widest text-outline">Avg Views</span>
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="trending_up">trending_up</span>
+</div>
+<div class="text-2xl font-mono text-on-surface">1.2k</div>
+</div>
+</div>
+<!-- Main Data Table Container -->
+<div class="bg-surface-container rounded-2xl overflow-hidden border border-outline-variant/5 shadow-2xl">
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-highest/50 border-b border-outline-variant/10">
+<th class="px-6 py-4 text-[11px] font-label uppercase tracking-widest text-outline">Info</th>
+<th class="px-6 py-4 text-[11px] font-label uppercase tracking-widest text-outline">Kategori</th>
+<th class="px-6 py-4 text-[11px] font-label uppercase tracking-widest text-outline">Area Target</th>
+<th class="px-6 py-4 text-[11px] font-label uppercase tracking-widest text-outline">Status</th>
+<th class="px-6 py-4 text-[11px] font-label uppercase tracking-widest text-outline">Jadwal Publish</th>
+<th class="px-6 py-4 text-[11px] font-label uppercase tracking-widest text-outline">Total Dibaca</th>
+<th class="px-6 py-4 text-[11px] font-label uppercase tracking-widest text-outline text-right">Aksi</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<!-- Pinned Row -->
+<tr class="bg-emerald-500/[0.03] group hover:bg-emerald-500/[0.07] transition-all">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="relative h-[60px] w-[60px] rounded-lg overflow-hidden shrink-0 border border-primary/20 shadow-sm shadow-primary/20">
+<img alt="Maintenance Thumbnail" class="w-full h-full object-cover" data-alt="abstract technological grid with emerald green lines and soft bokeh particles representing system maintenance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUJQMN_GOYGJDi1HN0Ex_R8s7GVE-0dDRXW_1hSvTGvDZ3bohojIo_xOfTuRIAZf_dxpiyaPZj9swwvUrmezOF6FjJn3aXCmyitORLRvblIeNrrWhA_n_sBiyjGDctaO8aEuShFsHKiZWwFstEK6KKKm4y-mPq0B_kbGxoV8E6k9i92KWbm607tKsk1qnBZ2Px-j2ft6D_T_49B2bZsEtNW3_p2_CgIEUlnpsWHTrXXZOx6EDY76oek7IAqv7LezOC5dHu5NE6NaI"/>
+<div class="absolute top-1 right-1 bg-primary rounded-full p-0.5 flex">
+<span class="material-symbols-outlined text-[10px] text-on-primary" data-icon="keep" style="font-variation-settings: 'FILL' 1;">keep</span>
+</div>
+</div>
+<div>
+<div class="text-sm font-sora font-bold text-on-surface line-clamp-1">Maintenance Backbone Jakarta-Pusat</div>
+<div class="text-[10px] font-mono text-outline mt-1">ID: ANN-9021-X</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold bg-secondary-container/30 text-secondary border border-secondary/20">MAINTENANCE</span>
+</td>
+<td class="px-6 py-4 text-xs text-on-surface-variant font-medium">Jabodetabek Area</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-xs text-primary font-semibold">Published</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs text-on-surface-variant font-mono">24 Oct, 08:00</td>
+<td class="px-6 py-4 text-sm font-mono text-on-surface">4,892</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-60 group-hover:opacity-100 transition-all">
+<button class="p-1.5 hover:bg-surface-bright rounded-lg text-outline hover:text-primary transition-all" title="Edit"><span class="material-symbols-outlined text-lg" data-icon="edit">edit</span></button>
+<button class="p-1.5 hover:bg-surface-bright rounded-lg text-primary transition-all" title="Pin"><span class="material-symbols-outlined text-lg" data-icon="keep" style="font-variation-settings: 'FILL' 1;">keep</span></button>
+<button class="p-1.5 hover:bg-surface-bright rounded-lg text-outline hover:text-error transition-all" title="Archive"><span class="material-symbols-outlined text-lg" data-icon="archive">archive</span></button>
+<button class="p-1.5 hover:bg-surface-bright rounded-lg text-outline hover:text-tertiary transition-all" title="Preview Mobile"><span class="material-symbols-outlined text-lg" data-icon="smartphone">smartphone</span></button>
+</div>
+</td>
+</tr>
+<!-- Regular Row -->
+<tr class="group hover:bg-surface-container-high transition-all">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="h-[60px] w-[60px] rounded-lg overflow-hidden shrink-0 border border-outline-variant/10">
+<img alt="Gangguan Thumbnail" class="w-full h-full object-cover" data-alt="dramatic close up of ethernet cables in a server rack with flashing red status lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzd2RWGmumhj8_Q2RzxVWBiB7bO2U3rSinXEhJ3oTcSSjKLMFYpzYO7pajgj3NhDCQcy4T0Rv_JhZbUgoAjj9BWju4WYFLS4U_8nMK4fSEtzR4rFn5rUen7V3skqi9Be502H9R979HounlsA0dl-tUWpunJ52pJzcwCLYDtNnGd5wy_jSwZ-VqSw17YBOlnCy5BGS2S6x14Q_paKbemFyCB84cdbPPCX5E0yr96TgAusbPw0pP0pikz-XpReKeuLr9uaC2SDC_8K4"/>
+</div>
+<div>
+<div class="text-sm font-sora font-bold text-on-surface line-clamp-1">Gangguan FO Fiber Optic Region III</div>
+<div class="text-[10px] font-mono text-outline mt-1">ID: ANN-9022-X</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold bg-error-container/30 text-error border border-error/20">GANGGUAN</span>
+</td>
+<td class="px-6 py-4 text-xs text-on-surface-variant font-medium">Jawa Timur</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="text-xs text-tertiary font-semibold">Scheduled</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs text-on-surface-variant font-mono">25 Oct, 00:00</td>
+<td class="px-6 py-4 text-sm font-mono text-on-surface">0</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-60 group-hover:opacity-100 transition-all">
+<button class="p-1.5 hover:bg-surface-bright rounded-lg text-outline hover:text-primary transition-all"><span class="material-symbols-outlined text-lg" data-icon="edit">edit</span></button>
+<button class="p-1.5 hover:bg-surface-bright rounded-lg text-outline hover:text-primary transition-all"><span class="material-symbols-outlined text-lg" data-icon="keep">keep</span></button>
+<button class="p-1.5 hover:bg-surface-bright rounded-lg text-outline hover:text-error transition-all"><span class="material-symbols-outlined text-lg" data-icon="archive">archive</span></button>
+<button class="p-1.5 hover:bg-surface-bright rounded-lg text-outline hover:text-tertiary transition-all"><span class="material-symbols-outlined text-lg" data-icon="smartphone">smartphone</span></button>
+</div>
+</td>
+</tr>
+<!-- Draft Row -->
+<tr class="group hover:bg-surface-container-high transition-all">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="h-[60px] w-[60px] rounded-lg overflow-hidden shrink-0 border border-outline-variant/10">
+<img alt="Umum Thumbnail" class="w-full h-full object-cover" data-alt="minimalist hardware circuits on a circuit board with soft glowing blue light accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHBjNGhggid_12iu6SRXAoXvlxX8R-4GvQuCdMzAVwlxqJ0tmJYex--n38bnQDGD8vx4MKhfmjvvS5J-7i0g5RFuhpXUoKUgLzG1kaPScSUOs8g5uwK0jDox2QrBqlbMoo3mtsDkQdz-eMlMp3iJ2rTn9fLpu-wZb-5PNGDUa27Hwd7C6_aHoKVQMPQFFpfSPrLQWGMrOAX6vPMrHHwZ56jmjtLwdq5xTvMNbSbLEEv0J2gvI8DZY62lCU7LSTxV9_gO1G2bSY_lI"/>
+</div>
+<div>
+<div class="text-sm font-sora font-bold text-on-surface line-clamp-1">Promo Akhir Tahun JBR Minpo</div>
+<div class="text-[10px] font-mono text-outline mt-1">ID: ANN-9023-X</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold bg-surface-container-highest text-on-surface-variant border border-outline-variant/20">UMUM</span>
+</td>
+<td class="px-6 py-4 text-xs text-on-surface-variant font-medium">Seluruh Indonesia</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+<span class="text-xs text-outline font-semibold">Draft</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs text-on-surface-variant font-mono">-</td>
+<td class="px-6 py-4 text-sm font-mono text-on-surface">0</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-60 group-hover:opacity-100 transition-all">
+<button class="p-1.5 hover:bg-surface-bright rounded-lg text-outline hover:text-primary transition-all"><span class="material-symbols-outlined text-lg" data-icon="edit">edit</span></button>
+<button class="p-1.5 hover:bg-surface-bright rounded-lg text-outline hover:text-primary transition-all"><span class="material-symbols-outlined text-lg" data-icon="keep">keep</span></button>
+<button class="p-1.5 hover:bg-surface-bright rounded-lg text-outline hover:text-error transition-all"><span class="material-symbols-outlined text-lg" data-icon="archive">archive</span></button>
+<button class="p-1.5 hover:bg-surface-bright rounded-lg text-outline hover:text-tertiary transition-all"><span class="material-symbols-outlined text-lg" data-icon="smartphone">smartphone</span></button>
+</div>
+</td>
+</tr>
+<!-- Archived Row -->
+<tr class="group hover:bg-surface-container-high transition-all opacity-50 grayscale">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="h-[60px] w-[60px] rounded-lg overflow-hidden shrink-0 border border-outline-variant/10">
+<img alt="Past Maintenance" class="w-full h-full object-cover" data-alt="faded data analytics dashboard on a screen with cool blue tones and slight film grain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCklVs7P9FZVgsYgoQeV6_dab2YacPOUzW2T2NOCYb_CkRR-yUgDb989Cc66U1GXxR_b_4T5mxPTauJpZ0c_hrOrfSbr7rms5_ZfwCNIdrY4unSOq5gihDpXhgVsVcUqqUU4166qV7F-4wIstocG0mwpVi3osu6XCPypyJVugpTPgoqmWIRwSD-9d8z0ZKNrirkfD5WDsX9Rf70At-Ax9r5V9YVSjO9JrI4IFaBDIZj-2RCUGC-JLvhxi5FtJ0F_Q1vBEUOskF_rYw"/>
+</div>
+<div>
+<div class="text-sm font-sora font-bold text-on-surface line-clamp-1">Maintenance Database Q3 2023</div>
+<div class="text-[10px] font-mono text-outline mt-1">ID: ANN-8812-X</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold bg-surface-container-highest text-on-surface-variant border border-outline-variant/20">MAINTENANCE</span>
+</td>
+<td class="px-6 py-4 text-xs text-on-surface-variant font-medium">All Clusters</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error-dim"></span>
+<span class="text-xs text-error-dim font-semibold">Archived</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs text-on-surface-variant font-mono">12 Sep, 22:00</td>
+<td class="px-6 py-4 text-sm font-mono text-on-surface">12,109</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-60 group-hover:opacity-100 transition-all">
+<button class="p-1.5 hover:bg-surface-bright rounded-lg text-outline hover:text-primary transition-all"><span class="material-symbols-outlined text-lg" data-icon="unarchive">unarchive</span></button>
+<button class="p-1.5 hover:bg-surface-bright rounded-lg text-outline hover:text-error transition-all"><span class="material-symbols-outlined text-lg" data-icon="delete">delete</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="bg-surface-container-highest/30 px-6 py-4 flex items-center justify-between border-t border-outline-variant/10">
+<div class="text-xs text-outline font-label">Menampilkan 4 dari 48 Pengumuman</div>
+<div class="flex items-center gap-2">
+<button class="p-2 bg-surface-container rounded-lg border border-outline-variant/10 hover:border-primary/50 text-outline transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-on-primary font-mono text-xs">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-bright text-on-surface font-mono text-xs transition-all">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-bright text-on-surface font-mono text-xs transition-all">3</button>
+<span class="text-outline px-1">...</span>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-bright text-on-surface font-mono text-xs transition-all">12</button>
+</div>
+<button class="p-2 bg-surface-container rounded-lg border border-outline-variant/10 hover:border-primary/50 text-outline transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Focus Guide / Tips (Asymmetric Column) -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 glass-panel p-6 rounded-2xl border border-primary/10 relative overflow-hidden">
+<div class="relative z-10">
+<h4 class="text-primary font-sora font-bold mb-2">Announcement Best Practice</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed max-w-xl">
+                            Selalu gunakan kategori <span class="text-error font-bold italic">GANGGUAN</span> hanya untuk kejadian mendadak yang mempengaruhi lebih dari 20% user di area terkait. Pastikan thumbnail memiliki kontras yang cukup untuk mode gelap.
+                        </p>
+</div>
+<!-- Background Visual Accent -->
+<div class="absolute -right-8 -bottom-8 w-48 h-48 bg-primary/5 rounded-full blur-3xl"></div>
+</div>
+<div class="bg-surface-container-high p-6 rounded-2xl border border-outline-variant/10">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-tertiary" data-icon="auto_awesome">auto_awesome</span>
+<h4 class="text-on-surface font-sora font-bold text-sm">Draft Cepat</h4>
+</div>
+<div class="space-y-3">
+<div class="p-3 bg-surface-dim rounded-xl border border-outline-variant/5 hover:border-tertiary/30 cursor-pointer transition-all">
+<div class="text-[10px] text-outline font-label uppercase">Template</div>
+<div class="text-xs text-on-surface font-medium mt-1">Maintenance Server Mingguan</div>
+</div>
+<div class="p-3 bg-surface-dim rounded-xl border border-outline-variant/5 hover:border-tertiary/30 cursor-pointer transition-all">
+<div class="text-[10px] text-outline font-label uppercase">Template</div>
+<div class="text-xs text-on-surface font-medium mt-1">Update Policy Privasi v2.0</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Action Button (FAB) suppressed on list screen as per instructions -->
+</main>
+</body></html>

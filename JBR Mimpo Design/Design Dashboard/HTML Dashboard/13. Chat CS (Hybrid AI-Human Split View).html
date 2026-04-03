@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JBR Minpo | CS Chat Command Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Sora', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #070e1d; }
+        ::-webkit-scrollbar-thumb { background: #1b263b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #69f6b8; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-dim": "#47edc4",
+                        "primary-container": "#06b77f",
+                        "surface-container-highest": "#1b263b",
+                        "inverse-on-surface": "#4e5566",
+                        "tertiary-fixed": "#00dcfd",
+                        "tertiary-container": "#00dcfd",
+                        "outline": "#6e7588",
+                        "tertiary": "#77e6ff",
+                        "primary-fixed-dim": "#58e7ab",
+                        "primary-fixed": "#69f6b8",
+                        "on-primary-container": "#002919",
+                        "on-primary-fixed": "#00452d",
+                        "inverse-primary": "#006d4a",
+                        "surface-container-lowest": "#000000",
+                        "on-secondary": "#005d4a",
+                        "on-error": "#490006",
+                        "surface-bright": "#212c43",
+                        "on-secondary-fixed": "#004939",
+                        "on-background": "#dfe5fa",
+                        "surface-container-high": "#161f33",
+                        "on-tertiary-container": "#004955",
+                        "on-primary": "#005a3c",
+                        "error": "#ff716c",
+                        "surface-dim": "#070e1d",
+                        "secondary-fixed-dim": "#47edc4",
+                        "tertiary-dim": "#00cdeb",
+                        "on-surface": "#dfe5fa",
+                        "primary-dim": "#58e7ab",
+                        "surface-container": "#11192b",
+                        "background": "#070e1d",
+                        "secondary-fixed": "#5afcd2",
+                        "inverse-surface": "#f9f9ff",
+                        "error-dim": "#d7383b",
+                        "secondary": "#5afcd2",
+                        "secondary-container": "#006b56",
+                        "outline-variant": "#414859",
+                        "on-tertiary-fixed-variant": "#005360",
+                        "on-secondary-fixed-variant": "#006853",
+                        "on-tertiary": "#005360",
+                        "tertiary-fixed-dim": "#00cdeb",
+                        "surface": "#070e1d",
+                        "surface-tint": "#69f6b8",
+                        "surface-container-low": "#0b1323",
+                        "primary": "#69f6b8",
+                        "on-surface-variant": "#a4abbf",
+                        "on-primary-fixed-variant": "#006544",
+                        "on-tertiary-fixed": "#00343c",
+                        "on-secondary-container": "#defff2",
+                        "error-container": "#9f0519",
+                        "surface-variant": "#1b263b",
+                        "on-error-container": "#ffa8a3"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface-dim text-on-surface min-h-screen overflow-hidden flex">
+<!-- SideNavBar Shell -->
+<aside class="flex flex-col h-screen py-6 bg-[#070e1d] h-full w-64 fixed left-0 top-0 z-50">
+<div class="px-6 mb-8">
+<h1 class="text-2xl font-black text-[#69f6b8] tracking-tighter">JBR Minpo</h1>
+<p class="text-xs text-slate-400 font-medium">Admin Ops v2.4</p>
+</div>
+<nav class="flex-1 space-y-1 px-3">
+<a class="flex items-center px-3 py-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+<span class="text-sm">Command Center</span>
+</a>
+<a class="flex items-center px-3 py-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="confirmation_number">confirmation_number</span>
+<span class="text-sm">Ticketing</span>
+</a>
+<a class="flex items-center px-3 py-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="settings_input_component">settings_input_component</span>
+<span class="text-sm">Network Health</span>
+</a>
+<a class="flex items-center px-3 py-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="quiz">quiz</span>
+<span class="text-sm">FAQ Manager</span>
+</a>
+<a class="flex items-center px-3 py-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="database">database</span>
+<span class="text-sm">Customer Database</span>
+</a>
+<!-- Active Tab: CS Chat -->
+<a class="flex items-center px-3 py-3 text-[#69f6b8] font-bold border-r-4 border-[#69f6b8] bg-[#11192b]/50 group transition-all duration-300 scale-[0.98]" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="chat_bubble">chat_bubble</span>
+<span class="text-sm">CS Chat</span>
+</a>
+</nav>
+<div class="mt-auto px-3 space-y-1">
+<button class="w-full mb-4 py-2 px-4 bg-[#11192b] text-[#69f6b8] text-xs font-bold rounded-lg border border-[#69f6b8]/20 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="notifications_active">notifications_active</span>
+                System Alert
+            </button>
+<a class="flex items-center px-3 py-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="settings">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+<a class="flex items-center px-3 py-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="logout">logout</span>
+<span class="text-sm">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 flex flex-col flex-1 h-screen">
+<!-- TopNavBar Shell -->
+<header class="flex justify-between items-center w-full px-8 h-16 bg-[#070e1d]/80 backdrop-blur-xl sticky top-0 z-40">
+<div class="flex items-center gap-6">
+<h2 class="text-xl font-bold text-[#69f6b8] tracking-tight">Command Center</h2>
+<div class="flex gap-4 text-sm font-medium">
+<a class="text-slate-400 hover:text-[#5afcd2]" href="#">Global View</a>
+<a class="text-slate-400 hover:text-[#5afcd2]" href="#">Live Metrics</a>
+<a class="text-slate-400 hover:text-[#5afcd2]" href="#">Incident Logs</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1 bg-surface-container rounded-full">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="notifications_active">notifications_active</span>
+<span class="material-symbols-outlined text-slate-400 text-lg" data-icon="dns">dns</span>
+<span class="material-symbols-outlined text-slate-400 text-lg" data-icon="support_agent">support_agent</span>
+</div>
+<button class="bg-primary text-on-primary px-4 py-1.5 rounded-xl font-semibold text-sm hover:opacity-80 transition-opacity">
+                    Deploy Update
+                </button>
+<img alt="User Avatar" class="w-8 h-8 rounded-full border border-primary/20" data-alt="professional male avatar with neutral expression in high-tech corporate lighting environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCASyDu07Q5xTLavfwkcoOG3oaaY5due26SPfy5yUI60kaSc5Uh5H3cph1TJ2czMB1h859Cp3YmXDzZc5FuOfs7Xr2HWTLh5M9vckvE01Rggvy7XEJ2d85RZifZZ9B_EzdpBeM1vdPI-pwnaCcplk9G67SNaWhBQC0je7un2KB6QuSCQk-XY7NQgOY54WchjOuatw7uuL4ZfZZqmvito9n_vgGJ9yB2ntiuMN2hQjMLXmnBvv_SBLiz_JzS_v_PMR52CrM-YTKn5pY"/>
+</div>
+</header>
+<!-- Chat Container: Split View -->
+<div class="flex flex-1 overflow-hidden">
+<!-- Left Panel: Session List -->
+<section class="w-80 bg-surface-container-low flex flex-col">
+<div class="p-4 flex items-center justify-between">
+<h3 class="text-sm font-bold text-on-surface/70 uppercase tracking-widest">Active Sessions</h3>
+<span class="mono text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full">24 ACTIVE</span>
+</div>
+<div class="flex-1 overflow-y-auto space-y-1 px-2">
+<!-- Session Item: AI Active -->
+<div class="p-3 bg-surface-container-high rounded-xl cursor-pointer border-l-4 border-tertiary group">
+<div class="flex justify-between items-start mb-1">
+<span class="font-bold text-sm text-on-surface">ID-8829_Marlow</span>
+<span class="mono text-[10px] text-tertiary">AI HANDLED</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">"Having trouble with the API latency..."</p>
+<div class="flex items-center justify-between mt-2">
+<span class="mono text-[9px] text-outline">10:42 AM</span>
+<span class="bg-tertiary text-on-tertiary-container text-[10px] font-bold px-1.5 py-0.5 rounded-full">3</span>
+</div>
+</div>
+<!-- Session Item: Human Active -->
+<div class="p-3 bg-surface-container rounded-xl cursor-pointer hover:bg-surface-container-high transition-colors group">
+<div class="flex justify-between items-start mb-1">
+<span class="font-bold text-sm text-on-surface">Corp_Admin_77</span>
+<span class="mono text-[10px] text-primary">HUMAN HANDLED</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">"Refund policy for the enterprise tier?"</p>
+<div class="flex items-center justify-between mt-2">
+<span class="mono text-[9px] text-outline">10:35 AM</span>
+</div>
+</div>
+<!-- Session Item: Unassigned (AI initial) -->
+<div class="p-3 bg-surface-container rounded-xl cursor-pointer hover:bg-surface-container-high transition-colors group">
+<div class="flex justify-between items-start mb-1">
+<span class="font-bold text-sm text-on-surface">User_2991</span>
+<span class="mono text-[10px] text-outline">CONNECTING...</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">User entered chat room.</p>
+<div class="flex items-center justify-between mt-2">
+<span class="mono text-[9px] text-outline">10:30 AM</span>
+</div>
+</div>
+<!-- Session Item: Closed -->
+<div class="p-3 bg-surface-container/40 rounded-xl cursor-pointer opacity-60">
+<div class="flex justify-between items-start mb-1">
+<span class="font-bold text-sm text-on-surface">DevOps_Lead_NY</span>
+<span class="mono text-[10px] text-outline">CLOSED</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">Resolution: Cache cleared.</p>
+<div class="flex items-center justify-between mt-2">
+<span class="mono text-[9px] text-outline">09:12 AM</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Panel: Chat Window -->
+<section class="flex-1 flex flex-col bg-surface-dim">
+<!-- Chat Header -->
+<div class="h-20 bg-surface-container border-b border-outline-variant/10 px-6 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img alt="Client Avatar" class="w-10 h-10 rounded-xl" data-alt="close-up of a woman's face with professional expression and soft focused tech office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDmXAGnL5irhCQCVnKo0J0nL6ZkiOIzx3yNmCHXonWad1JSaDVaDxwiv4pJh5uvg-NBodp-sYdyxv4msX8mEi7OK11ZwW-FaxAzk0JeqG4BlVlOGnd-xpQ5TsUVmxaAnJ7MvWa6wKxdg5ZS8NLSF4lBe37-H7HESoUZkVJhfh3fS42L89HBlNJ1IDnR-oFHRNP_0XqLLya8MLP76ZZpLYw1lgb6DH6aGOuHUMbkjZKNu6MSk-rwNoT9wK_HDQELtAPncaByGyz8eA"/>
+<div class="absolute -bottom-1 -right-1 w-3 h-3 bg-primary rounded-full border-2 border-surface-container"></div>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h4 class="font-bold text-on-surface">Marlow Jameson</h4>
+<span class="mono text-[10px] bg-outline-variant/30 px-2 py-0.5 rounded text-on-surface-variant">PLAN: ENTERPRISE</span>
+</div>
+<p class="text-xs text-on-surface-variant mono">IP: 192.168.1.104 • LOC: NEW YORK, USA</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-primary text-on-primary rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg shadow-primary/10">
+<span class="material-symbols-outlined text-sm" data-icon="handshake">handshake</span>
+                            Take over from AI
+                        </button>
+<button class="px-4 py-2 bg-surface-container-highest text-tertiary rounded-xl text-xs font-bold border border-tertiary/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="smart_toy">smart_toy</span>
+                            Return to AI
+                        </button>
+</div>
+</div>
+<!-- Message History -->
+<div class="flex-1 overflow-y-auto p-8 space-y-6">
+<!-- Client Message -->
+<div class="flex justify-end group">
+<div class="max-w-[70%] space-y-1">
+<div class="bg-primary/20 text-on-surface p-4 rounded-2xl rounded-tr-none border border-primary/10">
+<p class="text-sm">Hi, I'm seeing high latency on the secondary node in the Virginia region. Is there a known outage or should I failover manually?</p>
+</div>
+<div class="flex justify-end items-center gap-2 px-1">
+<span class="mono text-[10px] text-outline">10:40 AM</span>
+<span class="mono text-[10px] text-on-surface-variant">MARLOW (CLIENT)</span>
+</div>
+</div>
+</div>
+<!-- AI Message -->
+<div class="flex justify-start">
+<div class="max-w-[70%] space-y-1">
+<div class="bg-surface-container-high text-on-surface p-4 rounded-2xl rounded-tl-none border border-tertiary/20 backdrop-blur-md">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-tertiary text-sm" data-icon="smart_toy">smart_toy</span>
+<span class="text-[10px] font-bold text-tertiary uppercase tracking-widest">Minpo AI Assistant</span>
+</div>
+<p class="text-sm">Checking the Virginia status logs... I see a 12% increase in packet loss on Node-VA-02. Our engineers are currently investigating. Would you like me to initiate the failover sequence for you?</p>
+</div>
+<div class="flex items-center gap-2 px-1">
+<span class="mono text-[10px] text-on-surface-variant">BOT RESPONSE</span>
+<span class="mono text-[10px] text-outline">10:41 AM</span>
+</div>
+</div>
+</div>
+<!-- Admin Message (Simulated) -->
+<div class="flex justify-start">
+<div class="max-w-[70%] space-y-1">
+<div class="bg-surface-container-highest text-on-surface p-4 rounded-2xl rounded-tl-none border border-primary/30">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="support_agent">support_agent</span>
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">Admin (You)</span>
+</div>
+<p class="text-sm italic text-on-surface-variant">Drafting reply...</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-6 bg-surface-container-low border-t border-outline-variant/10">
+<div class="max-w-4xl mx-auto space-y-4">
+<!-- Quick Replies -->
+<div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+<button class="whitespace-nowrap px-3 py-1.5 rounded-full bg-surface-container-high text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors border border-outline-variant/20">Check Status</button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded-full bg-surface-container-high text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors border border-outline-variant/20">Escalate Tier 2</button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded-full bg-surface-container-high text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors border border-outline-variant/20">Policy Link</button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded-full bg-surface-container-high text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors border border-outline-variant/20">Reset Credentials</button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded-full bg-surface-container-high text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors border border-outline-variant/20">Manual Failover</button>
+</div>
+<!-- Rich Textarea Container -->
+<div class="relative bg-surface-container-highest rounded-2xl p-1 shadow-inner ring-1 ring-inset ring-outline-variant/20">
+<textarea class="w-full bg-transparent border-none focus:ring-0 text-sm text-on-surface p-4 min-h-[100px] resize-none placeholder-on-surface-variant/40" placeholder="Type your response to Marlow..."></textarea>
+<div class="flex items-center justify-between p-2 bg-surface-container/50 rounded-xl">
+<div class="flex gap-1">
+<button class="p-2 hover:bg-surface-bright rounded-lg text-outline transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="attach_file">attach_file</span>
+</button>
+<button class="p-2 hover:bg-surface-bright rounded-lg text-outline transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="image">image</span>
+</button>
+<button class="p-2 hover:bg-surface-bright rounded-lg text-outline transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="format_bold">format_bold</span>
+</button>
+<button class="p-2 hover:bg-surface-bright rounded-lg text-outline transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="code">code</span>
+</button>
+</div>
+<button class="flex items-center gap-2 bg-primary text-on-primary px-5 py-2 rounded-xl font-bold text-sm hover:scale-95 transition-transform">
+                                    Send Message
+                                    <span class="material-symbols-outlined text-sm" data-icon="send">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

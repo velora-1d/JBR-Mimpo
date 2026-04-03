@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JBR Minpo Command Center - Team Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#004939",
+                    "error-dim": "#d7383b",
+                    "surface-container-lowest": "#000000",
+                    "surface": "#070e1d",
+                    "tertiary-dim": "#00cdeb",
+                    "secondary-fixed-dim": "#47edc4",
+                    "on-tertiary-fixed": "#00343c",
+                    "outline-variant": "#414859",
+                    "primary-fixed": "#69f6b8",
+                    "on-tertiary-fixed-variant": "#005360",
+                    "on-secondary": "#005d4a",
+                    "outline": "#6e7588",
+                    "on-secondary-fixed-variant": "#006853",
+                    "on-tertiary-container": "#004955",
+                    "secondary-container": "#006b56",
+                    "surface-container-low": "#0b1323",
+                    "on-primary-container": "#002919",
+                    "on-surface": "#dfe5fa",
+                    "on-secondary-container": "#defff2",
+                    "primary": "#69f6b8",
+                    "on-primary": "#005a3c",
+                    "secondary-dim": "#47edc4",
+                    "surface-container-highest": "#1b263b",
+                    "error-container": "#9f0519",
+                    "primary-container": "#06b77f",
+                    "tertiary": "#77e6ff",
+                    "secondary": "#5afcd2",
+                    "on-error-container": "#ffa8a3",
+                    "primary-fixed-dim": "#58e7ab",
+                    "primary-dim": "#58e7ab",
+                    "on-error": "#490006",
+                    "inverse-primary": "#006d4a",
+                    "tertiary-container": "#00dcfd",
+                    "background": "#070e1d",
+                    "on-primary-fixed-variant": "#006544",
+                    "surface-variant": "#1b263b",
+                    "on-surface-variant": "#a4abbf",
+                    "on-tertiary": "#005360",
+                    "surface-container": "#11192b",
+                    "on-background": "#dfe5fa",
+                    "inverse-on-surface": "#4e5566",
+                    "secondary-fixed": "#5afcd2",
+                    "tertiary-fixed-dim": "#00cdeb",
+                    "on-primary-fixed": "#00452d",
+                    "surface-tint": "#69f6b8",
+                    "surface-bright": "#212c43",
+                    "surface-container-high": "#161f33",
+                    "tertiary-fixed": "#00dcfd",
+                    "error": "#ff716c",
+                    "surface-dim": "#070e1d",
+                    "inverse-surface": "#f9f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Sora"],
+                    "body": ["Sora"],
+                    "label": ["JetBrains Mono"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Sora', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #070e1d; }
+        ::-webkit-scrollbar-thumb { background: #1b263b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #69f6b8; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary/30 selection:text-primary min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-[#070e1d]/80 backdrop-blur-xl flex justify-between items-center px-8 h-16 w-full shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-[#69f6b8]">JBR Minpo Command Center</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-400 font-medium hover:text-[#5afcd2] transition-colors duration-300" href="#">Global Ops</a>
+<a class="text-slate-400 font-medium hover:text-[#5afcd2] transition-colors duration-300" href="#">Network</a>
+<a class="text-slate-400 font-medium hover:text-[#5afcd2] transition-colors duration-300" href="#">Security</a>
+<a class="text-[#69f6b8] border-b-2 border-[#69f6b8] pb-1 hover:text-[#5afcd2] transition-colors duration-300" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-slate-400 hover:text-[#5afcd2] active:scale-95 transition-all">notifications_active</button>
+<button class="material-symbols-outlined text-slate-400 hover:text-[#5afcd2] active:scale-95 transition-all">settings</button>
+<button class="material-symbols-outlined text-slate-400 hover:text-[#5afcd2] active:scale-95 transition-all">account_circle</button>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-[#11192b] flex flex-col py-6 pt-24 z-40">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-xl bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container">admin_panel_settings</span>
+</div>
+<div>
+<h3 class="text-xs font-black uppercase tracking-widest text-[#69f6b8]">Admin Sentinel</h3>
+<p class="text-[10px] text-slate-500 font-mono">Network Node 04</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-[#161f33] hover:text-[#5afcd2] cursor-pointer transition-all duration-200 text-xs font-['JetBrains_Mono']">
+<span class="material-symbols-outlined text-lg">dashboard</span>
+<span>Command</span>
+</div>
+<div class="text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-[#161f33] hover:text-[#5afcd2] cursor-pointer transition-all duration-200 text-xs font-['JetBrains_Mono']">
+<span class="material-symbols-outlined text-lg">send_and_archive</span>
+<span>Push Engine</span>
+</div>
+<div class="text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-[#161f33] hover:text-[#5afcd2] cursor-pointer transition-all duration-200 text-xs font-['JetBrains_Mono']">
+<span class="material-symbols-outlined text-lg">dashboard_customize</span>
+<span>Templates</span>
+</div>
+<div class="text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-[#161f33] hover:text-[#5afcd2] cursor-pointer transition-all duration-200 text-xs font-['JetBrains_Mono']">
+<span class="material-symbols-outlined text-lg">tune</span>
+<span>System Config</span>
+</div>
+<div class="text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-[#161f33] hover:text-[#5afcd2] cursor-pointer transition-all duration-200 text-xs font-['JetBrains_Mono']">
+<span class="material-symbols-outlined text-lg">loyalty</span>
+<span>Loyalty Logic</span>
+</div>
+<div class="bg-[#161f33] text-[#69f6b8] border-r-4 border-[#69f6b8] px-4 py-3 flex items-center gap-3 cursor-pointer transition-all duration-200 text-xs font-['JetBrains_Mono']">
+<span class="material-symbols-outlined text-lg">admin_panel_settings</span>
+<span>Team Admin</span>
+</div>
+</nav>
+<div class="mt-auto border-t border-slate-800/50 pt-4">
+<div class="text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-[#161f33] hover:text-[#5afcd2] cursor-pointer transition-all duration-200 text-xs font-['JetBrains_Mono']">
+<span class="material-symbols-outlined text-lg">list_alt</span>
+<span>Logs</span>
+</div>
+<div class="text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-[#161f33] hover:text-[#5afcd2] cursor-pointer transition-all duration-200 text-xs font-['JetBrains_Mono']">
+<span class="material-symbols-outlined text-lg">terminal</span>
+<span>Terminal</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="pl-64 pt-16 min-h-screen bg-[#070e1d]">
+<div class="p-8 max-w-7xl mx-auto">
+<!-- Page Header (Asymmetric) -->
+<div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-12">
+<div class="space-y-2">
+<span class="text-secondary font-mono text-xs tracking-widest uppercase">System Security</span>
+<h1 class="text-4xl font-bold tracking-tighter text-on-surface">Team Management</h1>
+<p class="text-on-surface-variant max-w-md">Manage internal staff access, security protocols, and dashboard operational permissions from this centralized command node.</p>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 px-6 py-3 bg-primary-container text-on-primary-container font-semibold rounded-xl active:scale-95 transition-transform shadow-[0_4px_20px_rgba(105,246,184,0.2)]">
+<span class="material-symbols-outlined">person_add</span>
+                        Tambah Admin
+                    </button>
+</div>
+</div>
+<!-- Bento Statistics -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+<div class="bg-surface-container-high p-6 rounded-xl border-l-4 border-primary">
+<p class="text-xs text-on-surface-variant uppercase font-bold tracking-wider mb-1">Total Admin</p>
+<p class="text-3xl font-bold font-mono">24</p>
+</div>
+<div class="bg-surface-container-high p-6 rounded-xl">
+<p class="text-xs text-on-surface-variant uppercase font-bold tracking-wider mb-1">Active Now</p>
+<div class="flex items-center gap-2">
+<span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+<p class="text-3xl font-bold font-mono text-primary">07</p>
+</div>
+</div>
+<div class="bg-surface-container-high p-6 rounded-xl">
+<p class="text-xs text-on-surface-variant uppercase font-bold tracking-wider mb-1">Failed Logins</p>
+<p class="text-3xl font-bold font-mono text-error">02</p>
+</div>
+<div class="bg-surface-container-high p-6 rounded-xl border-l-4 border-tertiary">
+<p class="text-xs text-on-surface-variant uppercase font-bold tracking-wider mb-1">Security Level</p>
+<p class="text-3xl font-bold font-mono text-tertiary">ALPHA</p>
+</div>
+</div>
+<!-- Staff Table (Dense Command View) -->
+<div class="bg-surface-container rounded-xl overflow-hidden shadow-2xl">
+<div class="p-6 border-b border-outline-variant/20 flex justify-between items-center">
+<div class="relative w-full max-w-xs">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-1 focus:ring-primary placeholder:text-on-surface-variant/50" placeholder="Filter team members..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-bright rounded-lg transition-colors text-on-surface-variant"><span class="material-symbols-outlined">filter_list</span></button>
+<button class="p-2 hover:bg-surface-bright rounded-lg transition-colors text-on-surface-variant"><span class="material-symbols-outlined">download</span></button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50 text-xs font-bold uppercase tracking-widest text-on-surface-variant">
+<th class="px-6 py-4">Nama</th>
+<th class="px-6 py-4">Email / WhatsApp</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4">Last Login</th>
+<th class="px-6 py-4 text-right">Security Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-bright/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-on-primary text-[10px] font-bold">JD</div>
+<div>
+<p class="text-sm font-semibold">Julian Draxler</p>
+<p class="text-[10px] text-primary uppercase font-mono tracking-tighter">Superadmin</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-xs text-on-surface font-medium">julian.d@jbr.minpo.io</p>
+<p class="text-[11px] text-on-surface-variant">+62 812-9988-0011</p>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-primary/10 text-primary border border-primary/20">
+<span class="h-1 w-1 rounded-full bg-primary"></span>
+                                        Aktif
+                                    </span>
+</td>
+<td class="px-6 py-4 text-xs font-mono text-on-surface-variant">
+                                    2023-11-24 <span class="text-on-surface">14:22:09</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:text-tertiary transition-colors" title="View Log"><span class="material-symbols-outlined text-lg">monitoring</span></button>
+<button class="p-2 hover:text-secondary transition-colors" title="Reset Password"><span class="material-symbols-outlined text-lg">lock_reset</span></button>
+<button class="p-2 hover:text-error transition-colors" title="Deactivate"><span class="material-symbols-outlined text-lg">block</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-bright/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-surface-container-highest border border-outline-variant/30 flex items-center justify-center text-on-surface-variant text-[10px] font-bold">SA</div>
+<div>
+<p class="text-sm font-semibold">Sarah Al-Amiri</p>
+<p class="text-[10px] text-tertiary uppercase font-mono tracking-tighter">Editor Ops</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-xs text-on-surface font-medium">sarah.ops@minpo.io</p>
+<p class="text-[11px] text-on-surface-variant">+62 855-4433-2211</p>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-primary/10 text-primary border border-primary/20">
+<span class="h-1 w-1 rounded-full bg-primary"></span>
+                                        Aktif
+                                    </span>
+</td>
+<td class="px-6 py-4 text-xs font-mono text-on-surface-variant">
+                                    2023-11-24 <span class="text-on-surface">11:05:41</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:text-tertiary transition-colors"><span class="material-symbols-outlined text-lg">monitoring</span></button>
+<button class="p-2 hover:text-secondary transition-colors"><span class="material-symbols-outlined text-lg">lock_reset</span></button>
+<button class="p-2 hover:text-error transition-colors"><span class="material-symbols-outlined text-lg">block</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3 (Inactive) -->
+<tr class="hover:bg-surface-bright/30 transition-colors group opacity-70">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant/40 text-[10px] font-bold italic">?</div>
+<div>
+<p class="text-sm font-semibold">Robby Hendra</p>
+<p class="text-[10px] text-slate-500 uppercase font-mono tracking-tighter">Temporary Admin</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-xs text-on-surface font-medium">robby.h@ext.minpo.io</p>
+<p class="text-[11px] text-on-surface-variant">+62 811-0011-2233</p>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-error/10 text-error border border-error/20">
+                                        Nonaktif
+                                    </span>
+</td>
+<td class="px-6 py-4 text-xs font-mono text-on-surface-variant">
+                                    2023-10-15 <span class="text-on-surface">09:12:00</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:text-tertiary transition-colors"><span class="material-symbols-outlined text-lg">monitoring</span></button>
+<button class="p-2 hover:text-secondary transition-colors"><span class="material-symbols-outlined text-lg">lock_reset</span></button>
+<button class="p-2 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">check_circle</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-bright/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-tertiary/20 flex items-center justify-center text-tertiary text-[10px] font-bold">MK</div>
+<div>
+<p class="text-sm font-semibold">Maya Kurnia</p>
+<p class="text-[10px] text-primary uppercase font-mono tracking-tighter">Auditor</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-xs text-on-surface font-medium">maya.k@jbr.minpo.io</p>
+<p class="text-[11px] text-on-surface-variant">+62 813-7766-5544</p>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-primary/10 text-primary border border-primary/20">
+<span class="h-1 w-1 rounded-full bg-primary"></span>
+                                        Aktif
+                                    </span>
+</td>
+<td class="px-6 py-4 text-xs font-mono text-on-surface-variant">
+                                    2023-11-23 <span class="text-on-surface">18:45:12</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:text-tertiary transition-colors"><span class="material-symbols-outlined text-lg">monitoring</span></button>
+<button class="p-2 hover:text-secondary transition-colors"><span class="material-symbols-outlined text-lg">lock_reset</span></button>
+<button class="p-2 hover:text-error transition-colors"><span class="material-symbols-outlined text-lg">block</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 bg-surface-container-low/50 border-t border-outline-variant/10 flex justify-between items-center">
+<p class="text-[10px] text-on-surface-variant font-mono">Showing 4 of 24 records</p>
+<div class="flex items-center gap-4">
+<div class="flex gap-1">
+<button class="h-8 w-8 flex items-center justify-center rounded bg-surface-container-highest text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">chevron_left</span></button>
+<button class="h-8 w-8 flex items-center justify-center rounded bg-primary text-on-primary text-xs font-bold">1</button>
+<button class="h-8 w-8 flex items-center justify-center rounded bg-surface-container-highest text-on-surface-variant hover:text-primary transition-colors text-xs font-bold">2</button>
+<button class="h-8 w-8 flex items-center justify-center rounded bg-surface-container-highest text-on-surface-variant hover:text-primary transition-colors text-xs font-bold">3</button>
+<button class="h-8 w-8 flex items-center justify-center rounded bg-surface-container-highest text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity Logs Preview (Glassmorphism Sidebar-like section) -->
+<div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 bg-surface-container p-6 rounded-xl relative overflow-hidden group">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">history</span>
+                            Recent Security Audit
+                        </h3>
+<a class="text-xs text-tertiary hover:underline" href="#">Full Log Report</a>
+</div>
+<div class="space-y-4 font-mono text-[11px]">
+<div class="flex gap-4 p-3 rounded-lg bg-surface-container-low border border-outline-variant/5">
+<span class="text-primary-dim">14:45:01</span>
+<span class="text-on-surface-variant">[LOGIN]</span>
+<span class="text-on-surface italic">User 'Julian Draxler' authenticated via IP 192.168.1.44</span>
+</div>
+<div class="flex gap-4 p-3 rounded-lg bg-surface-container-low border border-outline-variant/5">
+<span class="text-primary-dim">14:38:22</span>
+<span class="text-error">[SECURITY]</span>
+<span class="text-on-surface">Failed attempt: 'Admin_Node_02' password mismatch</span>
+</div>
+<div class="flex gap-4 p-3 rounded-lg bg-surface-container-low border border-outline-variant/5">
+<span class="text-primary-dim">13:12:44</span>
+<span class="text-tertiary-dim">[CONFIG]</span>
+<span class="text-on-surface">Loyalty Logic parameters updated by 'Maya Kurnia'</span>
+</div>
+</div>
+</div>
+<div class="bg-primary/5 p-6 rounded-xl border border-primary/10 flex flex-col justify-center">
+<h4 class="text-primary font-bold text-lg mb-2">Access Control</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed mb-6">Internal dashboard access is restricted to verified JBR corporate IPs. All actions are logged and immutable in the system ledger.</p>
+<button class="w-full py-2 bg-surface-container border border-primary/20 text-primary rounded-lg text-xs font-bold hover:bg-primary/10 transition-colors uppercase tracking-widest">
+                        Verify IP White-list
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Modal: Tambah Admin (Fixed Overlay) -->
+<!-- Note: In a real implementation, this would be toggled. For the visual task, we show the modal structure. -->
+<div class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4">
+<div class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-md"></div>
+<div class="relative w-full max-w-lg bg-surface-bright rounded-2xl shadow-2xl border border-outline-variant/30 overflow-hidden">
+<div class="p-6 border-b border-outline-variant/20 flex justify-between items-center">
+<h2 class="text-xl font-bold tracking-tight text-on-surface">Tambah Admin Baru</h2>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-on-surface">close</button>
+</div>
+<div class="p-8 space-y-6">
+<div class="space-y-1.5">
+<label class="text-[10px] font-bold uppercase tracking-widest text-primary">Nama Lengkap</label>
+<input class="w-full bg-surface-container-highest border-none rounded-xl p-4 text-on-surface focus:ring-2 focus:ring-primary" placeholder="Contoh: Budi Santoso" type="text"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-[10px] font-bold uppercase tracking-widest text-primary">Email Korporat</label>
+<input class="w-full bg-surface-container-highest border-none rounded-xl p-4 text-on-surface focus:ring-2 focus:ring-primary" placeholder="email@minpo.io" type="email"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-[10px] font-bold uppercase tracking-widest text-primary">Nomor WhatsApp</label>
+<div class="flex gap-2">
+<div class="bg-surface-container-highest px-4 flex items-center justify-center rounded-xl text-on-surface-variant font-mono text-sm border-none">+62</div>
+<input class="flex-1 bg-surface-container-highest border-none rounded-xl p-4 text-on-surface focus:ring-2 focus:ring-primary" placeholder="812345678" type="tel"/>
+</div>
+</div>
+<div class="pt-4 flex gap-4">
+<button class="flex-1 py-4 border border-outline-variant text-on-surface rounded-xl font-bold hover:bg-surface-container-high transition-colors">Batal</button>
+<button class="flex-1 py-4 bg-primary text-on-primary rounded-xl font-bold shadow-[0_8px_24px_rgba(105,246,184,0.3)] active:scale-95 transition-transform">Simpan Admin</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Action Button (FAB) Suppression: Suppressed on Team Admin detail screen per instruction -->
+</body></html>

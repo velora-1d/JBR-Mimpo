@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Promo Catalog | JBR Minpo Command Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#00dcfd",
+                        "tertiary": "#77e6ff",
+                        "surface": "#070e1d",
+                        "inverse-on-surface": "#4e5566",
+                        "surface-tint": "#69f6b8",
+                        "surface-container-lowest": "#000000",
+                        "secondary-dim": "#47edc4",
+                        "on-primary": "#005a3c",
+                        "surface-container": "#11192b",
+                        "tertiary-dim": "#00cdeb",
+                        "background": "#070e1d",
+                        "on-secondary-fixed": "#004939",
+                        "on-tertiary-fixed": "#00343c",
+                        "tertiary-container": "#00dcfd",
+                        "inverse-surface": "#f9f9ff",
+                        "primary-container": "#06b77f",
+                        "surface-bright": "#212c43",
+                        "on-primary-container": "#002919",
+                        "secondary-container": "#006b56",
+                        "primary-dim": "#58e7ab",
+                        "surface-container-high": "#161f33",
+                        "tertiary-fixed-dim": "#00cdeb",
+                        "secondary": "#5afcd2",
+                        "on-primary-fixed-variant": "#006544",
+                        "secondary-fixed-dim": "#47edc4",
+                        "error": "#ff716c",
+                        "outline": "#6e7588",
+                        "on-secondary": "#005d4a",
+                        "surface-variant": "#1b263b",
+                        "on-tertiary-container": "#004955",
+                        "on-secondary-fixed-variant": "#006853",
+                        "inverse-primary": "#006d4a",
+                        "surface-dim": "#070e1d",
+                        "on-tertiary-fixed-variant": "#005360",
+                        "on-surface-variant": "#a4abbf",
+                        "secondary-fixed": "#5afcd2",
+                        "on-error-container": "#ffa8a3",
+                        "on-surface": "#dfe5fa",
+                        "surface-container-highest": "#1b263b",
+                        "primary-fixed": "#69f6b8",
+                        "on-secondary-container": "#defff2",
+                        "outline-variant": "#414859",
+                        "on-background": "#dfe5fa",
+                        "on-error": "#490006",
+                        "primary": "#69f6b8",
+                        "surface-container-low": "#0b1323",
+                        "error-dim": "#d7383b",
+                        "on-primary-fixed": "#00452d",
+                        "on-tertiary": "#005360",
+                        "primary-fixed-dim": "#58e7ab",
+                        "error-container": "#9f0519"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #070e1d; color: #dfe5fa; }
+        .font-sora { font-family: 'Sora', sans-serif; }
+        .font-jetbrains { font-family: 'JetBrains Mono', monospace; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { background: rgba(27, 38, 59, 0.4); backdrop-filter: blur(20px); }
+    </style>
+</head>
+<body class="flex min-h-screen overflow-x-hidden">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-[#11192b] flex flex-col h-full py-8 border-r border-[#161f33] z-50">
+<div class="px-6 mb-10 flex items-center gap-3">
+<div class="w-10 h-10 bg-[#69f6b8] rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(105,246,184,0.3)]">
+<span class="material-symbols-outlined text-[#00452d] font-bold">bolt</span>
+</div>
+<div>
+<h1 class="text-[#69f6b8] font-black text-sm tracking-tighter uppercase font-jetbrains">Command Center</h1>
+<p class="text-slate-500 text-[10px] font-jetbrains uppercase tracking-widest leading-none">Emerald Sentinel v2</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Active Tab: Promo Catalog -->
+<a class="flex items-center gap-4 bg-[#161f33] text-[#69f6b8] border-r-4 border-[#69f6b8] px-6 py-3 transition-all duration-300 translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="loyalty">loyalty</span>
+<span class="font-jetbrains text-xs uppercase tracking-widest">Promo Catalog</span>
+</a>
+<a class="flex items-center gap-4 text-slate-400 hover:text-[#5afcd2] px-6 py-3 transition-all hover:bg-[#161f33]" href="#">
+<span class="material-symbols-outlined" data-icon="redeem">redeem</span>
+<span class="font-jetbrains text-xs uppercase tracking-widest">Reward Management</span>
+</a>
+<a class="flex items-center gap-4 text-slate-400 hover:text-[#5afcd2] px-6 py-3 transition-all hover:bg-[#161f33]" href="#">
+<span class="material-symbols-outlined" data-icon="casino">casino</span>
+<span class="font-jetbrains text-xs uppercase tracking-widest">Lottery Draw</span>
+</a>
+<a class="flex items-center gap-4 text-slate-400 hover:text-[#5afcd2] px-6 py-3 transition-all hover:bg-[#161f33]" href="#">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+<span class="font-jetbrains text-xs uppercase tracking-widest">Referral Tracking</span>
+</a>
+<a class="flex items-center gap-4 text-slate-400 hover:text-[#5afcd2] px-6 py-3 transition-all hover:bg-[#161f33]" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-jetbrains text-xs uppercase tracking-widest">Point Adjustment</span>
+</a>
+</nav>
+<div class="px-6 mt-auto space-y-4">
+<button class="w-full py-3 px-4 bg-[#69f6b8] text-[#00452d] rounded-xl font-bold font-jetbrains text-xs uppercase tracking-wider hover:bg-[#5afcd2] transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span>
+                New Campaign
+            </button>
+<div class="pt-6 border-t border-[#161f33]">
+<a class="flex items-center gap-4 text-slate-400 hover:text-[#5afcd2] py-2 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="font-jetbrains text-xs uppercase tracking-widest">Support</span>
+</a>
+<a class="flex items-center gap-4 text-slate-400 hover:text-[#5afcd2] py-2 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-jetbrains text-xs uppercase tracking-widest">Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="fixed top-0 left-64 right-0 h-16 bg-[#070e1d]/80 backdrop-blur-xl z-40 flex justify-between items-center px-8">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="w-full bg-[#11192b] border-none text-sm text-[#dfe5fa] pl-10 pr-4 py-2 rounded-lg focus:ring-1 focus:ring-[#69f6b8] placeholder-slate-500" placeholder="Search promotions, status, or dates..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3">
+<button class="p-2 text-slate-400 hover:bg-[#161f33] rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-400 hover:bg-[#161f33] rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-[#161f33]"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-xs font-bold text-[#dfe5fa]">Admin Sentinel</p>
+<p class="text-[10px] text-[#69f6b8] font-jetbrains uppercase tracking-tighter">Level 04 Access</p>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-[#69f6b8]/20 overflow-hidden">
+<img alt="Administrator Profile" data-alt="close-up portrait of a professional man in tech with subtle blue lighting against a dark studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqHrvMmlRHlkADDeCskom9TOBklhMdZjCDmtmAFiHZF1XaCJsvz-hcLXU5AvozCcNmfUeZSkMXx8ecGgaxif6b2kC6jQOtZt72l_4fldfvFheCGCwniqsixuCEaBYojWG71AqHDfeyzvmtaHVZ0cOdD_jcVoxTGGHSrQuJM5dNY6o7UHlgAhhSo90LqPze3v7UFPto51ZzkkdR5cfpjueWixosEayCG-X16q57pkEfsCbvpctx7MIo2Cu10Zg-GSaWDyt1D3UiVKs"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-64 mt-16 flex-1 bg-[#070e1d] p-8">
+<div class="max-w-7xl mx-auto">
+<!-- Page Header Section -->
+<div class="flex justify-between items-end mb-10">
+<div>
+<h2 class="text-4xl font-sora font-extrabold text-[#dfe5fa] tracking-tight mb-2">Promo Catalog</h2>
+<p class="text-slate-400 max-w-md">Orchestrate ISP offerings and track conversion metrics across the regional network.</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex bg-[#11192b] p-1 rounded-xl">
+<button class="px-4 py-2 rounded-lg text-xs font-bold font-jetbrains bg-[#161f33] text-[#69f6b8]">ALL</button>
+<button class="px-4 py-2 rounded-lg text-xs font-bold font-jetbrains text-slate-400 hover:text-[#dfe5fa]">ACTIVE</button>
+<button class="px-4 py-2 rounded-lg text-xs font-bold font-jetbrains text-slate-400 hover:text-[#dfe5fa]">DRAFT</button>
+</div>
+<button class="bg-[#06b77f] hover:bg-[#69f6b8] text-[#002919] font-sora font-bold px-6 py-3 rounded-xl flex items-center gap-2 transition-all shadow-lg shadow-emerald-950/20">
+<span class="material-symbols-outlined text-xl">add_circle</span>
+                        + Buat Promo
+                    </button>
+</div>
+</div>
+<!-- Bento Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+<div class="glass-card p-6 rounded-2xl border-b border-[#69f6b8]/10">
+<p class="text-[10px] font-jetbrains uppercase tracking-widest text-slate-400 mb-2">Total Campaigns</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-sora font-bold text-[#dfe5fa]">142</span>
+<span class="text-[#69f6b8] text-xs font-jetbrains">+12%</span>
+</div>
+</div>
+<div class="glass-card p-6 rounded-2xl">
+<p class="text-[10px] font-jetbrains uppercase tracking-widest text-slate-400 mb-2">Active Claims</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-sora font-bold text-[#dfe5fa]">8,902</span>
+<span class="text-[#77e6ff] text-xs font-jetbrains">Live</span>
+</div>
+</div>
+<div class="glass-card p-6 rounded-2xl">
+<p class="text-[10px] font-jetbrains uppercase tracking-widest text-slate-400 mb-2">Conversion Rate</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-sora font-bold text-[#dfe5fa]">24.8%</span>
+<span class="text-[#69f6b8] text-xs font-jetbrains">Optimal</span>
+</div>
+</div>
+<div class="glass-card p-6 rounded-2xl bg-gradient-to-br from-[#161f33] to-[#070e1d]">
+<p class="text-[10px] font-jetbrains uppercase tracking-widest text-slate-400 mb-2">Budget Utilization</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-sora font-bold text-[#dfe5fa]">Rp 1.2B</span>
+<span class="text-error text-xs font-jetbrains">72%</span>
+</div>
+</div>
+</div>
+<!-- Promo Catalog Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Promo Card 1 -->
+<div class="group relative bg-[#11192b] rounded-3xl overflow-hidden hover:ring-2 hover:ring-[#69f6b8]/20 transition-all duration-300">
+<div class="h-48 relative">
+<img alt="Tech Bundle Banner" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="high-tech digital server room with neon green led lights and futuristic server racks in atmospheric low light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA73kGLAExLCqRbacSHFNPPrY3d7Y0NkfwGU6zUxgznsUSKLTjHVRjAC-goxAyIq-8AMJYKIQCPB2OcxfddnOpFHpqTI6AN6t8xOrr6C1Q7Pb1Cy6G-lmOROLQzT6JIaDNtLI3dMy2Ep_XYcz8GlDHVW5eTHfTKmLJjmzCVUalVn6chGy6eR526IRMceF9NZg2Hj_Zp5rVlWvDGGbETThF01kl0Q59i5uUdVVpzUdOMelfwQP3Kx_rorQOzi9i_y2gz0UCN5X9VwGw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#11192b] via-[#11192b]/20 to-transparent"></div>
+<div class="absolute top-4 left-4">
+<span class="bg-[#002919] text-[#69f6b8] text-[10px] font-jetbrains font-bold px-3 py-1 rounded-full border border-[#69f6b8]/30 backdrop-blur-md uppercase tracking-wider">Active</span>
+</div>
+<div class="absolute bottom-4 left-6">
+<h3 class="text-2xl font-sora font-bold text-[#dfe5fa] leading-tight">Hyper-Speed Bundle 500Mbps</h3>
+</div>
+</div>
+<div class="p-6">
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="space-y-1">
+<p class="text-[10px] font-jetbrains text-slate-500 uppercase">Period Range</p>
+<p class="text-xs font-sora font-semibold text-slate-300">01 Oct — 31 Dec 2023</p>
+</div>
+<div class="space-y-1 text-right">
+<p class="text-[10px] font-jetbrains text-slate-500 uppercase">Remaining Time</p>
+<p class="text-xs font-jetbrains font-bold text-[#77e6ff]">14D : 08H : 22M</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-6 border-t border-[#1b263b]">
+<div class="flex flex-col">
+<span class="text-[10px] font-jetbrains text-slate-500 uppercase">Total Claims</span>
+<span class="text-xl font-jetbrains font-bold text-[#dfe5fa]">2,415</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-xl bg-[#1b263b] text-slate-400 hover:text-[#69f6b8] transition-colors">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="px-4 py-2 rounded-xl bg-[#1b263b] text-[#dfe5fa] text-xs font-bold hover:bg-[#212c43] transition-colors">View Details</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Promo Card 2 -->
+<div class="group relative bg-[#11192b] rounded-3xl overflow-hidden hover:ring-2 hover:ring-[#69f6b8]/20 transition-all duration-300">
+<div class="h-48 relative">
+<img alt="Loyalty Flash Sale Banner" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="sleek modern laptop on office desk with glowing neon green circuit board aesthetics in the background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA61Ybtyt16Ieho7-WKP3BK50_bP4DypnayAGkr5R4xom6ZgrDm6B8_Vy_i6hy9xq1YB516GcP8NYnU37EpynshhcADWlKSSCtynb8Y7X_lqwznpcvtIXLG5_Q-B4821hbSfCftGT_zAoSpOjld8QertFrmWioqBGjAniY3rC7IfTzsrWrI9Xp_moZCbqoDXI4T6p17PrVfKJce8jhapEkw7C4BKy7vvFAUXBnws5F9bUeh0WbtmBvzcYpNCPM7cD7YPZqECNMMyTs"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#11192b] via-[#11192b]/20 to-transparent"></div>
+<div class="absolute top-4 left-4">
+<span class="bg-[#1b263b] text-slate-400 text-[10px] font-jetbrains font-bold px-3 py-1 rounded-full border border-slate-500/30 backdrop-blur-md uppercase tracking-wider">Draft</span>
+</div>
+<div class="absolute bottom-4 left-6">
+<h3 class="text-2xl font-sora font-bold text-[#dfe5fa] leading-tight">Emerald Loyalty Flash Sale</h3>
+</div>
+</div>
+<div class="p-6">
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="space-y-1">
+<p class="text-[10px] font-jetbrains text-slate-500 uppercase">Period Range</p>
+<p class="text-xs font-sora font-semibold text-slate-300">Scheduled for Jan 2024</p>
+</div>
+<div class="space-y-1 text-right">
+<p class="text-[10px] font-jetbrains text-slate-500 uppercase">Time to Launch</p>
+<p class="text-xs font-jetbrains font-bold text-[#69f6b8]">28D : 00H : 00M</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-6 border-t border-[#1b263b]">
+<div class="flex flex-col">
+<span class="text-[10px] font-jetbrains text-slate-500 uppercase">Total Claims</span>
+<span class="text-xl font-jetbrains font-bold text-[#dfe5fa]">0</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-xl bg-[#1b263b] text-slate-400 hover:text-[#69f6b8] transition-colors">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="px-4 py-2 rounded-xl bg-[#1b263b] text-[#dfe5fa] text-xs font-bold hover:bg-[#212c43] transition-colors">Publish Now</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Promo Card 3 -->
+<div class="group relative bg-[#11192b] rounded-3xl overflow-hidden hover:ring-2 hover:ring-[#69f6b8]/20 transition-all duration-300">
+<div class="h-48 relative">
+<img alt="Night Rider Banner" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="abstract digital connection lines and data points glowing with cyan and blue lights over dark globe background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2_GempfroZhw0MvPcLKx3Cl5XEXZTlclQ9QxFzTFpaUjOL4xZ0JIlOowdDgBVXAz_dhexpsUBzG1Dm6R05WKCtslaxu9NuWNrGXVQqLP1gomQvSasJvqYmQJ6GjpnvM3PwtxXMcn-S92VNl0WMrzC5N6NtYgB2H3EQPe7Ao6pyowCWrjriijxHl8B3Ng8jOqbKqKVnp8qWME6DOIDpo9vhug_Q8C67WVEQ7TdGyWUwxl9ZF9ohxGU7QoHO4a8b7Rn0oWFX4G95BI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#11192b] via-[#11192b]/20 to-transparent"></div>
+<div class="absolute top-4 left-4">
+<span class="bg-red-950/40 text-error text-[10px] font-jetbrains font-bold px-3 py-1 rounded-full border border-error/30 backdrop-blur-md uppercase tracking-wider">Expired</span>
+</div>
+<div class="absolute bottom-4 left-6">
+<h3 class="text-2xl font-sora font-bold text-[#dfe5fa] leading-tight">Midnight Streamer Unlimited</h3>
+</div>
+</div>
+<div class="p-6">
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="space-y-1">
+<p class="text-[10px] font-jetbrains text-slate-500 uppercase">Period Range</p>
+<p class="text-xs font-sora font-semibold text-slate-300">Ended 15 Sep 2023</p>
+</div>
+<div class="space-y-1 text-right">
+<p class="text-[10px] font-jetbrains text-slate-500 uppercase">Status</p>
+<p class="text-xs font-jetbrains font-bold text-error">CLOSED</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-6 border-t border-[#1b263b]">
+<div class="flex flex-col">
+<span class="text-[10px] font-jetbrains text-slate-500 uppercase">Final Claims</span>
+<span class="text-xl font-jetbrains font-bold text-[#dfe5fa]">12,850</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-xl bg-[#1b263b] text-slate-400 hover:text-[#69f6b8] transition-colors">
+<span class="material-symbols-outlined text-lg">analytics</span>
+</button>
+<button class="px-4 py-2 rounded-xl bg-[#1b263b] text-[#dfe5fa] text-xs font-bold hover:bg-[#212c43] transition-colors">Archive</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Promo Card 4 (New / Placeholder Asymmetry) -->
+<div class="group relative bg-[#0b1323] border-2 border-dashed border-[#1b263b] rounded-3xl overflow-hidden flex flex-col items-center justify-center p-12 text-center hover:border-[#69f6b8]/50 transition-all">
+<div class="w-16 h-16 rounded-full bg-[#161f33] flex items-center justify-center mb-6 text-[#69f6b8]">
+<span class="material-symbols-outlined text-4xl">rocket_launch</span>
+</div>
+<h3 class="text-xl font-sora font-bold text-[#dfe5fa] mb-2">Ready for a new campaign?</h3>
+<p class="text-slate-500 text-sm mb-8 max-w-xs">Start building your next promotion with our drag-and-drop campaign builder.</p>
+<button class="bg-transparent border border-[#69f6b8] text-[#69f6b8] font-jetbrains text-xs uppercase tracking-widest px-8 py-3 rounded-xl hover:bg-[#69f6b8] hover:text-[#002919] transition-all">
+                        Initiate Protocol
+                    </button>
+</div>
+</div>
+<!-- Detailed Data View Section -->
+<div class="mt-16">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-sora font-bold text-[#dfe5fa]">Real-time Performance</h3>
+<div class="text-xs font-jetbrains text-slate-500 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#69f6b8] animate-pulse"></span>
+                        LIVE DATA STREAMING
+                    </div>
+</div>
+<div class="bg-[#11192b] rounded-3xl overflow-hidden border border-[#1b263b]">
+<table class="w-full text-left">
+<thead>
+<tr class="border-b border-[#1b263b] bg-[#161f33]/50">
+<th class="px-8 py-5 text-[10px] font-jetbrains uppercase tracking-widest text-slate-400">Offer Identity</th>
+<th class="px-6 py-5 text-[10px] font-jetbrains uppercase tracking-widest text-slate-400">Activity Level</th>
+<th class="px-6 py-5 text-[10px] font-jetbrains uppercase tracking-widest text-slate-400">Quota</th>
+<th class="px-6 py-5 text-[10px] font-jetbrains uppercase tracking-widest text-slate-400">Live Status</th>
+<th class="px-8 py-5 text-[10px] font-jetbrains uppercase tracking-widest text-slate-400 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#1b263b]">
+<tr class="hover:bg-[#161f33]/30 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-bright flex items-center justify-center">
+<span class="material-symbols-outlined text-sm text-[#77e6ff]">wifi</span>
+</div>
+<div>
+<p class="text-sm font-sora font-bold text-[#dfe5fa]">Student Basic 10Mbps</p>
+<p class="text-[10px] text-slate-500 font-jetbrains">UUID: CAM-092-XB</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="w-24 h-1.5 bg-[#1b263b] rounded-full overflow-hidden">
+<div class="h-full bg-[#69f6b8] rounded-full" style="width: 65%;"></div>
+</div>
+<span class="text-[10px] font-jetbrains text-[#69f6b8]">65%</span>
+</div>
+</td>
+<td class="px-6 py-5 font-jetbrains text-xs text-slate-300">500 / 750 CLAIMS</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-[#69f6b8]"></span>
+<span class="text-xs font-jetbrains text-[#69f6b8]">OPERATIONAL</span>
+</div>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="text-slate-500 hover:text-[#69f6b8] transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-[#161f33]/30 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-bright flex items-center justify-center">
+<span class="material-symbols-outlined text-sm text-[#77e6ff]">house</span>
+</div>
+<div>
+<p class="text-sm font-sora font-bold text-[#dfe5fa]">Home Pro 1Gbps</p>
+<p class="text-[10px] text-slate-500 font-jetbrains">UUID: CAM-144-ZL</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="w-24 h-1.5 bg-[#1b263b] rounded-full overflow-hidden">
+<div class="h-full bg-[#77e6ff] rounded-full" style="width: 42%;"></div>
+</div>
+<span class="text-[10px] font-jetbrains text-[#77e6ff]">42%</span>
+</div>
+</td>
+<td class="px-6 py-5 font-jetbrains text-xs text-slate-300">210 / 500 CLAIMS</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-[#69f6b8]"></span>
+<span class="text-xs font-jetbrains text-[#69f6b8]">OPERATIONAL</span>
+</div>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="text-slate-500 hover:text-[#69f6b8] transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</body></html>

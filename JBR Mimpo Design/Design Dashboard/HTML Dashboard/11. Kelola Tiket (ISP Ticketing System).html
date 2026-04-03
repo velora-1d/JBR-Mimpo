@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .jetbrains-mono { font-family: 'JetBrains Mono', monospace; }
+        .sora { font-family: 'Sora', sans-serif; }
+        
+        /* Custom scrollbar for deep-sea aesthetic */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #070e1d; }
+        ::-webkit-scrollbar-thumb { background: #1b263b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #69f6b8; }
+
+        /* Subtle red glow for critical tickets */
+        .critical-glow {
+            box-shadow: inset 4px 0 0 0 #ff716c, 0 0 15px -5px rgba(255, 113, 108, 0.2);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-dim": "#47edc4",
+                      "primary-container": "#06b77f",
+                      "surface-container-highest": "#1b263b",
+                      "inverse-on-surface": "#4e5566",
+                      "tertiary-fixed": "#00dcfd",
+                      "tertiary-container": "#00dcfd",
+                      "outline": "#6e7588",
+                      "tertiary": "#77e6ff",
+                      "primary-fixed-dim": "#58e7ab",
+                      "primary-fixed": "#69f6b8",
+                      "on-primary-container": "#002919",
+                      "on-primary-fixed": "#00452d",
+                      "inverse-primary": "#006d4a",
+                      "surface-container-lowest": "#000000",
+                      "on-secondary": "#005d4a",
+                      "on-error": "#490006",
+                      "surface-bright": "#212c43",
+                      "on-secondary-fixed": "#004939",
+                      "on-background": "#dfe5fa",
+                      "surface-container-high": "#161f33",
+                      "on-tertiary-container": "#004955",
+                      "on-primary": "#005a3c",
+                      "error": "#ff716c",
+                      "surface-dim": "#070e1d",
+                      "secondary-fixed-dim": "#47edc4",
+                      "tertiary-dim": "#00cdeb",
+                      "on-surface": "#dfe5fa",
+                      "primary-dim": "#58e7ab",
+                      "surface-container": "#11192b",
+                      "background": "#070e1d",
+                      "secondary-fixed": "#5afcd2",
+                      "inverse-surface": "#f9f9ff",
+                      "error-dim": "#d7383b",
+                      "secondary": "#5afcd2",
+                      "secondary-container": "#006b56",
+                      "outline-variant": "#414859",
+                      "on-tertiary-fixed-variant": "#005360",
+                      "on-secondary-fixed-variant": "#006853",
+                      "on-tertiary": "#005360",
+                      "tertiary-fixed-dim": "#00cdeb",
+                      "surface": "#070e1d",
+                      "surface-tint": "#69f6b8",
+                      "surface-container-low": "#0b1323",
+                      "primary": "#69f6b8",
+                      "on-surface-variant": "#a4abbf",
+                      "on-primary-fixed-variant": "#006544",
+                      "on-tertiary-fixed": "#00343c",
+                      "on-secondary-container": "#defff2",
+                      "error-container": "#9f0519",
+                      "surface-variant": "#1b263b",
+                      "on-error-container": "#ffa8a3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Plus Jakarta Sans"],
+                      "body": ["Inter"],
+                      "label": ["Space Grotesk"]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary-container">
+<!-- Sidebar Component (Mapped from JSON) -->
+<aside class="flex flex-col h-screen py-6 bg-[#070e1d] h-full w-64 fixed left-0 top-0 z-50">
+<div class="px-6 mb-10">
+<h1 class="text-2xl font-black text-[#69f6b8] tracking-tighter sora">JBR Minpo</h1>
+<p class="text-[10px] text-slate-500 jetbrains-mono uppercase tracking-widest mt-1">Admin Ops v2.4</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center px-4 py-3 rounded-lg text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 group active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="text-sm sora">Command Center</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-[#69f6b8] font-bold border-r-4 border-[#69f6b8] bg-[#11192b]/50 group active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined mr-3">confirmation_number</span>
+<span class="text-sm sora">Ticketing</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 group active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined mr-3">settings_input_component</span>
+<span class="text-sm sora">Network Health</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 group active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined mr-3">quiz</span>
+<span class="text-sm sora">FAQ Manager</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 group active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined mr-3">database</span>
+<span class="text-sm sora">Customer Database</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 group active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined mr-3">chat_bubble</span>
+<span class="text-sm sora">CS Chat</span>
+</a>
+</nav>
+<div class="px-4 mt-auto pt-6 space-y-1">
+<button class="w-full mb-4 flex items-center justify-center gap-2 bg-error-container text-on-error-container px-4 py-2.5 rounded-xl text-xs font-bold sora hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-sm">warning</span>
+                System Alert
+            </button>
+<a class="flex items-center px-4 py-3 rounded-lg text-slate-400 font-medium hover:bg-[#161f33] transition-all" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span class="text-sm sora">Settings</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-slate-400 font-medium hover:bg-[#161f33] transition-all" href="#">
+<span class="material-symbols-outlined mr-3">logout</span>
+<span class="text-sm sora">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 min-h-screen bg-surface-dim">
+<!-- Top Navigation Bar -->
+<header class="flex justify-between items-center w-full px-8 h-16 sticky top-0 z-40 bg-[#070e1d]/80 backdrop-blur-xl">
+<div class="flex items-center gap-8">
+<h2 class="text-xl font-bold text-[#69f6b8] tracking-tight sora">Command Center</h2>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">search</span>
+<input class="bg-surface-container-highest border-none focus:ring-0 rounded-xl pl-10 pr-4 py-1.5 text-xs w-64 jetbrains-mono text-on-surface placeholder:text-slate-500 focus:border-b-2 focus:border-[#69f6b8] transition-all" placeholder="Search tickets, IPs, or customers..." type="text"/>
+</div>
+</div>
+<nav class="flex items-center gap-6">
+<a class="text-slate-400 hover:text-[#5afcd2] text-sm sora font-medium transition-colors" href="#">Global View</a>
+<a class="text-[#69f6b8] border-b-2 border-[#69f6b8] pb-1 text-sm sora font-medium" href="#">Live Metrics</a>
+<a class="text-slate-400 hover:text-[#5afcd2] text-sm sora font-medium transition-colors" href="#">Incident Logs</a>
+<div class="flex items-center gap-4 ml-4 pl-6 border-l border-outline-variant/20">
+<button class="text-slate-400 hover:text-[#69f6b8] transition-opacity">
+<span class="material-symbols-outlined">notifications_active</span>
+</button>
+<button class="bg-[#69f6b8] text-[#002919] px-4 py-1.5 rounded-xl text-xs font-bold sora hover:opacity-90 transition-all">
+                        Deploy Update
+                    </button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="professional male admin avatar with glasses and dark hair in a clean corporate style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQsWN2CdC0fSfmlmY1ZVCRIRvCUs526kpk0OBfHxQbV2IFxfslPSh7NdpGKe0j0I7fa67VdSGYdJ4G0EdG9vguDXzxgg7rNh12xtkMB9IeknD-QaL3KN08Siymc9_l_bSQHCEJ1qpqNQgiAJS7lA3sujU0nX3FEizHKqo1cWejJa0iJ5rl5x_NG82KntOb9ntXtI6Mr1Lbm247q8wD5gLAlI36AelMBBmT7Ig2IjhH0FYuEbVEgK4pc7uyYFDC9nfAGzho9ndT7fg"/>
+</div>
+</div>
+</nav>
+</header>
+<!-- Page Content -->
+<div class="p-8">
+<!-- Summary Stats (Bento-lite) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+<div class="bg-surface-container rounded-xl p-5 border-l-4 border-primary">
+<p class="text-[10px] jetbrains-mono text-slate-500 uppercase tracking-widest">Active Tickets</p>
+<div class="flex items-end gap-2 mt-1">
+<h3 class="text-3xl font-bold sora text-on-surface">142</h3>
+<span class="text-primary text-[10px] jetbrains-mono mb-1.5">+12%</span>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-5 border-l-4 border-error">
+<p class="text-[10px] jetbrains-mono text-slate-500 uppercase tracking-widest">Critical High</p>
+<div class="flex items-end gap-2 mt-1">
+<h3 class="text-3xl font-bold sora text-on-surface">08</h3>
+<span class="text-error text-[10px] jetbrains-mono mb-1.5">Action Req</span>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-5 border-l-4 border-tertiary">
+<p class="text-[10px] jetbrains-mono text-slate-500 uppercase tracking-widest">Avg. Resolution</p>
+<div class="flex items-end gap-2 mt-1">
+<h3 class="text-3xl font-bold sora text-on-surface">42<span class="text-lg font-medium text-slate-500">m</span></h3>
+<span class="text-tertiary text-[10px] jetbrains-mono mb-1.5">-5m</span>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-5 border-l-4 border-secondary">
+<p class="text-[10px] jetbrains-mono text-slate-500 uppercase tracking-widest">CSAT Rating</p>
+<div class="flex items-end gap-2 mt-1">
+<h3 class="text-3xl font-bold sora text-on-surface">4.9</h3>
+<span class="text-secondary text-[10px] jetbrains-mono mb-1.5">Global</span>
+</div>
+</div>
+</div>
+<!-- Ticketing Table Section -->
+<div class="bg-surface-container rounded-xl overflow-hidden shadow-2xl">
+<div class="px-6 py-4 flex justify-between items-center bg-surface-container-high/50 border-b border-outline-variant/10">
+<h4 class="text-lg font-semibold sora flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">confirmation_number</span>
+                        Live Ticket Queue
+                    </h4>
+<div class="flex gap-2">
+<button class="bg-surface-container-highest text-on-surface text-xs px-3 py-1.5 rounded-lg sora flex items-center gap-1 hover:bg-surface-bright transition-all">
+<span class="material-symbols-outlined text-sm">filter_list</span> Filter
+                        </button>
+<button class="bg-surface-container-highest text-on-surface text-xs px-3 py-1.5 rounded-lg sora flex items-center gap-1 hover:bg-surface-bright transition-all">
+<span class="material-symbols-outlined text-sm">download</span> Export
+                        </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-highest/30 text-slate-400 text-[11px] jetbrains-mono uppercase tracking-tighter">
+<th class="px-4 py-3 font-medium">No. Tiket</th>
+<th class="px-4 py-3 font-medium">Nama Pelanggan</th>
+<th class="px-4 py-3 font-medium">No. WA</th>
+<th class="px-4 py-3 font-medium">Jenis Gangguan</th>
+<th class="px-4 py-3 font-medium">Area</th>
+<th class="px-4 py-3 font-medium">Status</th>
+<th class="px-4 py-3 font-medium">Assigned To</th>
+<th class="px-4 py-3 font-medium">Waktu Masuk</th>
+<th class="px-4 py-3 font-medium flex items-center gap-1 cursor-pointer text-primary">
+                                    Durasi <span class="material-symbols-outlined text-xs">keyboard_arrow_down</span>
+</th>
+<th class="px-4 py-3 font-medium text-center">Rating</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Ticket 1: Critical -->
+<tr class="hover:bg-surface-bright/20 transition-colors critical-glow">
+<td class="px-4 py-3 jetbrains-mono text-xs font-medium text-error">#TKT-20231027-001</td>
+<td class="px-4 py-3 text-sm font-semibold sora">Budi Santoso</td>
+<td class="px-4 py-3">
+<button class="bg-[#25D366]/20 text-[#25D366] p-1.5 rounded-lg hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-base">chat</span>
+</button>
+</td>
+<td class="px-4 py-3 text-xs text-slate-300">FO Cut - Main Trunk</td>
+<td class="px-4 py-3 text-xs text-slate-400">Jakarta Barat</td>
+<td class="px-4 py-3">
+<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold sora bg-yellow-500/10 text-yellow-500 border border-yellow-500/20">Waiting</span>
+</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<div class="w-5 h-5 rounded-full bg-surface-container-highest border border-outline-variant"></div>
+<span class="text-[11px] sora text-slate-400">Unassigned</span>
+</div>
+</td>
+<td class="px-4 py-3 jetbrains-mono text-[11px] text-slate-400">08:45:12</td>
+<td class="px-4 py-3 jetbrains-mono text-[11px] font-bold text-error">04h 12m</td>
+<td class="px-4 py-3 text-center">-</td>
+</tr>
+<!-- Ticket 2: In Progress -->
+<tr class="hover:bg-surface-bright/20 transition-colors">
+<td class="px-4 py-3 jetbrains-mono text-xs font-medium text-primary">#TKT-20231027-005</td>
+<td class="px-4 py-3 text-sm font-semibold sora">Ani Wijaya</td>
+<td class="px-4 py-3">
+<button class="bg-[#25D366]/20 text-[#25D366] p-1.5 rounded-lg hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-base">chat</span>
+</button>
+</td>
+<td class="px-4 py-3 text-xs text-slate-300">ONT Red Light</td>
+<td class="px-4 py-3 text-xs text-slate-400">Tangerang South</td>
+<td class="px-4 py-3">
+<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold sora bg-blue-500/10 text-blue-500 border border-blue-500/20">In Progress</span>
+</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<img alt="Avatar" class="w-5 h-5 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYqearErQd0P3tGw_n0yGfN62AvZjoLSx0JfbMuOUbpdy8VcMoXGiDdJgyjdIabXA42QaTCTcInBb6c6FXi8DT4ckFZTrlpk9M0Xr7ECtV0Vy1J5CPPkt_-Xvf2JmuZFj2MBvcvD24nXdepts7UKFv_I43uo24ziDY5OBVUeQUqcdr2FK-MK41zgBKb0Zn3eP9ZvtO5VsVUyEGkEKVtS-xJwjYZQBebFlLo_C6iits-6WPHH_YYFOxsS8mMfar0iEwz9CE0vMGZB0"/>
+<span class="text-[11px] sora text-slate-300">John Doe</span>
+</div>
+</td>
+<td class="px-4 py-3 jetbrains-mono text-[11px] text-slate-400">09:12:30</td>
+<td class="px-4 py-3 jetbrains-mono text-[11px] text-slate-300">01h 45m</td>
+<td class="px-4 py-3 text-center">-</td>
+</tr>
+<!-- Ticket 3: On Way -->
+<tr class="hover:bg-surface-bright/20 transition-colors">
+<td class="px-4 py-3 jetbrains-mono text-xs font-medium text-primary">#TKT-20231027-012</td>
+<td class="px-4 py-3 text-sm font-semibold sora">PT Teknologi Makmur</td>
+<td class="px-4 py-3">
+<button class="bg-[#25D366]/20 text-[#25D366] p-1.5 rounded-lg hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-base">chat</span>
+</button>
+</td>
+<td class="px-4 py-3 text-xs text-slate-300">Bandwidth Drop</td>
+<td class="px-4 py-3 text-xs text-slate-400">Sudirman Central</td>
+<td class="px-4 py-3">
+<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold sora bg-sky-400/10 text-sky-400 border border-sky-400/20">On Way</span>
+</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<img alt="Avatar" class="w-5 h-5 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLTV1qke_B7JwEGaS5HoE9hFqNGPSWnu7OcsDnN5O_plsBTJ9Tr65IsYkz7c1Uu47AreunnsReuYgE6OqP44Aq14keTHlfFSMDs8C4bNDVq98ROIrPh8URN0vjVkvtesJQiuOAj3TtHDXZNyrHd3fDhcXvebwOdMw423gUBUrOaFMBOtCsRzP-8zF51bbZv3OPtlMpsSpjlXAUHLDL28ITgkMmbGbwmkc-ZgV1Ko5dxnu7EZZXJP5L5XqNZlhsYsRzvgzSN32kdEQ"/>
+<span class="text-[11px] sora text-slate-300">Samsul S.</span>
+</div>
+</td>
+<td class="px-4 py-3 jetbrains-mono text-[11px] text-slate-400">10:05:00</td>
+<td class="px-4 py-3 jetbrains-mono text-[11px] text-slate-300">00h 52m</td>
+<td class="px-4 py-3 text-center">-</td>
+</tr>
+<!-- Ticket 4: Finished -->
+<tr class="hover:bg-surface-bright/20 transition-colors">
+<td class="px-4 py-3 jetbrains-mono text-xs font-medium text-slate-500">#TKT-20231027-008</td>
+<td class="px-4 py-3 text-sm font-semibold sora">Rina Sari</td>
+<td class="px-4 py-3">
+<button class="bg-[#25D366]/20 text-[#25D366] p-1.5 rounded-lg hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-base">chat</span>
+</button>
+</td>
+<td class="px-4 py-3 text-xs text-slate-300">Router Config</td>
+<td class="px-4 py-3 text-xs text-slate-400">Depok Utara</td>
+<td class="px-4 py-3">
+<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold sora bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">Finished</span>
+</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<img alt="Avatar" class="w-5 h-5 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUr6gpCPNj-1JLUTbaX2RXb70YW78c152k9cqclzV1J-SxpzlTduVUZVFgPtEEMU9xd6GX-RBa8h0dlzlGlPWyJ7-JmY8F5xW_EzTrDEia2kXvFRAu0skRN1nRrWIeqbbBoIZZgP6Rx-9dEAfEzTqdzoup76du9O6Qmp3NbxUFqBxy-Pjw05lSQ3IMIdk320RnmLy2FiJ4xYBYPiqNH01VORUdDc2HrZgT_KbUwnuAFCBtJNJgVqJJLrTvoELEM26Lf7sG4-OeXFE"/>
+<span class="text-[11px] sora text-slate-300">Ahmad M.</span>
+</div>
+</td>
+<td class="px-4 py-3 jetbrains-mono text-[11px] text-slate-400">08:15:22</td>
+<td class="px-4 py-3 jetbrains-mono text-[11px] text-slate-300">00h 28m</td>
+<td class="px-4 py-3 text-center font-bold text-yellow-400 text-xs">5.0</td>
+</tr>
+<!-- Ticket 5: Closed -->
+<tr class="hover:bg-surface-bright/20 transition-colors opacity-70">
+<td class="px-4 py-3 jetbrains-mono text-xs font-medium text-slate-500">#TKT-20231026-992</td>
+<td class="px-4 py-3 text-sm font-semibold sora">Indra Jaya</td>
+<td class="px-4 py-3">
+<button class="bg-[#25D366]/20 text-[#25D366] p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-base">chat</span>
+</button>
+</td>
+<td class="px-4 py-3 text-xs text-slate-400 line-through">Wifi Password Reset</td>
+<td class="px-4 py-3 text-xs text-slate-500">Bogor Selatan</td>
+<td class="px-4 py-3">
+<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold sora bg-slate-500/10 text-slate-500 border border-slate-500/20">Closed</span>
+</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<span class="text-[11px] sora text-slate-500">System Auto</span>
+</div>
+</td>
+<td class="px-4 py-3 jetbrains-mono text-[11px] text-slate-500">Yesterday</td>
+<td class="px-4 py-3 jetbrains-mono text-[11px] text-slate-500">00h 05m</td>
+<td class="px-4 py-3 text-center font-bold text-slate-500 text-xs">4.8</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 bg-surface-container-high/30 border-t border-outline-variant/10 flex justify-between items-center">
+<p class="text-xs text-slate-500 jetbrains-mono">Showing 1-10 of 2,492 entries</p>
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-surface-container-highest text-slate-400 hover:text-primary transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold text-xs">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-surface-container-highest text-slate-400 hover:text-primary transition-all text-xs">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-surface-container-highest text-slate-400 hover:text-primary transition-all text-xs">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-surface-container-highest text-slate-400 hover:text-primary transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Asymmetric Bottom Section: Maps and Active Techs -->
+<div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Map Context -->
+<div class="lg:col-span-2 bg-surface-container rounded-xl p-6 relative overflow-hidden h-[300px]">
+<div class="absolute inset-0 grayscale opacity-40 mix-blend-screen pointer-events-none">
+<img alt="Map Overlay" class="w-full h-full object-cover" data-alt="minimalist dark blue stylized map of a city with glowing green network lines and nodes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjVsAIcri88EBe5QXWks8oQDRCnNxIgr0IRUI_P7Fdv4Ys2uRtJmEW_UdwNsCyUZ2z9cIJDUoed1otPYvUZNfH4ZGRVpdNETzOyYc_e3wQ0yY3Q64L4FBNjqjeM5izuHkc8-GaWTwkOzMD0PGu8xKoYrSwevo05aFdMClwxxEEnhRXrkO8QEv6bZ6a1jDtPvSFrovlRu0XxyasanOST5gPQ7dtWmfeac43uMz9KatJHDvTjZHEjs91uBHnCQ16Es-ZGA2b10M_b1w"/>
+</div>
+<div class="relative z-10">
+<h4 class="text-lg font-bold sora text-on-surface flex items-center gap-2">
+<span class="w-3 h-3 bg-primary rounded-full animate-pulse"></span>
+                            Live Node Outages
+                        </h4>
+<p class="text-xs text-slate-400 sora mt-1">Real-time geospatial ticketing density</p>
+<!-- Floating KPI on Map -->
+<div class="absolute bottom-6 left-6 bg-surface-container-highest/80 backdrop-blur-md p-4 rounded-xl border border-primary/20">
+<p class="text-[10px] jetbrains-mono text-slate-500 uppercase">Worst Area</p>
+<p class="text-lg font-bold sora text-primary">Jakarta Barat</p>
+<p class="text-[10px] text-slate-400 mt-1">12 Pending Tickets</p>
+</div>
+</div>
+</div>
+<!-- Field Team Status -->
+<div class="bg-surface-container rounded-xl p-6">
+<h4 class="text-lg font-bold sora text-on-surface mb-4">Field Squads</h4>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img alt="Tech" class="w-10 h-10 rounded-xl bg-surface-variant p-0.5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCW3Vgr8T_nFDS5GHDumY7NSpHvPcgmgg76Axs9rFcnp2ddDrTozHLobV-AVo79ttmktH1EOgnWa3v0G_9AGxEGXmCAIyeyYqCKRwfbgQXcV3TmtDaOIs8K24ABTs0rRy2ocS4eTKYg_DqmWe6WbEd0atvF73VaZNx88q_xyx5CI0BAnM-zYgMrat6uBWyWaLKDznw_Uj4Q3Nq66Az92oLC9dbbzUY96FQzJncNtkgT5XYrQfpAhZ0MJCeSGz29ol6dMEnwRn2Yadk"/>
+<span class="absolute -bottom-1 -right-1 w-3 h-3 bg-emerald-500 border-2 border-surface-container rounded-full"></span>
+</div>
+<div>
+<p class="text-sm font-bold sora">Mike Ross</p>
+<p class="text-[10px] jetbrains-mono text-slate-500">On Way • TKT-012</p>
+</div>
+</div>
+<span class="text-xs text-tertiary jetbrains-mono">1.2km</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img alt="Tech" class="w-10 h-10 rounded-xl bg-surface-variant p-0.5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjh6wF3eCIhKRFwlXqopY1ke4DtAA9TzW5RdwBpjSmcXaCPex_9C_YrvgFSIRRbUiOThNox-dKdsBmMfOMDeBguVVvTEj82T2OwajigPOV3d8vRT1VBL4ZGwV8ZdMpDbHwew9N1cKb9zQoSorxmRLW9LtNAK4jwi_H5ozAeOUoZzt2Rd_v0y6UkB2S33z9biN7Zo4xeIBdY5l07LfIyrh2Sct1hf-TbHH93o9du7dx9KKsCGBek4GYoBfPmT0TscbuZ0fPKPamq3g"/>
+<span class="absolute -bottom-1 -right-1 w-3 h-3 bg-yellow-500 border-2 border-surface-container rounded-full"></span>
+</div>
+<div>
+<p class="text-sm font-bold sora">Harvey S.</p>
+<p class="text-[10px] jetbrains-mono text-slate-500">Working • TKT-005</p>
+</div>
+</div>
+<span class="text-xs text-tertiary jetbrains-mono">0.4km</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img alt="Tech" class="w-10 h-10 rounded-xl bg-surface-variant p-0.5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQYKA2dnU0GQUto_WdtqWOs_vVv-AYNYK4bo0NX6mykHpbZYdMj4eQizPjlkv8nbxf706G3DIRsouGuiHNwiy8Z7TPr8FyhwjpQOS_j9FV3qRSrv3_GZBLuHujCaKpbN0SFVlXCYYyo1m5PA1MEWS3mTUntkBCdVticvU6dyPcW-KIIN33KgVugaJFDfAmGuVtbBO5_bN-jhDolrhOo8Wr4LZzBLI9Yu_Cjnga5t8DltpStASR0YN7pgpadZiCW2U5gJtFQNqYQOY"/>
+<span class="absolute -bottom-1 -right-1 w-3 h-3 bg-slate-500 border-2 border-surface-container rounded-full"></span>
+</div>
+<div>
+<p class="text-sm font-bold sora">Donna Paul</p>
+<p class="text-[10px] jetbrains-mono text-slate-500">Idle • Break</p>
+</div>
+</div>
+<span class="text-xs text-slate-500 jetbrains-mono">Base</span>
+</div>
+<button class="w-full mt-4 py-2 border border-outline-variant/30 rounded-xl text-xs font-bold sora text-slate-400 hover:bg-surface-bright transition-all">
+                            Dispatch New Squad
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (Only on main dashboard screens) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary-container rounded-full shadow-[0_0_20px_rgba(105,246,184,0.4)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</body></html>

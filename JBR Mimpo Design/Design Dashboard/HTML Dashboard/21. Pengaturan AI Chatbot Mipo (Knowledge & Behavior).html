@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@400;500;700&amp;family=Sora:wght@300;400;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-fixed": "#00452d",
+                        "primary-fixed": "#69f6b8",
+                        "on-primary-container": "#002919",
+                        "tertiary": "#77e6ff",
+                        "primary-fixed-dim": "#58e7ab",
+                        "inverse-primary": "#006d4a",
+                        "surface-container-highest": "#1b263b",
+                        "primary-container": "#06b77f",
+                        "secondary-dim": "#47edc4",
+                        "tertiary-container": "#00dcfd",
+                        "tertiary-fixed": "#00dcfd",
+                        "inverse-on-surface": "#4e5566",
+                        "outline": "#6e7588",
+                        "surface-dim": "#070e1d",
+                        "secondary-fixed-dim": "#47edc4",
+                        "error": "#ff716c",
+                        "on-primary": "#005a3c",
+                        "tertiary-dim": "#00cdeb",
+                        "on-surface": "#dfe5fa",
+                        "primary-dim": "#58e7ab",
+                        "on-secondary": "#005d4a",
+                        "surface-container-lowest": "#000000",
+                        "surface-bright": "#212c43",
+                        "on-error": "#490006",
+                        "on-secondary-fixed": "#004939",
+                        "on-background": "#dfe5fa",
+                        "on-tertiary-container": "#004955",
+                        "surface-container-high": "#161f33",
+                        "secondary": "#5afcd2",
+                        "on-tertiary": "#005360",
+                        "on-tertiary-fixed-variant": "#005360",
+                        "on-secondary-fixed-variant": "#006853",
+                        "secondary-container": "#006b56",
+                        "outline-variant": "#414859",
+                        "tertiary-fixed-dim": "#00cdeb",
+                        "background": "#070e1d",
+                        "surface-container": "#11192b",
+                        "inverse-surface": "#f9f9ff",
+                        "secondary-fixed": "#5afcd2",
+                        "error-dim": "#d7383b",
+                        "on-tertiary-fixed": "#00343c",
+                        "on-secondary-container": "#defff2",
+                        "error-container": "#9f0519",
+                        "on-error-container": "#ffa8a3",
+                        "surface-variant": "#1b263b",
+                        "surface": "#070e1d",
+                        "surface-container-low": "#0b1323",
+                        "primary": "#69f6b8",
+                        "surface-tint": "#69f6b8",
+                        "on-primary-fixed-variant": "#006544",
+                        "on-surface-variant": "#a4abbf"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Sora", "Plus Jakarta Sans"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Space Grotesk", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(27, 38, 59, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .emerald-glow {
+            box-shadow: 0 0 20px rgba(105, 246, 184, 0.15);
+        }
+        body {
+            background-color: #070e1d;
+            color: #dfe5fa;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="antialiased font-body">
+<!-- Top Navigation Bar -->
+<header class="bg-[#070e1d] flex justify-between items-center px-8 w-full h-16 sticky top-0 z-50 font-headline antialiased">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black tracking-tighter text-[#69f6b8]">JBR Minpo</span>
+<nav class="hidden md:flex space-x-6">
+<a class="text-slate-400 font-medium hover:bg-[#161f33] transition-colors duration-300 px-3 py-1 rounded-lg" href="#">AI Config</a>
+<a class="text-slate-400 font-medium hover:bg-[#161f33] transition-colors duration-300 px-3 py-1 rounded-lg" href="#">Branding</a>
+<a class="text-[#69f6b8] font-bold border-b-2 border-[#69f6b8] px-3 py-1" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex items-center space-x-4">
+<button class="p-2 text-slate-400 hover:text-[#69f6b8] transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-[#69f6b8] transition-colors">
+<span class="material-symbols-outlined">notifications_active</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-primary-container">
+<img alt="Administrator Profile" data-alt="Cyberpunk style professional male administrator profile photo with holographic interface light reflections" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV4MSWkpvvZPKqg70fMYCWJa1CmZSu3oUtTo1XYklOCGkoG_DJFEPBRZGKhOWZCzN03c6unEGGUui-CjfM60B1_yHxqp5uOmRYKVKCqTj0OK0viVuA1F43gm6tCqyRkv33mJf4Q2sruNQvWyXAeqbVjWJuLp4ikGRvgEracfCA1QBOs9SG04_4DJZlG8_d0RIblmf8gFVK7mo94TiZFy5gBWX0NSNeCw1puPKkBWUS7GadBdbOGU1Ql4DgJitDUrLImafOMI-D0Wc"/>
+</div>
+</div>
+</header>
+<div class="flex min-h-screen">
+<!-- Side Navigation -->
+<aside class="flex flex-col h-full fixed left-0 top-0 pt-16 bg-[#11192b] w-72 z-40">
+<div class="px-6 py-8">
+<div class="flex items-center space-x-3 mb-8">
+<div class="w-10 h-10 rounded-xl bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div>
+<h2 class="text-[#69f6b8] font-bold font-headline text-sm">Command Center</h2>
+<p class="text-slate-500 text-xs">Sentinel Node 07</p>
+</div>
+</div>
+<nav class="space-y-1">
+<div class="text-[#69f6b8] bg-[#161f33] border-r-4 border-[#69f6b8] px-6 py-4 flex items-center space-x-3 cursor-pointer active:opacity-80 font-headline text-sm font-medium">
+<span class="material-symbols-outlined">smart_toy</span>
+<span>AI Config</span>
+</div>
+<div class="text-slate-500 px-6 py-4 flex items-center space-x-3 hover:text-[#5afcd2] hover:bg-[#161f33] transition-all duration-200 cursor-pointer active:opacity-80 font-headline text-sm font-medium">
+<span class="material-symbols-outlined">palette</span>
+<span>Branding</span>
+</div>
+<div class="text-slate-500 px-6 py-4 flex items-center space-x-3 hover:text-[#5afcd2] hover:bg-[#161f33] transition-all duration-200 cursor-pointer active:opacity-80 font-headline text-sm font-medium">
+<span class="material-symbols-outlined">terminal</span>
+<span>System Audit</span>
+</div>
+<div class="text-slate-500 px-6 py-4 flex items-center space-x-3 hover:text-[#5afcd2] hover:bg-[#161f33] transition-all duration-200 cursor-pointer active:opacity-80 font-headline text-sm font-medium">
+<span class="material-symbols-outlined">lan</span>
+<span>Network</span>
+</div>
+<div class="text-slate-500 px-6 py-4 flex items-center space-x-3 hover:text-[#5afcd2] hover:bg-[#161f33] transition-all duration-200 cursor-pointer active:opacity-80 font-headline text-sm font-medium">
+<span class="material-symbols-outlined">security</span>
+<span>Security</span>
+</div>
+</nav>
+<div class="mt-8 px-4">
+<button class="w-full py-3 bg-primary-container text-on-primary-container font-bold rounded-xl active:scale-95 transition-transform">
+                        New Configuration
+                    </button>
+</div>
+</div>
+<div class="mt-auto pb-8">
+<div class="text-slate-500 px-6 py-3 flex items-center space-x-3 hover:text-[#5afcd2] transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="text-sm">Documentation</span>
+</div>
+<div class="text-slate-500 px-6 py-3 flex items-center space-x-3 hover:text-[#5afcd2] transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="text-sm">Support</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-72 flex-1 p-8">
+<header class="mb-10 flex justify-between items-end">
+<div>
+<span class="text-primary font-mono text-xs tracking-widest uppercase mb-2 block">Module: AI_CORE_v2.1</span>
+<h1 class="text-4xl font-headline font-extrabold tracking-tight text-on-surface">Mipo Chatbot <span class="text-primary">Intelligence</span></h1>
+<p class="text-on-surface-variant mt-2 max-w-xl">Configure the behavior, semantic knowledge, and escalation logic for the Mipo sentinel entity.</p>
+</div>
+<div class="flex space-x-3">
+<button class="px-6 py-2 rounded-xl bg-surface-container-high border border-outline-variant hover:border-primary transition-all text-sm font-bold">Discard</button>
+<button class="px-6 py-2 rounded-xl bg-primary text-on-primary font-extrabold emerald-glow active:scale-95 transition-all text-sm">Deploy Changes</button>
+</div>
+</header>
+<div class="grid grid-cols-12 gap-8">
+<!-- Left Column: Knowledge & Behavior -->
+<div class="col-span-12 lg:col-span-8 space-y-8">
+<!-- Section 1: Knowledge Base (Bento Card) -->
+<section class="bg-surface-container rounded-2xl p-6 relative overflow-hidden">
+<div class="flex justify-between items-center mb-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary">database</span>
+<h3 class="font-headline text-lg font-bold">Knowledge Base</h3>
+</div>
+<button class="flex items-center gap-2 bg-surface-container-highest text-primary px-4 py-2 rounded-lg text-sm font-bold hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+                                Add Knowledge
+                            </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-separate border-spacing-y-3">
+<thead class="text-on-surface-variant font-mono text-xs uppercase tracking-wider">
+<tr>
+<th class="px-4 pb-2">Trigger Question</th>
+<th class="px-4 pb-2">AI Response</th>
+<th class="px-4 pb-2">Contextual Tag</th>
+<th class="px-4 pb-2"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="bg-surface-container-low hover:bg-surface-container-high transition-colors group">
+<td class="px-4 py-4 rounded-l-xl border-l border-t border-b border-outline-variant group-hover:border-primary-container/30">
+<span class="text-sm font-medium">How to reset Sentinel?</span>
+</td>
+<td class="px-4 py-4 border-t border-b border-outline-variant group-hover:border-primary-container/30">
+<p class="text-xs text-on-surface-variant line-clamp-1 italic">"Access the node panel and initiate sequence 07..."</p>
+</td>
+<td class="px-4 py-4 border-t border-b border-outline-variant group-hover:border-primary-container/30">
+<span class="font-mono text-[10px] bg-tertiary/10 text-tertiary px-2 py-0.5 rounded border border-tertiary/20 uppercase">Operations</span>
+</td>
+<td class="px-4 py-4 rounded-r-xl border-r border-t border-b border-outline-variant group-hover:border-primary-container/30 text-right">
+<button class="text-slate-500 hover:text-error transition-colors"><span class="material-symbols-outlined text-sm">delete</span></button>
+</td>
+</tr>
+<tr class="bg-surface-container-low hover:bg-surface-container-high transition-colors group">
+<td class="px-4 py-4 rounded-l-xl border-l border-t border-b border-outline-variant group-hover:border-primary-container/30">
+<span class="text-sm font-medium">Network latency issues</span>
+</td>
+<td class="px-4 py-4 border-t border-b border-outline-variant group-hover:border-primary-container/30">
+<p class="text-xs text-on-surface-variant line-clamp-1 italic">"Check the primary LAN interface for packet drops..."</p>
+</td>
+<td class="px-4 py-4 border-t border-b border-outline-variant group-hover:border-primary-container/30">
+<span class="font-mono text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded border border-primary/20 uppercase">Technical</span>
+</td>
+<td class="px-4 py-4 rounded-r-xl border-r border-t border-b border-outline-variant group-hover:border-primary-container/30 text-right">
+<button class="text-slate-500 hover:text-error transition-colors"><span class="material-symbols-outlined text-sm">delete</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Section 2: Bot Behavior -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Personality Card -->
+<div class="bg-surface-container rounded-2xl p-6">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">psychology</span>
+<h3 class="font-headline text-lg font-bold">Bot Identity</h3>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block text-xs font-mono text-on-surface-variant mb-1 uppercase tracking-tighter">Assigned Name</label>
+<input class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary text-on-surface" type="text" value="Mipo Sentinel 07"/>
+</div>
+<div>
+<label class="block text-xs font-mono text-on-surface-variant mb-1 uppercase tracking-tighter">Initial Greeting</label>
+<textarea class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary text-on-surface resize-none" rows="3">Greetings, Operator. Neural links established. How may I assist your command today?</textarea>
+</div>
+</div>
+</div>
+<!-- Behavior Control -->
+<div class="bg-surface-container rounded-2xl p-6">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-secondary">tune</span>
+<h3 class="font-headline text-lg font-bold">Response Parameters</h3>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block text-xs font-mono text-on-surface-variant mb-1 uppercase tracking-tighter">Communication Tone</label>
+<div class="grid grid-cols-3 gap-2">
+<button class="bg-primary text-on-primary text-[10px] py-2 rounded-lg font-bold uppercase tracking-widest">Formal</button>
+<button class="bg-surface-container-highest text-slate-400 text-[10px] py-2 rounded-lg font-bold uppercase tracking-widest hover:text-on-surface transition-colors">Neutral</button>
+<button class="bg-surface-container-highest text-slate-400 text-[10px] py-2 rounded-lg font-bold uppercase tracking-widest hover:text-on-surface transition-colors">Direct</button>
+</div>
+</div>
+<div>
+<label class="block text-xs font-mono text-on-surface-variant mb-1 uppercase tracking-tighter">Escalation Keywords (CSV)</label>
+<input class="w-full font-mono bg-surface-container-highest border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary text-secondary" type="text" value="CRITICAL, ERROR_500, OVERRIDE, EMERGENCY"/>
+<p class="text-[10px] text-slate-500 mt-2">Keywords will trigger manual administrative notification.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Interactive Test Panel -->
+<div class="col-span-12 lg:col-span-4">
+<div class="sticky top-24 glass-panel rounded-3xl border border-outline-variant p-1 flex flex-col h-[700px] emerald-glow">
+<div class="bg-surface-container/80 rounded-t-[22px] px-6 py-4 flex items-center justify-between border-b border-outline-variant/30">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="w-3 h-3 bg-primary rounded-full animate-pulse shadow-[0_0_8px_#69f6b8]"></div>
+<div class="absolute inset-0 bg-primary/40 rounded-full scale-150 blur-sm"></div>
+</div>
+<span class="font-headline font-bold text-sm tracking-tight">Test Simulation</span>
+</div>
+<span class="font-mono text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded uppercase">Uptime: 99.98%</span>
+</div>
+<!-- Chat Canvas -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6">
+<!-- Bot Msg -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="bg-surface-container-high p-4 rounded-2xl rounded-tl-none border border-outline-variant/20 max-w-[85%]">
+<p class="text-sm text-on-surface leading-relaxed">Greetings, Operator. Neural links established. How may I assist your command today?</p>
+<span class="block text-[10px] font-mono text-slate-500 mt-2">14:02:11 SYNC</span>
+</div>
+</div>
+<!-- User Msg -->
+<div class="flex gap-3 flex-row-reverse">
+<div class="w-8 h-8 rounded-lg bg-surface-bright flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary text-lg">person</span>
+</div>
+<div class="bg-tertiary/10 p-4 rounded-2xl rounded-tr-none border border-tertiary/20 max-w-[85%]">
+<p class="text-sm text-tertiary leading-relaxed">System status check. Run diagnostic on Node 07.</p>
+<span class="block text-[10px] font-mono text-tertiary/60 mt-2 text-right">14:02:45 REQ</span>
+</div>
+</div>
+<!-- Bot Msg (Thinking) -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="bg-surface-container-high p-4 rounded-2xl rounded-tl-none border border-outline-variant/20 max-w-[85%]">
+<div class="flex gap-1">
+<div class="w-1.5 h-1.5 bg-primary/40 rounded-full"></div>
+<div class="w-1.5 h-1.5 bg-primary/60 rounded-full"></div>
+<div class="w-1.5 h-1.5 bg-primary rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Chat Input -->
+<div class="p-4 bg-surface-container/50 rounded-b-[22px] border-t border-outline-variant/30">
+<div class="relative group">
+<input class="w-full bg-surface-container-lowest border-outline-variant/50 border rounded-2xl px-5 py-4 text-sm focus:ring-1 focus:ring-primary focus:border-primary transition-all pr-12 text-on-surface placeholder-slate-500" placeholder="Type a command or query..." type="text"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-primary text-on-primary rounded-xl flex items-center justify-center emerald-glow active:scale-90 transition-transform">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+<div class="flex justify-between items-center mt-3 px-2">
+<div class="flex gap-4">
+<button class="text-slate-500 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">mic</span></button>
+<button class="text-slate-500 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">attach_file</span></button>
+</div>
+<span class="text-[10px] font-mono text-slate-500 italic">Mipo AI v2.1-stable</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Background Decorative Elements -->
+<div class="fixed top-0 right-0 -z-10 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="fixed bottom-0 left-0 -z-10 w-[600px] h-[600px] bg-tertiary/5 blur-[150px] rounded-full pointer-events-none"></div>
+</body></html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JBR Minpo Command Center - Loyalty Logic</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#004939",
+                        "error-dim": "#d7383b",
+                        "surface-container-lowest": "#000000",
+                        "surface": "#070e1d",
+                        "tertiary-dim": "#00cdeb",
+                        "secondary-fixed-dim": "#47edc4",
+                        "on-tertiary-fixed": "#00343c",
+                        "outline-variant": "#414859",
+                        "primary-fixed": "#69f6b8",
+                        "on-tertiary-fixed-variant": "#005360",
+                        "on-secondary": "#005d4a",
+                        "outline": "#6e7588",
+                        "on-secondary-fixed-variant": "#006853",
+                        "on-tertiary-container": "#004955",
+                        "secondary-container": "#006b56",
+                        "surface-container-low": "#0b1323",
+                        "on-primary-container": "#002919",
+                        "on-surface": "#dfe5fa",
+                        "on-secondary-container": "#defff2",
+                        "primary": "#69f6b8",
+                        "on-primary": "#005a3c",
+                        "secondary-dim": "#47edc4",
+                        "surface-container-highest": "#1b263b",
+                        "error-container": "#9f0519",
+                        "primary-container": "#06b77f",
+                        "tertiary": "#77e6ff",
+                        "secondary": "#5afcd2",
+                        "on-error-container": "#ffa8a3",
+                        "primary-fixed-dim": "#58e7ab",
+                        "primary-dim": "#58e7ab",
+                        "on-error": "#490006",
+                        "inverse-primary": "#006d4a",
+                        "tertiary-container": "#00dcfd",
+                        "background": "#070e1d",
+                        "on-primary-fixed-variant": "#006544",
+                        "surface-variant": "#1b263b",
+                        "on-surface-variant": "#a4abbf",
+                        "on-tertiary": "#005360",
+                        "surface-container": "#11192b",
+                        "on-background": "#dfe5fa",
+                        "inverse-on-surface": "#4e5566",
+                        "secondary-fixed": "#5afcd2",
+                        "tertiary-fixed-dim": "#00cdeb",
+                        "on-primary-fixed": "#00452d",
+                        "surface-tint": "#69f6b8",
+                        "surface-bright": "#212c43",
+                        "surface-container-high": "#161f33",
+                        "tertiary-fixed": "#00dcfd",
+                        "error": "#ff716c",
+                        "surface-dim": "#070e1d",
+                        "inverse-surface": "#f9f9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Sora"],
+                        "body": ["Sora"],
+                        "label": ["JetBrains Mono"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Sora', sans-serif; background-color: #070e1d; color: #dfe5fa; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .glass-panel { background: rgba(27, 38, 59, 0.4); backdrop-filter: blur(20px); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 w-full z-50 bg-[#070e1d]/80 backdrop-blur-xl flex justify-between items-center px-8 h-16 w-full shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-[#69f6b8]">JBR Minpo Command Center</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-slate-400 font-medium hover:text-[#5afcd2] transition-colors duration-300" href="#">Global Ops</a>
+<a class="text-slate-400 font-medium hover:text-[#5afcd2] transition-colors duration-300" href="#">Network</a>
+<a class="text-slate-400 font-medium hover:text-[#5afcd2] transition-colors duration-300" href="#">Security</a>
+<a class="text-slate-400 font-medium hover:text-[#5afcd2] transition-colors duration-300" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-slate-400 hover:text-[#69f6b8] active:scale-95 transition-all">notifications_active</button>
+<button class="material-symbols-outlined text-slate-400 hover:text-[#69f6b8] active:scale-95 transition-all">settings</button>
+<button class="material-symbols-outlined text-slate-400 hover:text-[#69f6b8] active:scale-95 transition-all">account_circle</button>
+</div>
+</header>
+<!-- SideNavBar Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-[#11192b] flex flex-col h-full py-6 z-40 hidden md:flex">
+<div class="px-6 mb-8 pt-16">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center border border-primary/30">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+</div>
+<div>
+<h3 class="text-[#69f6b8] font-black uppercase tracking-widest text-[10px]">Admin Sentinel</h3>
+<p class="text-slate-500 font-['JetBrains_Mono'] text-[9px]">Network Node 04</p>
+</div>
+</div>
+</div>
+<nav class="flex-grow">
+<a class="text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-[#161f33] hover:text-[#5afcd2] cursor-pointer transition-all duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-['JetBrains_Mono'] text-xs">Command</span>
+</a>
+<a class="text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-[#161f33] hover:text-[#5afcd2] cursor-pointer transition-all duration-200" href="#">
+<span class="material-symbols-outlined">send_and_archive</span>
+<span class="font-['JetBrains_Mono'] text-xs">Push Engine</span>
+</a>
+<a class="text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-[#161f33] hover:text-[#5afcd2] cursor-pointer transition-all duration-200" href="#">
+<span class="material-symbols-outlined">dashboard_customize</span>
+<span class="font-['JetBrains_Mono'] text-xs">Templates</span>
+</a>
+<a class="text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-[#161f33] hover:text-[#5afcd2] cursor-pointer transition-all duration-200" href="#">
+<span class="material-symbols-outlined">tune</span>
+<span class="font-['JetBrains_Mono'] text-xs">System Config</span>
+</a>
+<a class="bg-[#161f33] text-[#69f6b8] border-r-4 border-[#69f6b8] px-4 py-3 flex items-center gap-3 cursor-pointer transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">loyalty</span>
+<span class="font-['JetBrains_Mono'] text-xs">Loyalty Logic</span>
+</a>
+<a class="text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-[#161f33] hover:text-[#5afcd2] cursor-pointer transition-all duration-200" href="#">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span class="font-['JetBrains_Mono'] text-xs">Team Admin</span>
+</a>
+</nav>
+<div class="px-4 mt-auto pt-6 border-t border-outline-variant/10">
+<a class="text-slate-400 px-4 py-2 flex items-center gap-3 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">list_alt</span>
+<span class="font-['JetBrains_Mono'] text-[10px]">Logs</span>
+</a>
+<a class="text-slate-400 px-4 py-2 flex items-center gap-3 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">terminal</span>
+<span class="font-['JetBrains_Mono'] text-[10px]">Terminal</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-0 md:ml-64 pt-24 pb-12 px-6 md:px-12 min-h-screen">
+<header class="mb-12">
+<div class="flex items-center gap-2 text-tertiary mb-2 uppercase tracking-[0.2em] text-[10px] font-bold">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+                System Core Configuration
+            </div>
+<h1 class="text-4xl md:text-5xl font-extrabold tracking-tighter text-on-surface">Loyalty Logic &amp; Reward Weights</h1>
+<p class="text-on-surface-variant max-w-2xl mt-4 body-md">Adjust the neural weighting of user incentives. Values modified here take immediate effect across all node clusters in the JBR Minpo ecosystem.</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Section 1: Konfigurasi Nilai Poin -->
+<section class="lg:col-span-7 space-y-6">
+<div class="bg-surface-container-low rounded-xl p-8 border border-outline-variant/5">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-xl font-bold flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">analytics</span>
+                            Active Point Weights
+                        </h2>
+<span class="px-3 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded-full uppercase tracking-wider">Live Schema v.2.4</span>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<!-- Login Harian -->
+<div class="group bg-surface-container p-6 rounded-xl border border-transparent hover:border-primary/20 transition-all duration-300 flex items-center justify-between">
+<div class="flex items-center gap-5">
+<div class="w-12 h-12 glass-panel rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">event_repeat</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Login Harian</h4>
+<p class="text-xs text-on-surface-variant">Daily user check-in rewarding.</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<input class="w-24 bg-surface-container-highest border-none focus:ring-2 focus:ring-primary/50 text-right font-['JetBrains_Mono'] text-lg font-bold text-primary px-4 py-2 rounded-lg" type="text" value="150"/>
+<span class="text-xs text-on-surface-variant mono">PTS</span>
+</div>
+</div>
+<!-- Bulan Loyalty -->
+<div class="group bg-surface-container p-6 rounded-xl border border-transparent hover:border-primary/20 transition-all duration-300 flex items-center justify-between">
+<div class="flex items-center gap-5">
+<div class="w-12 h-12 glass-panel rounded-lg flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">stars</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Bulan Loyalty</h4>
+<p class="text-xs text-on-surface-variant">Bonus for consecutive 30-day activity.</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<input class="w-24 bg-surface-container-highest border-none focus:ring-2 focus:ring-primary/50 text-right font-['JetBrains_Mono'] text-lg font-bold text-secondary px-4 py-2 rounded-lg" type="text" value="1200"/>
+<span class="text-xs text-on-surface-variant mono">PTS</span>
+</div>
+</div>
+<!-- Referral Berhasil -->
+<div class="group bg-surface-container p-6 rounded-xl border border-transparent hover:border-primary/20 transition-all duration-300 flex items-center justify-between">
+<div class="flex items-center gap-5">
+<div class="w-12 h-12 glass-panel rounded-lg flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">person_add_alt</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Referral Berhasil</h4>
+<p class="text-xs text-on-surface-variant">New node deployment bonus.</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<input class="w-24 bg-surface-container-highest border-none focus:ring-2 focus:ring-primary/50 text-right font-['JetBrains_Mono'] text-lg font-bold text-tertiary px-4 py-2 rounded-lg" type="text" value="5000"/>
+<span class="text-xs text-on-surface-variant mono">PTS</span>
+</div>
+</div>
+<!-- Event -->
+<div class="group bg-surface-container p-6 rounded-xl border border-transparent hover:border-primary/20 transition-all duration-300 flex items-center justify-between">
+<div class="flex items-center gap-5">
+<div class="w-12 h-12 glass-panel rounded-lg flex items-center justify-center text-[#ff716c]">
+<span class="material-symbols-outlined">campaign</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Event</h4>
+<p class="text-xs text-on-surface-variant">Base weighting for global campaign events.</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<input class="w-24 bg-surface-container-highest border-none focus:ring-2 focus:ring-primary/50 text-right font-['JetBrains_Mono'] text-lg font-bold text-error px-4 py-2 rounded-lg" type="text" value="3000"/>
+<span class="text-xs text-on-surface-variant mono">PTS</span>
+</div>
+</div>
+</div>
+<div class="mt-12">
+<button class="w-full group relative bg-primary hover:bg-primary-container text-on-primary font-bold py-5 rounded-xl transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-3 overflow-hidden shadow-lg">
+<div class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">save</span>
+                            Simpan Perubahan
+                        </button>
+</div>
+</div>
+</section>
+<!-- Section 2: Histori Perubahan -->
+<section class="lg:col-span-5">
+<div class="bg-surface-container-low rounded-xl p-8 border border-outline-variant/5">
+<h2 class="text-xl font-bold mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary">history</span>
+                        Change History Audit
+                    </h2>
+<div class="space-y-4">
+<!-- History Item 1 -->
+<div class="bg-surface-container p-5 rounded-xl border-l-2 border-primary">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary text-[10px] mono font-bold">JD</div>
+<span class="text-xs font-bold text-on-surface">Admin_JohnDoe</span>
+</div>
+<span class="text-[10px] mono text-on-surface-variant">2023-10-27 14:22</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-xs font-medium text-slate-400">Referral Berhasil</span>
+<div class="flex items-center gap-3">
+<span class="text-xs mono text-on-surface-variant line-through">4500</span>
+<span class="material-symbols-outlined text-xs text-primary">arrow_forward</span>
+<span class="text-sm mono font-bold text-primary">5000</span>
+</div>
+</div>
+</div>
+<!-- History Item 2 -->
+<div class="bg-surface-container p-5 rounded-xl border-l-2 border-slate-600">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-tertiary/20 flex items-center justify-center text-tertiary text-[10px] mono font-bold">SA</div>
+<span class="text-xs font-bold text-on-surface">System_Auto</span>
+</div>
+<span class="text-[10px] mono text-on-surface-variant">2023-10-25 09:00</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-xs font-medium text-slate-400">Event</span>
+<div class="flex items-center gap-3">
+<span class="text-xs mono text-on-surface-variant line-through">2500</span>
+<span class="material-symbols-outlined text-xs text-primary">arrow_forward</span>
+<span class="text-sm mono font-bold text-primary">3000</span>
+</div>
+</div>
+</div>
+<!-- History Item 3 -->
+<div class="bg-surface-container p-5 rounded-xl border-l-2 border-slate-600">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center text-secondary text-[10px] mono font-bold">AS</div>
+<span class="text-xs font-bold text-on-surface">Admin_Sara</span>
+</div>
+<span class="text-[10px] mono text-on-surface-variant">2023-10-20 18:45</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-xs font-medium text-slate-400">Login Harian</span>
+<div class="flex items-center gap-3">
+<span class="text-xs mono text-on-surface-variant line-through">100</span>
+<span class="material-symbols-outlined text-xs text-primary">arrow_forward</span>
+<span class="text-sm mono font-bold text-primary">150</span>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-8 py-3 rounded-lg border border-outline-variant/30 text-on-surface-variant text-xs font-bold uppercase tracking-widest hover:bg-surface-bright hover:text-on-surface transition-all">
+                        View Full Audit Log
+                    </button>
+</div>
+</section>
+</div>
+</main>
+<!-- Confirmation Modal (Hidden by default, used as placeholder) -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-surface-container-lowest/80 backdrop-blur-md hidden">
+<div class="bg-surface-container-high w-full max-w-md rounded-2xl p-8 border border-outline-variant shadow-2xl relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-tertiary"></div>
+<div class="flex items-center justify-center w-16 h-16 rounded-full bg-error-container/20 text-error mb-6 mx-auto">
+<span class="material-symbols-outlined text-4xl">warning</span>
+</div>
+<h3 class="text-2xl font-bold text-center mb-2">Commit Logic Changes?</h3>
+<p class="text-on-surface-variant text-center text-sm mb-8">This action will rewrite the Loyalty Point weighting system. Users across all regions will receive points at the new rates effective immediately.</p>
+<div class="flex flex-col gap-3">
+<button class="w-full py-4 bg-primary text-on-primary font-bold rounded-xl active:scale-95 transition-transform">Confirm &amp; Synchronize Nodes</button>
+<button class="w-full py-4 bg-surface-variant text-on-surface-variant font-bold rounded-xl active:scale-95 transition-transform hover:bg-outline-variant">Discard Changes</button>
+</div>
+</div>
+</div>
+<!-- Mobile Bottom Navigation -->
+<nav class="md:hidden fixed bottom-0 w-full h-16 bg-[#070e1d] flex justify-around items-center px-4 z-50 border-t border-outline-variant/10">
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[8px] uppercase font-bold tracking-widest">Dash</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#69f6b8]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">loyalty</span>
+<span class="text-[8px] uppercase font-bold tracking-widest">Logic</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">tune</span>
+<span class="text-[8px] uppercase font-bold tracking-widest">Config</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[8px] uppercase font-bold tracking-widest">Admin</span>
+</button>
+</nav>
+</body></html>

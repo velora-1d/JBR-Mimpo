@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JBR Minpo | Dynamic Branding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;family=Sora:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#00452d",
+                    "primary-fixed": "#69f6b8",
+                    "on-primary-container": "#002919",
+                    "tertiary": "#77e6ff",
+                    "primary-fixed-dim": "#58e7ab",
+                    "inverse-primary": "#006d4a",
+                    "surface-container-highest": "#1b263b",
+                    "primary-container": "#06b77f",
+                    "secondary-dim": "#47edc4",
+                    "tertiary-container": "#00dcfd",
+                    "tertiary-fixed": "#00dcfd",
+                    "inverse-on-surface": "#4e5566",
+                    "outline": "#6e7588",
+                    "surface-dim": "#070e1d",
+                    "secondary-fixed-dim": "#47edc4",
+                    "error": "#ff716c",
+                    "on-primary": "#005a3c",
+                    "tertiary-dim": "#00cdeb",
+                    "on-surface": "#dfe5fa",
+                    "primary-dim": "#58e7ab",
+                    "on-secondary": "#005d4a",
+                    "surface-container-lowest": "#000000",
+                    "surface-bright": "#212c43",
+                    "on-error": "#490006",
+                    "on-secondary-fixed": "#004939",
+                    "on-background": "#dfe5fa",
+                    "on-tertiary-container": "#004955",
+                    "surface-container-high": "#161f33",
+                    "secondary": "#5afcd2",
+                    "on-tertiary": "#005360",
+                    "on-tertiary-fixed-variant": "#005360",
+                    "on-secondary-fixed-variant": "#006853",
+                    "secondary-container": "#006b56",
+                    "outline-variant": "#414859",
+                    "tertiary-fixed-dim": "#00cdeb",
+                    "background": "#070e1d",
+                    "surface-container": "#11192b",
+                    "inverse-surface": "#f9f9ff",
+                    "secondary-fixed": "#5afcd2",
+                    "error-dim": "#d7383b",
+                    "on-tertiary-fixed": "#00343c",
+                    "on-secondary-container": "#defff2",
+                    "error-container": "#9f0519",
+                    "on-error-container": "#ffa8a3",
+                    "surface-variant": "#1b263b",
+                    "surface": "#070e1d",
+                    "surface-container-low": "#0b1323",
+                    "primary": "#69f6b8",
+                    "surface-tint": "#69f6b8",
+                    "on-primary-fixed-variant": "#006544",
+                    "on-surface-variant": "#a4abbf"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Sora", "Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Space Grotesk"],
+                    "mono": ["JetBrains Mono"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #070e1d;
+            font-family: 'Inter', sans-serif;
+        }
+        .font-sora { font-family: 'Sora', sans-serif; }
+        .glass-panel {
+            background: rgba(27, 38, 59, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(110, 117, 136, 0.1);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="text-on-surface antialiased overflow-hidden">
+<!-- TopNavBar Shell -->
+<header class="bg-[#070e1d] dark:bg-[#070e1d] text-[#69f6b8] font-headline antialiased w-full h-16 bg-[#11192b] flex justify-between items-center px-8 w-full sticky top-0 z-50">
+<div class="text-2xl font-black tracking-tighter text-[#69f6b8]">JBR Minpo</div>
+<div class="hidden md:flex items-center space-x-8">
+<nav class="flex space-x-6">
+<a class="text-slate-400 font-medium hover:bg-[#161f33] transition-colors duration-300 px-3 py-1 rounded-lg" href="#">Overview</a>
+<a class="text-[#69f6b8] font-bold border-b-2 border-[#69f6b8] px-3 py-1" href="#">Branding</a>
+<a class="text-slate-400 font-medium hover:bg-[#161f33] transition-colors duration-300 px-3 py-1 rounded-lg" href="#">Assets</a>
+<a class="text-slate-400 font-medium hover:bg-[#161f33] transition-colors duration-300 px-3 py-1 rounded-lg" href="#">Deploy</a>
+</nav>
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined cursor-pointer hover:bg-[#161f33] p-2 rounded-full transition-all">settings</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-[#161f33] p-2 rounded-full transition-all">notifications_active</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+<img alt="Administrator Profile" data-alt="close-up portrait of a professional system administrator in a high-tech control room environment with soft cyan neon lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDftnKr6RHqsqv5yEOK1l5eUImYPZp6wISij2Fv3CXsB2lOacmPkumjHtqe9IR-6sEHWJrBT2nVKb2oZs1fYLnaF8hXPNBMDd-cKWQ4W01TobFU0rK19mkRWMHxQfIjoxVQhqrKkTDxZM5U9CXiEyJCWSR476pVFi3lFsqhzYqaDvp7nQHfeEBwQt11kQxpd53A7v_kxrjQhZ23aBJFz5ldzAoP5MgGT9k0YB9iSjPpinDLh17z_nEdUd6jjdVIL8g8mYR4eRogUZw"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex h-[calc(100vh-64px)]">
+<!-- SideNavBar Shell -->
+<aside class="bg-[#11192b] dark:bg-[#11192b] text-[#69f6b8] font-headline text-sm font-medium h-full w-72 flex flex-col pt-8 relative z-40 hidden lg:flex">
+<div class="px-6 mb-8">
+<div class="flex items-center space-x-3 mb-1">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="text-xs uppercase tracking-widest text-slate-500">Sentinel Node 07</span>
+</div>
+<h2 class="text-xl font-bold text-white">Command Center</h2>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="text-slate-500 px-6 py-4 flex items-center space-x-3 hover:text-[#5afcd2] hover:bg-[#161f33] transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined">smart_toy</span>
+<span>AI Config</span>
+</div>
+<div class="text-[#69f6b8] bg-[#161f33] border-r-4 border-[#69f6b8] px-6 py-4 flex items-center space-x-3 cursor-pointer">
+<span class="material-symbols-outlined">palette</span>
+<span>Branding</span>
+</div>
+<div class="text-slate-500 px-6 py-4 flex items-center space-x-3 hover:text-[#5afcd2] hover:bg-[#161f33] transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined">terminal</span>
+<span>System Audit</span>
+</div>
+<div class="text-slate-500 px-6 py-4 flex items-center space-x-3 hover:text-[#5afcd2] hover:bg-[#161f33] transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined">lan</span>
+<span>Network</span>
+</div>
+<div class="text-slate-500 px-6 py-4 flex items-center space-x-3 hover:text-[#5afcd2] hover:bg-[#161f33] transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined">security</span>
+<span>Security</span>
+</div>
+</nav>
+<div class="px-6 pb-8 space-y-4">
+<button class="w-full py-3 px-4 bg-primary-container/10 border border-primary/20 text-primary rounded-xl font-bold hover:bg-primary-container/20 transition-all flex items-center justify-center space-x-2">
+<span class="material-symbols-outlined text-sm">add</span>
+<span>New Configuration</span>
+</button>
+<div class="pt-4 border-t border-slate-800 space-y-2">
+<div class="text-slate-500 flex items-center space-x-3 hover:text-white transition-colors cursor-pointer py-1">
+<span class="material-symbols-outlined text-lg">menu_book</span>
+<span class="text-xs">Documentation</span>
+</div>
+<div class="text-slate-500 flex items-center space-x-3 hover:text-white transition-colors cursor-pointer py-1">
+<span class="material-symbols-outlined text-lg">support_agent</span>
+<span class="text-xs">Support</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area (Dynamic Branding) -->
+<main class="flex-1 bg-surface-dim overflow-y-auto no-scrollbar relative p-8">
+<div class="max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-12 gap-12 items-start">
+<!-- Left: Form Area -->
+<section class="xl:col-span-5 space-y-8">
+<header>
+<h1 class="text-4xl font-extrabold font-sora tracking-tight text-white mb-2">Dynamic Branding</h1>
+<p class="text-on-surface-variant font-body">Tailor your app's visual identity in real-time. Changes are pushed instantly to all active nodes.</p>
+</header>
+<div class="space-y-6">
+<!-- Logo Upload -->
+<div class="space-y-3">
+<label class="text-sm font-label uppercase tracking-widest text-slate-500">Asset: Brand Logo</label>
+<div class="glass-panel rounded-2xl p-6 flex items-center justify-between group cursor-pointer hover:bg-surface-container-high transition-all">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">cloud_upload</span>
+</div>
+<div>
+<p class="text-white font-semibold">minpo_logo_v2.svg</p>
+<p class="text-xs text-slate-500">SVG, PNG up to 5MB</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-500 group-hover:text-primary transition-colors">edit</span>
+</div>
+</div>
+<!-- App Name & Tagline -->
+<div class="grid grid-cols-1 gap-6">
+<div class="space-y-3">
+<label class="text-sm font-label uppercase tracking-widest text-slate-500">App Name</label>
+<input class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-4 text-white focus:ring-2 focus:ring-primary/50 font-sora font-semibold placeholder-slate-600 transition-all" type="text" value="JBR Minpo"/>
+</div>
+<div class="space-y-3">
+<label class="text-sm font-label uppercase tracking-widest text-slate-500">Tagline</label>
+<input class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-4 text-white focus:ring-2 focus:ring-primary/50 font-body placeholder-slate-600 transition-all" type="text" value="Sentinel Intelligence"/>
+</div>
+</div>
+<!-- Color Picker -->
+<div class="space-y-3">
+<label class="text-sm font-label uppercase tracking-widest text-slate-500">Primary Brand Color</label>
+<div class="flex flex-wrap gap-4">
+<button class="w-12 h-12 rounded-full border-4 border-white bg-[#69f6b8] shadow-lg shadow-primary/20 ring-2 ring-primary/20"></button>
+<button class="w-12 h-12 rounded-full border-2 border-transparent bg-[#77e6ff] hover:scale-110 transition-transform"></button>
+<button class="w-12 h-12 rounded-full border-2 border-transparent bg-[#ff716c] hover:scale-110 transition-transform"></button>
+<button class="w-12 h-12 rounded-full border-2 border-transparent bg-[#defff2] hover:scale-110 transition-transform"></button>
+<div class="w-12 h-12 rounded-full border-2 border-dashed border-slate-600 flex items-center justify-center text-slate-500 cursor-pointer hover:border-primary hover:text-primary transition-all">
+<span class="material-symbols-outlined">add</span>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<div class="pt-8">
+<button class="w-full py-5 bg-primary text-on-primary rounded-xl font-sora font-extrabold text-lg flex items-center justify-center space-x-3 shadow-xl shadow-primary/10 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+<span>Save &amp; Apply Changes</span>
+</button>
+<p class="text-center text-xs text-slate-600 mt-4 font-mono">ENCRYPTED DEPLOYMENT VIA RSA-4096</p>
+</div>
+</div>
+</section>
+<!-- Right: Live Preview -->
+<section class="xl:col-span-7 flex justify-center sticky top-8">
+<div class="relative group">
+<!-- Decorative Glows -->
+<div class="absolute -top-20 -left-20 w-64 h-64 bg-primary/10 rounded-full blur-[120px]"></div>
+<div class="absolute -bottom-20 -right-20 w-64 h-64 bg-tertiary/10 rounded-full blur-[120px]"></div>
+<!-- Mobile Mockup -->
+<div class="relative w-[340px] h-[680px] bg-slate-900 rounded-[3rem] border-[8px] border-slate-800 shadow-2xl overflow-hidden ring-1 ring-white/5">
+<!-- Notch -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-8 bg-slate-800 rounded-b-2xl z-50"></div>
+<!-- App Inner Content -->
+<div class="h-full bg-surface-dim p-6 flex flex-col">
+<div class="mt-10 flex flex-col items-center mb-8">
+<div class="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-5xl">deployed_code</span>
+</div>
+<h3 class="text-2xl font-extrabold font-sora text-white text-center">JBR Minpo</h3>
+<p class="text-primary text-xs font-mono uppercase tracking-widest mt-1">Sentinel Intelligence</p>
+</div>
+<div class="space-y-4">
+<div class="p-4 bg-surface-container rounded-2xl border border-white/5 space-y-2">
+<div class="flex justify-between items-center">
+<span class="text-[10px] text-slate-500 font-label uppercase">Network Status</span>
+<div class="flex items-center space-x-1">
+<span class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_#69f6b8]"></span>
+<span class="text-[10px] text-primary font-mono">LIVE</span>
+</div>
+</div>
+<div class="h-1 bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="p-4 bg-surface-container rounded-2xl border border-white/5">
+<span class="material-symbols-outlined text-primary text-xl mb-2">speed</span>
+<p class="text-[10px] text-slate-500">Latency</p>
+<p class="text-lg font-mono text-white">12ms</p>
+</div>
+<div class="p-4 bg-surface-container rounded-2xl border border-white/5">
+<span class="material-symbols-outlined text-tertiary text-xl mb-2">hub</span>
+<p class="text-[10px] text-slate-500">Nodes</p>
+<p class="text-lg font-mono text-white">402</p>
+</div>
+</div>
+<div class="h-24 w-full bg-surface-container rounded-2xl border border-white/5 overflow-hidden relative">
+<img class="w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="abstract flowing liquid metal background with emerald and deep navy color gradients and soft digital grain texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgWcIyNtYL2nmFtU7WptMg0uMrGgP36fh4c1PXRGcW_mn_hRbPc1yjsiepGFbBvdhjmVfdoHqSzKBpixEdFP5eom8u90jMrrwv3JJ-9SGZ49FVenEdSe-y8lYnO45UWAh_RyC6iKr_Dz4D_oFdj5xSx1nddOFFFD8fOpSBFPieWespMacZP-q3Z1mM2XS4MCvvvvAq_RDBubhR12yw5GKLGblhjbiID7BjF0r8rPhpmoWZUew9s5ZP5f2wLUtaFjYPd9O18pFf8lE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+<p class="absolute bottom-3 left-4 text-xs font-bold text-white">Neural Overview</p>
+</div>
+</div>
+<div class="mt-auto">
+<button class="w-full py-4 bg-primary text-on-primary rounded-xl font-sora font-bold text-sm shadow-lg shadow-primary/20">
+                                        Access Console
+                                    </button>
+</div>
+</div>
+</div>
+<!-- Live Tag -->
+<div class="absolute -top-4 -right-4 bg-primary text-on-primary-fixed px-4 py-2 rounded-full text-xs font-bold font-mono animate-bounce shadow-xl">
+                            LIVE PREVIEW
+                        </div>
+</div>
+<!-- Right Column Data Fl Flare -->
+<div class="hidden 2xl:block absolute -right-32 top-1/4 space-y-6">
+<div class="p-4 glass-panel rounded-xl space-y-1">
+<p class="text-[10px] text-slate-500 font-label">CSS HEX</p>
+<p class="text-primary font-mono">#69F6B8</p>
+</div>
+<div class="p-4 glass-panel rounded-xl space-y-1">
+<p class="text-[10px] text-slate-500 font-label">SVG PATHS</p>
+<p class="text-tertiary font-mono">204 BYTES</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Mobile Bottom Navigation -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-[#11192b] flex items-center justify-around px-4 z-50">
+<span class="material-symbols-outlined text-slate-400">dashboard</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">palette</span>
+<span class="material-symbols-outlined text-slate-400">terminal</span>
+<span class="material-symbols-outlined text-slate-400">account_circle</span>
+</nav>
+</body></html>

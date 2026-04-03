@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JBR Minpo | Announcement Engine</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Sora:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-container": "#defff2",
+                        "on-secondary": "#005d4a",
+                        "on-primary-fixed-variant": "#006544",
+                        "on-error": "#490006",
+                        "secondary-fixed-dim": "#47edc4",
+                        "background": "#070e1d",
+                        "primary": "#69f6b8",
+                        "on-secondary-fixed-variant": "#006853",
+                        "surface-container-high": "#161f33",
+                        "surface": "#070e1d",
+                        "secondary-container": "#006b56",
+                        "on-tertiary-fixed": "#00343c",
+                        "on-error-container": "#ffa8a3",
+                        "surface-container-highest": "#1b263b",
+                        "surface-bright": "#212c43",
+                        "error-dim": "#d7383b",
+                        "surface-dim": "#070e1d",
+                        "on-secondary-fixed": "#004939",
+                        "secondary-fixed": "#5afcd2",
+                        "tertiary-fixed": "#00dcfd",
+                        "on-tertiary-fixed-variant": "#005360",
+                        "surface-variant": "#1b263b",
+                        "on-tertiary-container": "#004955",
+                        "on-tertiary": "#005360",
+                        "secondary-dim": "#47edc4",
+                        "secondary": "#5afcd2",
+                        "on-primary-container": "#002919",
+                        "tertiary-container": "#00dcfd",
+                        "surface-container": "#11192b",
+                        "tertiary-dim": "#00cdeb",
+                        "tertiary-fixed-dim": "#00cdeb",
+                        "outline": "#6e7588",
+                        "on-primary": "#005a3c",
+                        "surface-tint": "#69f6b8",
+                        "on-surface": "#dfe5fa",
+                        "on-surface-variant": "#a4abbf",
+                        "surface-container-lowest": "#000000",
+                        "inverse-on-surface": "#4e5566",
+                        "inverse-surface": "#f9f9ff",
+                        "primary-dim": "#58e7ab",
+                        "primary-fixed": "#69f6b8",
+                        "tertiary": "#77e6ff",
+                        "primary-fixed-dim": "#58e7ab"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Sora", "Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Space Grotesk"],
+                        "mono": ["JetBrains Mono"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .emerald-glass {
+            background: rgba(17, 25, 43, 0.85);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid rgba(105, 246, 184, 0.1);
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #070e1d; }
+        ::-webkit-scrollbar-thumb { background: #1b263b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #69f6b8; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body overflow-hidden">
+<!-- Top Navigation Anchor (Shared Component) -->
+<nav class="fixed top-0 w-full z-40 bg-[#070e1d]/80 backdrop-blur-xl flex justify-between items-center px-8 h-16 w-full">
+<div class="text-xl font-bold tracking-tighter text-[#69f6b8] font-['Plus_Jakarta_Sans']">JBR Minpo</div>
+<div class="hidden md:flex gap-8 items-center font-['Plus_Jakarta_Sans'] font-medium">
+<a class="text-slate-400 hover:text-[#5afcd2] transition-colors" href="#">Command Center</a>
+<a class="text-slate-400 hover:text-[#5afcd2] transition-colors" href="#">Network Traffic</a>
+<a class="text-[#69f6b8] border-b-2 border-[#69f6b8] pb-1" href="#">Announcement Engine</a>
+<a class="text-slate-400 hover:text-[#5afcd2] transition-colors" href="#">Security Protocols</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-[#69f6b8]">notifications</span>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-[#69f6b8]">settings</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-[#69f6b8]/30">
+<img class="w-full h-full object-cover" data-alt="Administrator profile picture showing a modern minimalist avatar with emerald accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG2bhEfg5ltHretNf3DHPT9qNa1qLNiOK8uZOb1vYxZrnHh8m4jCMTG108YYUpmtM5bxt6BSw0pmC8NmqfjfL6vX5_ngRX7PSLxUwUIyKG6L1WmsufF-Iyiy5cA4cQ3ofukPMo6NrNvRO5t9zRflkKS7O3ShLmyu_U23gIpHFMo2eGKN17oI1ufXKr9Syvo2HgDvbVIJUJU9GFgO2aD0f0Piw6DVdmCVDzKGC4q12L39b188KxrK2KCaME_oIi9RHi8-RgLHn3PPw"/>
+</div>
+</div>
+</nav>
+<!-- Side Navigation Anchor (Shared Component) -->
+<aside class="fixed left-0 top-0 h-full w-64 z-50 bg-[#11192b] flex flex-col h-full py-6 hidden md:flex">
+<div class="px-6 mb-8">
+<div class="text-lg font-black text-[#69f6b8] font-['Plus_Jakarta_Sans'] mb-1">Command Center</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#69f6b8] animate-pulse"></span>
+<span class="text-[10px] uppercase tracking-widest text-slate-500 font-mono">Active Session</span>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 text-slate-400 py-3 px-6 hover:bg-[#161f33] transition-all hover:text-[#69f6b8] font-['Plus_Jakarta_Sans'] text-sm tracking-wide" href="#">
+<span class="material-symbols-outlined">dashboard</span> Command Center
+            </a>
+<a class="flex items-center gap-3 text-slate-400 py-3 px-6 hover:bg-[#161f33] transition-all hover:text-[#69f6b8] font-['Plus_Jakarta_Sans'] text-sm tracking-wide" href="#">
+<span class="material-symbols-outlined">hub</span> Network Traffic
+            </a>
+<a class="flex items-center gap-3 bg-[#161f33] text-[#69f6b8] rounded-r-full py-3 px-6 border-l-4 border-[#69f6b8] font-['Plus_Jakarta_Sans'] text-sm tracking-wide" href="#">
+<span class="material-symbols-outlined">campaign</span> Announcement Engine
+            </a>
+<a class="flex items-center gap-3 text-slate-400 py-3 px-6 hover:bg-[#161f33] transition-all hover:text-[#69f6b8] font-['Plus_Jakarta_Sans'] text-sm tracking-wide" href="#">
+<span class="material-symbols-outlined">shield</span> Security Protocols
+            </a>
+<a class="flex items-center gap-3 text-slate-400 py-3 px-6 hover:bg-[#161f33] transition-all hover:text-[#69f6b8] font-['Plus_Jakarta_Sans'] text-sm tracking-wide" href="#">
+<span class="material-symbols-outlined">terminal</span> System Logs
+            </a>
+</nav>
+<div class="mt-auto px-6 space-y-1">
+<a class="flex items-center gap-3 text-slate-500 py-2 hover:text-[#69f6b8] transition-colors text-sm" href="#">
+<span class="material-symbols-outlined text-sm">help</span> Help Support
+            </a>
+<a class="flex items-center gap-3 text-red-400 py-2 hover:text-red-300 transition-colors text-sm" href="#">
+<span class="material-symbols-outlined text-sm">logout</span> Log Out
+            </a>
+</div>
+</aside>
+<!-- Background Content (Blurred Table) -->
+<main class="ml-0 md:ml-64 pt-16 p-8 min-h-screen blur-md select-none pointer-events-none">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h1 class="font-headline text-3xl font-bold text-on-surface">Announcement Engine</h1>
+<p class="text-on-surface-variant font-mono text-sm">v2.4.0_STABLE_PROD</p>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined">add</span> Create New
+            </button>
+</div>
+<!-- Fake Bento Grid for background depth -->
+<div class="grid grid-cols-12 gap-6">
+<div class="col-span-12 bg-surface-container rounded-xl h-96"></div>
+<div class="col-span-4 bg-surface-container rounded-xl h-48"></div>
+<div class="col-span-8 bg-surface-container rounded-xl h-48"></div>
+</div>
+</main>
+<!-- Overlay Backdrop -->
+<div class="fixed inset-0 bg-black/40 z-[60] backdrop-blur-sm"></div>
+<!-- Side Panel Slide-in (40% width) -->
+<div class="fixed right-0 top-0 h-full w-full md:w-[40%] z-[70] emerald-glass shadow-2xl flex flex-col">
+<!-- Header -->
+<div class="p-8 border-b border-outline-variant/10 flex justify-between items-center">
+<div>
+<h2 class="font-headline text-2xl font-bold text-primary">Create Announcement</h2>
+<p class="text-on-surface-variant text-sm">Drafting new system communication</p>
+</div>
+<button class="p-2 hover:bg-surface-container-highest rounded-full transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Form Content (Scrollable) -->
+<div class="flex-1 overflow-y-auto p-8 space-y-8">
+<!-- Title Input -->
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant font-label">Announcement Title</label>
+<div class="relative">
+<input class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary/50 font-medium placeholder:text-slate-600" maxlength="200" placeholder="e.g., Scheduled Maintenance for Cluster Alpha" type="text"/>
+<div class="absolute right-3 bottom-2 text-[10px] font-mono text-on-surface-variant">0/200</div>
+</div>
+</div>
+<!-- Category & Area Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant font-label">Category</label>
+<select class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary/50 appearance-none cursor-pointer">
+<option>System Alert</option>
+<option>Maintenance</option>
+<option>Update</option>
+<option>Security Patch</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant font-label">Target Area</label>
+<div class="flex flex-wrap gap-1 bg-surface-container-highest rounded-xl p-2 min-h-[48px]">
+<span class="bg-primary/20 text-primary text-[10px] px-2 py-1 rounded-md border border-primary/30 flex items-center gap-1 font-mono">
+                            ALL_UNITS <span class="material-symbols-outlined text-[10px] cursor-pointer">close</span>
+</span>
+<span class="bg-primary/20 text-primary text-[10px] px-2 py-1 rounded-md border border-primary/30 flex items-center gap-1 font-mono">
+                            ZONE_01 <span class="material-symbols-outlined text-[10px] cursor-pointer">close</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Rich Text Editor Placeholder (Tiptap Style) -->
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant font-label">Communication Content</label>
+<div class="rounded-xl overflow-hidden bg-surface-container-highest border border-outline-variant/10">
+<div class="flex gap-1 p-2 bg-surface-bright border-b border-outline-variant/10">
+<button class="p-1.5 hover:bg-primary/10 hover:text-primary rounded transition-colors"><span class="material-symbols-outlined text-sm">format_bold</span></button>
+<button class="p-1.5 hover:bg-primary/10 hover:text-primary rounded transition-colors"><span class="material-symbols-outlined text-sm">format_italic</span></button>
+<button class="p-1.5 hover:bg-primary/10 hover:text-primary rounded transition-colors"><span class="material-symbols-outlined text-sm">format_list_bulleted</span></button>
+<button class="p-1.5 hover:bg-primary/10 hover:text-primary rounded transition-colors"><span class="material-symbols-outlined text-sm">link</span></button>
+<button class="p-1.5 hover:bg-primary/10 hover:text-primary rounded transition-colors ml-auto"><span class="material-symbols-outlined text-sm">code</span></button>
+</div>
+<textarea class="w-full bg-transparent border-none text-on-surface focus:ring-0 p-4 resize-none font-body text-sm" placeholder="Write your message here..." rows="6"></textarea>
+</div>
+</div>
+<!-- Image Upload Zone -->
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant font-label">Cover Visual (Optional)</label>
+<div class="border-2 border-dashed border-outline-variant/30 rounded-xl p-8 flex flex-col items-center justify-center hover:border-primary/50 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-3xl text-on-surface-variant group-hover:text-primary transition-colors mb-2">cloud_upload</span>
+<p class="text-sm font-medium text-on-surface">Drag &amp; Drop or Click to Upload</p>
+<p class="text-[10px] text-on-surface-variant mt-1 font-mono">PNG, JPG up to 10MB (16:9 recommended)</p>
+</div>
+</div>
+<!-- Scheduling & Toggles -->
+<div class="grid grid-cols-2 gap-8 py-4">
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-sm font-medium text-on-surface">Pin Announcement</span>
+<div class="w-10 h-5 bg-surface-container-highest rounded-full relative cursor-pointer border border-outline-variant/20">
+<div class="absolute left-1 top-1 w-3 h-3 bg-primary rounded-full translate-x-5 transition-transform"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm font-medium text-on-surface">Send Notification</span>
+<div class="w-10 h-5 bg-surface-container-highest rounded-full relative cursor-pointer border border-outline-variant/20">
+<div class="absolute left-1 top-1 w-3 h-3 bg-slate-600 rounded-full transition-transform"></div>
+</div>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant font-label">Schedule Publication</label>
+<div class="bg-surface-container-highest rounded-xl p-3 flex items-center gap-2 cursor-pointer border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary text-sm">calendar_today</span>
+<span class="text-sm font-mono">2023-10-24 09:00</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="p-8 bg-surface-container/50 border-t border-outline-variant/10 grid grid-cols-2 gap-4">
+<button class="border border-primary text-primary px-6 py-3 rounded-xl font-bold hover:bg-primary/5 transition-all active:scale-95 duration-200">
+                Simpan Draft
+            </button>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-xl font-bold hover:shadow-[0_0_20px_rgba(105,246,184,0.3)] transition-all active:scale-95 duration-200">
+                Publish Sekarang
+            </button>
+</div>
+</div>
+</body></html>

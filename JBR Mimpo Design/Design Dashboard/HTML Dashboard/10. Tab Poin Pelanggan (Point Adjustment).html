@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&amp;family=JetBrains+Mono:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Sora', sans-serif;
+            background-color: #070e1d;
+        }
+        .mono {
+            font-family: 'JetBrains_Mono', monospace;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(27, 38, 59, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed": "#00dcfd",
+                      "tertiary": "#77e6ff",
+                      "surface": "#070e1d",
+                      "inverse-on-surface": "#4e5566",
+                      "surface-tint": "#69f6b8",
+                      "surface-container-lowest": "#000000",
+                      "secondary-dim": "#47edc4",
+                      "on-primary": "#005a3c",
+                      "surface-container": "#11192b",
+                      "tertiary-dim": "#00cdeb",
+                      "background": "#070e1d",
+                      "on-secondary-fixed": "#004939",
+                      "on-tertiary-fixed": "#00343c",
+                      "tertiary-container": "#00dcfd",
+                      "inverse-surface": "#f9f9ff",
+                      "primary-container": "#06b77f",
+                      "surface-bright": "#212c43",
+                      "on-primary-container": "#002919",
+                      "secondary-container": "#006b56",
+                      "primary-dim": "#58e7ab",
+                      "surface-container-high": "#161f33",
+                      "tertiary-fixed-dim": "#00cdeb",
+                      "secondary": "#5afcd2",
+                      "on-primary-fixed-variant": "#006544",
+                      "secondary-fixed-dim": "#47edc4",
+                      "error": "#ff716c",
+                      "outline": "#6e7588",
+                      "on-secondary": "#005d4a",
+                      "surface-variant": "#1b263b",
+                      "on-tertiary-container": "#004955",
+                      "on-secondary-fixed-variant": "#006853",
+                      "inverse-primary": "#006d4a",
+                      "surface-dim": "#070e1d",
+                      "on-tertiary-fixed-variant": "#005360",
+                      "on-surface-variant": "#a4abbf",
+                      "secondary-fixed": "#5afcd2",
+                      "on-error-container": "#ffa8a3",
+                      "on-surface": "#dfe5fa",
+                      "surface-container-highest": "#1b263b",
+                      "primary-fixed": "#69f6b8",
+                      "on-secondary-container": "#defff2",
+                      "outline-variant": "#414859",
+                      "on-background": "#dfe5fa",
+                      "on-error": "#490006",
+                      "primary": "#69f6b8",
+                      "surface-container-low": "#0b1323",
+                      "error-dim": "#d7383b",
+                      "on-primary-fixed": "#00452d",
+                      "on-tertiary": "#005360",
+                      "primary-fixed-dim": "#58e7ab",
+                      "error-container": "#9f0519"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              }
+            },
+          }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-[#070e1d]/80 backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full tonal-transition bg-[#11192b]/50">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-[#69f6b8] font-['Sora']">JBR Minpo Command Center</span>
+<div class="hidden md:flex gap-6">
+<span class="text-slate-400 font-['Sora'] font-semibold tracking-tight cursor-pointer hover:bg-[#161f33] transition-colors px-3 py-1 rounded-lg">Overview</span>
+<span class="text-[#69f6b8] font-bold font-['Sora'] tracking-tight cursor-pointer px-3 py-1 rounded-lg">Point Adjustment</span>
+<span class="text-slate-400 font-['Sora'] font-semibold tracking-tight cursor-pointer hover:bg-[#161f33] transition-colors px-3 py-1 rounded-lg">Analytics</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-primary transition-colors">notifications</span>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-primary transition-colors">settings</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="Administrator Profile" data-alt="Professional profile headshot of a system administrator in a high-tech environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUV5bkzc-hB-lMvDlOYAZCDYEUsMl0Z3ROrwx6SrRQwi67rlT4KEAupi9-_FJCcC27AHA0woOe_p--N8AKwmXWU4ZrfVuYg6tZKSx6qtRZltwCtU-VUWPFBge_0vBbQaOcXHqg8TAqD-k4AUwO8_Up9CmbCzHnjlxeaLbtwSzODZz2CyPalemAjR2WA_zosLvhMZO_aO3QguZnG0NEoAoWJOXRKLSIMb2ktAJTEqjIBqy3r5o972tOnBzWiEeefY2X_OVTA8rq63A"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-[#11192b] tonal-transition border-r border-[#161f33] shadow-2xl shadow-black/50 flex flex-col h-full py-8 z-40 hidden md:flex">
+<div class="px-6 mb-10 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-[#69f6b8]" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+<div>
+<h2 class="text-[#69f6b8] font-black font-['JetBrains_Mono'] text-xs uppercase tracking-widest leading-none">Command Center</h2>
+<p class="text-slate-500 text-[10px] mt-1">Emerald Sentinel v2</p>
+</div>
+</div>
+<nav class="flex-1 px-2 space-y-1">
+<a class="flex items-center gap-3 text-slate-400 hover:text-[#5afcd2] px-4 py-3 transition-all font-['JetBrains_Mono'] text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">loyalty</span>
+                Promo Catalog
+            </a>
+<a class="flex items-center gap-3 text-slate-400 hover:text-[#5afcd2] px-4 py-3 transition-all font-['JetBrains_Mono'] text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">redeem</span>
+                Reward Management
+            </a>
+<a class="flex items-center gap-3 text-slate-400 hover:text-[#5afcd2] px-4 py-3 transition-all font-['JetBrains_Mono'] text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">casino</span>
+                Lottery Draw
+            </a>
+<a class="flex items-center gap-3 text-slate-400 hover:text-[#5afcd2] px-4 py-3 transition-all font-['JetBrains_Mono'] text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">share</span>
+                Referral Tracking
+            </a>
+<a class="bg-[#161f33] text-[#69f6b8] border-r-4 border-[#69f6b8] px-4 py-3 flex items-center gap-3 font-['JetBrains_Mono'] text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+                Point Adjustment
+            </a>
+</nav>
+<div class="px-4 mt-auto space-y-2">
+<button class="w-full bg-primary/10 text-primary border border-primary/20 rounded-xl py-2 font-bold text-xs uppercase tracking-tighter hover:bg-primary hover:text-on-primary transition-all">
+                New Campaign
+            </button>
+<div class="pt-4 border-t border-outline-variant/30 flex flex-col">
+<a class="flex items-center gap-3 text-slate-400 hover:text-[#5afcd2] px-4 py-2 text-[10px] font-['JetBrains_Mono'] uppercase" href="#">
+<span class="material-symbols-outlined text-sm">help_outline</span> Support
+                </a>
+<a class="flex items-center gap-3 text-slate-400 hover:text-[#5afcd2] px-4 py-2 text-[10px] font-['JetBrains_Mono'] uppercase" href="#">
+<span class="material-symbols-outlined text-sm">logout</span> Logout
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="md:ml-64 pt-24 px-6 pb-12 min-h-screen">
+<div class="max-w-7xl mx-auto space-y-8">
+<!-- Section 1: Search & Profile Asymmetric Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Search Panel -->
+<div class="lg:col-span-4 flex flex-col justify-between p-6 rounded-2xl bg-surface-container border border-outline-variant/10 shadow-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8 opacity-10">
+<span class="material-symbols-outlined text-8xl">search</span>
+</div>
+<div>
+<h3 class="text-sm font-['JetBrains_Mono'] uppercase tracking-widest text-primary mb-6">Customer Lookup</h3>
+<div class="relative group">
+<input class="w-full bg-surface-container-highest border-b-2 border-transparent focus:border-primary transition-all rounded-xl px-4 py-4 pr-12 text-on-surface outline-none placeholder:text-slate-500 font-['Sora']" placeholder="Search Name or WhatsApp..." type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">person_search</span>
+</div>
+<p class="text-[10px] text-slate-500 mt-4 leading-relaxed font-['JetBrains_Mono']">ENTER FULL WHATSAPP NUMBER INCLUDING COUNTRY CODE FOR ACCURATE FILTERING.</p>
+</div>
+</div>
+<!-- Profile Card (Active/Result) -->
+<div class="lg:col-span-8 glass-panel p-8 rounded-2xl border border-primary/20 relative overflow-hidden group">
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-700"></div>
+<div class="relative flex flex-col md:flex-row gap-8 items-center">
+<div class="relative">
+<div class="w-24 h-24 rounded-2xl overflow-hidden border-2 border-primary/30 p-1">
+<img alt="Customer Profile" class="w-full h-full object-cover rounded-xl" data-alt="High quality portrait of a young professional customer with vibrant emerald background accent lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBR9RCowfr1KrJLNTBqalBbEz2qtij2rpRp_GLdeGU1NLko9ttxeeYdtctXn4BHOHwnFg0EPzshmdD_ccg3CqRv2iWqztlvUXffzZ87Y1_RnM52Gjor0gbJKJsV93vgcbF6_kEIwSK9rRsNNU6sUt3cSETIdxvSRUBi2OZ9stfMq71av6mQb0JGhINjztwbiFWGhEGBsN2XTzN_Zm3orqK39jxhEhKGpzTGxMiFBOhyav7HGpK_GuvCN1J9_nU95uJEtGX_kZZCHLk"/>
+</div>
+<div class="absolute -bottom-2 -right-2 w-8 h-8 bg-surface-container-high rounded-lg flex items-center justify-center border border-primary/50">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="flex-1 text-center md:text-left">
+<h2 class="text-3xl font-extrabold font-['Sora'] tracking-tight text-on-surface">Ahmad Rizky Pratama</h2>
+<p class="text-slate-400 font-['JetBrains_Mono'] text-sm mt-1">+62 812-3456-7890</p>
+<div class="flex flex-wrap gap-3 mt-4 justify-center md:justify-start">
+<span class="px-3 py-1 bg-primary/10 text-primary text-[10px] font-['JetBrains_Mono'] rounded-full border border-primary/20 uppercase tracking-tighter">Active: Platinum Elite</span>
+<span class="px-3 py-1 bg-surface-variant text-on-surface-variant text-[10px] font-['JetBrains_Mono'] rounded-full border border-outline-variant/30 uppercase tracking-tighter">Member Since 2022</span>
+</div>
+</div>
+<div class="bg-surface-container-highest/50 p-6 rounded-2xl border border-outline-variant/20 min-w-[200px] text-center">
+<p class="text-[10px] font-['JetBrains_Mono'] uppercase tracking-[0.2em] text-slate-400 mb-1">Current Balance</p>
+<div class="text-4xl font-bold font-['JetBrains_Mono'] text-[#69f6b8]">12.450</div>
+<p class="text-[10px] font-['JetBrains_Mono'] text-primary/60 mt-1 uppercase">Points Ready</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 2: Adjust Poin Form (Asymmetric & Dense) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<div class="lg:col-span-12 bg-surface-container rounded-2xl border border-outline-variant/10 p-8">
+<div class="flex items-center gap-4 mb-8">
+<div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary">edit_note</span>
+</div>
+<h3 class="text-xl font-bold font-['Sora']">Point Adjustment Protocol</h3>
+</div>
+<form class="grid grid-cols-1 md:grid-cols-3 gap-10">
+<!-- Radio Selection -->
+<div class="space-y-4">
+<label class="text-xs font-['JetBrains_Mono'] uppercase tracking-widest text-slate-500">Operation Type</label>
+<div class="grid grid-cols-2 gap-4">
+<label class="relative cursor-pointer group">
+<input checked="" class="peer sr-only" name="op" type="radio"/>
+<div class="p-4 rounded-xl border border-outline-variant/30 bg-surface-container-low peer-checked:bg-primary-container/20 peer-checked:border-primary transition-all flex flex-col items-center gap-2 group-hover:bg-surface-bright">
+<span class="material-symbols-outlined text-primary">add_circle</span>
+<span class="text-xs font-bold uppercase tracking-tight">Tambah</span>
+</div>
+</label>
+<label class="relative cursor-pointer group">
+<input class="peer sr-only" name="op" type="radio"/>
+<div class="p-4 rounded-xl border border-outline-variant/30 bg-surface-container-low peer-checked:bg-error-container/20 peer-checked:border-error transition-all flex flex-col items-center gap-2 group-hover:bg-surface-bright">
+<span class="material-symbols-outlined text-error">remove_circle</span>
+<span class="text-xs font-bold uppercase tracking-tight">Kurangi</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Amount Input -->
+<div class="space-y-4">
+<label class="text-xs font-['JetBrains_Mono'] uppercase tracking-widest text-slate-500">Point Magnitude</label>
+<div class="relative">
+<input class="w-full h-[74px] bg-surface-container-highest rounded-xl px-6 text-2xl font-bold font-['JetBrains_Mono'] text-primary border-b-2 border-transparent focus:border-primary outline-none transition-all placeholder:text-slate-700" placeholder="000,000" type="number"/>
+<span class="absolute right-6 top-1/2 -translate-y-1/2 text-[10px] font-['JetBrains_Mono'] text-slate-500 uppercase tracking-widest">PTS</span>
+</div>
+</div>
+<!-- Reason Dropdown -->
+<div class="space-y-4 flex flex-col justify-between">
+<div class="space-y-4">
+<label class="text-xs font-['JetBrains_Mono'] uppercase tracking-widest text-slate-500">Adjustment Reason</label>
+<select class="w-full h-[74px] bg-surface-container-highest rounded-xl px-6 font-['Sora'] border-none focus:ring-2 focus:ring-primary/50 text-on-surface cursor-pointer appearance-none">
+<option>Loyalty Bonus</option>
+<option>Campaign Correction</option>
+<option>Refund Adjustment</option>
+<option>System Migration</option>
+<option>Others</option>
+</select>
+</div>
+</div>
+<div class="md:col-span-3 flex items-center justify-between pt-6 border-t border-outline-variant/30">
+<div class="flex items-center gap-3 text-error">
+<span class="material-symbols-outlined text-lg">warning</span>
+<span class="text-xs font-['Sora'] font-semibold italic">Riwayat poin tidak dapat dihapus</span>
+</div>
+<button class="px-10 py-4 bg-primary text-on-primary rounded-xl font-bold font-['Sora'] hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-primary/20" type="submit">
+                                EXECUTE ADJUSTMENT
+                            </button>
+</div>
+</form>
+</div>
+</div>
+<!-- Section 3: History Transaction Table -->
+<div class="bg-surface-container rounded-2xl border border-outline-variant/10 overflow-hidden">
+<div class="p-6 border-b border-outline-variant/10 flex justify-between items-center">
+<h3 class="text-sm font-['JetBrains_Mono'] uppercase tracking-widest text-primary">Transaction Logs</h3>
+<button class="text-[10px] font-['JetBrains_Mono'] text-slate-400 uppercase tracking-widest hover:text-tertiary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">download</span> Export Logs
+                    </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant/5">
+<th class="px-6 py-4 text-[10px] font-['JetBrains_Mono'] uppercase tracking-widest text-slate-500">Timestamp</th>
+<th class="px-6 py-4 text-[10px] font-['JetBrains_Mono'] uppercase tracking-widest text-slate-500">Transaction Type</th>
+<th class="px-6 py-4 text-[10px] font-['JetBrains_Mono'] uppercase tracking-widest text-slate-500">Magnitude</th>
+<th class="px-6 py-4 text-[10px] font-['JetBrains_Mono'] uppercase tracking-widest text-slate-500">Source</th>
+<th class="px-6 py-4 text-[10px] font-['JetBrains_Mono'] uppercase tracking-widest text-slate-500">Admin Authority</th>
+<th class="px-6 py-4 text-[10px] font-['JetBrains_Mono'] uppercase tracking-widest text-slate-500">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<tr class="hover:bg-surface-bright transition-colors">
+<td class="px-6 py-4 font-['JetBrains_Mono'] text-xs text-on-surface-variant">2023-10-24 14:22:01</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-sm font-medium">Manual Credit</span>
+</div>
+</td>
+<td class="px-6 py-4 font-['JetBrains_Mono'] font-bold text-primary text-sm">+2,500.00</td>
+<td class="px-6 py-4 text-xs text-slate-400">Bonus Event Autumn</td>
+<td class="px-6 py-4 text-xs font-semibold">SuperAdmin_JBR</td>
+<td class="px-6 py-4"><span class="px-2 py-0.5 bg-primary/10 text-primary text-[10px] rounded uppercase font-bold tracking-tighter">Verified</span></td>
+</tr>
+<tr class="hover:bg-surface-bright transition-colors">
+<td class="px-6 py-4 font-['JetBrains_Mono'] text-xs text-on-surface-variant">2023-10-23 09:15:45</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="text-sm font-medium">Point Redemption</span>
+</div>
+</td>
+<td class="px-6 py-4 font-['JetBrains_Mono'] font-bold text-error text-sm">-1,200.00</td>
+<td class="px-6 py-4 text-xs text-slate-400">Voucher Redeem ID-882</td>
+<td class="px-6 py-4 text-xs font-semibold">System_Kernel</td>
+<td class="px-6 py-4"><span class="px-2 py-0.5 bg-surface-container-highest text-slate-400 text-[10px] rounded uppercase font-bold tracking-tighter">Locked</span></td>
+</tr>
+<tr class="hover:bg-surface-bright transition-colors">
+<td class="px-6 py-4 font-['JetBrains_Mono'] text-xs text-on-surface-variant">2023-10-20 18:44:12</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-sm font-medium">Refferal Reward</span>
+</div>
+</td>
+<td class="px-6 py-4 font-['JetBrains_Mono'] font-bold text-primary text-sm">+500.00</td>
+<td class="px-6 py-4 text-xs text-slate-400">User Invitation</td>
+<td class="px-6 py-4 text-xs font-semibold">System_Kernel</td>
+<td class="px-6 py-4"><span class="px-2 py-0.5 bg-primary/10 text-primary text-[10px] rounded uppercase font-bold tracking-tighter">Verified</span></td>
+</tr>
+<tr class="hover:bg-surface-bright transition-colors">
+<td class="px-6 py-4 font-['JetBrains_Mono'] text-xs text-on-surface-variant">2023-10-18 11:30:00</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="text-sm font-medium">Admin Correction</span>
+</div>
+</td>
+<td class="px-6 py-4 font-['JetBrains_Mono'] font-bold text-error text-sm">-3,000.00</td>
+<td class="px-6 py-4 text-xs text-slate-400">Error Correction ID-11</td>
+<td class="px-6 py-4 text-xs font-semibold">Manager_X02</td>
+<td class="px-6 py-4"><span class="px-2 py-0.5 bg-primary/10 text-primary text-[10px] rounded uppercase font-bold tracking-tighter">Verified</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container border-t border-outline-variant/10 px-4 h-16 flex justify-around items-center z-50">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="material-symbols-outlined text-slate-400">loyalty</span>
+<span class="material-symbols-outlined text-slate-400">casino</span>
+<span class="material-symbols-outlined text-slate-400">share</span>
+<span class="material-symbols-outlined text-slate-400">settings</span>
+</nav>
+</body></html>

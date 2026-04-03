@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&amp;family=JetBrains+Mono:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#00dcfd",
+                        "tertiary": "#77e6ff",
+                        "surface": "#070e1d",
+                        "inverse-on-surface": "#4e5566",
+                        "surface-tint": "#69f6b8",
+                        "surface-container-lowest": "#000000",
+                        "secondary-dim": "#47edc4",
+                        "on-primary": "#005a3c",
+                        "surface-container": "#11192b",
+                        "tertiary-dim": "#00cdeb",
+                        "background": "#070e1d",
+                        "on-secondary-fixed": "#004939",
+                        "on-tertiary-fixed": "#00343c",
+                        "tertiary-container": "#00dcfd",
+                        "inverse-surface": "#f9f9ff",
+                        "primary-container": "#06b77f",
+                        "surface-bright": "#212c43",
+                        "on-primary-container": "#002919",
+                        "secondary-container": "#006b56",
+                        "primary-dim": "#58e7ab",
+                        "surface-container-high": "#161f33",
+                        "tertiary-fixed-dim": "#00cdeb",
+                        "secondary": "#5afcd2",
+                        "on-primary-fixed-variant": "#006544",
+                        "secondary-fixed-dim": "#47edc4",
+                        "error": "#ff716c",
+                        "outline": "#6e7588",
+                        "on-secondary": "#005d4a",
+                        "surface-variant": "#1b263b",
+                        "on-tertiary-container": "#004955",
+                        "on-secondary-fixed-variant": "#006853",
+                        "inverse-primary": "#006d4a",
+                        "surface-dim": "#070e1d",
+                        "on-tertiary-fixed-variant": "#005360",
+                        "on-surface-variant": "#a4abbf",
+                        "secondary-fixed": "#5afcd2",
+                        "on-error-container": "#ffa8a3",
+                        "on-surface": "#dfe5fa",
+                        "surface-container-highest": "#1b263b",
+                        "primary-fixed": "#69f6b8",
+                        "on-secondary-container": "#defff2",
+                        "outline-variant": "#414859",
+                        "on-background": "#dfe5fa",
+                        "on-error": "#490006",
+                        "primary": "#69f6b8",
+                        "surface-container-low": "#0b1323",
+                        "error-dim": "#d7383b",
+                        "on-primary-fixed": "#00452d",
+                        "on-tertiary": "#005360",
+                        "primary-fixed-dim": "#58e7ab",
+                        "error-container": "#9f0519"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Space Grotesk", "sans-serif"],
+                        "sora": ["Sora", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(27, 38, 59, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #070e1d; }
+        ::-webkit-scrollbar-thumb { background: #1b263b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #69f6b8; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-[#11192b] flex flex-col py-8 border-r border-[#161f33] z-50">
+<div class="px-6 mb-10 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+</div>
+<div>
+<h2 class="text-[#69f6b8] font-black font-sora tracking-tighter text-lg leading-tight">Command Center</h2>
+<p class="font-mono text-[10px] uppercase tracking-widest text-slate-500">Emerald Sentinel v2</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1 px-2">
+<a class="text-slate-400 hover:text-[#5afcd2] px-4 py-3 flex items-center gap-3 transition-all font-mono text-xs uppercase tracking-widest hover:bg-[#161f33]" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="loyalty">loyalty</span>
+<span>Promo Catalog</span>
+</a>
+<a class="bg-[#161f33] text-[#69f6b8] border-r-4 border-[#69f6b8] px-4 py-3 flex items-center gap-3 font-mono text-xs uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="redeem" style="font-variation-settings: 'FILL' 1;">redeem</span>
+<span>Reward Management</span>
+</a>
+<a class="text-slate-400 hover:text-[#5afcd2] px-4 py-3 flex items-center gap-3 transition-all font-mono text-xs uppercase tracking-widest hover:bg-[#161f33]" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="casino">casino</span>
+<span>Lottery Draw</span>
+</a>
+<a class="text-slate-400 hover:text-[#5afcd2] px-4 py-3 flex items-center gap-3 transition-all font-mono text-xs uppercase tracking-widest hover:bg-[#161f33]" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="share">share</span>
+<span>Referral Tracking</span>
+</a>
+<a class="text-slate-400 hover:text-[#5afcd2] px-4 py-3 flex items-center gap-3 transition-all font-mono text-xs uppercase tracking-widest hover:bg-[#161f33]" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span>Point Adjustment</span>
+</a>
+</nav>
+<div class="px-4 mt-auto pt-6 border-t border-[#161f33] space-y-1">
+<button class="w-full bg-primary-container text-on-primary-container font-sora font-bold py-3 rounded-xl flex items-center justify-center gap-2 mb-4 hover:brightness-110 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                New Campaign
+            </button>
+<a class="text-slate-400 hover:text-[#5afcd2] px-4 py-2 flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-base" data-icon="help_outline">help_outline</span>
+<span>Support</span>
+</a>
+<a class="text-slate-400 hover:text-error px-4 py-2 flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-base" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- Header -->
+<header class="fixed top-0 right-0 left-64 h-16 bg-[#070e1d]/80 backdrop-blur-xl z-40 flex justify-between items-center px-8 border-b border-[#161f33]/50">
+<div class="flex items-center gap-4">
+<h1 class="font-sora font-bold text-xl tracking-tight text-on-surface">Loyalty Management</h1>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<span class="text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded">PHASE_07</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary cursor-pointer transition-colors" data-icon="notifications">notifications</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-error rounded-full"></span>
+</div>
+<span class="material-symbols-outlined text-slate-400 hover:text-primary cursor-pointer transition-colors" data-icon="settings">settings</span>
+<div class="flex items-center gap-3 pl-4 border-l border-[#161f33]">
+<div class="text-right">
+<p class="text-xs font-bold leading-none">Admin_Zenix</p>
+<p class="text-[10px] text-slate-500 font-mono">SUPER_USER</p>
+</div>
+<img alt="Administrator Profile" class="w-8 h-8 rounded-lg bg-surface-container" data-alt="close-up portrait of a professional system administrator avatar in a minimalist digital style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3tIttmj7N3HvlgckqSTIKauAudpb64fb2FHy5zPlHdviuhCcBIzDozhLAu8IPYg4YdmshJsKd2fg9wUSVIzYdM35URWfKL04bSYhlGzOs2LJGuFPMUyeLvST-uFxCBWNM2CvkREYtuspa9vHG6YNHrxwepPsOTuLxa2_DcNJkVPbcBDsfZ_ebvZopocLZpis6uS_S-n6e7-H0wPPyfI7M9rjkgswPlKHMj4Ak39CqqVdWsbjkJ0DydF36oFUmsk4pwkAOgucFLx0"/>
+</div>
+</div>
+</header>
+<section class="pt-24 px-8 pb-12">
+<!-- Sub-Navigation Tabs -->
+<div class="flex items-center gap-8 mb-8 border-b border-[#161f33]">
+<button class="pb-4 px-2 text-primary font-sora font-bold text-sm relative">
+                    Daftar Reward
+                    <span class="absolute bottom-0 left-0 w-full h-[2px] bg-primary"></span>
+</button>
+<button class="pb-4 px-2 text-slate-500 font-sora font-medium text-sm hover:text-on-surface transition-colors">
+                    Klaim Masuk
+                    <span class="ml-2 inline-flex items-center justify-center bg-error-container text-on-error-container text-[10px] w-5 h-5 rounded-full font-mono">12</span>
+</button>
+</div>
+<!-- Bento Grid Stats -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+<div class="bg-surface-container p-5 rounded-xl border border-outline-variant/10">
+<p class="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-1">Total Rewards</p>
+<h3 class="text-3xl font-mono font-bold text-primary">24</h3>
+<div class="mt-2 flex items-center text-[10px] text-primary">
+<span class="material-symbols-outlined text-xs mr-1" data-icon="trending_up">trending_up</span>
+<span>+2 This Month</span>
+</div>
+</div>
+<div class="bg-surface-container p-5 rounded-xl border border-outline-variant/10">
+<p class="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-1">Active Claims</p>
+<h3 class="text-3xl font-mono font-bold text-tertiary">156</h3>
+<div class="mt-2 flex items-center text-[10px] text-tertiary">
+<span class="material-symbols-outlined text-xs mr-1" data-icon="history">history</span>
+<span>89% Success Rate</span>
+</div>
+</div>
+<div class="bg-surface-container p-5 rounded-xl border border-outline-variant/10 md:col-span-2 relative overflow-hidden group">
+<div class="relative z-10">
+<p class="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-1">Loyalty Pulse</p>
+<div class="flex items-end gap-1 h-12">
+<div class="w-full bg-primary/20 h-[30%] rounded-t-sm group-hover:bg-primary/40 transition-all"></div>
+<div class="w-full bg-primary/20 h-[50%] rounded-t-sm group-hover:bg-primary/40 transition-all"></div>
+<div class="w-full bg-primary/20 h-[80%] rounded-t-sm group-hover:bg-primary/40 transition-all"></div>
+<div class="w-full bg-primary/20 h-[60%] rounded-t-sm group-hover:bg-primary/40 transition-all"></div>
+<div class="w-full bg-primary/20 h-[90%] rounded-t-sm group-hover:bg-primary/40 transition-all"></div>
+<div class="w-full bg-primary/20 h-[40%] rounded-t-sm group-hover:bg-primary/40 transition-all"></div>
+<div class="w-full bg-primary h-[100%] rounded-t-sm"></div>
+</div>
+</div>
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent -translate-x-full group-hover:translate-x-full duration-1000 transition-transform"></div>
+</div>
+</div>
+<!-- Main Data Table Container -->
+<div class="bg-surface-container rounded-2xl overflow-hidden border border-outline-variant/10">
+<div class="p-6 border-b border-[#161f33] flex justify-between items-center">
+<h2 class="font-sora font-bold text-lg">Reward Inventory</h2>
+<div class="flex gap-3">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm" data-icon="search">search</span>
+<input class="bg-surface-container-high border-none rounded-lg pl-9 pr-4 py-2 text-xs focus:ring-1 focus:ring-primary w-64 placeholder:text-slate-600" placeholder="Filter rewards..." type="text"/>
+</div>
+<button class="bg-surface-container-high hover:bg-surface-bright p-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-slate-400" data-icon="filter_list">filter_list</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-6 py-4 text-[10px] font-mono text-slate-500 uppercase tracking-widest">Reward Name</th>
+<th class="px-6 py-4 text-[10px] font-mono text-slate-500 uppercase tracking-widest">Type</th>
+<th class="px-6 py-4 text-[10px] font-mono text-slate-500 uppercase tracking-widest">Points Required</th>
+<th class="px-6 py-4 text-[10px] font-mono text-slate-500 uppercase tracking-widest">Stock Remaining</th>
+<th class="px-6 py-4 text-[10px] font-mono text-slate-500 uppercase tracking-widest text-center">Active Status</th>
+<th class="px-6 py-4 text-[10px] font-mono text-slate-500 uppercase tracking-widest"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#161f33]">
+<!-- Row 1 -->
+<tr class="hover:bg-[#161f33]/30 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-[#1b263b] flex items-center justify-center text-primary border border-primary/20">
+<span class="material-symbols-outlined" data-icon="wifi">wifi</span>
+</div>
+<div>
+<p class="text-sm font-bold">Ultra-Fiber 24H Pass</p>
+<p class="text-[10px] text-slate-500">ID: RF-8821</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2 py-1 rounded text-[10px] font-bold bg-primary/10 text-primary border border-primary/20">GRATIS INTERNET</span>
+</td>
+<td class="px-6 py-5 font-mono text-sm text-on-surface">5,000 PTS</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="w-24 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%]"></div>
+</div>
+<span class="font-mono text-xs text-slate-400">85/100</span>
+</div>
+</td>
+<td class="px-6 py-5 text-center">
+<button class="relative inline-flex h-5 w-10 items-center rounded-full bg-primary transition-colors focus:outline-none">
+<span class="translate-x-5 inline-block h-3 w-3 transform rounded-full bg-on-primary transition-transform"></span>
+</button>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-slate-500 hover:text-on-surface opacity-0 group-hover:opacity-100 transition-all">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-[#161f33]/30 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-[#1b263b] flex items-center justify-center text-tertiary border border-tertiary/20">
+<span class="material-symbols-outlined" data-icon="percent">percent</span>
+</div>
+<div>
+<p class="text-sm font-bold">Merchant Discount 25%</p>
+<p class="text-[10px] text-slate-500">ID: RF-9012</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2 py-1 rounded text-[10px] font-bold bg-tertiary/10 text-tertiary border border-tertiary/20">DISKON</span>
+</td>
+<td class="px-6 py-5 font-mono text-sm text-on-surface">12,500 PTS</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="w-24 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="bg-tertiary h-full w-[12%]"></div>
+</div>
+<span class="font-mono text-xs text-error">12/100</span>
+</div>
+</td>
+<td class="px-6 py-5 text-center">
+<button class="relative inline-flex h-5 w-10 items-center rounded-full bg-primary transition-colors focus:outline-none">
+<span class="translate-x-5 inline-block h-3 w-3 transform rounded-full bg-on-primary transition-transform"></span>
+</button>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-slate-500 hover:text-on-surface opacity-0 group-hover:opacity-100 transition-all">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-[#161f33]/30 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-[#1b263b] flex items-center justify-center text-slate-500 border border-slate-700">
+<span class="material-symbols-outlined" data-icon="card_giftcard">card_giftcard</span>
+</div>
+<div>
+<p class="text-sm font-bold text-slate-400">Coffee Shop Voucher</p>
+<p class="text-[10px] text-slate-600">ID: RF-1104</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2 py-1 rounded text-[10px] font-bold bg-surface-container-highest text-slate-400">VOUCHER</span>
+</td>
+<td class="px-6 py-5 font-mono text-sm text-slate-500">2,500 PTS</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="w-24 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="bg-slate-700 h-full w-0"></div>
+</div>
+<span class="font-mono text-xs text-slate-600">0/50</span>
+</div>
+</td>
+<td class="px-6 py-5 text-center">
+<button class="relative inline-flex h-5 w-10 items-center rounded-full bg-surface-container-highest transition-colors focus:outline-none">
+<span class="translate-x-1 inline-block h-3 w-3 transform rounded-full bg-slate-500 transition-transform"></span>
+</button>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-slate-500 hover:text-on-surface opacity-0 group-hover:opacity-100 transition-all">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-surface-container-low/50 flex justify-between items-center px-6 border-t border-[#161f33]">
+<p class="text-xs text-slate-500 font-mono">SHOWING 1-10 OF 24 REWARDS</p>
+<div class="flex gap-1">
+<button class="p-1 rounded bg-[#161f33] text-slate-500 cursor-not-allowed">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-7 h-7 flex items-center justify-center rounded bg-primary text-on-primary font-mono text-xs">1</button>
+<button class="w-7 h-7 flex items-center justify-center rounded bg-[#161f33] text-slate-400 font-mono text-xs hover:bg-surface-bright transition-colors">2</button>
+<button class="w-7 h-7 flex items-center justify-center rounded bg-[#161f33] text-slate-400 font-mono text-xs hover:bg-surface-bright transition-colors">3</button>
+<button class="p-1 rounded bg-[#161f33] text-slate-400 hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Recently Claimed Cards (Asymmetric Layout Example) -->
+<div class="mt-12">
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-sora font-bold text-lg">Incoming Claims <span class="text-primary-dim text-xs font-mono ml-2">Live Monitor</span></h2>
+<a class="text-primary text-xs font-bold uppercase tracking-wider flex items-center gap-1 hover:underline" href="#">
+                        View All Claims
+                        <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Claim Card 1 -->
+<div class="glass-panel p-6 rounded-2xl border border-primary/10 relative group hover:border-primary/30 transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<img alt="Customer Avatar" class="w-10 h-10 rounded-full bg-surface-variant" data-alt="vibrant 3d avatar of a young male customer for a modern dashboard profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCw5lhyU1X3Af_sA6HislaWT5iOSseBtOih_uAIgwvsPDp3xUh1E0Uv41ivhIs5Up6q4ALCyy8OoMz5UlVy4Gz1XIvOMjzdTeZUR2qOmb3xxzWfZDyL42sByiUmT79UYGgmR76r4h4jKvcFOJBZL7oB5R3dGq8Cfs1V0GN5T9RB0IkHd2btozIt7POUCnhO5J1nUFBdgOuUBDJYo5oJS1lNPXUkVLDBigDw1FAH1_qeFHvHHpo7UyIsMfG5bk4p3J8euRnltSSlvWQ"/>
+<div>
+<h4 class="text-sm font-bold">Andi Wijaya</h4>
+<p class="text-[10px] font-mono text-slate-500">ID: CUST_09912</p>
+</div>
+</div>
+<span class="bg-error/10 text-error px-2 py-1 rounded text-[10px] font-bold uppercase font-mono tracking-tighter">Pending</span>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between text-xs">
+<span class="text-slate-500">Reward:</span>
+<span class="font-bold">Ultra-Fiber 24H Pass</span>
+</div>
+<div class="flex justify-between text-xs">
+<span class="text-slate-500">Points Deducted:</span>
+<span class="font-mono text-primary">5,000 PTS</span>
+</div>
+</div>
+<div class="flex gap-2">
+<a class="flex-1 bg-[#25D366] hover:bg-[#20bd5c] text-white py-2 rounded-lg flex items-center justify-center gap-2 text-[10px] font-bold transition-all" href="https://wa.me/628123456789" target="_blank">
+<span class="material-symbols-outlined text-sm" data-icon="chat">chat</span>
+                                WhatsApp
+                            </a>
+<button class="bg-primary/10 hover:bg-primary/20 text-primary py-2 px-4 rounded-lg text-[10px] font-bold transition-all">Process</button>
+</div>
+<div class="absolute top-0 right-0 p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-slate-500 text-xs cursor-help" data-icon="info">info</span>
+</div>
+</div>
+<!-- Claim Card 2 -->
+<div class="glass-panel p-6 rounded-2xl border border-tertiary/10 relative group hover:border-tertiary/30 transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<img alt="Customer Avatar" class="w-10 h-10 rounded-full bg-surface-variant" data-alt="vibrant 3d avatar of a young female customer for a modern dashboard profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDteJKHeVB4yHq_UMoqpz-qSw5f1aRcmaaCJi_Ut4SBAkHouElTmCJ7h9zViAJRVuXuuo7eQxUvY_5E9V4C5-Wq2XUHGvRWYOHMJPSdVwHern6Xr0iwxmzsnUNIvzlrq3hvJHob0lidAQgFeKKTp3kyhzZBUBR80PFhIGqlqMU--mQJqDMH1cbYFghiV7RKDICOfeRXB_EzJuN7iPqL7u-N33cL9E7Jtox4j_MUUwPqgbb75rhDFwzr_LlA_ToLogrYbvEmbqYuCYY"/>
+<div>
+<h4 class="text-sm font-bold">Siti Aminah</h4>
+<p class="text-[10px] font-mono text-slate-500">ID: CUST_11203</p>
+</div>
+</div>
+<span class="bg-tertiary/10 text-tertiary px-2 py-1 rounded text-[10px] font-bold uppercase font-mono tracking-tighter">Diproses</span>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between text-xs">
+<span class="text-slate-500">Reward:</span>
+<span class="font-bold">Merchant Discount 25%</span>
+</div>
+<div class="flex justify-between text-xs">
+<span class="text-slate-500">Points Deducted:</span>
+<span class="font-mono text-tertiary">12,500 PTS</span>
+</div>
+</div>
+<div class="flex gap-2">
+<a class="flex-1 bg-[#25D366] hover:bg-[#20bd5c] text-white py-2 rounded-lg flex items-center justify-center gap-2 text-[10px] font-bold transition-all" href="https://wa.me/628123456789" target="_blank">
+<span class="material-symbols-outlined text-sm" data-icon="chat">chat</span>
+                                WhatsApp
+                            </a>
+<button class="bg-tertiary/10 hover:bg-tertiary/20 text-tertiary py-2 px-4 rounded-lg text-[10px] font-bold transition-all">Complete</button>
+</div>
+</div>
+<!-- Claim Card 3 -->
+<div class="glass-panel p-6 rounded-2xl border border-slate-700/50 relative group opacity-75 grayscale-[0.5] hover:grayscale-0 hover:opacity-100 transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<img alt="Customer Avatar" class="w-10 h-10 rounded-full bg-surface-variant" data-alt="vibrant 3d avatar of an older male customer for a modern dashboard profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAExYafZ1XLVu1cA4ZAqYYCRACVtOtV8Z3a2eU65rDn1zQVL11stVhUmQNEdlPpHQGj-cNEawxP3xAtlvog6Sce4gESeKOR70X1n4F36ykWI8dTsBss48asE0L4Zh8oTnfyE3uuQk0vn9ohq5Oqkelps0RRDdn1g0nFNtcEJdtlY-tt_BHdEdVpeALs6TeoO4X3He3pxpuAAcZQM4V9txpI1pZZLsPaKeb5A8DuJlrw2BmUOCzDpIEo_yr6r-Jy6x-lu140pcnTUxc"/>
+<div>
+<h4 class="text-sm font-bold">Budi Santoso</h4>
+<p class="text-[10px] font-mono text-slate-500">ID: CUST_88321</p>
+</div>
+</div>
+<span class="bg-primary/10 text-primary px-2 py-1 rounded text-[10px] font-bold uppercase font-mono tracking-tighter">Selesai</span>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between text-xs">
+<span class="text-slate-500">Reward:</span>
+<span class="font-bold">Ultra-Fiber 24H Pass</span>
+</div>
+<div class="flex justify-between text-xs">
+<span class="text-slate-500">Points Deducted:</span>
+<span class="font-mono text-slate-400">5,000 PTS</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="w-full bg-surface-container-highest text-slate-400 py-2 rounded-lg flex items-center justify-center gap-2 text-[10px] font-bold cursor-default">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+                                Handed Over
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="px-8 py-6 border-t border-[#161f33] flex justify-between items-center">
+<p class="text-[10px] font-mono text-slate-500">SYSTEM STABLE // LATENCY 14MS // CLOUD_SYNC_ACTIVE</p>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[10px] font-mono text-primary uppercase tracking-widest">Sentinel Live</span>
+</div>
+<p class="text-[10px] font-mono text-slate-600">© 2024 JBR MINPO CMND</p>
+</div>
+</footer>
+</main>
+<!-- Contextual FAB -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-full shadow-2xl shadow-primary/20 flex items-center justify-center group hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-2xl group-hover:rotate-90 transition-transform" data-icon="add">add</span>
+</button>
+</body></html>

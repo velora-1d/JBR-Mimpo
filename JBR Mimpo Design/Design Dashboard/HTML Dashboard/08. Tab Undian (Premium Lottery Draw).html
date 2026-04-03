@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&amp;family=JetBrains+Mono:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#00dcfd",
+                        "tertiary": "#77e6ff",
+                        "surface": "#070e1d",
+                        "inverse-on-surface": "#4e5566",
+                        "surface-tint": "#69f6b8",
+                        "surface-container-lowest": "#000000",
+                        "secondary-dim": "#47edc4",
+                        "on-primary": "#005a3c",
+                        "surface-container": "#11192b",
+                        "tertiary-dim": "#00cdeb",
+                        "background": "#070e1d",
+                        "on-secondary-fixed": "#004939",
+                        "on-tertiary-fixed": "#00343c",
+                        "tertiary-container": "#00dcfd",
+                        "inverse-surface": "#f9f9ff",
+                        "primary-container": "#06b77f",
+                        "surface-bright": "#212c43",
+                        "on-primary-container": "#002919",
+                        "secondary-container": "#006b56",
+                        "primary-dim": "#58e7ab",
+                        "surface-container-high": "#161f33",
+                        "tertiary-fixed-dim": "#00cdeb",
+                        "secondary": "#5afcd2",
+                        "on-primary-fixed-variant": "#006544",
+                        "secondary-fixed-dim": "#47edc4",
+                        "error": "#ff716c",
+                        "outline": "#6e7588",
+                        "on-secondary": "#005d4a",
+                        "surface-variant": "#1b263b",
+                        "on-tertiary-container": "#004955",
+                        "on-secondary-fixed-variant": "#006853",
+                        "inverse-primary": "#006d4a",
+                        "surface-dim": "#070e1d",
+                        "on-tertiary-fixed-variant": "#005360",
+                        "on-surface-variant": "#a4abbf",
+                        "secondary-fixed": "#5afcd2",
+                        "on-error-container": "#ffa8a3",
+                        "on-surface": "#dfe5fa",
+                        "surface-container-highest": "#1b263b",
+                        "primary-fixed": "#69f6b8",
+                        "on-secondary-container": "#defff2",
+                        "outline-variant": "#414859",
+                        "on-background": "#dfe5fa",
+                        "on-error": "#490006",
+                        "primary": "#69f6b8",
+                        "surface-container-low": "#0b1323",
+                        "error-dim": "#d7383b",
+                        "on-primary-fixed": "#00452d",
+                        "on-tertiary": "#005360",
+                        "primary-fixed-dim": "#58e7ab",
+                        "error-container": "#9f0519"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Space Grotesk"],
+                        "sora": ["Sora"],
+                        "mono": ["JetBrains Mono"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .emerald-glow {
+            box-shadow: 0 0 40px -10px rgba(105, 246, 184, 0.3);
+        }
+        .glass-panel {
+            backdrop-filter: blur(20px);
+            background: rgba(27, 38, 59, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-[#070e1d]/80 backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tighter text-[#69f6b8] font-sora">JBR Minpo Command Center</span>
+<div class="hidden md:flex ml-8 gap-6 items-center">
+<span class="text-slate-400 font-sora font-semibold text-sm hover:bg-[#161f33] transition-colors px-3 py-1 rounded-lg cursor-pointer">Dashboard</span>
+<span class="text-[#69f6b8] font-bold font-sora text-sm px-3 py-1 rounded-lg">Campaigns</span>
+<span class="text-slate-400 font-sora font-semibold text-sm hover:bg-[#161f33] transition-colors px-3 py-1 rounded-lg cursor-pointer">Analytics</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="bg-[#161f33] px-3 py-1.5 rounded-xl flex items-center gap-2 border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-xs w-48 text-on-surface-variant" placeholder="Global Search..." type="text"/>
+</div>
+<span class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors cursor-pointer">notifications</span>
+<span class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors cursor-pointer">settings</span>
+<img alt="Administrator Profile" class="w-8 h-8 rounded-full border border-primary/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXZ5JYdyWyqt0V5OaLoGxUyxJ-jD_MfrYk9tb9GyyhEj4VcqyBEQ03exOlZ-EjPcZ210baXdca7hdHOyHHJvQ5V5WCxqpQBwyKoFcAoyfKoZEy4HwqSYja3dg6hBCIaNmjxuGjMgwRAXDUUjdv2y-0EJyYTRvkZJ_90VN-vhEJHrPV_XobhmHIIh1R1bZSjwkswgHy2x_4VDDrbn2bAv2NvreH3l4_4YqhquBzat44jfHpx57UhDmmsGGkVfZVi47tB4__lJDhimM"/>
+</div>
+</header>
+<!-- Side Navigation -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-[#11192b] flex flex-col h-full py-8 border-r border-[#161f33] pt-24 hidden md:flex">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary">shield</span>
+</div>
+<div>
+<h3 class="text-[#69f6b8] font-black font-mono text-sm">Command Center</h3>
+<p class="text-[10px] text-slate-500 tracking-widest font-mono">EMERALD SENTINEL V2</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="text-slate-400 hover:text-[#5afcd2] px-4 py-3 font-mono text-xs uppercase tracking-widest flex items-center gap-3 transition-all hover:bg-[#161f33] cursor-pointer">
+<span class="material-symbols-outlined text-lg">loyalty</span> Promo Catalog
+            </div>
+<div class="text-slate-400 hover:text-[#5afcd2] px-4 py-3 font-mono text-xs uppercase tracking-widest flex items-center gap-3 transition-all hover:bg-[#161f33] cursor-pointer">
+<span class="material-symbols-outlined text-lg">redeem</span> Reward Management
+            </div>
+<div class="bg-[#161f33] text-[#69f6b8] border-r-4 border-[#69f6b8] px-4 py-3 font-mono text-xs uppercase tracking-widest flex items-center gap-3">
+<span class="material-symbols-outlined text-lg">casino</span> Lottery Draw
+            </div>
+<div class="text-slate-400 hover:text-[#5afcd2] px-4 py-3 font-mono text-xs uppercase tracking-widest flex items-center gap-3 transition-all hover:bg-[#161f33] cursor-pointer">
+<span class="material-symbols-outlined text-lg">share</span> Referral Tracking
+            </div>
+<div class="text-slate-400 hover:text-[#5afcd2] px-4 py-3 font-mono text-xs uppercase tracking-widest flex items-center gap-3 transition-all hover:bg-[#161f33] cursor-pointer">
+<span class="material-symbols-outlined text-lg">account_balance_wallet</span> Point Adjustment
+            </div>
+</nav>
+<div class="px-4 py-6 border-t border-[#161f33] space-y-2">
+<div class="text-slate-400 hover:text-[#5afcd2] px-4 py-2 font-mono text-xs uppercase tracking-widest flex items-center gap-3 transition-all hover:bg-[#161f33] cursor-pointer rounded-lg">
+<span class="material-symbols-outlined text-lg">help_outline</span> Support
+            </div>
+<div class="text-slate-400 hover:text-error px-4 py-2 font-mono text-xs uppercase tracking-widest flex items-center gap-3 transition-all hover:bg-[#161f33] cursor-pointer rounded-lg">
+<span class="material-symbols-outlined text-lg">logout</span> Logout
+            </div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 pt-24 px-8 pb-12 min-h-screen">
+<div class="max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+<div class="space-y-2">
+<span class="text-primary font-mono text-xs tracking-widest uppercase flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span> SYSTEM_LIVE: PREMIUM_LOTTERY
+                    </span>
+<h1 class="text-5xl font-extrabold tracking-tight font-sora text-on-surface">Lottery Draw</h1>
+<p class="text-on-surface-variant max-w-xl">Execute high-stakes digital draws with the Emerald Sentinel algorithm. Real-time participant verification and winner transparency.</p>
+</div>
+<button class="bg-primary text-on-primary px-8 py-4 rounded-xl font-sora font-bold text-sm emerald-glow hover:scale-[0.98] transition-transform flex items-center gap-2">
+<span class="material-symbols-outlined">add_circle</span> NEW CAMPAIGN
+                </button>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Left: Lottery Table (Asymmetric Focus) -->
+<div class="col-span-12 lg:col-span-8">
+<div class="bg-surface-container rounded-2xl overflow-hidden border border-outline-variant/10">
+<div class="px-6 py-4 bg-surface-container-high flex justify-between items-center">
+<h2 class="font-sora font-semibold text-lg">Active Undian</h2>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">filter_list</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-on-surface-variant border-b border-outline-variant/10">
+<th class="px-6 py-4 font-mono text-xs tracking-widest uppercase">Judul Undian</th>
+<th class="px-6 py-4 font-mono text-xs tracking-widest uppercase">Hadiah Utama</th>
+<th class="px-6 py-4 font-mono text-xs tracking-widest uppercase">Peserta</th>
+<th class="px-6 py-4 font-mono text-xs tracking-widest uppercase">Tipe Draw</th>
+<th class="px-6 py-4 font-mono text-xs tracking-widest uppercase">Tanggal Draw</th>
+<th class="px-6 py-4"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-bright/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="font-sora font-semibold text-on-surface">Mega Emerald Rewards</span>
+<span class="text-xs text-primary/70">PROMO_ID: 992-X1</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="bg-secondary-container/20 text-secondary text-xs font-bold px-2 py-1 rounded-md inline-block">BMW iX M60</div>
+</td>
+<td class="px-6 py-5 font-mono text-sm text-on-surface">12,450</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-1.5 text-xs font-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> RANDOM_GEN
+                                            </span>
+</td>
+<td class="px-6 py-5 font-mono text-sm text-tertiary">2024-11-20</td>
+<td class="px-6 py-5 text-right">
+<button class="opacity-0 group-hover:opacity-100 bg-primary/10 text-primary px-4 py-2 rounded-lg text-xs font-bold transition-all border border-primary/20">EXECUTE</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-bright/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="font-sora font-semibold text-on-surface">Year-End Jackpot</span>
+<span class="text-xs text-primary/70">PROMO_ID: 104-Y0</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="bg-secondary-container/20 text-secondary text-xs font-bold px-2 py-1 rounded-md inline-block">1 BTC CASH</div>
+</td>
+<td class="px-6 py-5 font-mono text-sm text-on-surface">8,102</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-1.5 text-xs font-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> WEIGHTED_PROB
+                                            </span>
+</td>
+<td class="px-6 py-5 font-mono text-sm text-tertiary">2024-12-31</td>
+<td class="px-6 py-5 text-right">
+<button class="opacity-0 group-hover:opacity-100 bg-primary/10 text-primary px-4 py-2 rounded-lg text-xs font-bold transition-all border border-primary/20">EXECUTE</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-bright/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="font-sora font-semibold text-on-surface">Loyalty Tier S+</span>
+<span class="text-xs text-primary/70">PROMO_ID: 442-Z2</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="bg-secondary-container/20 text-secondary text-xs font-bold px-2 py-1 rounded-md inline-block">ROLEX DAYTONA</div>
+</td>
+<td class="px-6 py-5 font-mono text-sm text-on-surface">450</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-1.5 text-xs font-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> EXCLUSIVE_POOL
+                                            </span>
+</td>
+<td class="px-6 py-5 font-mono text-sm text-tertiary">2024-11-25</td>
+<td class="px-6 py-5 text-right">
+<button class="opacity-0 group-hover:opacity-100 bg-primary/10 text-primary px-4 py-2 rounded-lg text-xs font-bold transition-all border border-primary/20">EXECUTE</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right: Stats & Cards -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<div class="bg-primary/5 border border-primary/20 p-6 rounded-2xl relative overflow-hidden group">
+<div class="absolute top-[-20px] right-[-20px] w-32 h-32 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all"></div>
+<span class="font-mono text-[10px] tracking-[0.2em] text-primary uppercase">System Status</span>
+<h4 class="text-2xl font-sora font-bold text-on-surface mt-2 mb-1">99.9% Integrity</h4>
+<p class="text-on-surface-variant text-sm">Blockchain-verified random seed generator is active and operational.</p>
+<div class="mt-6 flex items-center justify-between">
+<span class="text-xs font-mono text-primary-dim">LATENCY: 4ms</span>
+<span class="material-symbols-outlined text-primary">verified_user</span>
+</div>
+</div>
+<div class="bg-surface-container rounded-2xl p-6 border border-outline-variant/10">
+<h3 class="font-sora font-semibold text-on-surface mb-4">Historical Yield</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-sm text-on-surface-variant">Total Distributed</span>
+<span class="font-mono text-primary">$4.2M</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[72%]"></div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm text-on-surface-variant">Winners Validated</span>
+<span class="font-mono text-tertiary">1,244</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- DRAW MODAL OVERLAY (Active/Reveal State) -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-4">
+<div class="absolute inset-0 bg-surface/90 backdrop-blur-2xl"></div>
+<!-- Draw Process Modal -->
+<div class="relative w-full max-w-2xl bg-surface-container-high rounded-[32px] border border-primary/20 overflow-hidden shadow-[0_0_100px_-20px_rgba(105,246,184,0.2)]">
+<!-- Progress Track -->
+<div class="absolute top-0 left-0 w-full h-1 bg-surface-container-highest">
+<div class="h-full bg-primary w-[85%] transition-all"></div>
+</div>
+<div class="p-12 flex flex-col items-center text-center">
+<div class="mb-8">
+<span class="material-symbols-outlined text-primary text-6xl animate-pulse">refresh</span>
+</div>
+<div class="space-y-2 mb-10">
+<h2 class="text-3xl font-sora font-extrabold text-on-surface">SHUFFLING ENTRIES</h2>
+<p class="font-mono text-xs text-primary-dim tracking-widest uppercase">Processing 12,450 unique hashed IDs</p>
+</div>
+<!-- Animated Shuffle Area (Conceptual Design) -->
+<div class="w-full h-40 relative flex items-center justify-center overflow-hidden bg-surface-container-lowest/50 rounded-2xl border border-outline-variant/20 mb-10">
+<div class="flex flex-col gap-2 opacity-40 blur-[2px]">
+<div class="font-mono text-xs text-slate-500">ID_778X_9921_002</div>
+<div class="font-mono text-xs text-slate-500">ID_441A_1120_551</div>
+<div class="font-mono text-xl text-primary font-bold">ID_REVEALING_SYSTEM...</div>
+<div class="font-mono text-xs text-slate-500">ID_129K_8821_419</div>
+</div>
+<!-- Central Winner Highlight Glass Card -->
+<div class="absolute inset-0 flex items-center justify-center p-4">
+<div class="w-full max-w-sm glass-panel border border-primary/40 rounded-xl py-6 emerald-glow flex flex-col items-center">
+<span class="text-[10px] font-mono text-tertiary tracking-[0.3em] uppercase mb-1">Potential Match</span>
+<div class="text-2xl font-mono font-bold text-on-surface">#JBR-0092384-XP</div>
+</div>
+</div>
+</div>
+<div class="flex gap-4 w-full">
+<button class="flex-1 bg-surface-container-highest text-on-surface font-bold py-4 rounded-xl font-sora text-sm hover:bg-surface-bright transition-colors">
+                        ABORT DRAW
+                    </button>
+<button class="flex-1 bg-primary text-on-primary font-bold py-4 rounded-xl font-sora text-sm emerald-glow hover:scale-[1.02] transition-transform">
+                        UMUMKAN PEMENANG
+                    </button>
+</div>
+</div>
+<!-- Footer Decorative -->
+<div class="px-12 py-6 bg-surface-container-highest/50 border-t border-outline-variant/10 flex justify-between items-center">
+<div class="flex gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-primary/20"></div>
+<div class="w-2 h-2 rounded-full bg-primary/20"></div>
+</div>
+<span class="font-mono text-[10px] text-on-surface-variant">ALGO: SENTINEL-X-GEN3</span>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#004955",
+                    "on-tertiary": "#005360",
+                    "surface-container-lowest": "#000000",
+                    "outline": "#6e7588",
+                    "on-secondary-fixed": "#004939",
+                    "secondary-container": "#006b56",
+                    "on-secondary": "#005d4a",
+                    "on-tertiary-fixed-variant": "#005360",
+                    "on-secondary-container": "#defff2",
+                    "surface-container-high": "#161f33",
+                    "surface-tint": "#69f6b8",
+                    "primary-fixed-dim": "#58e7ab",
+                    "secondary": "#5afcd2",
+                    "on-surface-variant": "#a4abbf",
+                    "on-tertiary-fixed": "#00343c",
+                    "on-primary-fixed": "#00452d",
+                    "surface-dim": "#070e1d",
+                    "surface-container-highest": "#1b263b",
+                    "error-dim": "#d7383b",
+                    "inverse-on-surface": "#4e5566",
+                    "tertiary-fixed": "#00dcfd",
+                    "tertiary-fixed-dim": "#00cdeb",
+                    "tertiary": "#77e6ff",
+                    "outline-variant": "#414859",
+                    "inverse-surface": "#f9f9ff",
+                    "secondary-fixed-dim": "#47edc4",
+                    "tertiary-container": "#00dcfd",
+                    "surface-container": "#11192b",
+                    "inverse-primary": "#006d4a",
+                    "error-container": "#9f0519",
+                    "on-primary-fixed-variant": "#006544",
+                    "primary-dim": "#58e7ab",
+                    "on-primary": "#005a3c",
+                    "on-error": "#490006",
+                    "primary": "#69f6b8",
+                    "secondary-dim": "#47edc4",
+                    "surface-variant": "#1b263b",
+                    "on-surface": "#dfe5fa",
+                    "error": "#ff716c",
+                    "surface": "#070e1d",
+                    "on-secondary-fixed-variant": "#006853",
+                    "on-background": "#dfe5fa",
+                    "surface-bright": "#212c43",
+                    "tertiary-dim": "#00cdeb",
+                    "primary-container": "#06b77f",
+                    "primary-fixed": "#69f6b8",
+                    "on-error-container": "#ffa8a3",
+                    "surface-container-low": "#0b1323",
+                    "secondary-fixed": "#5afcd2",
+                    "background": "#070e1d",
+                    "on-primary-container": "#002919"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Sora", "Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Space Grotesk"],
+                    "mono": ["JetBrains Mono"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(27, 38, 59, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .emerald-glow {
+            box-shadow: 0 0 20px rgba(105, 246, 184, 0.15);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #414859;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- SideNavBar (JSON Derived) -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-950 flex flex-col h-full py-8 px-4 z-40 hidden md:flex">
+<div class="mb-10 px-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center emerald-glow">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<div>
+<h1 class="text-emerald-400 font-bold font-sora tracking-tighter text-lg">Minpo Sentinel</h1>
+<p class="text-[10px] text-slate-500 uppercase tracking-widest font-mono">Active Protocol: v4.2</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<div class="flex items-center gap-3 bg-emerald-500/10 text-emerald-400 rounded-lg px-4 py-3 border-r-2 border-emerald-400 transition-all">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-sora font-medium text-xs">Command Center</span>
+</div>
+<div class="flex items-center gap-3 text-slate-500 hover:text-slate-300 hover:bg-slate-900 px-4 py-3 rounded-lg transition-all group">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="font-sora font-medium text-xs">Traffic Analysis</span>
+</div>
+<div class="flex items-center gap-3 text-slate-500 hover:text-slate-300 hover:bg-slate-900 px-4 py-3 rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="list_alt">list_alt</span>
+<span class="font-sora font-medium text-xs">Asset Registry</span>
+</div>
+<div class="flex items-center gap-3 text-slate-500 hover:text-slate-300 hover:bg-slate-900 px-4 py-3 rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="campaign">campaign</span>
+<span class="font-sora font-medium text-xs">Announcements</span>
+</div>
+<div class="flex items-center gap-3 text-slate-500 hover:text-slate-300 hover:bg-slate-900 px-4 py-3 rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="monitor_heart">monitor_heart</span>
+<span class="font-sora font-medium text-xs">System Health</span>
+</div>
+</nav>
+<div class="mt-auto space-y-4 pt-4">
+<button class="w-full bg-primary-container text-on-primary-container font-sora font-bold text-xs py-3 rounded-xl emerald-glow transition-transform active:scale-95">
+                    New Announcement
+                </button>
+<div class="space-y-1">
+<div class="flex items-center gap-3 text-slate-500 hover:text-slate-300 px-4 py-2">
+<span class="material-symbols-outlined text-sm" data-icon="help_outline">help_outline</span>
+<span class="font-sora font-medium text-[10px] uppercase tracking-wider">Support</span>
+</div>
+<div class="flex items-center gap-3 text-slate-500 hover:text-slate-300 px-4 py-2">
+<span class="material-symbols-outlined text-sm" data-icon="terminal">terminal</span>
+<span class="font-sora font-medium text-[10px] uppercase tracking-wider">Terminal</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-64 flex flex-col h-screen overflow-hidden bg-surface">
+<!-- TopNavBar (JSON Derived) -->
+<header class="bg-slate-900/40 backdrop-blur-xl docked full-width top-0 sticky z-50 shadow-sm shadow-emerald-900/10 flex justify-between items-center w-full px-8 py-4">
+<div class="flex items-center gap-8">
+<h2 class="text-xl font-bold tracking-tighter text-emerald-400 font-sora">Overview</h2>
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-emerald-400 font-semibold border-b-2 border-emerald-400 pb-1 font-sora tracking-tight text-sm" href="#">Network</a>
+<a class="text-slate-400 font-medium hover:text-emerald-300 transition-colors font-sora tracking-tight text-sm" href="#">Security</a>
+<a class="text-slate-400 font-medium hover:text-emerald-300 transition-colors font-sora tracking-tight text-sm" href="#">Logs</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant/30"></div>
+<div class="flex items-center gap-3 pl-2 group cursor-pointer">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-on-surface">Admin Utama</p>
+<p class="text-[10px] text-emerald-400/70 font-mono">Superuser</p>
+</div>
+<img alt="Administrator Profile" class="w-10 h-10 rounded-full border-2 border-emerald-400/20 group-hover:border-emerald-400 transition-all" data-alt="close-up portrait of professional male administrator in tech environment with cinematic neon lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF6ylqrDJo_iC5tA-_aihwMl8-7mKkLYZZt_HJe230rfBTRCo5RLwI1zmeOhefXjfz4Gs_I9TuqzTCv2Bjur6Bk0ZIPisCnj_HMFWSo1nEP2kAdoJ7DyxLL-WgsPSVCm5281KACHzZhI6l-EfZUjRdyIgRXwC2jmCXGhZ2H9S0pme5KaMuVJ7o0rB1rC9Aopq3H5VkhKzKpi3kRYfoaITaqekGlJY0K7gTnUFbi8mSNNNL-t2RA4Oiq6NWRuQZ4QPA2FhDt3v--4o"/>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-6 lg:p-8 space-y-8">
+<!-- 4 Stat Cards: Asymmetric Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface-container rounded-2xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-5xl text-primary" data-icon="group">group</span>
+</div>
+<p class="text-on-surface-variant text-xs font-label uppercase tracking-widest mb-2">Total Pelanggan Aktif</p>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-mono font-bold text-on-surface">12,842</h3>
+<span class="text-primary text-xs font-mono font-medium">+2.4%</span>
+</div>
+<div class="mt-4 h-1 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[78%]"></div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container rounded-2xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-5xl text-error" data-icon="confirmation_number">confirmation_number</span>
+</div>
+<p class="text-on-surface-variant text-xs font-label uppercase tracking-widest mb-2">Tiket Masuk Hari Ini</p>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-mono font-bold text-on-surface">47</h3>
+<span class="text-error text-xs font-mono font-medium">+12%</span>
+</div>
+<div class="mt-4 flex gap-1 items-end h-6">
+<div class="w-2 h-2 bg-error/40 rounded-sm"></div>
+<div class="w-2 h-4 bg-error/40 rounded-sm"></div>
+<div class="w-2 h-3 bg-error/40 rounded-sm"></div>
+<div class="w-2 h-6 bg-error rounded-sm"></div>
+<div class="w-2 h-5 bg-error/40 rounded-sm"></div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container rounded-2xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-5xl text-tertiary" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<p class="text-on-surface-variant text-xs font-label uppercase tracking-widest mb-2">Promo &amp; Undian Aktif</p>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-mono font-bold text-on-surface">06</h3>
+<span class="text-tertiary text-xs font-mono font-medium">Running</span>
+</div>
+<div class="mt-4 flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-surface-container bg-emerald-500"></div>
+<div class="w-6 h-6 rounded-full border-2 border-surface-container bg-blue-500"></div>
+<div class="w-6 h-6 rounded-full border-2 border-surface-container bg-purple-500"></div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-high rounded-2xl p-6 relative overflow-hidden border-l-4 border-secondary emerald-glow group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-5xl text-secondary" data-icon="chat_bubble">chat_bubble</span>
+</div>
+<p class="text-secondary text-xs font-label uppercase tracking-widest mb-2">Chat Belum Dibalas</p>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-mono font-bold text-on-surface">18</h3>
+<span class="animate-pulse w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+<p class="mt-4 text-[10px] font-mono text-on-surface-variant italic">Avg. Wait: 4m 12s</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Main Chart Section -->
+<div class="lg:col-span-8 bg-surface-container rounded-3xl p-8">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="text-xl font-headline font-bold text-on-surface">Aktivitas Login User</h3>
+<p class="text-xs text-on-surface-variant font-mono mt-1">Global Authentication Traffic (Last 7 Days)</p>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1 text-[10px] font-bold uppercase tracking-tighter bg-surface-container-highest text-on-surface rounded-lg">Week</button>
+<button class="px-3 py-1 text-[10px] font-bold uppercase tracking-tighter text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors">Month</button>
+</div>
+</div>
+<!-- Pseudo Chart with Gradients -->
+<div class="relative h-64 w-full mt-4 flex items-end justify-between px-2">
+<!-- Background Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between py-2 pointer-events-none opacity-5">
+<div class="w-full h-[1px] bg-on-surface"></div>
+<div class="w-full h-[1px] bg-on-surface"></div>
+<div class="w-full h-[1px] bg-on-surface"></div>
+<div class="w-full h-[1px] bg-on-surface"></div>
+</div>
+<!-- Area Gradient (Simulated) -->
+<div class="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-primary/10 to-transparent pointer-events-none"></div>
+<!-- Data Bars for Visual Representation -->
+<div class="w-8 bg-gradient-to-t from-primary-container to-secondary h-[45%] rounded-t-lg relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-bright px-2 py-1 rounded text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity">1.2k</div>
+</div>
+<div class="w-8 bg-gradient-to-t from-primary-container to-secondary h-[65%] rounded-t-lg relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-bright px-2 py-1 rounded text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity">2.8k</div>
+</div>
+<div class="w-8 bg-gradient-to-t from-primary-container to-secondary h-[55%] rounded-t-lg relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-bright px-2 py-1 rounded text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity">2.1k</div>
+</div>
+<div class="w-8 bg-gradient-to-t from-primary-container to-secondary h-[85%] rounded-t-lg relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-bright px-2 py-1 rounded text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity">4.5k</div>
+</div>
+<div class="w-8 bg-gradient-to-t from-primary-container to-secondary h-[75%] rounded-t-lg relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-bright px-2 py-1 rounded text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity">3.9k</div>
+</div>
+<div class="w-8 bg-gradient-to-t from-primary-container to-secondary h-[95%] rounded-t-lg relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-bright px-2 py-1 rounded text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity">5.2k</div>
+</div>
+<div class="w-8 bg-gradient-to-t from-primary-container to-secondary h-[60%] rounded-t-lg relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-bright px-2 py-1 rounded text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity">2.4k</div>
+</div>
+</div>
+<div class="flex justify-between mt-4 px-2 text-[10px] font-mono text-on-surface-variant uppercase tracking-widest">
+<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+</div>
+</div>
+<!-- Right Panel: Priority Alerts (Glassmorphism) -->
+<div class="lg:col-span-4 glass-panel rounded-3xl p-6 border border-white/5 flex flex-col">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">warning</span>
+<h3 class="text-lg font-headline font-bold text-on-surface">Alert Prioritas</h3>
+</div>
+<div class="flex-1 space-y-4 overflow-y-auto pr-2 custom-scrollbar">
+<!-- Alert Item -->
+<div class="bg-surface-container-highest/60 rounded-xl p-4 border-l-2 border-error">
+<div class="flex justify-between items-start mb-1">
+<span class="text-[10px] font-mono text-error font-bold uppercase">Ticket #9921</span>
+<span class="text-[10px] font-mono text-on-surface-variant">2h 15m ago</span>
+</div>
+<p class="text-sm font-headline font-semibold text-on-surface">Koneksi Putus - Area Cibubur</p>
+<div class="mt-3 flex items-center justify-between">
+<div class="flex -space-x-1">
+<div class="w-5 h-5 rounded-full bg-slate-700 border border-surface"></div>
+<div class="w-5 h-5 rounded-full bg-slate-600 border border-surface"></div>
+</div>
+<button class="text-[10px] font-bold text-tertiary flex items-center gap-1 uppercase tracking-tight">Escalate <span class="material-symbols-outlined text-[14px]">arrow_forward</span></button>
+</div>
+</div>
+<!-- Alert Item -->
+<div class="bg-surface-container-highest/60 rounded-xl p-4 border-l-2 border-error">
+<div class="flex justify-between items-start mb-1">
+<span class="text-[10px] font-mono text-error font-bold uppercase">Ticket #9918</span>
+<span class="text-[10px] font-mono text-on-surface-variant">3h 02m ago</span>
+</div>
+<p class="text-sm font-headline font-semibold text-on-surface">Latency Tinggi - IP 103.21.x.x</p>
+<div class="mt-3 flex items-center justify-between">
+<div class="flex -space-x-1">
+<div class="w-5 h-5 rounded-full bg-slate-700 border border-surface"></div>
+</div>
+<button class="text-[10px] font-bold text-tertiary flex items-center gap-1 uppercase tracking-tight">Escalate <span class="material-symbols-outlined text-[14px]">arrow_forward</span></button>
+</div>
+</div>
+<!-- Alert Item -->
+<div class="bg-surface-container-highest/60 rounded-xl p-4 border-l-2 border-secondary">
+<div class="flex justify-between items-start mb-1">
+<span class="text-[10px] font-mono text-secondary font-bold uppercase">Chat Pending</span>
+<span class="text-[10px] font-mono text-on-surface-variant">45m ago</span>
+</div>
+<p class="text-sm font-headline font-semibold text-on-surface">User: Budi Santoso (Billing Query)</p>
+<div class="mt-3 flex items-center justify-between">
+<span class="text-[10px] font-mono text-secondary/70 italic">Pending Transfer...</span>
+<button class="text-[10px] font-bold text-secondary flex items-center gap-1 uppercase tracking-tight">Claim <span class="material-symbols-outlined text-[14px]">chat_bubble</span></button>
+</div>
+</div>
+</div>
+<button class="mt-6 w-full py-3 bg-surface-bright rounded-xl text-on-surface font-headline font-bold text-xs hover:bg-surface-container-highest transition-colors uppercase tracking-widest">
+                            View All Incidents
+                        </button>
+</div>
+</div>
+<!-- Bottom Summary Section -->
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-8 pb-12">
+<!-- Tickets Table -->
+<div class="bg-surface-container rounded-3xl p-6 overflow-hidden">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline font-bold text-on-surface">Newest Tickets</h3>
+<button class="text-xs font-mono text-primary flex items-center gap-1">SEE ALL <span class="material-symbols-outlined text-sm">open_in_new</span></button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-[10px] font-label text-on-surface-variant uppercase tracking-widest border-b border-outline-variant/20">
+<th class="pb-3 px-2">Ticket ID</th>
+<th class="pb-3 px-2">Subject</th>
+<th class="pb-3 px-2">Status</th>
+<th class="pb-3 px-2">Created</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="group hover:bg-surface-container-high transition-colors">
+<td class="py-4 px-2 font-mono text-xs">#TK-9821</td>
+<td class="py-4 px-2 text-on-surface font-medium">Instalasi Baru - Kelapa Gading</td>
+<td class="py-4 px-2">
+<span class="px-3 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded-full uppercase tracking-tighter">Open</span>
+</td>
+<td class="py-4 px-2 font-mono text-[10px] text-on-surface-variant">10:24 AM</td>
+</tr>
+<tr class="group hover:bg-surface-container-high transition-colors">
+<td class="py-4 px-2 font-mono text-xs">#TK-9819</td>
+<td class="py-4 px-2 text-on-surface font-medium">Upgrade Speed Paket Home</td>
+<td class="py-4 px-2">
+<span class="px-3 py-1 bg-tertiary/10 text-tertiary text-[10px] font-bold rounded-full uppercase tracking-tighter">Pending</span>
+</td>
+<td class="py-4 px-2 font-mono text-[10px] text-on-surface-variant">09:15 AM</td>
+</tr>
+<tr class="group hover:bg-surface-container-high transition-colors">
+<td class="py-4 px-2 font-mono text-xs">#TK-9815</td>
+<td class="py-4 px-2 text-on-surface font-medium">ONT Replacement</td>
+<td class="py-4 px-2">
+<span class="px-3 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded-full uppercase tracking-tighter">In Progress</span>
+</td>
+<td class="py-4 px-2 font-mono text-[10px] text-on-surface-variant">08:42 AM</td>
+</tr>
+<tr class="group hover:bg-surface-container-high transition-colors">
+<td class="py-4 px-2 font-mono text-xs">#TK-9810</td>
+<td class="py-4 px-2 text-on-surface font-medium">Refund Request #AR11</td>
+<td class="py-4 px-2">
+<span class="px-3 py-1 bg-error/10 text-error text-[10px] font-bold rounded-full uppercase tracking-tighter">Overdue</span>
+</td>
+<td class="py-4 px-2 font-mono text-[10px] text-on-surface-variant">07:55 AM</td>
+</tr>
+<tr class="group hover:bg-surface-container-high transition-colors">
+<td class="py-4 px-2 font-mono text-xs">#TK-9802</td>
+<td class="py-4 px-2 text-on-surface font-medium">Loss Power - Central Hub</td>
+<td class="py-4 px-2">
+<span class="px-3 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded-full uppercase tracking-tighter">Open</span>
+</td>
+<td class="py-4 px-2 font-mono text-[10px] text-on-surface-variant">05:20 AM</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Pending Chats Section -->
+<div class="bg-surface-container rounded-3xl p-6 overflow-hidden">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline font-bold text-on-surface">Live Chat Queue</h3>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[10px] font-mono text-primary font-bold">12 AGENTS ONLINE</span>
+</div>
+</div>
+<div class="space-y-3">
+<!-- Chat Row -->
+<div class="flex items-center gap-4 p-3 rounded-2xl hover:bg-surface-container-high transition-all cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary font-bold">JD</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<p class="text-sm font-bold text-on-surface">John Doe</p>
+<span class="text-[10px] font-mono text-on-surface-variant">4m ago</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate w-48">"Halo, internet saya mati dari tadi malam..."</p>
+</div>
+<span class="px-3 py-1 bg-secondary/20 text-secondary text-[10px] font-bold rounded-full uppercase tracking-tighter">Mobile</span>
+</div>
+<!-- Chat Row -->
+<div class="flex items-center gap-4 p-3 rounded-2xl hover:bg-surface-container-high transition-all cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-tertiary font-bold">AM</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<p class="text-sm font-bold text-on-surface">Anita Mega</p>
+<span class="text-[10px] font-mono text-on-surface-variant">12m ago</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate w-48">"Bisa bantu ganti password wifi?"</p>
+</div>
+<span class="px-3 py-1 bg-on-tertiary/20 text-tertiary text-[10px] font-bold rounded-full uppercase tracking-tighter">Web</span>
+</div>
+<!-- Chat Row -->
+<div class="flex items-center gap-4 p-3 rounded-2xl hover:bg-surface-container-high transition-all cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary font-bold">RS</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<p class="text-sm font-bold text-on-surface">Rudi Salim</p>
+<span class="text-[10px] font-mono text-on-surface-variant">18m ago</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate w-48">"Saya sudah bayar tapi belum aktif."</p>
+</div>
+<span class="px-3 py-1 bg-secondary/20 text-secondary text-[10px] font-bold rounded-full uppercase tracking-tighter">Mobile</span>
+</div>
+<!-- Chat Row -->
+<div class="flex items-center gap-4 p-3 rounded-2xl hover:bg-surface-container-high transition-all cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface font-bold">LW</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<p class="text-sm font-bold text-on-surface">Lia Wong</p>
+<span class="text-[10px] font-mono text-on-surface-variant">25m ago</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate w-48">"Terima kasih atas bantuannya tadi."</p>
+</div>
+<span class="px-3 py-1 bg-on-surface-variant/20 text-on-surface-variant text-[10px] font-bold rounded-full uppercase tracking-tighter">Closed</span>
+</div>
+<!-- Chat Row -->
+<div class="flex items-center gap-4 p-3 rounded-2xl hover:bg-surface-container-high transition-all cursor-pointer border border-primary/20">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold italic">?</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<p class="text-sm font-bold text-primary">Guest #1142</p>
+<span class="text-[10px] font-mono text-primary animate-pulse">New Message</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate w-48 font-bold">"Saya mau tanya promo bulan depan..."</p>
+</div>
+<span class="px-3 py-1 bg-secondary/20 text-secondary text-[10px] font-bold rounded-full uppercase tracking-tighter">Mobile</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Mobile Nav Anchor (JSON Perspective) -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-slate-900/90 backdrop-blur-xl flex justify-around items-center py-3 border-t border-white/5 z-50">
+<button class="flex flex-col items-center gap-1 text-emerald-400">
+<span class="material-symbols-outlined" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-[10px] font-sora">Overview</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="text-[10px] font-sora">Traffic</span>
+</button>
+<div class="relative -top-6">
+<button class="w-14 h-14 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center emerald-glow shadow-lg shadow-emerald-500/20">
+<span class="material-symbols-outlined text-2xl" data-icon="add">add</span>
+</button>
+</div>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined" data-icon="list_alt">list_alt</span>
+<span class="text-[10px] font-sora">Assets</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined" data-icon="monitor_heart">monitor_heart</span>
+<span class="text-[10px] font-sora">Health</span>
+</button>
+</div>
+</body></html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Sora:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#00452d",
+                        "primary-fixed": "#69f6b8",
+                        "on-primary-container": "#002919",
+                        "tertiary": "#77e6ff",
+                        "primary-fixed-dim": "#58e7ab",
+                        "inverse-primary": "#006d4a",
+                        "surface-container-highest": "#1b263b",
+                        "primary-container": "#06b77f",
+                        "secondary-dim": "#47edc4",
+                        "tertiary-container": "#00dcfd",
+                        "tertiary-fixed": "#00dcfd",
+                        "inverse-on-surface": "#4e5566",
+                        "outline": "#6e7588",
+                        "surface-dim": "#070e1d",
+                        "secondary-fixed-dim": "#47edc4",
+                        "error": "#ff716c",
+                        "on-primary": "#005a3c",
+                        "tertiary-dim": "#00cdeb",
+                        "on-surface": "#dfe5fa",
+                        "primary-dim": "#58e7ab",
+                        "on-secondary": "#005d4a",
+                        "surface-container-lowest": "#000000",
+                        "surface-bright": "#212c43",
+                        "on-error": "#490006",
+                        "on-secondary-fixed": "#004939",
+                        "on-background": "#dfe5fa",
+                        "on-tertiary-container": "#004955",
+                        "surface-container-high": "#161f33",
+                        "secondary": "#5afcd2",
+                        "on-tertiary": "#005360",
+                        "on-tertiary-fixed-variant": "#005360",
+                        "on-secondary-fixed-variant": "#006853",
+                        "secondary-container": "#006b56",
+                        "outline-variant": "#414859",
+                        "tertiary-fixed-dim": "#00cdeb",
+                        "background": "#070e1d",
+                        "surface-container": "#11192b",
+                        "inverse-surface": "#f9f9ff",
+                        "secondary-fixed": "#5afcd2",
+                        "error-dim": "#d7383b",
+                        "on-tertiary-fixed": "#00343c",
+                        "on-secondary-container": "#defff2",
+                        "error-container": "#9f0519",
+                        "on-error-container": "#ffa8a3",
+                        "surface-variant": "#1b263b",
+                        "surface": "#070e1d",
+                        "surface-container-low": "#0b1323",
+                        "primary": "#69f6b8",
+                        "surface-tint": "#69f6b8",
+                        "on-primary-fixed-variant": "#006544",
+                        "on-surface-variant": "#a4abbf"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans", "Sora"],
+                        "body": ["Inter", "Sora"],
+                        "label": ["Space Grotesk", "JetBrains Mono"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Sora', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar -->
+<nav class="flex justify-between items-center px-8 w-full sticky top-0 z-50 bg-[#070e1d] dark:bg-[#070e1d] font-plus-jakarta-sans antialiased h-16">
+<div class="text-2xl font-black tracking-tighter text-[#69f6b8]">JBR Minpo</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-slate-400 font-medium hover:bg-[#161f33] transition-colors duration-300 px-3 py-1 rounded-lg" href="#">Overview</a>
+<a class="text-[#69f6b8] font-bold border-b-2 border-[#69f6b8] px-3 py-1" href="#">System Audit</a>
+<a class="text-slate-400 font-medium hover:bg-[#161f33] transition-colors duration-300 px-3 py-1 rounded-lg" href="#">Users</a>
+</div>
+<div class="flex items-center space-x-4">
+<button class="material-symbols-outlined text-[#69f6b8] hover:bg-[#161f33] p-2 rounded-full transition-all">settings</button>
+<button class="material-symbols-outlined text-[#69f6b8] hover:bg-[#161f33] p-2 rounded-full transition-all">notifications_active</button>
+<div class="h-8 w-8 rounded-full overflow-hidden bg-surface-container-highest border border-outline-variant">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="High-resolution professional avatar of a system administrator with a tech-focused neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWSxbbg-jTO3koNOfVLDX5csvZ0r32D8YlKTeVJRkR0a8peQQHG92wO_ZXl-Rum69Pkyya7b6unYhEjVJTj3jlL_Xfc-YbL4tcHM-wJsHREZXGdqipK2cBgKnqsCDuEL7q4caE9_m3IvNSjVQ2DD-TTNrL49Z57cxB9vJ2bTzJlXG7ZF23JM-6yxyy4ivCgyXKUTcapS1xDVOFGV5nORjqu7tihpuXY2qWQSCelIt3jgO4qGa2cUA0Kz28W_2Gu_HKblm7lAnT0bM"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="flex flex-col h-full fixed left-0 top-0 pt-16 bg-[#11192b] dark:bg-[#11192b] h-screen w-72 z-40">
+<div class="px-6 py-8 flex items-center space-x-4">
+<div class="w-12 h-12 rounded-xl bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+<div>
+<h3 class="text-[#69f6b8] font-bold text-sm">Command Center</h3>
+<p class="text-slate-500 text-xs font-mono uppercase tracking-widest">Sentinel Node 07</p>
+</div>
+</div>
+<div class="flex-1 space-y-1">
+<a class="text-slate-500 px-6 py-4 flex items-center space-x-3 hover:text-[#5afcd2] hover:bg-[#161f33] transition-all duration-200" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-plus-jakarta-sans text-sm font-medium">AI Config</span>
+</a>
+<a class="text-slate-500 px-6 py-4 flex items-center space-x-3 hover:text-[#5afcd2] hover:bg-[#161f33] transition-all duration-200" href="#">
+<span class="material-symbols-outlined">palette</span>
+<span class="font-plus-jakarta-sans text-sm font-medium">Branding</span>
+</a>
+<a class="text-[#69f6b8] bg-[#161f33] border-r-4 border-[#69f6b8] px-6 py-4 flex items-center space-x-3" href="#">
+<span class="material-symbols-outlined">terminal</span>
+<span class="font-plus-jakarta-sans text-sm font-medium">System Audit</span>
+</a>
+<a class="text-slate-500 px-6 py-4 flex items-center space-x-3 hover:text-[#5afcd2] hover:bg-[#161f33] transition-all duration-200" href="#">
+<span class="material-symbols-outlined">lan</span>
+<span class="font-plus-jakarta-sans text-sm font-medium">Network</span>
+</a>
+<a class="text-slate-500 px-6 py-4 flex items-center space-x-3 hover:text-[#5afcd2] hover:bg-[#161f33] transition-all duration-200" href="#">
+<span class="material-symbols-outlined">security</span>
+<span class="font-plus-jakarta-sans text-sm font-medium">Security</span>
+</a>
+</div>
+<div class="p-6 mt-auto">
+<button class="w-full py-3 bg-primary text-on-primary font-bold rounded-xl active:scale-95 transition-transform">
+                New Configuration
+            </button>
+<div class="mt-6 pt-6 border-t border-outline-variant/20">
+<a class="flex items-center space-x-3 text-slate-500 py-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">menu_book</span>
+<span class="text-xs">Documentation</span>
+</a>
+<a class="flex items-center space-x-3 text-slate-500 py-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">support_agent</span>
+<span class="text-xs">Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-72 p-8 min-h-screen bg-surface">
+<!-- Page Header -->
+<header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<nav class="flex items-center space-x-2 text-xs text-slate-500 mb-4 font-mono">
+<span>ROOT</span>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<span>SYSTEM</span>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<span class="text-primary-fixed">AUDIT_TRAIL</span>
+</nav>
+<h1 class="text-4xl font-extrabold tracking-tight text-on-surface">Log Aktivitas</h1>
+<p class="text-on-surface-variant mt-2 max-w-2xl">Surveilans infrastruktur tingkat tinggi. Semua mutasi data dan otentikasi dicatat dengan presisi mikrosekon.</p>
+</div>
+<div class="flex items-center space-x-3">
+<div class="flex flex-col items-end mr-4">
+<span class="text-[10px] font-bold text-primary uppercase tracking-[0.2em] mb-1">Status Keamanan</span>
+<div class="flex items-center space-x-2">
+<div class="h-2 w-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_#69f6b8]"></div>
+<span class="text-xs font-mono text-primary">ENCRYPTED_NODE_STABLE</span>
+</div>
+</div>
+<button class="bg-surface-container-high hover:bg-surface-bright text-on-surface px-5 py-3 rounded-xl border border-outline-variant/30 flex items-center space-x-3 transition-all active:scale-95">
+<span class="material-symbols-outlined text-tertiary">download</span>
+<span class="font-semibold text-sm">Export Log (CSV)</span>
+</button>
+</div>
+</header>
+<!-- Audit Table Shell -->
+<div class="bg-surface-container rounded-2xl overflow-hidden border border-outline-variant/10 shadow-2xl">
+<!-- Table Controls -->
+<div class="p-4 bg-surface-container-high/50 flex items-center justify-between border-b border-outline-variant/10">
+<div class="flex items-center space-x-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">search</span>
+<input class="bg-surface-container-lowest border-none rounded-lg pl-10 pr-4 py-2 text-xs w-64 focus:ring-1 focus:ring-primary text-on-surface placeholder:text-slate-600 font-mono" placeholder="Filter audit logs..." type="text"/>
+</div>
+<button class="text-xs font-bold text-slate-400 hover:text-on-surface flex items-center space-x-1 transition-colors">
+<span class="material-symbols-outlined text-sm">filter_alt</span>
+<span>ADVANCED_FILTER</span>
+</button>
+</div>
+<div class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">
+                    Menampilkan 120 dari 4.582 entri
+                </div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high/30">
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-[0.15em] text-slate-400">Admin Name</th>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-[0.15em] text-slate-400">Action Type</th>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-[0.15em] text-slate-400">Target Object</th>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-[0.15em] text-slate-400">Change Details</th>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-[0.15em] text-slate-400">IP Address</th>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-[0.15em] text-slate-400">Timestamp</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-bright/20 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded bg-primary-container/20 flex items-center justify-center text-primary font-bold text-xs">SA</div>
+<span class="font-semibold text-sm">Super Admin</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-blue-500/10 text-blue-400 text-[10px] font-mono font-bold border border-blue-500/20">UPDATE</span>
+</td>
+<td class="px-6 py-4">
+<span class="text-xs font-mono text-tertiary">firewall_v4_config</span>
+</td>
+<td class="px-6 py-4">
+<div class="font-mono text-xs text-slate-400 max-w-xs truncate" title="Modified rule chain ACCEPT to DROP on PORT 8080">
+                                    Modified rule chain <span class="text-primary-fixed">ACCEPT</span> to <span class="text-error">DROP</span> on <span class="text-on-surface">PORT 8080</span>
+</div>
+</td>
+<td class="px-6 py-4 font-mono text-xs text-on-surface">192.168.1.105</td>
+<td class="px-6 py-4 font-mono text-[11px] text-slate-500">2023-11-24 14:22:01.0042</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-bright/20 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded bg-secondary/20 flex items-center justify-center text-secondary font-bold text-xs">JD</div>
+<span class="font-semibold text-sm">Jane Doe</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-primary-container/10 text-primary-fixed text-[10px] font-mono font-bold border border-primary-container/20">CREATE</span>
+</td>
+<td class="px-6 py-4">
+<span class="text-xs font-mono text-tertiary">new_api_key_09</span>
+</td>
+<td class="px-6 py-4">
+<div class="font-mono text-xs text-slate-400">
+                                    Generated scoped API token for <span class="text-on-surface">CI/CD Pipeline</span>
+</div>
+</td>
+<td class="px-6 py-4 font-mono text-xs text-on-surface">10.0.4.52</td>
+<td class="px-6 py-4 font-mono text-[11px] text-slate-500">2023-11-24 14:15:58.8821</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-bright/20 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded bg-error-container/20 flex items-center justify-center text-error font-bold text-xs">RS</div>
+<span class="font-semibold text-sm">Root Sys</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-error/10 text-error text-[10px] font-mono font-bold border border-error/20">DELETE</span>
+</td>
+<td class="px-6 py-4">
+<span class="text-xs font-mono text-tertiary">stale_user_nodes</span>
+</td>
+<td class="px-6 py-4">
+<div class="font-mono text-xs text-slate-400">
+                                    Purged 42 records from <span class="text-on-surface">node_cache_v2</span>
+</div>
+</td>
+<td class="px-6 py-4 font-mono text-xs text-on-surface">127.0.0.1</td>
+<td class="px-6 py-4 font-mono text-[11px] text-slate-500">2023-11-24 14:10:12.0000</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-bright/20 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded bg-slate-700/50 flex items-center justify-center text-slate-300 font-bold text-xs">MS</div>
+<span class="font-semibold text-sm">Minpo Sentinel</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-tertiary/10 text-tertiary text-[10px] font-mono font-bold border border-tertiary/20">LOGIN</span>
+</td>
+<td class="px-6 py-4">
+<span class="text-xs font-mono text-tertiary">auth_session_772</span>
+</td>
+<td class="px-6 py-4">
+<div class="font-mono text-xs text-slate-400">
+                                    System login via <span class="text-on-surface">SSH-RSA Key: 4096</span>
+</div>
+</td>
+<td class="px-6 py-4 font-mono text-xs text-on-surface">45.221.12.8</td>
+<td class="px-6 py-4 font-mono text-[11px] text-slate-500">2023-11-24 13:58:44.2210</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-bright/20 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded bg-primary-container/20 flex items-center justify-center text-primary font-bold text-xs">SA</div>
+<span class="font-semibold text-sm">Super Admin</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-blue-500/10 text-blue-400 text-[10px] font-mono font-bold border border-blue-500/20">UPDATE</span>
+</td>
+<td class="px-6 py-4">
+<span class="text-xs font-mono text-tertiary">global_qos_policy</span>
+</td>
+<td class="px-6 py-4">
+<div class="font-mono text-xs text-slate-400">
+                                    Priority shift: <span class="text-on-surface">Video-Stream</span> to <span class="text-primary-fixed">Tier 1</span>
+</div>
+</td>
+<td class="px-6 py-4 font-mono text-xs text-on-surface">192.168.1.105</td>
+<td class="px-6 py-4 font-mono text-[11px] text-slate-500">2023-11-24 13:45:00.1192</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Shell -->
+<div class="p-6 flex items-center justify-between bg-surface-container-low">
+<div class="text-xs text-slate-500 font-mono">PAGE_CURSOR: 001/458</div>
+<div class="flex items-center space-x-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-highest text-slate-500 hover:text-primary transition-all">
+<span class="material-symbols-outlined">first_page</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-highest text-slate-500 hover:text-primary transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold text-xs">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-highest text-slate-400 hover:text-primary font-bold text-xs">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-highest text-slate-400 hover:text-primary font-bold text-xs">3</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-highest text-slate-500 hover:text-primary transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-highest text-slate-500 hover:text-primary transition-all">
+<span class="material-symbols-outlined">last_page</span>
+</button>
+</div>
+</div>
+</div>
+<!-- System Stats Asymmetric Footer -->
+<div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="md:col-span-2 bg-surface-container-high p-6 rounded-2xl border border-outline-variant/10">
+<h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Integrity Verification</h3>
+<div class="flex items-center justify-between">
+<div class="space-y-4">
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<div>
+<p class="text-xs font-mono text-primary">SHA-512_CHAIN_VALID</p>
+<p class="text-[10px] text-slate-500">Last verification: 30 seconds ago</p>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-tertiary">cloud_done</span>
+<div>
+<p class="text-xs font-mono text-tertiary">OFFSITE_REPLICATION_SYNCED</p>
+<p class="text-[10px] text-slate-500">Remote: Node_Phoenix_Primary</p>
+</div>
+</div>
+</div>
+<div class="hidden lg:block h-20 w-px bg-outline-variant/20"></div>
+<div class="hidden lg:flex flex-col items-end">
+<span class="text-5xl font-black text-on-surface opacity-10 font-mono">0.02ms</span>
+<span class="text-[10px] font-bold text-slate-500 uppercase">Avg Log Latency</span>
+</div>
+</div>
+</div>
+<div class="bg-primary-container p-6 rounded-2xl flex flex-col justify-between relative overflow-hidden group">
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-9xl text-on-primary-container/10 rotate-12 transition-transform group-hover:rotate-0 duration-500">history</span>
+<div>
+<h4 class="text-on-primary-container font-black text-lg leading-none">Retention<br/>Policy</h4>
+<p class="text-on-primary-container/70 text-xs mt-2">Logs are immutable and retained for 365 days by default.</p>
+</div>
+<div class="mt-4">
+<span class="text-3xl font-black text-on-primary-container font-mono">365<span class="text-sm font-normal">DAYS</span></span>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual Floating Indicator (Non-interactive) -->
+<div class="fixed bottom-8 right-8 z-50">
+<div class="bg-surface-bright/80 backdrop-blur-xl border border-outline-variant/30 px-6 py-4 rounded-2xl shadow-2xl flex items-center space-x-4">
+<div class="relative">
+<div class="w-3 h-3 rounded-full bg-primary animate-ping absolute inset-0"></div>
+<div class="w-3 h-3 rounded-full bg-primary relative"></div>
+</div>
+<div>
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">Live Monitor</p>
+<p class="text-sm font-mono text-on-surface">EVENT_STREAM_ACTIVE</p>
+</div>
+</div>
+</div>
+</body></html>

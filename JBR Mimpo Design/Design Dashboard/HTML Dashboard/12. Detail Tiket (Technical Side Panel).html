@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-dim": "#47edc4",
+                    "primary-container": "#06b77f",
+                    "surface-container-highest": "#1b263b",
+                    "inverse-on-surface": "#4e5566",
+                    "tertiary-fixed": "#00dcfd",
+                    "tertiary-container": "#00dcfd",
+                    "outline": "#6e7588",
+                    "tertiary": "#77e6ff",
+                    "primary-fixed-dim": "#58e7ab",
+                    "primary-fixed": "#69f6b8",
+                    "on-primary-container": "#002919",
+                    "on-primary-fixed": "#00452d",
+                    "inverse-primary": "#006d4a",
+                    "surface-container-lowest": "#000000",
+                    "on-secondary": "#005d4a",
+                    "on-error": "#490006",
+                    "surface-bright": "#212c43",
+                    "on-secondary-fixed": "#004939",
+                    "on-background": "#dfe5fa",
+                    "surface-container-high": "#161f33",
+                    "on-tertiary-container": "#004955",
+                    "on-primary": "#005a3c",
+                    "error": "#ff716c",
+                    "surface-dim": "#070e1d",
+                    "secondary-fixed-dim": "#47edc4",
+                    "tertiary-dim": "#00cdeb",
+                    "on-surface": "#dfe5fa",
+                    "primary-dim": "#58e7ab",
+                    "surface-container": "#11192b",
+                    "background": "#070e1d",
+                    "secondary-fixed": "#5afcd2",
+                    "inverse-surface": "#f9f9ff",
+                    "error-dim": "#d7383b",
+                    "secondary": "#5afcd2",
+                    "secondary-container": "#006b56",
+                    "outline-variant": "#414859",
+                    "on-tertiary-fixed-variant": "#005360",
+                    "on-secondary-fixed-variant": "#006853",
+                    "on-tertiary": "#005360",
+                    "tertiary-fixed-dim": "#00cdeb",
+                    "surface": "#070e1d",
+                    "surface-tint": "#69f6b8",
+                    "surface-container-low": "#0b1323",
+                    "primary": "#69f6b8",
+                    "on-surface-variant": "#a4abbf",
+                    "on-primary-fixed-variant": "#006544",
+                    "on-tertiary-fixed": "#00343c",
+                    "on-secondary-container": "#defff2",
+                    "error-container": "#9f0519",
+                    "surface-variant": "#1b263b",
+                    "on-error-container": "#ffa8a3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Sora", "sans-serif"],
+                    "body": ["Sora", "sans-serif"],
+                    "label": ["JetBrains Mono", "monospace"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Sora', sans-serif;
+            background-color: #070e1d;
+        }
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
+</head>
+<body class="text-on-background overflow-hidden h-screen flex">
+<!-- SideNavBar (Shared Component) -->
+<aside class="flex flex-col h-screen py-6 bg-[#070e1d] h-full w-64 fixed left-0 top-0 z-50">
+<div class="px-6 mb-8">
+<h1 class="text-2xl font-black text-[#69f6b8] tracking-tighter">JBR Minpo</h1>
+<p class="text-slate-400 text-xs font-label">Admin Ops v2.4</p>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="px-4 py-3 text-[#69f6b8] font-bold border-r-4 border-[#69f6b8] bg-[#11192b]/50 flex items-center gap-3 transition-all duration-300 active:scale-95">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-sm">Command Center</span>
+</div>
+<div class="px-4 py-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+<span class="text-sm">Ticketing</span>
+</div>
+<div class="px-4 py-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
+<span class="text-sm">Network Health</span>
+</div>
+<div class="px-4 py-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="quiz">quiz</span>
+<span class="text-sm">FAQ Manager</span>
+</div>
+<div class="px-4 py-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="text-sm">Customer Database</span>
+</div>
+<div class="px-4 py-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="text-sm">CS Chat</span>
+</div>
+</nav>
+<div class="px-4 pt-4 border-t border-outline-variant/15">
+<div class="px-4 py-3 text-slate-400 font-medium hover:bg-[#161f33] hover:text-[#5afcd2] transition-colors duration-200 flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-sm">Settings</span>
+</div>
+<div class="px-4 py-3 text-error font-medium hover:bg-error-container/20 transition-colors duration-200 flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="text-sm">Logout</span>
+</div>
+</div>
+</aside>
+<!-- Main Workspace Background -->
+<main class="ml-64 flex-1 h-screen relative bg-surface-dim p-8 overflow-hidden">
+<!-- Mock Content for Main Workspace -->
+<header class="flex justify-between items-center mb-8">
+<div>
+<h2 class="text-3xl font-bold tracking-tight text-on-background">Ticket: #TK-8829-X</h2>
+<div class="flex items-center gap-2 mt-2">
+<span class="px-2 py-0.5 bg-primary/20 text-primary rounded text-xs font-label uppercase">In Progress</span>
+<span class="text-on-surface-variant text-sm font-label">Fiber Optic Damage - Jakarta Selatan</span>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="bg-surface-container-high px-4 py-2 rounded-xl text-sm font-semibold border border-outline-variant/10">Export Log</button>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-xl text-sm font-bold shadow-lg shadow-primary/20">Resolve Ticket</button>
+</div>
+</header>
+<div class="grid grid-cols-12 gap-6 h-full">
+<!-- Left Side Simulation -->
+<div class="col-span-6 space-y-6">
+<div class="bg-surface-container rounded-2xl p-6 h-64 relative overflow-hidden">
+<div class="absolute inset-0 opacity-20">
+<img alt="Server rack" class="w-full h-full object-cover" data-alt="close-up of fiber optic server rack cables with glowing emerald and cyan indicator lights in a dark data center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPNeAFpSApNsMezwo2LawT9ZlHkmgOp-8H62eJKXHUoTwNlnfENveIpTib8YWYUAlplMo9K7pNA0yqQVWHEFuvZ-JzEubrO7BE-G74JGKbA00rIEp2xPbQiA6mL7bIlb994Bq6LAXZ4kK9hECLnyz0Ckt38TfqSDf1ImxnGNkaU67Vfj1OtLg8diKXW1AiwBHgh0zc4PbE062l2tmpGdtUbV0JUjjRDU8E72rSolpCtlD1jKeVWRwLzRnx22rQfMA7Kk4mr8RXfxI"/>
+</div>
+<div class="relative z-10">
+<h3 class="text-lg font-bold text-primary mb-2">Node Performance</h3>
+<p class="text-sm text-on-surface-variant">Real-time status of Jakarta Node 04</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container rounded-xl p-4">
+<p class="text-xs font-label text-on-surface-variant mb-1 uppercase">Latency</p>
+<p class="text-2xl font-bold font-label text-tertiary">14ms</p>
+</div>
+<div class="bg-surface-container rounded-xl p-4">
+<p class="text-xs font-label text-on-surface-variant mb-1 uppercase">Uptime</p>
+<p class="text-2xl font-bold font-label text-secondary">99.98%</p>
+</div>
+</div>
+</div>
+<!-- THE TECHNICAL SIDE PANEL (45% Width Instruction) -->
+<div class="fixed top-0 right-0 w-[45%] h-screen bg-surface-container-low/80 backdrop-blur-3xl z-40 shadow-2xl border-l border-outline-variant/15 flex flex-col">
+<div class="p-6 overflow-y-auto flex-1 custom-scrollbar space-y-8">
+<!-- Section 1: Info & Hubungi -->
+<section>
+<div class="flex items-center gap-4 mb-6">
+<div class="relative">
+<img alt="Customer" class="w-16 h-16 rounded-2xl object-cover ring-2 ring-primary/20" data-alt="professional portrait of a middle-aged man in a business casual shirt with soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTO6gLyyjG_hT5fj2KmvsEgQETSBZhobX7h1FCjgcib_ZSbru-CerPqcifgUPuwkxytWB1-Krm0KvkPcrvzXQ8W37KIpy-UogzL3sDtDN9lqaK3AoHgnxhKXcHV1gTNxgtVCOTXSSXrX6uolt-bABr_DxlcI4m8ViesEuNNlrI9QG-5HBrR_Y_-hH0qHtDxy6i1-ZdndAugpWA7T5nU0pnmh8PNeuRAio-R5qpEv8TX5JtJ1HVe26p8XhJtEuYk1-wTqSQq9-UQZM"/>
+<span class="absolute -bottom-1 -right-1 w-5 h-5 bg-primary rounded-full border-4 border-surface-container-low flex items-center justify-center">
+<span class="w-2 h-2 bg-on-primary rounded-full"></span>
+</span>
+</div>
+<div class="flex-1">
+<h3 class="text-xl font-bold text-on-surface">Aditya Wijaya</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-xs font-label bg-surface-container-highest px-2 py-0.5 rounded text-secondary-dim border border-secondary-dim/20">ULTRA FIBER 1GBPS</span>
+<span class="text-xs text-on-surface-variant font-label">#CUST-99211</span>
+</div>
+</div>
+</div>
+<button class="w-full bg-[#25D366] hover:bg-[#128C7E] text-white py-4 rounded-xl flex items-center justify-center gap-3 transition-all active:scale-[0.98] shadow-lg shadow-[#25D366]/10">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<span class="font-bold">Hubungi Customer via WhatsApp</span>
+</button>
+</section>
+<!-- Section 2: Detail Gangguan -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h4 class="text-sm font-label text-on-surface-variant uppercase tracking-widest">Detail Gangguan</h4>
+<span class="material-symbols-outlined text-primary text-sm" data-icon="report_problem">report_problem</span>
+</div>
+<div class="bg-surface-container rounded-xl p-5 border border-outline-variant/5">
+<p class="text-on-surface leading-relaxed text-sm">
+                                "Kabel serat optik luar ruangan terputus akibat dahan pohon tumbang saat hujan badai semalam. Sinyal benar-benar hilang sejak pukul 23:45 WIB."
+                            </p>
+</div>
+<!-- Gallery Grid -->
+<div class="grid grid-cols-3 gap-2">
+<div class="aspect-square rounded-lg overflow-hidden bg-surface-container-highest cursor-zoom-in group">
+<img alt="Damage photo 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="close-up of snapped black fiber optic cable on a wet asphalt road surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjmjU6qnA96BCo0V_fXfCFL-JfvvuYiO7HxlVs6MKhv7JVK5PX965o6xxLp689I5gHdNKvBzTXg5qDkkZ73UnAIAJ5kpbzCX1DmOHltb5K7_h1PzqVDu8qX6w2i3s6Om2yzSHVwreSseQ82KgNSDwWtSKbwU_g7avpm5N2EGk86oFegyRNJKIOqtt9c5kpw4LOwsh3dMkCbwVhhymiExFxMEeS4wewkG7U4R48Rey9tuf86wIgjYZ6ywfFAABopmOmSxivfXoyx2Y"/>
+</div>
+<div class="aspect-square rounded-lg overflow-hidden bg-surface-container-highest cursor-zoom-in group">
+<img alt="Damage photo 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="damaged outdoor utility box on a wooden pole with tangled wires and broken plastic casing" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEjG7odCMPA9TgwbtAX4u3NG-8Gbst_jOh8fd7Qy7OZetzLc9iSkPSB5fzmdiNZYXjtMRoNTjtogp3czMfjT3sdIpOzOfDvviKtblbsU3KMA1vwYPz60S631exrpzmiS5oDOAOxqBfDhtMRR8gUhyCHWuz0UFjN6XG2Gd0eTMLHsgnkEALdWKKK5oI_o1C3Va2LLo5Zduvt3MOBo_2y5zMlgYWGvPdBgvjOKXwNnMM6UWPS-KDwHpAwBh_tRXt6eDAAZ5GrwPRvg4"/>
+</div>
+<div class="aspect-square rounded-lg overflow-hidden bg-surface-container-highest cursor-zoom-in group relative">
+<img alt="Damage photo 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-50" data-alt="technician tools spread out on the ground near a cable junction box with soft rainy lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeL76izm1GNNkvbX7OKRCP5nr9mNaRDhQzDTfbVFkbWYpzIPz7N2JmVczKlbtgaqkfm7MyE3CEUv3MXQ8xitkVQjAf41W9zk2fYf3xayedAqlYlpFWXR31DXnkR1wghTO6S6mSsZ8wu_ALZCsWqahvAMyI-OtLG5ddCxpniT1Voft0Hyy7V2cuxABZyXGIdlrX_Uo5pwtJW7LfkyVt8gPt4Jh7-qfqBUsiYvLxV7P2tsbX4Kjcjkx9-siLl3OFE4cZsXpByO-3aVU"/>
+<div class="absolute inset-0 flex items-center justify-center font-label text-xs text-white bg-surface-container-lowest/40">+4 View</div>
+</div>
+</div>
+<!-- GPS & Map Thumbnail -->
+<div class="bg-surface-container-high rounded-xl overflow-hidden flex h-24 border border-outline-variant/10">
+<div class="flex-1 p-4 flex flex-col justify-center">
+<p class="text-[10px] font-label text-tertiary uppercase">GPS Coordinates</p>
+<p class="text-sm font-label text-on-surface mt-1">-6.2088° S, 106.8456° E</p>
+<p class="text-xs text-on-surface-variant truncate mt-1">Menteng, Jakarta Pusat, DKI Jakarta</p>
+</div>
+<div class="w-32 bg-surface-bright relative">
+<img alt="Map" class="w-full h-full object-cover grayscale contrast-125 opacity-70" data-alt="stylized dark mode satellite map view showing urban grid streets with a single neon emerald location pin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaQo1FZhGKGM_-q0qWuSVSJAdOfpw9OYHWhRERk7qblaFqAE8bjK9haApCU0EelHL9kqMJLiwA3SUXFiNwhQ29ymaSc2KtzRW_ELmZ8CSsfr35kJHMFIpU2F2SbGyqh0gdJm82Z3aDhKCrtQ5uk4g9ogkzczdbHAPj3zMOhfjQt2TJuJBaDs-pruTCyoL2zXbJZp5MJmXvTC5u0aE6Hg38HnGVyZjfgLXlnzj-sE64CWf9GgUY7zMB-TH_rvWfLi2aMGck2j4pTP4"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Timeline & Update -->
+<section class="space-y-6">
+<h4 class="text-sm font-label text-on-surface-variant uppercase tracking-widest">Timeline &amp; Update</h4>
+<div class="relative pl-6 space-y-8 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-surface-container-highest">
+<!-- Log 1 -->
+<div class="relative">
+<span class="absolute -left-6 top-1 w-6 h-6 bg-surface-container-highest rounded-full border-4 border-surface-container-low flex items-center justify-center">
+<span class="w-1.5 h-1.5 bg-primary rounded-full"></span>
+</span>
+<div>
+<div class="flex justify-between items-start">
+<p class="text-sm font-bold text-on-surface">Ticket Created</p>
+<p class="text-[10px] font-label text-on-surface-variant">08:12 AM</p>
+</div>
+<p class="text-xs text-on-surface-variant mt-1">Automated system assignment to Area Technician 04.</p>
+</div>
+</div>
+<!-- Log 2 -->
+<div class="relative">
+<span class="absolute -left-6 top-1 w-6 h-6 bg-surface-container-highest rounded-full border-4 border-surface-container-low flex items-center justify-center">
+<span class="w-1.5 h-1.5 bg-secondary rounded-full"></span>
+</span>
+<div>
+<div class="flex justify-between items-start">
+<p class="text-sm font-bold text-on-surface">Technician Dispatched</p>
+<p class="text-[10px] font-label text-on-surface-variant">09:45 AM</p>
+</div>
+<p class="text-xs text-on-surface-variant mt-1">Bambang Susanto (Tech ID: 882) is en route to site.</p>
+</div>
+</div>
+</div>
+<!-- Update Form -->
+<div class="bg-surface-container-highest/50 rounded-2xl p-5 space-y-4 border border-primary/10">
+<div>
+<label class="text-[10px] font-label text-primary uppercase mb-2 block">Quick Update</label>
+<select class="w-full bg-surface-container-low border-none rounded-lg text-sm text-on-surface font-label py-2.5 focus:ring-2 focus:ring-primary">
+<option>Update Status: In Progress</option>
+<option>Update Status: Pending Equipment</option>
+<option>Update Status: Resolved</option>
+</select>
+</div>
+<textarea class="w-full bg-surface-container-low border-none rounded-lg text-sm text-on-surface py-3 min-h-[80px] focus:ring-2 focus:ring-primary" placeholder="Technician notes..."></textarea>
+<div class="flex gap-2">
+<button class="flex-1 bg-surface-bright text-on-surface text-xs font-bold py-2.5 rounded-lg border border-outline-variant/10">Add Photo</button>
+<button class="flex-[2] bg-primary-container text-on-primary-container text-xs font-bold py-2.5 rounded-lg">Submit Update</button>
+</div>
+</div>
+</section>
+<!-- Section 4: Feedback -->
+<section class="bg-surface-container-high rounded-2xl p-6 border border-tertiary/10">
+<div class="flex justify-between items-center mb-4">
+<h4 class="text-sm font-bold text-on-surface">Customer Feedback</h4>
+<div class="flex text-tertiary gap-0.5">
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star">star</span>
+</div>
+</div>
+<div class="relative bg-surface-container-low p-4 rounded-xl italic text-sm text-on-surface-variant before:content-['“'] before:text-3xl before:text-tertiary/20 before:absolute before:top-0 before:left-2">
+                            Penanganan sangat cepat, teknisi ramah dan menjelaskan masalah dengan detail. Semoga kedepannya dahan pohon di sekitar kabel lebih sering dipantau.
+                        </div>
+<p class="text-[10px] font-label text-on-surface-variant mt-3 text-right">Submitted: 14 Oct, 2023 11:20 AM</p>
+</section>
+</div>
+<!-- Footer of side panel -->
+<div class="p-6 bg-surface-container/50 border-t border-outline-variant/15 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+<span class="text-xs font-label text-on-surface-variant uppercase">Operator Active</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg bg-surface-container-highest text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="share">share</span>
+</button>
+<button class="p-2 rounded-lg bg-surface-container-highest text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="print">print</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- TopNavBar (Shared Component Over Main Workspace) -->
+<header class="flex justify-between items-center w-full px-8 h-16 ml-64 max-w-[calc(100%-16rem)] bg-[#070e1d]/80 backdrop-blur-xl docked full-width top-0 sticky z-[60]">
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400 text-sm" data-icon="search">search</span>
+<input class="bg-[#1b263b] text-on-surface border-none rounded-full pl-10 pr-6 py-1.5 text-sm focus:ring-2 focus:ring-primary w-64 transition-all focus:w-80" placeholder="Search Global Logs..." type="text"/>
+</div>
+<nav class="flex gap-6">
+<a class="text-[#69f6b8] border-b-2 border-[#69f6b8] pb-2 text-sm font-semibold" href="#">Global View</a>
+<a class="text-slate-400 hover:text-[#5afcd2] text-sm font-semibold transition-opacity hover:opacity-80" href="#">Live Metrics</a>
+<a class="text-slate-400 hover:text-[#5afcd2] text-sm font-semibold transition-opacity hover:opacity-80" href="#">Incident Logs</a>
+</nav>
+</div>
+<div class="flex items-center gap-5">
+<div class="flex items-center gap-2 mr-4 border-r border-outline-variant/15 pr-4">
+<span class="material-symbols-outlined text-slate-400 hover:text-[#5afcd2] cursor-pointer" data-icon="notifications_active">notifications_active</span>
+<span class="material-symbols-outlined text-slate-400 hover:text-[#5afcd2] cursor-pointer" data-icon="dns">dns</span>
+<span class="material-symbols-outlined text-slate-400 hover:text-[#5afcd2] cursor-pointer" data-icon="support_agent">support_agent</span>
+</div>
+<button class="bg-primary text-on-primary font-bold text-xs px-4 py-2 rounded-xl transition-all active:scale-95 shadow-lg shadow-primary/20">
+                Deploy Update
+            </button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="close-up portrait of a young professional male with neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGgeVoUsPxHiJgZk6Y7IIT_QArBNXzY2l2rSyUbg7YNeHgbAQ40l3yiEzAK1dJXfi4rv1T36hJ21xjTwLgXvau5xhrtlJN2J0s2Bax0lKzO4Dtvk1IjGvMXeXz1OORH4MM-lNw8849Y_G5JC4JKE_h5j6syXkTleN4vGmbK5dYi-kwM60ZgpD5MM_bN8es6un4x6_LK0FSZyj3702DXPM-QQRPQnS7Bq3xYNEwba5fHfAjIltbxcZaUwIRce0CGqKHjt4yz-bsP34"/>
+</div>
+</div>
+</header>
+</body></html>
