@@ -84,39 +84,86 @@ class _InformationScreenState extends State<InformationScreen> {
   }
 
   Widget _buildSearchAndFilter() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
+    return Container(
+      padding: const EdgeInsets.fromLTRB(20, 10, 20, 16),
+      decoration: BoxDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor,
+      ),
       child: Column(
         children: [
-          // Search Bar
+          // Ultra Premium Search Bar (Modern Solid)
           Container(
+            height: 60,
             decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
-              borderRadius: BorderRadius.circular(AppDimensions.radiusButton),
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(
+                color: Theme.of(context).dividerColor.withValues(alpha: 0.1),
+                width: 1.5,
+              ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.03),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
+                  color: Colors.black.withValues(alpha: 0.05),
+                  blurRadius: 20,
+                  offset: const Offset(0, 10),
                 ),
               ],
             ),
             child: TextField(
+              style: GoogleFonts.dmSans(
+                color: Theme.of(context).colorScheme.onSurface, 
+                fontWeight: FontWeight.w600,
+                fontSize: 15,
+              ),
               decoration: InputDecoration(
-                hintText: 'Cari info...',
-                hintStyle: GoogleFonts.dmSans(color: Colors.grey.shade400),
-                prefixIcon: const Icon(Icons.search_rounded, color: Colors.grey),
+                hintText: 'Cari informasi terbaru...',
+                hintStyle: GoogleFonts.dmSans(
+                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.3),
+                  fontSize: 14,
+                ),
+                prefixIcon: UnconstrainedBox(
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: const Icon(Icons.search_rounded, color: AppColors.primary, size: 22),
+                  ).animate(onPlay: (c) => c.repeat(reverse: true))
+                   .shimmer(duration: 3.seconds, color: Colors.white24),
+                ),
+                suffixIcon: UnconstrainedBox(
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 8),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [AppColors.primary, Color(0xFF6366f1)],
+                      ),
+                      borderRadius: BorderRadius.circular(14),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.primary.withValues(alpha: 0.3),
+                          blurRadius: 12,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: const Icon(Icons.tune_rounded, color: Colors.white, size: 20),
+                  ),
+                ),
                 border: InputBorder.none,
-                contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                contentPadding: const EdgeInsets.symmetric(vertical: 18),
               ),
             ),
-          ),
+          ).animate().fadeIn(duration: 600.ms).slideY(begin: 0.2, curve: Curves.easeOutBack),
           
           const SizedBox(height: 20),
 
           // Filter Chips
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
             child: Row(
               children: [
                 _buildCategoryChip('Semua'),
@@ -145,10 +192,14 @@ class _InformationScreenState extends State<InformationScreen> {
         duration: 300.ms,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
-          color: isActive ? AppColors.primary : Theme.of(context).cardColor,
-          borderRadius: BorderRadius.circular(30),
+          color: isActive ? AppColors.primary : Theme.of(context).cardColor.withValues(alpha: 0.5),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isActive ? AppColors.primary : Theme.of(context).dividerColor.withValues(alpha: 0.1),
+            width: 1.5,
+          ),
           boxShadow: isActive 
-            ? [BoxShadow(color: AppColors.primary.withValues(alpha: 0.3), blurRadius: 10, offset: const Offset(0, 4))]
+            ? [BoxShadow(color: AppColors.primary.withValues(alpha: 0.3), blurRadius: 12, offset: const Offset(0, 6))]
             : [],
         ),
         child: Text(
@@ -156,7 +207,7 @@ class _InformationScreenState extends State<InformationScreen> {
           style: GoogleFonts.sora(
             fontSize: 12,
             fontWeight: FontWeight.bold,
-            color: isActive ? Colors.white : AppColors.textSecondary,
+            color: isActive ? Colors.white : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
           ),
         ),
       ),
@@ -170,16 +221,17 @@ class _InformationScreenState extends State<InformationScreen> {
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
-        color: isPinned ? color.withValues(alpha: 0.08) : Theme.of(context).cardColor,
-        borderRadius: BorderRadius.circular(AppDimensions.radiusCard),
+        color: isPinned ? color.withValues(alpha: 0.05) : Theme.of(context).cardColor,
+        borderRadius: BorderRadius.circular(28),
         border: Border.all(
-          color: isPinned ? color.withValues(alpha: 0.2) : Theme.of(context).dividerColor.withValues(alpha: 0.05),
+          color: isPinned ? color.withValues(alpha: 0.3) : Theme.of(context).dividerColor.withValues(alpha: 0.08),
+          width: isPinned ? 2 : 1,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.02),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
+            color: color.withValues(alpha: 0.03),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
           ),
         ],
       ),
@@ -241,15 +293,15 @@ class _InformationScreenState extends State<InformationScreen> {
                             style: GoogleFonts.sora(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: AppColors.textPrimary,
+                              color: Theme.of(context).colorScheme.onSurface,
                             ),
                           ),
-                          const SizedBox(height: 4),
+                          const SizedBox(height: 6),
                           Text(
                             info['desc'],
                             style: GoogleFonts.dmSans(
                               fontSize: 13,
-                              color: AppColors.textSecondary,
+                              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
                               height: 1.4,
                             ),
                           ),
@@ -258,32 +310,53 @@ class _InformationScreenState extends State<InformationScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 20),
                 if (info['category'] == 'Maintenance')
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                        decoration: BoxDecoration(
-                          color: color.withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Text(
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor.withValues(alpha: 0.5),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.event_rounded, size: 14, color: color),
+                        const SizedBox(width: 8),
+                        Text(
                           info['date'],
                           style: GoogleFonts.jetBrainsMono(fontSize: 10, fontWeight: FontWeight.bold, color: color),
                         ),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        info['time'],
-                        style: GoogleFonts.dmSans(fontSize: 11, color: Colors.grey.shade500, fontWeight: FontWeight.w500),
-                      ),
-                    ],
+                        const SizedBox(width: 12),
+                        Container(width: 1, height: 12, color: Theme.of(context).dividerColor.withValues(alpha: 0.1)),
+                        const SizedBox(width: 12),
+                        Icon(Icons.schedule_rounded, size: 14, color: color),
+                        const SizedBox(width: 8),
+                        Text(
+                          info['time'],
+                          style: GoogleFonts.dmSans(fontSize: 11, color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5), fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
                   )
                 else if (info['category'] == 'Gangguan')
-                   Text(
-                    '${info['status']} • Diperbarui ${info['updateTime']}',
-                    style: GoogleFonts.dmSans(fontSize: 11, color: Colors.grey.shade500, fontWeight: FontWeight.w500),
+                   Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: color.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.sync_rounded, size: 14, color: color),
+                        const SizedBox(width: 8),
+                        Text(
+                          '${info['status']} • ${info['updateTime']}',
+                          style: GoogleFonts.dmSans(fontSize: 11, color: color, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
                   )
                 else
                   Row(
@@ -292,7 +365,7 @@ class _InformationScreenState extends State<InformationScreen> {
                       const SizedBox(width: 4),
                       Text(
                         info['time'],
-                        style: GoogleFonts.jetBrainsMono(fontSize: 10, color: Colors.grey.shade500, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.jetBrainsMono(fontSize: 10, color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.4), fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -331,7 +404,7 @@ class _InformationScreenState extends State<InformationScreen> {
             style: GoogleFonts.jetBrainsMono(
               fontSize: 10,
               fontWeight: FontWeight.bold,
-              color: AppColors.textSecondary,
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.3),
               letterSpacing: 1,
             ),
           ),

@@ -69,15 +69,59 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
               Text(
                 'Promo & Reward',
                 style: GoogleFonts.sora(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                   fontWeight: FontWeight.w800,
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.search_rounded, color: AppColors.primary)),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withValues(alpha: 0.1),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(Icons.stars_rounded, color: AppColors.primary, size: 20),
+              ),
             ],
           ),
           const SizedBox(height: 16),
+          // Ultra Premium Search Bar (Modern Solid)
+          Container(
+            height: 56,
+            decoration: BoxDecoration(
+              color: Theme.of(context).cardColor,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: Theme.of(context).dividerColor.withValues(alpha: 0.1),
+                width: 1.2,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.04),
+                  blurRadius: 15,
+                  offset: const Offset(0, 8),
+                ),
+              ],
+            ),
+            child: TextField(
+              style: GoogleFonts.dmSans(
+                color: Theme.of(context).colorScheme.onSurface, 
+                fontWeight: FontWeight.w600,
+                fontSize: 14,
+              ),
+              decoration: InputDecoration(
+                hintText: 'Cari promo menarik...',
+                hintStyle: GoogleFonts.dmSans(
+                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.3),
+                  fontSize: 13,
+                ),
+                prefixIcon: const Icon(Icons.search_rounded, color: AppColors.primary, size: 20),
+                border: InputBorder.none,
+                contentPadding: const EdgeInsets.symmetric(vertical: 16),
+              ),
+            ),
+          ).animate().fadeIn(duration: 500.ms).slideY(begin: 0.2, curve: Curves.easeOutCubic),
+          const SizedBox(height: 20),
           TabBar(
             controller: _tabController,
             onTap: (index) {

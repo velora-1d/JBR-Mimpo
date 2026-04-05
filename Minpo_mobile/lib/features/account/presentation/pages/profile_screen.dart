@@ -268,6 +268,7 @@ class ProfileScreen extends StatelessWidget {
             child: Column(
               children: [
                 _buildMenuItem(
+                  context: context,
                   icon: Icons.person_outline_rounded,
                   title: 'Edit Profil',
                   onTap: () {
@@ -277,6 +278,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 _buildDivider(),
                 _buildMenuItem(
+                  context: context,
                   icon: Icons.lock_reset_rounded,
                   title: 'Ganti Sandi',
                   onTap: () {
@@ -286,6 +288,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 _buildDivider(),
                 _buildMenuItem(
+                  context: context,
                   icon: Icons.notifications_none_rounded,
                   title: 'Pusat Notifikasi',
                   onTap: () {
@@ -295,6 +298,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 _buildDivider(),
                 _buildMenuItem(
+                  context: context,
                   icon: Icons.security_rounded,
                   title: 'Keamanan Akun',
                   onTap: () {
@@ -304,6 +308,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 _buildDivider(),
                 _buildMenuItem(
+                  context: context,
                   icon: Icons.language_rounded,
                   title: 'Bahasa & Info Aplikasi',
                   onTap: () {
@@ -313,6 +318,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 _buildDivider(),
                 _buildMenuItem(
+                  context: context,
                   icon: Icons.help_outline_rounded,
                   title: 'Pusat Bantuan',
                   onTap: () {
@@ -332,9 +338,9 @@ class ProfileScreen extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.circular(24),
-                border: Border.all(color: Colors.red.withValues(alpha: 0.1)),
+                border: Border.all(color: Colors.red.withValues(alpha: 0.2)),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -354,7 +360,12 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildMenuItem({required IconData icon, required String title, required VoidCallback onTap}) {
+  Widget _buildMenuItem({
+    required BuildContext context, 
+    required IconData icon, 
+    required String title, 
+    required VoidCallback onTap
+  }) {
     return ListTile(
       onTap: onTap,
       contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
@@ -365,7 +376,11 @@ class ProfileScreen extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: GoogleFonts.sora(fontSize: 15, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+        style: GoogleFonts.sora(
+          fontSize: 15, 
+          fontWeight: FontWeight.bold, 
+          color: Theme.of(context).colorScheme.onSurface
+        ),
       ),
       trailing: const Icon(Icons.chevron_right_rounded, color: Colors.grey),
     );

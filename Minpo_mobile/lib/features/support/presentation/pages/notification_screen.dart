@@ -12,6 +12,11 @@ class NotificationScreen extends StatefulWidget {
 
 class _NotificationScreenState extends State<NotificationScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  
+  // Notification States
+  bool isPushEnabled = true;
+  bool isWhatsAppEnabled = true;
+  bool isEmailEnabled = false;
 
   @override
   void initState() {
@@ -28,7 +33,7 @@ class _NotificationScreenState extends State<NotificationScreen> with SingleTick
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bgLight,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -63,37 +68,45 @@ class _NotificationScreenState extends State<NotificationScreen> with SingleTick
   }
 
   Widget _buildAppBar(BuildContext context) {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      decoration: BoxDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor.withValues(alpha: 0.8),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: AppColors.primary.withValues(alpha: 0.2), width: 2),
-                ),
-                child: const ClipOval(
-                  child: Image(
-                    image: NetworkImage('https://lh3.googleusercontent.com/aida-public/AB6AXuBXkvHcRvkxnnFB2OIzaakBP81e2MOh0k9l9YCZbOOpPjhp8VAaLklj5fsy6VwQgTar2xXepHCID_TxbnTvH2oDZSyF9ueiu4m7s4mfEnEQ6EFoe0ReckU3enVKCKf1INfUtE1jy9Lh3qjfaEqhsLz-ASRrqAeGFtM5g3pQYUjiBzy5LFGq4NEZPlOoGZ_M0NvxIBP-SSJeQeGv7L8cdu6BLPmeyGGP-A_S2PjJNDA7dmsaQPh9iN37-hLo70U27LrNAKKQz6aLWC1G'),
-                    fit: BoxFit.cover,
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).cardColor,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Theme.of(context).dividerColor.withValues(alpha: 0.05)),
                   ),
+                  child: const Icon(Icons.arrow_back_ios_new_rounded, color: AppColors.primary, size: 20),
                 ),
               ),
-              const SizedBox(width: 12),
+              const SizedBox(width: 16),
               Text(
-                'JBR Minpo',
-                style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.primary),
+                'Notifikasi',
+                style: GoogleFonts.sora(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
               ),
             ],
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.support_agent_rounded, color: AppColors.primary),
+            icon: const Icon(Icons.done_all_rounded, color: AppColors.primary),
+            tooltip: 'Tandai semua sudah dibaca',
           ),
         ],
       ),
@@ -105,29 +118,45 @@ class _NotificationScreenState extends State<NotificationScreen> with SingleTick
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       child: Stack(
         clipBehavior: Clip.none,
+        alignment: Alignment.centerLeft,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
             children: [
-              Text(
-                'Pusat',
-                style: GoogleFonts.sora(fontSize: 32, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
-              ),
-              Text(
-                'Notifikasi',
-                style: GoogleFonts.sora(fontSize: 32, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Pusat',
+                    style: GoogleFonts.sora(
+                      fontSize: 32, 
+                      fontWeight: FontWeight.w800, 
+                      color: Theme.of(context).colorScheme.onSurface,
+                      letterSpacing: -1,
+                    ),
+                  ),
+                  Text(
+                    'Notifikasi',
+                    style: GoogleFonts.sora(
+                      fontSize: 32, 
+                      fontWeight: FontWeight.w800, 
+                      color: AppColors.primary,
+                      letterSpacing: -1,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
           Positioned(
-            right: -10,
-            top: -20,
+            right: -20,
+            top: -10,
             child: Icon(
-              Icons.notifications_rounded,
-              size: 100,
-              color: AppColors.textPrimary.withValues(alpha: 0.05),
+              Icons.notifications_active_rounded,
+              size: 110,
+              color: AppColors.primary.withValues(alpha: 0.05),
             ),
-          ),
+          ).animate(onPlay: (c) => c.repeat(reverse: true))
+           .moveY(begin: 0, end: 10, duration: 2.seconds, curve: Curves.easeInOut),
         ],
       ),
     ).animate().fadeIn().slideX(begin: -0.1);
@@ -138,8 +167,9 @@ class _NotificationScreenState extends State<NotificationScreen> with SingleTick
       margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.all(6),
       decoration: BoxDecoration(
-        color: const Color(0xFFf2f3ff),
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: Theme.of(context).dividerColor.withValues(alpha: 0.05)),
       ),
       child: TabBar(
         controller: _tabController,
@@ -148,14 +178,14 @@ class _NotificationScreenState extends State<NotificationScreen> with SingleTick
         labelStyle: GoogleFonts.dmSans(fontSize: 14, fontWeight: FontWeight.bold),
         unselectedLabelStyle: GoogleFonts.dmSans(fontSize: 14, fontWeight: FontWeight.w500),
         indicator: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.primary,
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
-            BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, 4)),
+            BoxShadow(color: AppColors.primary.withValues(alpha: 0.3), blurRadius: 10, offset: const Offset(0, 4)),
           ],
         ),
-        labelColor: AppColors.primary,
-        unselectedLabelColor: Colors.grey,
+        labelColor: Colors.white,
+        unselectedLabelColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.4),
         tabs: const [
           Tab(text: 'Riwayat'),
           Tab(text: 'Pengaturan'),
@@ -209,61 +239,105 @@ class _NotificationScreenState extends State<NotificationScreen> with SingleTick
   }) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.7),
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(24),
-        border: isMaintenance 
-          ? Border(left: BorderSide(color: categoryColor, width: 4))
-          : Border.all(color: AppColors.primary.withValues(alpha: 0.05)),
+        border: Border.all(
+          color: isMaintenance ? categoryColor.withValues(alpha: 0.3) : Theme.of(context).dividerColor.withValues(alpha: 0.05),
+        ),
         boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 10, offset: const Offset(0, 4)),
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.02),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
         ],
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: categoryColor.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Icon(icon, color: categoryColor, size: 24),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () {},
+          borderRadius: BorderRadius.circular(24),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(title, style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
-                    Text(time, style: GoogleFonts.jetBrainsMono(fontSize: 10, color: Colors.grey)),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  content,
-                  style: GoogleFonts.dmSans(fontSize: 12, color: AppColors.textSecondary, height: 1.5),
-                ),
-                const SizedBox(height: 12),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     color: categoryColor.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(16),
                   ),
-                  child: Text(
-                    category,
-                    style: GoogleFonts.sora(fontSize: 9, fontWeight: FontWeight.w900, color: categoryColor, letterSpacing: 0.5),
+                  child: Icon(icon, color: categoryColor, size: 24),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              title,
+                              style: GoogleFonts.sora(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          Text(
+                            time,
+                            style: GoogleFonts.jetBrainsMono(
+                              fontSize: 10,
+                              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.4),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        content,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 12,
+                          color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+                          height: 1.5,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: categoryColor.withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              category,
+                              style: GoogleFonts.jetBrainsMono(
+                                fontSize: 9,
+                                fontWeight: FontWeight.bold,
+                                color: categoryColor,
+                                letterSpacing: 0.5,
+                              ),
+                            ),
+                          ),
+                          const Spacer(),
+                          const Icon(Icons.chevron_right_rounded, color: Colors.grey, size: 20),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
@@ -275,17 +349,30 @@ class _NotificationScreenState extends State<NotificationScreen> with SingleTick
       children: [
         Text(
           'Kontrol Notifikasi',
-          style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold),
+          style: GoogleFonts.sora(
+            fontSize: 18, 
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
         ),
         const SizedBox(height: 4),
-        Container(width: 50, height: 4, decoration: BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.circular(2))),
+        Container(
+          width: 50, 
+          height: 4, 
+          alignment: Alignment.centerLeft,
+          child: Container(
+            width: 40,
+            decoration: BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.circular(2)),
+          ),
+        ),
         const SizedBox(height: 24),
         
         Container(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: const Color(0xFFf2f3ff),
+            color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(32),
+            border: Border.all(color: Theme.of(context).dividerColor.withValues(alpha: 0.05)),
           ),
           child: Column(
             children: [
@@ -294,27 +381,30 @@ class _NotificationScreenState extends State<NotificationScreen> with SingleTick
                 title: 'Push Notification',
                 subtitle: 'Alert real-time di HP kamu',
                 color: AppColors.primary,
-                value: true,
+                value: isPushEnabled,
+                onChanged: (v) => setState(() => isPushEnabled = v),
               ),
               _buildSettingItem(
                 icon: Icons.chat_bubble_rounded,
                 title: 'WhatsApp Alert',
                 subtitle: 'Pesan langsung ke nomor terdaftar',
                 color: Colors.green,
-                value: true,
+                value: isWhatsAppEnabled,
+                onChanged: (v) => setState(() => isWhatsAppEnabled = v),
               ),
               _buildSettingItem(
                 icon: Icons.mail_rounded,
                 title: 'Email Alert',
                 subtitle: 'Laporan bulanan & tagihan',
                 color: const Color(0xFF005ac2),
-                value: false,
+                value: isEmailEnabled,
+                onChanged: (v) => setState(() => isEmailEnabled = v),
               ),
             ],
           ),
         ),
       ],
-    );
+    ).animate().fadeIn(delay: 400.ms);
   }
 
   Widget _buildSettingItem({
@@ -323,11 +413,15 @@ class _NotificationScreenState extends State<NotificationScreen> with SingleTick
     required String subtitle,
     required Color color,
     required bool value,
+    required ValueChanged<bool> onChanged,
   }) {
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(24)),
+      decoration: BoxDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor.withValues(alpha: 0.5), 
+        borderRadius: BorderRadius.circular(24)
+      ),
       child: Row(
         children: [
           Container(
@@ -340,15 +434,28 @@ class _NotificationScreenState extends State<NotificationScreen> with SingleTick
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.bold)),
-                Text(subtitle, style: GoogleFonts.dmSans(fontSize: 10, color: Colors.grey)),
+                Text(
+                  title, 
+                  style: GoogleFonts.sora(
+                    fontSize: 14, 
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  )
+                ),
+                Text(
+                  subtitle, 
+                  style: GoogleFonts.dmSans(
+                    fontSize: 10, 
+                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5)
+                  )
+                ),
               ],
             ),
           ),
           Switch.adaptive(
             value: value,
             activeTrackColor: AppColors.primary,
-            onChanged: (v) {},
+            onChanged: onChanged,
           ),
         ],
       ),

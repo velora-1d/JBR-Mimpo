@@ -82,37 +82,56 @@ class _FaqScreenState extends State<FaqScreen> {
             ),
           ),
 
-          // 2. Search Bar
+          // 2. Ultra Premium Search Bar (Modern Solid)
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Container(
-                height: 56,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                height: 60,
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
+                  color: Theme.of(context).cardColor,
+                  borderRadius: BorderRadius.circular(24),
+                  border: Border.all(
+                    color: Theme.of(context).dividerColor.withValues(alpha: 0.1),
+                    width: 1.5,
+                  ),
                   boxShadow: [
-                    BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 15, offset: const Offset(0, 4)),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.search_rounded, color: AppColors.primary),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Cari solusi...',
-                          hintStyle: GoogleFonts.dmSans(color: Colors.grey, fontSize: 14),
-                          border: InputBorder.none,
-                        ),
-                      ),
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.05),
+                      blurRadius: 20,
+                      offset: const Offset(0, 10),
                     ),
                   ],
                 ),
+                child: TextField(
+                  style: GoogleFonts.dmSans(
+                    color: Theme.of(context).colorScheme.onSurface, 
+                    fontWeight: FontWeight.w600,
+                    fontSize: 15,
+                  ),
+                  decoration: InputDecoration(
+                    hintText: 'Cari solusi...',
+                    hintStyle: GoogleFonts.dmSans(
+                      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.3),
+                      fontSize: 14,
+                    ),
+                    prefixIcon: UnconstrainedBox(
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: AppColors.primary.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: const Icon(Icons.search_rounded, color: AppColors.primary, size: 22),
+                      ).animate(onPlay: (c) => c.repeat(reverse: true))
+                       .shimmer(duration: 3.seconds, color: Colors.white24),
+                    ),
+                    border: InputBorder.none,
+                    contentPadding: const EdgeInsets.symmetric(vertical: 18),
+                  ),
+                ),
               ),
-            ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.2),
+            ).animate().fadeIn(duration: 600.ms).slideY(begin: 0.2, curve: Curves.easeOutBack),
           ),
 
           // 3. Categories
