@@ -1,5 +1,5 @@
-# Root .gitignore
-JBR MImpo Bahan/
+﻿# Root .gitignore
+JBR Minpo Bahan/
 .gemini/
 .DS_Store
 .vscode/
@@ -22,3 +22,4 @@ obj/
 **/dist/
 **/bin/
 **/obj/
+

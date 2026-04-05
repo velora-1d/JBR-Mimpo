@@ -1,24 +1,24 @@
-# JBR MIMPO — Jabbar Media Informasi dan Promosi
+﻿# JBR Minpo â€” Jabbar Media Informasi dan Promosi
 > **Official Infrastructure Project for ISP Jabbar23**
-> Reliable Connectivity · Information Transparency · Customer Loyalty
+> Reliable Connectivity Â· Information Transparency Â· Customer Loyalty
 
 ---
 
-## 🌏 Language / Bahasa
+## ðŸŒ Language / Bahasa
 - [Bahasa Indonesia](#-bahasa-indonesia)
 - [English Section](#-english)
 
 ---
 
-## 🇮🇩 Bahasa Indonesia
+## ðŸ‡®ðŸ‡© Bahasa Indonesia
 
 ### 1. Gambaran Proyek
-JBR Mimpo adalah ekosistem digital resmi untuk pelanggan ISP Jabbar23. Proyek ini bertujuan untuk menjembatani komunikasi antara penyedia layanan internet (ISP) dan pelanggan melalui platform mobile dan dashboard admin yang terintegrasi.
+JBR Minpo adalah ekosistem digital resmi untuk pelanggan ISP Jabbar23. Proyek ini bertujuan untuk menjembatani komunikasi antara penyedia layanan internet (ISP) dan pelanggan melalui platform mobile dan dashboard admin yang terintegrasi.
 
 ### 2. Komponen Sistem
 
-#### 🖥️ Dashboard ISP (Admin)
-Halaman administrasi pusat untuk mengelola seluruh ekosistem JBR Mimpo.
+#### ðŸ–¥ï¸ Dashboard ISP (Admin)
+Halaman administrasi pusat untuk mengelola seluruh ekosistem JBR Minpo.
 - **Teknologi**: Next.js 14, React, TypeScript, Tailwind CSS.
 - **Fitur Utama**:
   <details>
@@ -36,7 +36,7 @@ Halaman administrasi pusat untuk mengelola seluruh ekosistem JBR Mimpo.
   10. **Audit Log**: Pencatatan seluruh aktivitas admin untuk keamanan sistem.
   </details>
 
-#### 📱 Mobile User App
+#### ðŸ“± Mobile User App
 Aplikasi pendamping pelanggan untuk akses informasi dan layanan mandiri.
 - **Teknologi**: Flutter, Dart, Riverpod (State Management).
 - **Fitur Utama**:
@@ -58,15 +58,15 @@ Aplikasi pendamping pelanggan untuk akses informasi dan layanan mandiri.
 
 ---
 
-## 🇬🇧 English
+## ðŸ‡¬ðŸ‡§ English
 
 ### 1. Project Overview
-JBR Mimpo is the official digital ecosystem for ISP Jabbar23 customers. This project aims to bridge the communication gap between the internet service provider (ISP) and its customers through an integrated mobile platform and admin dashboard.
+JBR Minpo is the official digital ecosystem for ISP Jabbar23 customers. This project aims to bridge the communication gap between the internet service provider (ISP) and its customers through an integrated mobile platform and admin dashboard.
 
 ### 2. System Components
 
-#### 🖥️ ISP Dashboard (Admin)
-The central administrative hub for managing the entire JBR Mimpo ecosystem.
+#### ðŸ–¥ï¸ ISP Dashboard (Admin)
+The central administrative hub for managing the entire JBR Minpo ecosystem.
 - **Tech Stack**: Next.js 14, React, TypeScript, Tailwind CSS.
 - **Key Features**:
   <details>
@@ -84,7 +84,7 @@ The central administrative hub for managing the entire JBR Mimpo ecosystem.
   10. **Audit Log**: Comprehensive logging of all admin actions for security.
   </details>
 
-#### 📱 Mobile User App
+#### ðŸ“± Mobile User App
 Customer-facing application for information access and self-service.
 - **Tech Stack**: Flutter, Dart, Riverpod (State Management).
 - **Key Features**:
@@ -105,4 +105,5 @@ Customer-facing application for information access and self-service.
 - **Data**: Real-time synchronization via WebSocket for chat and ticket tracking features.
 
 ---
-© 2026 Mahin Utsman Nawawi · JBR-Mimpo Project
+Â© 2026 Mahin Utsman Nawawi Â· JBR-Minpo Project
+

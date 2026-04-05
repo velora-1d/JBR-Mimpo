@@ -1,8 +1,8 @@
 {
-  "name": "jbr-mimpo",
-  "description": "Dashboard Admin dan App Mobile JBR Mimpo dengan Backend Golang",
+  "name": "jbr-Minpo",
+  "description": "Dashboard Admin dan App Mobile JBR Minpo dengan Backend Golang",
   "version": "1.0.0",
-  "lastUpdated": "2026-04-02",
+  "lastUpdated": "2026-04-05",
 
   "stack": {
     "frontend": "next.js-14",
@@ -38,5 +38,6 @@
     "redis"
   ],
 
-  "notes": "Project JBR Mimpo (ISP Mobile App). Referensi brief: PROJECT_BRIEF_JABBAR23.md."
+  "notes": "Project JBR Minpo (ISP Mobile App). Referensi brief: PROJECT_BRIEF_JABBAR23.md."
 }
+

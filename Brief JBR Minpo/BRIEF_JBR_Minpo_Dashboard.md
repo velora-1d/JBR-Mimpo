@@ -1,7 +1,7 @@
-# PROJECT BRIEF — JBR MIMPO DASHBOARD
-> Jabbar Media Informasi dan Promosi — Dashboard Web Admin
-> Platform: Web (Next.js) · Desktop First
-> Version: 1.0.0 · Status: Final
+﻿# PROJECT BRIEF â€” JBR Minpo DASHBOARD
+> Jabbar Media Informasi dan Promosi â€” Dashboard Web Admin
+> Platform: Web (Next.js) Â· Desktop First
+> Version: 1.0.0 Â· Status: Final
 
 ---
 
@@ -23,15 +23,15 @@
 ### Identitas Produk
 | Atribut | Detail |
 |---|---|
-| Nama | JBR Mimpo Dashboard |
-| Fungsi | Panel admin untuk kelola semua konten JBR Mimpo |
+| Nama | JBR Minpo Dashboard |
+| Fungsi | Panel admin untuk kelola semua konten JBR Minpo |
 | Platform | Web (browser) |
 | Framework | Next.js 14 (React + TypeScript) |
 | Target User | Admin / tim internal ISP Jabbar23 |
 | Versi | 1.0.0 |
 
 ### Prinsip Utama
-> Semua konten yang dilihat pelanggan di mobile app JBR Mimpo dapat dikelola penuh oleh admin dari dashboard ini. Tidak ada konten hardcoded di app mobile.
+> Semua konten yang dilihat pelanggan di mobile app JBR Minpo dapat dikelola penuh oleh admin dari dashboard ini. Tidak ada konten hardcoded di app mobile.
 
 ### Scope Dashboard
 | Dalam Scope |
@@ -50,9 +50,9 @@
 
 | Atribut | Detail |
 |---|---|
-| Level admin | 1 level (Admin — full access) |
+| Level admin | 1 level (Admin â€” full access) |
 | Login | Email + Password + OTP via WA (2FA wajib) |
-| Session | Persistent — tidak logout kecuali manual |
+| Session | Persistent â€” tidak logout kecuali manual |
 | Beda device | Wajib OTP WA ulang |
 | Notifikasi | WA alert jika login dari device baru |
 | Semua aksi | Tercatat otomatis di activity log |
@@ -70,24 +70,24 @@
 
 ### Struktur Layout
 ```
-JBR MIMPO DASHBOARD
-│
-├── Sidebar (fixed kiri, 240px, dark #111827)
-│   ├── Logo JBR Mimpo
-│   ├── 📊 Overview
-│   ├── 📢 Kelola Informasi
-│   ├── 🎁 Kelola Promo & Reward
-│   ├── 🎧 Kelola Tiket & CS
-│   ├── 👥 Data Pelanggan
-│   ├── 🔔 Push Notification
-│   └── ⚙️ Pengaturan
-│
-├── Top Header (fixed atas)
-│   ├── Judul halaman aktif
-│   ├── Tanggal hari ini
-│   └── Nama admin + avatar dropdown (logout)
-│
-└── Content Area (scrollable)
+JBR Minpo DASHBOARD
+â”‚
+â”œâ”€â”€ Sidebar (fixed kiri, 240px, dark #111827)
+â”‚   â”œâ”€â”€ Logo JBR Minpo
+â”‚   â”œâ”€â”€ ðŸ“Š Overview
+â”‚   â”œâ”€â”€ ðŸ“¢ Kelola Informasi
+â”‚   â”œâ”€â”€ ðŸŽ Kelola Promo & Reward
+â”‚   â”œâ”€â”€ ðŸŽ§ Kelola Tiket & CS
+â”‚   â”œâ”€â”€ ðŸ‘¥ Data Pelanggan
+â”‚   â”œâ”€â”€ ðŸ”” Push Notification
+â”‚   â””â”€â”€ âš™ï¸ Pengaturan
+â”‚
+â”œâ”€â”€ Top Header (fixed atas)
+â”‚   â”œâ”€â”€ Judul halaman aktif
+â”‚   â”œâ”€â”€ Tanggal hari ini
+â”‚   â””â”€â”€ Nama admin + avatar dropdown (logout)
+â”‚
+â””â”€â”€ Content Area (scrollable)
 ```
 
 ---
@@ -96,7 +96,7 @@ JBR MIMPO DASHBOARD
 
 ---
 
-### 📊 OVERVIEW
+### ðŸ“Š OVERVIEW
 
 **Tujuan:** Tampilan ringkasan kondisi sistem secara real-time.
 
@@ -123,25 +123,25 @@ Muncul otomatis jika kondisi berikut terpenuhi:
 | Klaim reward pending | > 24 jam |
 | Undian melewati draw date | Langsung alert |
 
-Threshold bisa diubah di menu Pengaturan → Alert Threshold.
+Threshold bisa diubah di menu Pengaturan â†’ Alert Threshold.
 
 #### Section Tiket Terbaru
 - List 5 tiket terbaru yang belum diproses
 - Kolom: No. Tiket | Nama | Jenis | Status | Waktu masuk
-- Klik → langsung ke detail tiket
+- Klik â†’ langsung ke detail tiket
 
 #### Section Chat Pending
 - List 5 sesi chat yang belum dibalas
 - Kolom: Nama pelanggan | Preview pesan | Waktu
-- Klik → langsung ke chat window
+- Klik â†’ langsung ke chat window
 
 ---
 
-### 📢 KELOLA INFORMASI
+### ðŸ“¢ KELOLA INFORMASI
 
 **Tujuan:** Buat, kelola, dan publish pengumuman ke pelanggan di mobile app.
 
-#### Halaman Utama — List Pengumuman
+#### Halaman Utama â€” List Pengumuman
 
 **Tabel Pengumuman:**
 | Kolom | Keterangan |
@@ -194,7 +194,7 @@ Threshold bisa diubah di menu Pengaturan → Alert Threshold.
 
 ---
 
-### 🎁 KELOLA PROMO & REWARD
+### ðŸŽ KELOLA PROMO & REWARD
 
 **Tujuan:** Kelola semua program promosi, reward, undian, referral, dan poin pelanggan.
 
@@ -235,7 +235,7 @@ Threshold bisa diubah di menu Pengaturan → Alert Threshold.
 
 #### Tab Reward & Klaim
 
-**Sub bagian 1 — Daftar Reward:**
+**Sub bagian 1 â€” Daftar Reward:**
 
 | Kolom | Keterangan |
 |---|---|
@@ -258,7 +258,7 @@ Threshold bisa diubah di menu Pengaturan → Alert Threshold.
 | Stok | Number input (0 = unlimited) |
 | Status | Toggle aktif/nonaktif |
 
-**Sub bagian 2 — Klaim Masuk:**
+**Sub bagian 2 â€” Klaim Masuk:**
 
 | Kolom | Keterangan |
 |---|---|
@@ -322,7 +322,7 @@ Threshold bisa diubah di menu Pengaturan → Alert Threshold.
 - List semua peserta (scrollable)
 - Tombol "Acak Pemenang" (animasi spin)
 - Kartu pemenang terpilih (reveal effect)
-- Tombol "Umumkan Pemenang" → trigger:
+- Tombol "Umumkan Pemenang" â†’ trigger:
   - Push notif ke pemenang
   - Update halaman undian mobile (nama pemenang)
   - Banner pemenang di Home mobile
@@ -357,7 +357,7 @@ Threshold bisa diubah di menu Pengaturan → Alert Threshold.
 
 #### Tab Poin Pelanggan
 
-**Bagian 1 — Cari Pelanggan:**
+**Bagian 1 â€” Cari Pelanggan:**
 - Search by nama / no WA
 - Card pelanggan terpilih:
   - Nama + No WA
@@ -365,7 +365,7 @@ Threshold bisa diubah di menu Pengaturan → Alert Threshold.
   - Rank leaderboard
   - Paket aktif + status
 
-**Bagian 2 — Adjust Poin Manual:**
+**Bagian 2 â€” Adjust Poin Manual:**
 | Field | Tipe |
 |---|---|
 | Tipe | Radio: Tambah / Kurangi |
@@ -373,7 +373,7 @@ Threshold bisa diubah di menu Pengaturan → Alert Threshold.
 | Alasan | Dropdown + opsional notes |
 | | Tombol "Update Poin" |
 
-**Bagian 3 — History Transaksi Poin:**
+**Bagian 3 â€” History Transaksi Poin:**
 | Kolom | Keterangan |
 |---|---|
 | Tanggal | |
@@ -385,7 +385,7 @@ Threshold bisa diubah di menu Pengaturan → Alert Threshold.
 
 ---
 
-### 🎧 KELOLA TIKET & CS
+### ðŸŽ§ KELOLA TIKET & CS
 
 **Tab:** Tiket | Chat CS | FAQ
 
@@ -426,25 +426,25 @@ Threshold bisa diubah di menu Pengaturan → Alert Threshold.
 
 **Detail Tiket (side panel kanan):**
 ```
-Section 1 — Info Pelanggan:
+Section 1 â€” Info Pelanggan:
 Nama + No WA + paket aktif
 Tombol "Hubungi via WA"
 
-Section 2 — Detail Gangguan:
+Section 2 â€” Detail Gangguan:
 Jenis + deskripsi + foto (bisa diperbesar)
-Koordinat GPS + map thumbnail (klik → Google Maps)
+Koordinat GPS + map thumbnail (klik â†’ Google Maps)
 Waktu gangguan dilaporkan mulai
 
-Section 3 — Timeline Status:
+Section 3 â€” Timeline Status:
 Log semua perubahan status (siapa, kapan, catatan)
 
-Section 4 — Update Status:
+Section 4 â€” Update Status:
 Dropdown status baru
 Input catatan (opsional)
 Dropdown assign ke admin/NOC
 Tombol "Simpan Perubahan"
 
-Section 5 — Rating & Feedback:
+Section 5 â€” Rating & Feedback:
 Bintang rating dari pelanggan
 Teks feedback
 (muncul setelah tiket selesai & dirating)
@@ -456,7 +456,7 @@ Teks feedback
 
 **Layout Split View:**
 
-**Panel Kiri (35%) — List Sesi Chat:**
+**Panel Kiri (35%) â€” List Sesi Chat:**
 | Elemen | Keterangan |
 |---|---|
 | Avatar inisial | |
@@ -469,7 +469,7 @@ Teks feedback
 Filter sesi: Semua | AI | Human | Closed
 Search: nama / no WA
 
-**Panel Kanan (65%) — Chat Window:**
+**Panel Kanan (65%) â€” Chat Window:**
 
 Header:
 - Foto + nama pelanggan
@@ -519,7 +519,7 @@ Input bar:
 
 ---
 
-### 👥 DATA PELANGGAN
+### ðŸ‘¥ DATA PELANGGAN
 
 **Tabel Pelanggan:**
 | Kolom | Keterangan |
@@ -552,25 +552,25 @@ Input bar:
 
 **Detail Pelanggan (side panel kanan):**
 ```
-Section 1 — Profil:
+Section 1 â€” Profil:
 Avatar inisial | Nama | No WA
 Alamat | Area | Paket aktif
 Status badge | Tanggal bergabung
 Tombol: "Hubungi via WA" | "Edit" | "Nonaktifkan"
 
-Section 2 — Statistik:
+Section 2 â€” Statistik:
 Saldo poin | Rank leaderboard
 Total reward diklaim | Total referral berhasil
 
-Section 3 — History Tiket:
+Section 3 â€” History Tiket:
 List tiket compact (no. tiket + jenis + status + tanggal)
 Tombol "Lihat semua tiket"
 
-Section 4 — History Chat:
+Section 4 â€” History Chat:
 List sesi chat (tanggal + preview + status)
 Tombol "Lihat semua chat"
 
-Section 5 — History Poin:
+Section 5 â€” History Poin:
 List transaksi poin terbaru
 Tombol "Lihat semua transaksi"
 ```
@@ -593,7 +593,7 @@ Tombol "Lihat semua transaksi"
 
 ---
 
-### 🔔 PUSH NOTIFICATION
+### ðŸ”” PUSH NOTIFICATION
 
 **Tab:** Kirim Notif | History | Template
 
@@ -603,14 +603,14 @@ Tombol "Lihat semua transaksi"
 
 **Form Kirim Notifikasi:**
 
-**Section 1 — Konten:**
+**Section 1 â€” Konten:**
 | Field | Keterangan |
 |---|---|
 | Judul | Maks 100 karakter (counter real-time) |
 | Isi pesan | Maks 300 karakter (counter real-time) |
 | Gambar | Upload opsional |
 
-**Section 2 — Target Penerima:**
+**Section 2 â€” Target Penerima:**
 | Pilihan | Detail |
 |---|---|
 | Semua pelanggan | Broadcast ke semua pelanggan aktif |
@@ -619,15 +619,15 @@ Tombol "Lihat semua transaksi"
 
 Counter estimasi: "X pelanggan akan menerima notifikasi ini"
 
-**Section 3 — Deep Link Tujuan:**
+**Section 3 â€” Deep Link Tujuan:**
 - Dropdown pilih halaman: Home / Info / Promo / Undian / Tiket / Reward / Referral / Chat CS / FAQ
 - Jika konten spesifik: input ID konten
 
-**Section 4 — Waktu Kirim:**
+**Section 4 â€” Waktu Kirim:**
 - Radio: Sekarang / Jadwalkan
 - Jika jadwalkan: date time picker
 
-**Section 5 — Preview:**
+**Section 5 â€” Preview:**
 - Simulasi phone mockup real-time
 - Update otomatis saat admin mengetik
 
@@ -692,7 +692,7 @@ Counter estimasi: "X pelanggan akan menerima notifikasi ini"
 
 ---
 
-### ⚙️ PENGATURAN
+### âš™ï¸ PENGATURAN
 
 **Sub Menu:** Akun Admin | Poin & Reward | AI Chatbot | Kategori | Tampilan App | Alert Threshold | Log Aktivitas
 
@@ -752,7 +752,7 @@ Counter estimasi: "X pelanggan akan menerima notifikasi ini"
 **Setting Perilaku AI:**
 | Setting | Keterangan |
 |---|---|
-| Nama AI | Default: "Mipo" — nama karakter AI di chat |
+| Nama AI | Default: "Mipo" â€” nama karakter AI di chat |
 | Pesan sambutan | Default greeting saat chat dimulai |
 | Maks panjang jawaban | Karakter |
 | Tone bahasa | Dropdown: Formal / Santai |
@@ -760,7 +760,7 @@ Counter estimasi: "X pelanggan akan menerima notifikasi ini"
 
 **Tombol:**
 - "Simpan"
-- "Test AI" — coba tanya AI langsung dari dashboard tanpa buka mobile
+- "Test AI" â€” coba tanya AI langsung dari dashboard tanpa buka mobile
 
 ---
 
@@ -784,14 +784,14 @@ Counter estimasi: "X pelanggan akan menerima notifikasi ini"
 
 | Setting | Keterangan |
 |---|---|
-| Upload logo | Logo JBR Mimpo di mobile app |
+| Upload logo | Logo JBR Minpo di mobile app |
 | Nama app | Display name di mobile |
 | Tagline | Tagline di splash screen & login |
 | Primary color | Color picker + live preview |
 
 **Tombol:**
-- "Preview di Mobile" — simulasi tampilan
-- "Simpan & Apply" — berlaku di mobile tanpa update APK
+- "Preview di Mobile" â€” simulasi tampilan
+- "Simpan & Apply" â€” berlaku di mobile tanpa update APK
 
 ---
 
@@ -835,33 +835,33 @@ Log disimpan min 1 tahun, tidak bisa dihapus oleh siapapun.
 
 ### Flow Login Admin
 ```
-Buka dashboard → halaman login
-    ↓
-Input Email + Password → "Masuk"
-    ↓
-Backend validasi → kirim OTP via WA
-    ↓
-Input OTP 6 digit → valid
-    ↓
-[Device baru] → notif WA ke admin: "Login dari device baru"
-    ↓
+Buka dashboard â†’ halaman login
+    â†“
+Input Email + Password â†’ "Masuk"
+    â†“
+Backend validasi â†’ kirim OTP via WA
+    â†“
+Input OTP 6 digit â†’ valid
+    â†“
+[Device baru] â†’ notif WA ke admin: "Login dari device baru"
+    â†“
 Generate JWT + refresh token (httpOnly cookie)
-    ↓
+    â†“
 Redirect ke Overview
 ```
 
 ### Flow Publish Pengumuman
 ```
-Kelola Informasi → "Buat Pengumuman"
-    ↓
+Kelola Informasi â†’ "Buat Pengumuman"
+    â†“
 Isi form: judul + kategori + area + konten + gambar
          + jadwal + pin + toggle notif
-    ↓
-[Publish sekarang] → langsung tampil di mobile
-[Jadwalkan] → sistem publish otomatis saat waktunya
-    ↓
-[Toggle notif ON] → push notif otomatis ke target pelanggan
-    ↓
+    â†“
+[Publish sekarang] â†’ langsung tampil di mobile
+[Jadwalkan] â†’ sistem publish otomatis saat waktunya
+    â†“
+[Toggle notif ON] â†’ push notif otomatis ke target pelanggan
+    â†“
 Pengumuman tampil di:
 - List Informasi mobile (sesuai filter area)
 - Home mobile (jika dipinned, maks 2 item)
@@ -869,59 +869,59 @@ Pengumuman tampil di:
 
 ### Flow Proses Undian
 ```
-Kelola Promo → Tab Undian → pilih undian done
-    ↓
+Kelola Promo â†’ Tab Undian â†’ pilih undian done
+    â†“
 Tap "Proses Pengundian"
-    ↓
+    â†“
 Modal: list semua peserta
-    ↓
-Tap "Acak Pemenang" → animasi spin
-    ↓
+    â†“
+Tap "Acak Pemenang" â†’ animasi spin
+    â†“
 Pemenang terpilih
-    ↓
-Tap "Umumkan Pemenang" → sistem otomatis:
+    â†“
+Tap "Umumkan Pemenang" â†’ sistem otomatis:
   - Push notif ke pemenang
   - Update halaman undian mobile
   - Pasang banner di Home mobile
   - Notif ke admin (no WA pemenang)
-    ↓
+    â†“
 Admin hubungi pemenang via WA
 ```
 
 ### Flow Takeover Chat dari AI
 ```
-Kelola Tiket → Tab Chat CS
-    ↓
+Kelola Tiket â†’ Tab Chat CS
+    â†“
 Pilih sesi chat (badge: AI aktif)
-    ↓
+    â†“
 Baca history percakapan AI dengan pelanggan
-    ↓
+    â†“
 Tap "Ambil Alih"
-    ↓
+    â†“
 System message muncul di chat: "CS bergabung"
 AI nonaktif di sesi ini
-    ↓
+    â†“
 Admin balas manual (real-time WebSocket)
-    ↓
-Selesai → Tap "Kembalikan ke AI" atau "Tutup Sesi"
+    â†“
+Selesai â†’ Tap "Kembalikan ke AI" atau "Tutup Sesi"
 ```
 
 ### Flow Kirim Push Notification
 ```
-Push Notification → "Buat Notifikasi"
-    ↓
+Push Notification â†’ "Buat Notifikasi"
+    â†“
 Isi: judul + pesan + gambar (opsional)
-    ↓
+    â†“
 Pilih target: Semua / Spesifik / Grup
-    ↓
+    â†“
 Pilih deep link tujuan
-    ↓
+    â†“
 Pilih waktu: Sekarang / Jadwalkan
-    ↓
+    â†“
 Preview di phone mockup
-    ↓
+    â†“
 "Kirim" / "Jadwalkan"
-    ↓
+    â†“
 FCM deliver ke device pelanggan
 Sistem catat: Terkirim / Dibuka / Gagal
 ```
@@ -996,13 +996,13 @@ Sistem catat: Terkirim / Dibuka / Gagal
 - Admin tidak bisa ikut undian
 - Notifikasi hanya dikirim ke pelanggan aktif
 - Maks 3 push notif per hari per pelanggan (anti spam)
-- Notif jam tenang 22.00–07.00 WIB (kecuali gangguan darurat)
+- Notif jam tenang 22.00â€“07.00 WIB (kecuali gangguan darurat)
 - Log aktivitas disimpan min 1 tahun
 
 ### System Constraints Dashboard
 - API response: maks 3 detik
 - Uptime target: 99.5%
-- Maintenance window: 00.00–04.00 WIB
+- Maintenance window: 00.00â€“04.00 WIB
 - Session admin: persistent, logout manual only
 - Alert threshold: bisa dikonfigurasi di Pengaturan
 - Export data: maks 10.000 baris per export
@@ -1011,7 +1011,7 @@ Sistem catat: Terkirim / Dibuka / Gagal
 
 ## 9. Koneksi ke Mobile App
 
-Semua perubahan di dashboard langsung berdampak ke mobile app JBR Mimpo secara real-time atau near real-time.
+Semua perubahan di dashboard langsung berdampak ke mobile app JBR Minpo secara real-time atau near real-time.
 
 | Aksi di Dashboard | Dampak di Mobile |
 |---|---|
@@ -1029,6 +1029,7 @@ Semua perubahan di dashboard langsung berdampak ke mobile app JBR Mimpo secara r
 
 ---
 
-*JBR Mimpo Dashboard Brief v1.0.0*
-*Dokumen ini merupakan blueprint resmi dashboard admin JBR Mimpo.*
+*JBR Minpo Dashboard Brief v1.0.0*
+*Dokumen ini merupakan blueprint resmi dashboard admin JBR Minpo.*
 *Perubahan apapun harus melalui diskusi dan update dokumen ini.*
+

@@ -1,4 +1,4 @@
-# JBR Mimpo
+# JBR Minpo
 
 ## Deskripsi
 Aplikasi terintegrasi yang terdiri dari Dashboard Admin dan Aplikasi Mobile. Proyek ini menggunakan 1 Backend (Golang) untuk melayani 2 Frontend (Next.js & Flutter).
@@ -22,7 +22,7 @@ Aplikasi terintegrasi yang terdiri dari Dashboard Admin dan Aplikasi Mobile. Pro
 [x] Web + Mobile
 
 ## Multi-tenant
-[ ] Ya — strategi: [TBD]
+[ ] Ya â€” strategi: [TBD]
 [ ] Tidak
 
 ## Skala User
@@ -32,7 +32,7 @@ Aplikasi terintegrasi yang terdiri dari Dashboard Admin dan Aplikasi Mobile. Pro
 
 ## Tim
 [x] Solo developer
-[ ] Tim — jumlah: ___
+[ ] Tim â€” jumlah: ___
 
 ## Hosting & Infra
 - Development: local
@@ -41,11 +41,13 @@ Aplikasi terintegrasi yang terdiri dari Dashboard Admin dan Aplikasi Mobile. Pro
 
 ## Catatan Khusus
 - Menggunakan struktur 1 BE (Golang) dan 2 FE (Next.js & Flutter).
-- Folder utama sudah dibuat: `Mimpo Backend`, `mimpo-dashboard`, `mimpo_mobile`.
+- Folder utama sudah dibuat: `Minpo Backend`, `Minpo-dashboard`, `Minpo_mobile`.
 
 ## Progress Terakhir
 - Inisialisasi struktur folder utama.
 - Setup PROJECT.md dan project.json.
+- Update remote repository ke https://github.com/velora-1d/JBR-Minpo.
 
 ## Last Updated
-2026-04-02
+2026-04-05
+

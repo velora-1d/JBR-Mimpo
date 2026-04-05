@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -10,7 +10,7 @@ export default function LoginPage() {
         <div className="flex flex-col items-center">
           <Image
             src="/logo.svg"
-            alt="JBR Mimpo Logo"
+            alt="JBR Minpo Logo"
             width={180}
             height={60}
             priority
@@ -89,3 +89,4 @@ export default function LoginPage() {
     </div>
   );
 }
+

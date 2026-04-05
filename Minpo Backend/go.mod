@@ -1,4 +1,4 @@
-module jbr-mimpo/backend
+﻿module jbr-Minpo/backend
 
 go 1.26.1
 
@@ -35,3 +35,4 @@ require (
 	golang.org/x/text v0.35.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 )
+

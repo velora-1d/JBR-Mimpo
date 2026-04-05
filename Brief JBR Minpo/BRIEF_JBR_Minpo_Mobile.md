@@ -1,7 +1,7 @@
-# PROJECT BRIEF — JBR MIMPO MOBILE
-> Jabbar Media Informasi dan Promosi — Mobile App
-> Platform: Android (APK) + iOS (IPA) · Flutter / Dart
-> Version: 1.0.0 · Status: Final
+﻿# PROJECT BRIEF â€” JBR Minpo MOBILE
+> Jabbar Media Informasi dan Promosi â€” Mobile App
+> Platform: Android (APK) + iOS (IPA) Â· Flutter / Dart
+> Version: 1.0.0 Â· Status: Final
 
 ---
 
@@ -24,7 +24,7 @@
 ### Identitas Produk
 | Atribut | Detail |
 |---|---|
-| Nama Aplikasi | JBR Mimpo |
+| Nama Aplikasi | JBR Minpo |
 | Kepanjangan | Jabbar Media Informasi dan Promosi |
 | Platform | Android (APK) + iOS (IPA) |
 | Framework | Flutter / Dart (single codebase) |
@@ -40,7 +40,7 @@ Tidak ada channel komunikasi resmi antara ISP Jabbar23 dan pelanggan:
 - Tidak ada media resmi untuk laporan gangguan & CS online
 
 ### Solusi
-JBR Mimpo hadir sebagai satu-satunya media komunikasi resmi antara ISP dan pelanggan — menyampaikan informasi, menjalankan promosi, mengelola reward, dan menyediakan CS online dalam satu aplikasi.
+JBR Minpo hadir sebagai satu-satunya media komunikasi resmi antara ISP dan pelanggan â€” menyampaikan informasi, menjalankan promosi, mengelola reward, dan menyediakan CS online dalam satu aplikasi.
 
 ### Tujuan Produk (Prioritas)
 1. Sampaikan info & pengumuman dengan cepat
@@ -70,9 +70,9 @@ JBR Mimpo hadir sebagai satu-satunya media komunikasi resmi antara ISP dan pelan
 
 ### Detail Login Pelanggan
 - Login: Nomor WhatsApp + Sandi + OTP via WA
-- Persistent login — tidak logout kecuali manual
-- Beda device → wajib OTP WA ulang
-- Lupa sandi: No WA → OTP via WA → sandi baru → auto login
+- Persistent login â€” tidak logout kecuali manual
+- Beda device â†’ wajib OTP WA ulang
+- Lupa sandi: No WA â†’ OTP via WA â†’ sandi baru â†’ auto login
 
 ### Register Pelanggan
 - Nomor WhatsApp (wajib)
@@ -87,26 +87,26 @@ JBR Mimpo hadir sebagai satu-satunya media komunikasi resmi antara ISP dan pelan
 
 ### Struktur Navigasi
 ```
-JBR MIMPO MOBILE
-│
-├── AUTH (sebelum login)
-│   ├── Splash Screen
-│   ├── Onboarding (3 slide, pertama install)
-│   ├── Login
-│   ├── Register
-│   ├── Verifikasi OTP
-│   └── Lupa Sandi
-│
-└── MAIN APP (setelah login)
-    │
-    ├── Header: Logo + "Halo, [Nama]" + 🔔 Notifikasi
-    │
-    └── Bottom Navigation (5 menu)
-        ├── 🏠 Home
-        ├── 📢 Informasi
-        ├── 🎁 Promo & Reward
-        ├── 🎧 Support / CS
-        └── 👤 Akun
+JBR Minpo MOBILE
+â”‚
+â”œâ”€â”€ AUTH (sebelum login)
+â”‚   â”œâ”€â”€ Splash Screen
+â”‚   â”œâ”€â”€ Onboarding (3 slide, pertama install)
+â”‚   â”œâ”€â”€ Login
+â”‚   â”œâ”€â”€ Register
+â”‚   â”œâ”€â”€ Verifikasi OTP
+â”‚   â””â”€â”€ Lupa Sandi
+â”‚
+â””â”€â”€ MAIN APP (setelah login)
+    â”‚
+    â”œâ”€â”€ Header: Logo + "Halo, [Nama]" + ðŸ”” Notifikasi
+    â”‚
+    â””â”€â”€ Bottom Navigation (5 menu)
+        â”œâ”€â”€ ðŸ  Home
+        â”œâ”€â”€ ðŸ“¢ Informasi
+        â”œâ”€â”€ ðŸŽ Promo & Reward
+        â”œâ”€â”€ ðŸŽ§ Support / CS
+        â””â”€â”€ ðŸ‘¤ Akun
 ```
 
 ### Catatan Navigasi
@@ -121,7 +121,7 @@ JBR MIMPO MOBILE
 ### AUTH PAGES
 
 **Splash Screen**
-- Logo JBR Mimpo (center)
+- Logo JBR Minpo (center)
 - Background: Emerald gradient
 - Loading indicator (bottom)
 
@@ -159,16 +159,16 @@ JBR MIMPO MOBILE
 
 **Lupa Sandi**
 - Input: Nomor WhatsApp
-- Kirim OTP → Input OTP → Input sandi baru → Auto login
+- Kirim OTP â†’ Input OTP â†’ Input sandi baru â†’ Auto login
 
 ---
 
-### 🏠 HOME
+### ðŸ  HOME
 
 **Susunan konten (atas ke bawah):**
 
 1. Header
-   - Logo JBR Mimpo (kiri)
+   - Logo JBR Minpo (kiri)
    - "Halo, [Nama Pelanggan]" (kiri)
    - Icon lonceng notifikasi + badge unread (kanan)
 
@@ -176,7 +176,7 @@ JBR MIMPO MOBILE
    - Auto-play + swipe manual
    - Maks 5 banner
    - Dot indicator
-   - Tap → detail promo
+   - Tap â†’ detail promo
 
 3. Status Paket Aktif
    - Dot hijau (aktif) / merah (nonaktif)
@@ -186,8 +186,8 @@ JBR MIMPO MOBILE
 4. Pengumuman Terbaru
    - Maks 2 item
    - Card: icon kategori + judul + tanggal
-   - Tap → detail pengumuman
-   - Link "Lihat Semua" → menu Informasi
+   - Tap â†’ detail pengumuman
+   - Link "Lihat Semua" â†’ menu Informasi
 
 5. Quick Action (2 tombol)
    - Lapor Gangguan (filled)
@@ -197,7 +197,7 @@ JBR MIMPO MOBILE
 
 ---
 
-### 📢 INFORMASI
+### ðŸ“¢ INFORMASI
 
 **Halaman List Pengumuman**
 - Search bar (keyword)
@@ -225,7 +225,7 @@ JBR MIMPO MOBILE
 
 ---
 
-### 🎁 PROMO & REWARD
+### ðŸŽ PROMO & REWARD
 
 **Tab Bar:** Promo | Reward | Undian | Referral
 
@@ -288,7 +288,7 @@ JBR MIMPO MOBILE
 
 ---
 
-### 🎧 SUPPORT / CS
+### ðŸŽ§ SUPPORT / CS
 
 **Halaman Utama Support**
 - Banner status jaringan area (orange jika ada gangguan)
@@ -316,7 +316,7 @@ JBR MIMPO MOBILE
   - Jenis gangguan + tanggal
   - Badge status (warna berbeda per status)
   - Progress stepper horizontal (5 langkah):
-    Menunggu → Diproses → Dalam Perjalanan → Selesai → Ditutup
+    Menunggu â†’ Diproses â†’ Dalam Perjalanan â†’ Selesai â†’ Ditutup
 - Detail tiket:
   - Info lengkap laporan
   - Timeline perubahan status
@@ -328,7 +328,7 @@ JBR MIMPO MOBILE
 - ETA perbaikan (jika ada)
 
 **Chat CS / AI Chatbot**
-- Header: "CS JBR Mimpo" + badge "AI Online" / "CS Online"
+- Header: "CS JBR Minpo" + badge "AI Online" / "CS Online"
 - Tombol WA (redirect ke WA CS)
 - Bubble chat:
   - User: kanan (warna emerald)
@@ -349,7 +349,7 @@ JBR MIMPO MOBILE
 
 ---
 
-### 👤 AKUN
+### ðŸ‘¤ AKUN
 
 **Halaman Utama Akun**
 - Header profil (emerald gradient):
@@ -382,16 +382,16 @@ JBR MIMPO MOBILE
 
 **Halaman Riwayat Notifikasi**
 - List semua notifikasi yang pernah diterima (90 hari terakhir)
-- Tap → buka halaman tujuan (deep link)
+- Tap â†’ buka halaman tujuan (deep link)
 
 ---
 
-### 🔔 NOTIFIKASI
+### ðŸ”” NOTIFIKASI
 
 **Halaman Riwayat Notifikasi** (akses dari icon lonceng header)
 - List notifikasi (terbaru di atas)
 - Badge unread per item
-- Tap → deep link ke halaman tujuan
+- Tap â†’ deep link ke halaman tujuan
 - Tandai semua sudah dibaca
 - Notifikasi tersimpan maks 90 hari
 
@@ -464,88 +464,88 @@ JBR MIMPO MOBILE
 
 ### Flow Register
 ```
-Buka app → Splash → Onboarding (pertama install)
-    ↓
-Login page → tap "Daftar"
-    ↓
+Buka app â†’ Splash â†’ Onboarding (pertama install)
+    â†“
+Login page â†’ tap "Daftar"
+    â†“
 Isi: Nama + No WA + Alamat + Sandi
-    ↓
+    â†“
 Tap "Daftar & Kirim OTP"
-    ↓
+    â†“
 OTP 6 digit dikirim via WA (timer 60 detik)
-    ↓
-Input OTP → valid
-    ↓
-Akun dibuat → JWT token generated
-    ↓
-Otomatis masuk → redirect ke Home
+    â†“
+Input OTP â†’ valid
+    â†“
+Akun dibuat â†’ JWT token generated
+    â†“
+Otomatis masuk â†’ redirect ke Home
 ```
 
 ### Flow Login
 ```
-Buka app → Login page
-    ↓
-Input No WA + Sandi → tap "Masuk"
-    ↓
-Backend validasi → kirim OTP via WA
-    ↓
-Input OTP 6 digit → valid
-    ↓
+Buka app â†’ Login page
+    â†“
+Input No WA + Sandi â†’ tap "Masuk"
+    â†“
+Backend validasi â†’ kirim OTP via WA
+    â†“
+Input OTP 6 digit â†’ valid
+    â†“
 Generate JWT + refresh token
-    ↓
-Simpan di secure storage → Home
-    ↓
+    â†“
+Simpan di secure storage â†’ Home
+    â†“
 [Lupa Sandi]
-Input No WA → OTP via WA → Sandi baru → Auto login
+Input No WA â†’ OTP via WA â†’ Sandi baru â†’ Auto login
 ```
 
 ### Flow Lapor Gangguan
 ```
-Support → tap "Lapor Gangguan"
-    ↓
+Support â†’ tap "Lapor Gangguan"
+    â†“
 Isi form: jenis + deskripsi + foto (opsional)
          + lokasi GPS + waktu gangguan
-    ↓
+    â†“
 Tap "Kirim Laporan"
-    ↓
-Tiket dibuat → nomor tiket muncul
+    â†“
+Tiket dibuat â†’ nomor tiket muncul
 Push notif ke pelanggan: "Tiket #XXXX diterima"
 Push notif ke admin: "Tiket baru masuk"
-    ↓
-Admin update status → notif otomatis ke pelanggan
-    ↓
-MENUNGGU → DIPROSES → DALAM PERJALANAN
-→ SELESAI → minta rating & feedback
+    â†“
+Admin update status â†’ notif otomatis ke pelanggan
+    â†“
+MENUNGGU â†’ DIPROSES â†’ DALAM PERJALANAN
+â†’ SELESAI â†’ minta rating & feedback
 ```
 
 ### Flow Tukar Reward
 ```
-Promo → Tab Reward → pilih reward
-    ↓
+Promo â†’ Tab Reward â†’ pilih reward
+    â†“
 Lihat detail + poin dibutuhkan
-    ↓
-Tap "Tukar Sekarang" → dialog konfirmasi
-    ↓
-Konfirmasi → poin terpotong → reward tercatat
-    ↓
+    â†“
+Tap "Tukar Sekarang" â†’ dialog konfirmasi
+    â†“
+Konfirmasi â†’ poin terpotong â†’ reward tercatat
+    â†“
 Notif: "Reward diklaim! Admin akan hubungi via WA"
 Notif ke admin: klaim baru + no WA pelanggan
-    ↓
-Admin proses → hubungi via WA → update selesai
+    â†“
+Admin proses â†’ hubungi via WA â†’ update selesai
 Notif ke pelanggan: "Reward sudah diproses"
 ```
 
 ### Flow Undian
 ```
-Promo → Tab Undian → lihat detail undian
-    ↓
+Promo â†’ Tab Undian â†’ lihat detail undian
+    â†“
 Tap "Ikut Undian"
-    ↓
-Sistem cek syarat → lolos → terdaftar
+    â†“
+Sistem cek syarat â†’ lolos â†’ terdaftar
 Konfirmasi: "Kamu sudah terdaftar!"
-    ↓
+    â†“
 Menunggu tanggal draw...
-    ↓
+    â†“
 [Jika menang]
 Push notif ke pemenang
 Banner pemenang di Home
@@ -555,21 +555,21 @@ Admin hubungi via WA
 
 ### Flow Chat CS & AI Chatbot
 ```
-Support → tap "Chat CS"
-    ↓
-Masuk ruang chat → AI "Mipo" menyapa
-    ↓
+Support â†’ tap "Chat CS"
+    â†“
+Masuk ruang chat â†’ AI "Mipo" menyapa
+    â†“
 User ketik pertanyaan
-    ↓
-[AI bisa jawab] → AI balas otomatis
-[AI tidak bisa jawab] → eskalasi ke admin
-  Admin takeover → balas manual (WebSocket real-time)
-    ↓
+    â†“
+[AI bisa jawab] â†’ AI balas otomatis
+[AI tidak bisa jawab] â†’ eskalasi ke admin
+  Admin takeover â†’ balas manual (WebSocket real-time)
+    â†“
 [User tap "Hubungi via WA"]
 Deep link ke WA CS + pesan otomatis:
 "Halo, saya [Nama] - [No WA] ingin bertanya..."
-    ↓
-Sesi selesai → user bisa rating percakapan
+    â†“
+Sesi selesai â†’ user bisa rating percakapan
 ```
 
 ---
@@ -589,7 +589,7 @@ Sesi selesai → user bisa rating percakapan
 | Image | cached_network_image | Lazy load + cache |
 | File Upload | image_picker + dio | Foto tiket, avatar |
 | Location/GPS | geolocator | Laporan gangguan |
-| Deep Link | app_links | Notif → halaman langsung |
+| Deep Link | app_links | Notif â†’ halaman langsung |
 | Crash Report | sentry_flutter | |
 | OTP Input | pinput | 6 kotak OTP |
 | Multi Bahasa | flutter_localizations | ID + EN |
@@ -598,7 +598,7 @@ Sesi selesai → user bisa rating percakapan
 
 ### Data Flow
 ```
-API → Local Cache (Hive) → State (Riverpod) → UI
+API â†’ Local Cache (Hive) â†’ State (Riverpod) â†’ UI
 
 Prinsip:
 - Tampilkan cache dulu (instant)
@@ -635,7 +635,7 @@ Prinsip:
 ### Design System
 | Atribut | Nilai |
 |---|---|
-| Border Radius Cards | 12–16px |
+| Border Radius Cards | 12â€“16px |
 | Border Radius Modal | 20px |
 | Shadow | Subtle soft only |
 | Icon Style | Outline modern |
@@ -643,8 +643,8 @@ Prinsip:
 
 ### AI Design Prompt Master (Mobile)
 ```
-"Design a screen for JBR Mimpo (Jabbar Media Informasi 
-dan Promosi) — a modern premium ISP mobile app from Indonesia.
+"Design a screen for JBR Minpo (Jabbar Media Informasi 
+dan Promosi) â€” a modern premium ISP mobile app from Indonesia.
 
 Design system:
 - Style: Clean minimalist, premium, modern tech ISP
@@ -653,7 +653,7 @@ Design system:
 - BG light: #F8FAFB | BG dark: #111827
 - Heading font: Sora | Body font: DM Sans
 - Code font: JetBrains Mono (referral code, ticket number)
-- Border radius: 12–16px cards, 20px modals
+- Border radius: 12â€“16px cards, 20px modals
 - Shadow: soft subtle only | Icon: outline modern
 - Support light AND dark mode
 - Bottom nav: Home | Info | Promo | Support | Akun
@@ -695,9 +695,9 @@ Design system:
 - Promo tidak bisa diklaim dobel
 
 ### Validation Rules
-- Nomor WA: format +62/08xx, 10–15 digit
+- Nomor WA: format +62/08xx, 10â€“15 digit
 - Sandi: min 8 karakter, huruf + angka
-- OTP: 6 digit, expire 5 menit, maks 5x salah → blocked 30 menit
+- OTP: 6 digit, expire 5 menit, maks 5x salah â†’ blocked 30 menit
 - Nama: min 3, maks 100 karakter
 - Alamat: min 10 karakter
 - Deskripsi tiket: min 10 karakter
@@ -719,7 +719,7 @@ Design system:
 - API timeout: maks 10 detik
 - Retry: 3x dengan exponential backoff
 - Offline mode: tampilkan cache terakhir
-- Push notif jam tenang: 22.00–07.00 WIB
+- Push notif jam tenang: 22.00â€“07.00 WIB
 - Notif darurat (gangguan): boleh kapan saja
 - Notifikasi tersimpan di app: maks 90 hari
 - Force update: wajib sebelum bisa pakai app
@@ -727,6 +727,7 @@ Design system:
 
 ---
 
-*JBR Mimpo Mobile Brief v1.0.0*
-*Dokumen ini merupakan blueprint resmi mobile app JBR Mimpo.*
+*JBR Minpo Mobile Brief v1.0.0*
+*Dokumen ini merupakan blueprint resmi mobile app JBR Minpo.*
 *Perubahan apapun harus melalui diskusi dan update dokumen ini.*
+

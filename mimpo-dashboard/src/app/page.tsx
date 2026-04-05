@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 
 export default function Home() {
   return (
@@ -6,7 +6,7 @@ export default function Home() {
       <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <Image
           src="/logo.svg"
-          alt="JBR Mimpo Logo"
+          alt="JBR Minpo Logo"
           width={180}
           height={60}
           priority
@@ -62,3 +62,4 @@ export default function Home() {
     </div>
   );
 }
+

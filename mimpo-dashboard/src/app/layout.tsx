@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "JBR Mimpo | Admin Dashboard",
-  description: "Official Admin Dashboard for JBR Mimpo ISP",
+  title: "JBR Minpo | Admin Dashboard",
+  description: "Official Admin Dashboard for JBR Minpo ISP",
   icons: {
     icon: "/logo.svg",
   },
@@ -34,3 +34,4 @@ export default function RootLayout({
     </html>
   );
 }
+
