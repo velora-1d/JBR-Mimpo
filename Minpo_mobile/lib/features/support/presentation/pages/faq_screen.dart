@@ -86,53 +86,47 @@ class _FaqScreenState extends State<FaqScreen> {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Container(
-                height: 60,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).cardColor,
-                  borderRadius: BorderRadius.circular(24),
-                  border: Border.all(
-                    color: Theme.of(context).dividerColor.withValues(alpha: 0.1),
-                    width: 1.5,
+            child: Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.primary.withValues(alpha: 0.08),
+                    blurRadius: 30,
+                    offset: const Offset(0, 12),
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.05),
-                      blurRadius: 20,
-                      offset: const Offset(0, 10),
+                ],
+              ),
+              child: TextField(
+                style: GoogleFonts.dmSans(fontSize: 15, color: AppColors.textPrimary, fontWeight: FontWeight.w600),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  hintText: 'Cari solusi...',
+                  hintStyle: GoogleFonts.dmSans(color: Colors.grey.withValues(alpha: 0.4), fontSize: 14),
+                  prefixIcon: const Icon(Icons.search_rounded, color: AppColors.primary, size: 22),
+                  suffixIcon: Container(
+                    margin: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary.withValues(alpha: 0.05),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                  ],
-                ),
-                child: TextField(
-                  style: GoogleFonts.dmSans(
-                    color: Theme.of(context).colorScheme.onSurface, 
-                    fontWeight: FontWeight.w600,
-                    fontSize: 15,
+                    child: const Icon(Icons.tune_rounded, color: AppColors.primary, size: 18),
                   ),
-                  decoration: InputDecoration(
-                    hintText: 'Cari solusi...',
-                    hintStyle: GoogleFonts.dmSans(
-                      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.3),
-                      fontSize: 14,
-                    ),
-                    prefixIcon: UnconstrainedBox(
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: AppColors.primary.withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                        child: const Icon(Icons.search_rounded, color: AppColors.primary, size: 22),
-                      ).animate(onPlay: (c) => c.repeat(reverse: true))
-                       .shimmer(duration: 3.seconds, color: Colors.white24),
-                    ),
-                    border: InputBorder.none,
-                    contentPadding: const EdgeInsets.symmetric(vertical: 18),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(22),
+                    borderSide: BorderSide(color: AppColors.primary.withValues(alpha: 0.05), width: 1.5),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(22),
+                    borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
                   ),
                 ),
               ),
-            ).animate().fadeIn(duration: 600.ms).slideY(begin: 0.2, curve: Curves.easeOutBack),
+            ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.1, end: 0, curve: Curves.easeOutQuad),
           ),
+        ),
 
           // 3. Categories
           SliverToBoxAdapter(

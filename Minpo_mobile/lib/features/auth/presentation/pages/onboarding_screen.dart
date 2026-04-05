@@ -56,24 +56,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       backgroundColor: AppColors.bgLight,
       body: Stack(
         children: [
-          // 1. Skip Button (Top Right)
-          Positioned(
-            top: 60,
-            right: 24,
-            child: TextButton(
-              onPressed: () => context.go('/login'),
-              child: Text(
-                'Skip',
-                style: GoogleFonts.manrope(
-                  color: AppColors.textSecondary,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ).animate().fadeIn(delay: 500.ms),
-
-          // 2. PageView Content
+          // 1. PageView Content
           Column(
             children: [
               Expanded(
@@ -88,7 +71,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
               
-              // 3. Bottom Card Content
+              // 2. Bottom Card Content
               Expanded(
                 flex: 4,
                 child: Container(
@@ -191,6 +174,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ],
           ),
+
+          // 3. Skip Button (Top Right) dipindah ke sini agar bisa diklik (z-index atas)
+          Positioned(
+            top: 60,
+            right: 24,
+            child: TextButton(
+              onPressed: () => context.go('/login'),
+              child: Text(
+                'Skip',
+                style: GoogleFonts.manrope(
+                  color: AppColors.textSecondary,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ).animate().fadeIn(delay: 500.ms),
         ],
       ),
     );

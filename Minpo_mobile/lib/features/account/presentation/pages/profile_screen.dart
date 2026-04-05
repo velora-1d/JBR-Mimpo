@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
-import 'package:jbr_mimpo/core/theme/app_dimensions.dart';
 import 'package:go_router/go_router.dart';
+import 'dart:ui';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -12,403 +11,308 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            // 1. Premium Emerald Header
-            _buildPremiumHeader(context),
-            
-            // 2. Bento Stats Hub
-            _buildBentoStatsHub(context),
-            
-            // 3. Menu List
-            _buildMenuList(context),
-            
-            // 4. Footer
-            _buildFooter(),
-            
-            const SizedBox(height: 120), // Padding for Bottom Navigation
+      backgroundColor: AppColors.bgLight,
+      body: RefreshIndicator(
+        color: AppColors.primary,
+        onRefresh: () async => await Future.delayed(const Duration(seconds: 1)),
+        child: CustomScrollView(
+          physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+          slivers: [
+            _buildHeader(context),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
+                child: Column(
+                  children: [
+                    _buildMembershipCard(),
+                    const SizedBox(height: 32),
+                    _buildStatsGrid(),
+                    const SizedBox(height: 32),
+                    _buildMenuSection(context, 'Akun & Keamanan', [
+                      _buildMenuItem(context, 'Edit Profil', Icons.person_outline_rounded, '/profile/edit-profile'),
+                      _buildMenuItem(context, 'Alamat Pemasangan', Icons.location_on_outlined, '/profile/address'),
+                      _buildMenuItem(context, 'Ubah Password', Icons.lock_outline_rounded, '/profile/change-password'),
+                      _buildMenuItem(context, 'Layanan Keamanan (2FA)', Icons.security_rounded, '/profile/security'),
+                    ]),
+                    const SizedBox(height: 24),
+                    _buildMenuSection(context, 'Aplikasi & Preferensi', [
+                      _buildMenuItem(context, 'Pengaturan Notifikasi', Icons.notifications_none_rounded, '/profile/notifications-settings'),
+                      _buildMenuItem(context, 'Bahasa & Wilayah', Icons.language_rounded, '/profile/app-settings'),
+                      _buildMenuItem(context, 'Hapus Akun', Icons.delete_outline_rounded, '/profile/delete-account', isDanger: true),
+                    ]),
+                    const SizedBox(height: 24),
+                    _buildMenuSection(context, 'Informasi', [
+                      _buildMenuItem(context, 'Tentang JBR Minpo', Icons.info_outline_rounded, '/profile/about'),
+                      _buildMenuItem(context, 'Syarat & Ketentuan', Icons.gavel_rounded, '/profile/tos'),
+                      _buildMenuItem(context, 'Kebijakan Privasi', Icons.privacy_tip_outlined, '/profile/privacy'),
+                      _buildMenuItem(context, 'Kebijakan Khusus', Icons.star_outline_rounded, '/profile/special-policy'),
+                    ]),
+                    const SizedBox(height: 32),
+                    _buildLogoutSection(context),
+                    const SizedBox(height: 100), // Extra padding for bottom nav
+                    Text('JBR Minpo v2.5.1 Stable', style: GoogleFonts.dmSans(fontSize: 10, color: Colors.grey)),
+                    const SizedBox(height: 20),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildPremiumHeader(BuildContext context) {
-    return Stack(
-      children: [
-        // Background Gradient with Glow
-        Container(
-          height: 320,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [AppColors.primary, Color(0xFF064e3b)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(40),
-              bottomRight: Radius.circular(40),
-            ),
-          ),
-        ),
-        // Ambient Glow Dots
-        Positioned(
-          top: -50,
-          left: -50,
-          child: Container(
-            width: 200,
-            height: 200,
-            decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.1),
-              shape: BoxShape.circle,
-            ),
-          ).animate().scale(duration: 3.seconds, curve: Curves.easeInOut).fadeIn(),
-        ),
-        
-        // Content
-        SafeArea(
-          child: Column(
-            children: [
-              // Top Bar
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                     Row(
-                      children: [
-                         Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.2),
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(Icons.person_rounded, color: Colors.white, size: 20),
-                        ),
-                        const SizedBox(width: 12),
-                        Text(
-                          'JBR Minpo',
-                          style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-                        ),
-                      ],
-                    ),
-                    IconButton(
-                      onPressed: () => context.push('/faq'),
-                      icon: const Icon(Icons.support_agent_rounded, color: Colors.white),
-                    ),
-                  ],
+  Widget _buildHeader(BuildContext context) {
+    return SliverAppBar(
+      expandedHeight: 220,
+      pinned: true,
+      backgroundColor: AppColors.primary,
+      elevation: 0,
+      stretch: true,
+      centerTitle: false,
+      title: Text('Profil Saya', style: GoogleFonts.sora(color: Colors.white, fontWeight: FontWeight.bold)),
+      flexibleSpace: FlexibleSpaceBar(
+        stretchModes: const [StretchMode.zoomBackground, StretchMode.blurBackground],
+        background: Stack(
+          fit: StackFit.expand,
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [AppColors.primary, Color(0xFF065f46)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
               ),
-              
-              const SizedBox(height: 20),
-              
-              // Avatar
-              Center(
-                child: Stack(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white.withValues(alpha: 0.3), width: 4),
-                        boxShadow: [
-                          BoxShadow(color: Colors.black.withValues(alpha: 0.1), blurRadius: 20, offset: const Offset(0, 10)),
-                        ],
+            ),
+            // Decorative background circles
+            Positioned(
+              top: -50,
+              right: -50,
+              child: CircleAvatar(radius: 100, backgroundColor: Colors.white.withValues(alpha: 0.05)),
+            ),
+            Positioned(
+              left: 24,
+              bottom: 30,
+              child: Row(
+                children: [
+                  Container(
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white, width: 3),
+                      image: const DecorationImage(
+                        image: NetworkImage('https://i.pravatar.cc/150?u=ahmad'),
+                        fit: BoxFit.cover,
                       ),
-                      child: const CircleAvatar(
-                        radius: 50,
-                        backgroundImage: NetworkImage('https://lh3.googleusercontent.com/aida-public/AB6AXuBWemjxFV6B__HQV4yyQeZQSg-zszgymP3w2vssTlH6-YETvxMrdV-E3xqzWfW0GCv90sP2vOdjxyu13s2cU7UdsxM9wD8q8c4xISCbmnVQyzVjW-SJy4e8RT4zalXoACSYmUXLPjrXzLzVZ_ibIVj1VIk2cIXL3jcN1UqhiRN2GWjpgcdYgFxq3Pj8fm5n4inpAtZKdWkq5OFwGiB6TGP1oZm0YWve6fhGFBhLzfoJ-TahS0WEZKd-aP8Dw5tyjoqWnLCbFZp2oSLQ'),
+                      boxShadow: [
+                        BoxShadow(color: Colors.black.withValues(alpha: 0.1), blurRadius: 20)
+                      ],
+                    ),
+                  ).animate().scale(duration: 500.ms),
+                  const SizedBox(width: 20),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Ahmad Syarif',
+                        style: GoogleFonts.sora(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
                       ),
-                    ),
-                    Positioned(
-                      bottom: 5,
-                      right: 5,
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-                        child: const Icon(Icons.verified_rounded, color: AppColors.primary, size: 20),
+                      const SizedBox(height: 4),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: Colors.amber.withValues(alpha: 0.2),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: Colors.amber.withValues(alpha: 0.3)),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.workspace_premium_rounded, color: Colors.amber, size: 12),
+                            const SizedBox(width: 4),
+                            Text(
+                              'PLATINUM MEMBER',
+                              style: GoogleFonts.jetBrainsMono(fontSize: 9, fontWeight: FontWeight.bold, color: Colors.amber),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMembershipCard() {
+    return Container(
+      width: double.infinity,
+      height: 100,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
+        gradient: LinearGradient(
+          colors: [Colors.white.withValues(alpha: 0.3), Colors.white.withValues(alpha: 0.1)],
+        ),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.4)),
+        boxShadow: [
+          BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 20, offset: const Offset(0, 10))
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(24),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('KEUNTUNGAN PLATINUM', style: GoogleFonts.jetBrainsMono(fontSize: 10, fontWeight: FontWeight.bold, color: AppColors.primary)),
+                      const SizedBox(height: 4),
+                      Text('Dapatkan cashback 5% untuk setiap pembayaran.', style: GoogleFonts.sora(fontSize: 13, color: AppColors.textPrimary)),
+                    ],
+                  ),
                 ),
-              ).animate().scale(delay: 200.ms, curve: Curves.easeOutBack),
-              
-              const SizedBox(height: 16),
-              
-              // Name & Phone
-              Text(
-                'Budi Santoso',
-                style: GoogleFonts.sora(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
-              ).animate().fadeIn(delay: 300.ms),
-              Text(
-                '0812-3456-7890',
-                style: GoogleFonts.jetBrainsMono(fontSize: 14, color: Colors.white.withValues(alpha: 0.7), fontWeight: FontWeight.w500),
-              ).animate().fadeIn(delay: 400.ms),
-              
-              const SizedBox(height: 16),
-              
-              // Platinum Badge
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
+                TextButton(
+                  onPressed: () {},
+                  child: Text('LIHAT', style: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.primary)),
                 ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Icon(Icons.workspace_premium_rounded, color: Colors.amber, size: 16),
-                    const SizedBox(width: 8),
-                    Text(
-                      'MEMBER PLATINUM',
-                      style: GoogleFonts.sora(fontSize: 11, fontWeight: FontWeight.w800, color: Colors.white, letterSpacing: 1),
-                    ),
-                  ],
-                ),
-              ).animate().fadeIn(delay: 500.ms).slideY(begin: 0.5),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStatsGrid() {
+    return Row(
+      children: [
+        Expanded(child: _buildStatItem('345', 'Hari Aktif', Icons.calendar_month_rounded, AppColors.primary)),
+        const SizedBox(width: 12),
+        Expanded(child: _buildStatItem('50M', 'Speed', Icons.speed_rounded, Colors.blue)),
+        const SizedBox(width: 12),
+        Expanded(child: _buildStatItem('8', 'Perangkat', Icons.devices_rounded, Colors.purple)),
+      ],
+    );
+  }
+
+  Widget _buildStatItem(String val, String label, IconData icon, Color color) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.01), blurRadius: 10)],
+      ),
+      child: Column(
+        children: [
+          Icon(icon, color: color, size: 20),
+          const SizedBox(height: 8),
+          Text(val, style: GoogleFonts.sora(fontSize: 16, fontWeight: FontWeight.bold)),
+          Text(label, style: GoogleFonts.dmSans(fontSize: 10, color: Colors.grey)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMenuSection(BuildContext context, String title, List<Widget> items) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 4, bottom: 12),
+          child: Text(
+            title,
+            style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(24),
+            boxShadow: [
+              BoxShadow(color: Colors.black.withValues(alpha: 0.01), blurRadius: 20)
             ],
           ),
+          child: Column(children: items),
         ),
       ],
     );
   }
 
-  Widget _buildBentoStatsHub(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-      child: Row(
-        children: [
-          Expanded(
-            child: _buildBentoCard(
-              context,
-              label: 'Total Points',
-              value: '12,450',
-              unit: 'PTS',
-              icon: Icons.auto_awesome_rounded,
-              color: Colors.amber,
-            ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: _buildBentoCard(
-              context,
-              label: 'Active Plan',
-              value: '500',
-              unit: 'MBPS',
-              icon: Icons.speed_rounded,
-              color: AppColors.primary,
-            ),
-          ),
-        ],
-      ).animate().fadeIn(delay: 600.ms).slideY(begin: 0.2),
-    );
-  }
-
-  Widget _buildBentoCard(
-    BuildContext context, {
-    required String label,
-    required String value,
-    required String unit,
-    required IconData icon,
-    required Color color,
-  }) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
-        borderRadius: BorderRadius.circular(AppDimensions.radiusCard),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 20, offset: const Offset(0, 8)),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(color: color.withValues(alpha: 0.1), shape: BoxShape.circle),
-            child: Icon(icon, color: color, size: 16),
-          ),
-          const SizedBox(height: 12),
-          Text(label, style: GoogleFonts.dmSans(fontSize: 12, color: Colors.grey)),
-          const SizedBox(height: 4),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(value, style: GoogleFonts.sora(fontSize: 22, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSurface)),
-              const SizedBox(width: 4),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 4),
-                child: Text(unit, style: GoogleFonts.sora(fontSize: 10, fontWeight: FontWeight.bold, color: color)),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildMenuList(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
-              borderRadius: BorderRadius.circular(AppDimensions.radiusCard),
-              boxShadow: [
-                BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 10, offset: const Offset(0, 4)),
-              ],
-            ),
-            child: Column(
-              children: [
-                _buildMenuItem(
-                  context: context,
-                  icon: Icons.person_outline_rounded,
-                  title: 'Edit Profil',
-                  onTap: () {
-                    HapticFeedback.selectionClick();
-                    context.push('/edit-profile');
-                  },
-                ),
-                _buildDivider(),
-                _buildMenuItem(
-                  context: context,
-                  icon: Icons.lock_reset_rounded,
-                  title: 'Ganti Sandi',
-                  onTap: () {
-                    HapticFeedback.selectionClick();
-                    context.push('/change-password');
-                  },
-                ),
-                _buildDivider(),
-                _buildMenuItem(
-                  context: context,
-                  icon: Icons.notifications_none_rounded,
-                  title: 'Pusat Notifikasi',
-                  onTap: () {
-                    HapticFeedback.selectionClick();
-                    context.push('/notifications');
-                  },
-                ),
-                _buildDivider(),
-                _buildMenuItem(
-                  context: context,
-                  icon: Icons.security_rounded,
-                  title: 'Keamanan Akun',
-                  onTap: () {
-                    HapticFeedback.selectionClick();
-                    context.push('/security');
-                  },
-                ),
-                _buildDivider(),
-                _buildMenuItem(
-                  context: context,
-                  icon: Icons.language_rounded,
-                  title: 'Bahasa & Info Aplikasi',
-                  onTap: () {
-                    HapticFeedback.selectionClick();
-                    context.push('/app-settings');
-                  },
-                ),
-                _buildDivider(),
-                _buildMenuItem(
-                  context: context,
-                  icon: Icons.help_outline_rounded,
-                  title: 'Pusat Bantuan',
-                  onTap: () {
-                    HapticFeedback.selectionClick();
-                    context.push('/faq');
-                  },
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 24),
-          
-          // Logout Button
-          GestureDetector(
-            onTap: () => context.go('/login'),
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Theme.of(context).cardColor,
-                borderRadius: BorderRadius.circular(24),
-                border: Border.all(color: Colors.red.withValues(alpha: 0.2)),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.logout_rounded, color: Colors.red, size: 20),
-                  const SizedBox(width: 12),
-                  Text(
-                    'Logout Account',
-                    style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.red),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ).animate().fadeIn(delay: 700.ms),
-    );
-  }
-
-  Widget _buildMenuItem({
-    required BuildContext context, 
-    required IconData icon, 
-    required String title, 
-    required VoidCallback onTap
-  }) {
+  Widget _buildMenuItem(BuildContext context, String title, IconData icon, String route, {bool isDanger = false}) {
     return ListTile(
-      onTap: onTap,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
+      onTap: () => context.push(route),
       leading: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(color: AppColors.primary.withValues(alpha: 0.05), borderRadius: BorderRadius.circular(16)),
-        child: Icon(icon, color: AppColors.primary, size: 22),
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(color: AppColors.bgLight, borderRadius: BorderRadius.circular(10)),
+        child: Icon(icon, color: isDanger ? Colors.red : AppColors.primary, size: 20),
       ),
       title: Text(
         title,
-        style: GoogleFonts.sora(
-          fontSize: 15, 
-          fontWeight: FontWeight.bold, 
-          color: Theme.of(context).colorScheme.onSurface
-        ),
+        style: GoogleFonts.dmSans(fontSize: 14, fontWeight: FontWeight.w500, color: isDanger ? Colors.red : AppColors.textPrimary),
       ),
-      trailing: const Icon(Icons.chevron_right_rounded, color: Colors.grey),
+      trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 14, color: Colors.grey),
     );
   }
 
-  Widget _buildDivider() {
+  Widget _buildLogoutSection(BuildContext context) {
+    return Column(
+      children: [
+        _buildLogoutButton(
+          label: 'Keluar dari Akun',
+          onTap: () {},
+          isMass: false,
+        ),
+        const SizedBox(height: 12),
+        _buildLogoutButton(
+          label: 'Logout dari Semua Perangkat',
+          onTap: () => context.push('/profile/security'),
+          isMass: true,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildLogoutButton({required String label, required VoidCallback onTap, required bool isMass}) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 24),
-      height: 1,
-      color: Colors.grey.withValues(alpha: 0.05),
-    );
-  }
-
-  Widget _buildFooter() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 40),
-      child: Column(
-        children: [
-          Text(
-            'JBR MINPO V4.8.2-STABLE',
-            style: GoogleFonts.jetBrainsMono(fontSize: 10, color: Colors.grey, fontWeight: FontWeight.bold, letterSpacing: 2),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: isMass ? Colors.orange.withValues(alpha: 0.05) : Colors.red.withValues(alpha: 0.05),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: isMass ? Colors.orange.withValues(alpha: 0.1) : Colors.red.withValues(alpha: 0.1)),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(20),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 18),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(isMass ? Icons.devices_other_rounded : Icons.logout_rounded, color: isMass ? Colors.orange : Colors.red, size: 22),
+                const SizedBox(width: 12),
+                Text(
+                  label,
+                  style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.bold, color: isMass ? Colors.orange : Colors.red),
+                ),
+              ],
+            ),
           ),
-          const SizedBox(height: 8),
-          Text(
-            '© 2024 JBR Connectivity Hub. All rights reserved.',
-            style: GoogleFonts.dmSans(fontSize: 11, color: Colors.grey),
-          ),
-        ],
+        ),
       ),
     );
   }

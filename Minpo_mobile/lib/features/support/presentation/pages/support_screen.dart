@@ -1,355 +1,253 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
-import 'package:jbr_mimpo/core/theme/app_dimensions.dart';
 import 'package:go_router/go_router.dart';
 
-class SupportScreen extends StatelessWidget {
+class SupportScreen extends StatefulWidget {
   const SupportScreen({super.key});
+
+  @override
+  State<SupportScreen> createState() => _SupportScreenState();
+}
+
+class _SupportScreenState extends State<SupportScreen> {
+  final List<Map<String, dynamic>> _faqs = [
+    {'q': 'Bagaimana cara bayar tagihan?', 'a': 'Anda dapat membayar tagihan melalui Menu Pembayaran di App, transfer bank, atau gerai retail terdekat.', 'isOpen': false},
+    {'q': 'Koneksi internet lambat tiba-tiba?', 'a': 'Coba restart router Anda selama 30 detik. Jika masih kendala, gunakan menu Lapor Gangguan.', 'isOpen': false},
+    {'q': 'Cara ganti password WiFi?', 'a': 'Buka menu Pengaturan Router di Aplikasi JBR Minpo, pilih WiFi Settings.', 'isOpen': false},
+    {'q': 'Biaya upgrade paket internet?', 'a': 'Biaya bervariasi tergantung kecepatan yang pilih. Cek menu Paket Saya.', 'isOpen': false},
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          // 1. Header Area
-          SliverPadding(
-            padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
-            sliver: SliverToBoxAdapter(
+      backgroundColor: AppColors.bgLight,
+      body: RefreshIndicator(
+        onRefresh: () async => await Future.delayed(const Duration(seconds: 1)),
+        child: CustomScrollView(
+          physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+          slivers: [
+            _buildSliverHeader(),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildActiveTicketCard(),
+                    const SizedBox(height: 32),
+                    _buildBentoGrid(),
+                    const SizedBox(height: 32),
+                    _buildQuickContact(),
+                    const SizedBox(height: 32),
+                    _buildFaqSection(),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSliverHeader() {
+    return SliverAppBar(
+      expandedHeight: 200,
+      pinned: true,
+      backgroundColor: AppColors.primary,
+      elevation: 0,
+      stretch: true,
+      flexibleSpace: FlexibleSpaceBar(
+        stretchModes: const [StretchMode.zoomBackground, StretchMode.blurBackground],
+        title: Text('Pusat Bantuan', style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
+        centerTitle: true,
+        background: Stack(
+          fit: StackFit.expand,
+          children: [
+             Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(colors: [AppColors.primary, Color(0xFF064e3b)], begin: Alignment.topLeft, end: Alignment.bottomRight),
+              ),
+            ),
+            Positioned(
+              right: -50,
+              top: -20,
+              child: Icon(Icons.support_agent_rounded, size: 250, color: Colors.white.withValues(alpha: 0.05)),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 80, 24, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: AppColors.primary.withValues(alpha: 0.1),
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(Icons.support_agent_rounded, color: AppColors.primary),
-                      ),
-                      IconButton(onPressed: () {}, icon: const Icon(Icons.help_outline_rounded, color: Colors.grey)),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
-                  Text(
-                    'Halo, ada kendala?',
-                    style: GoogleFonts.sora(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w800,
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                  ).animate().fadeIn().slideX(begin: -0.2),
+                  Text('Ada Kendala, Ahmad?', style: GoogleFonts.sora(fontSize: 24, fontWeight: FontWeight.w900, color: Colors.white)),
                   const SizedBox(height: 8),
-                  Text(
-                    'Kami siap membantu memastikan koneksi Anda tetap lancar secepat kilat.',
-                    style: GoogleFonts.dmSans(
-                      fontSize: 14,
-                      color: AppColors.textSecondary,
-                    ),
-                  ).animate().fadeIn(delay: 200.ms),
+                  Text('Kami siap membantu 24/7.', style: GoogleFonts.dmSans(fontSize: 14, color: Colors.white70)),
                 ],
               ),
             ),
-          ),
+          ],
+        ),
+      ),
+    );
+  }
 
-          // 2. Bento Grid Actions
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            sliver: SliverGrid(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 16,
-                crossAxisSpacing: 16,
-                childAspectRatio: 1.0,
+  Widget _buildActiveTicketCard() {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: Colors.orange.withValues(alpha: 0.3)),
+        boxShadow: [BoxShadow(color: Colors.orange.withValues(alpha: 0.05), blurRadius: 20, offset: const Offset(0, 5))],
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(padding: const EdgeInsets.all(10), decoration: BoxDecoration(color: Colors.orange.withValues(alpha: 0.1), shape: BoxShape.circle), child: const Icon(Icons.bolt_rounded, color: Colors.orange, size: 20)),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Tiket Gangguan Aktif', style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.bold)),
+                    Text('ID #89123 • Sedang ditangani teknisi', style: GoogleFonts.dmSans(fontSize: 11, color: Colors.grey)),
+                  ],
+                ),
               ),
-              delegate: SliverChildListDelegate([
-                GestureDetector(
-                  onTap: () {
-                    HapticFeedback.lightImpact();
-                    context.push('/report-issue');
-                  },
-                  child: _buildActionCard(
-                    context,
-                    title: 'Lapor Gangguan',
-                    subtitle: 'Respon < 2 jam',
-                    icon: Icons.bolt_rounded,
-                    bgIcon: Icons.report_problem_outlined,
-                    color: AppColors.primary,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    HapticFeedback.lightImpact();
-                    context.push('/ticket-tracking');
-                  },
-                  child: _buildActionCard(
-                    context,
-                    title: 'Cek Tiket',
-                    subtitle: 'Pantau status',
-                    icon: Icons.receipt_long_rounded,
-                    bgIcon: Icons.confirmation_number_outlined,
-                    color: Colors.blue,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    HapticFeedback.lightImpact();
-                    context.push('/chat-cs');
-                  },
-                  child: _buildActionCard(
-                    context,
-                    title: 'Chat CS',
-                    subtitle: 'Live Chat 24/7',
-                    icon: Icons.forum_rounded,
-                    bgIcon: Icons.support_agent_outlined,
-                    color: Colors.orange,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    HapticFeedback.lightImpact();
-                    context.push('/faq');
-                  },
-                  child: _buildActionCard(
-                    context,
-                    title: 'FAQ',
-                    subtitle: 'Solusi instan',
-                    icon: Icons.quiz_rounded,
-                    bgIcon: Icons.help_outline_rounded,
-                    color: Colors.teal,
-                  ),
-                ),
-              ]),
-            ),
+              Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: Colors.orange, borderRadius: BorderRadius.circular(8)), child: Text('Track', style: GoogleFonts.dmSans(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.white))),
+            ],
           ),
+          const SizedBox(height: 16),
+           LinearProgressIndicator(value: 0.6, backgroundColor: Colors.orange.withValues(alpha: 0.1), color: Colors.orange, minHeight: 6, borderRadius: BorderRadius.circular(3)),
+        ],
+      ),
+    ).animate().fadeIn().slideY(begin: 0.2);
+  }
 
-          // 3. Latest Ticket
-          SliverPadding(
-            padding: const EdgeInsets.fromLTRB(20, 32, 20, 20),
-            sliver: SliverToBoxAdapter(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Tiket Terakhir Kamu',
-                        style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      GestureDetector(
-                        onTap: () => context.push('/ticket-tracking'),
-                        child: Text('Lihat Semua', style: GoogleFonts.dmSans(fontSize: 13, color: AppColors.primary, fontWeight: FontWeight.bold)),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  _buildTicketCard(context),
-                ],
+  Widget _buildBentoGrid() {
+    return GridView.count(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      crossAxisCount: 2,
+      mainAxisSpacing: 16,
+      crossAxisSpacing: 16,
+      childAspectRatio: 1.1,
+      children: [
+        _buildActionCard('Lapor Gangguan', 'Respon cepat', Icons.feedback_rounded, AppColors.primary, '/support/report-issue'),
+        _buildActionCard('Cek Jaringan', 'Status koneksi', Icons.sensors_rounded, Colors.blue, '/support/check-connection'),
+        _buildActionCard('Live Chat', 'Bicara dengan CS', Icons.chat_bubble_rounded, Colors.green, '/support/chat-cs'),
+        _buildActionCard('Instalasi Baru', 'Tambah titik baru', Icons.add_business_rounded, Colors.purple, '/support/installation'),
+      ],
+    );
+  }
+
+  Widget _buildActionCard(String title, String sub, IconData icon, Color color, String route) {
+    return GestureDetector(
+      onTap: () => context.push(route),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(24), boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 10)]),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, color: color, size: 28),
+            const SizedBox(height: 12),
+            Text(title, style: GoogleFonts.sora(fontSize: 13, fontWeight: FontWeight.bold)),
+            Text(sub, style: GoogleFonts.dmSans(fontSize: 10, color: Colors.grey)),
+          ],
+        ),
+      ),
+    ).animate().scale(delay: 50.ms);
+  }
+
+  Widget _buildQuickContact() {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: AppColors.primary,
+        borderRadius: BorderRadius.circular(32),
+        image: const DecorationImage(image: NetworkImage('https://www.transparenttextures.com/patterns/carbon-fibre.png'), opacity: 0.05),
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Butuh Bantuan Langsung?', style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
+                    const SizedBox(height: 4),
+                    Text('Hubungi Call Center kami di 1500-123 atau melalui WhatsApp.', style: GoogleFonts.dmSans(fontSize: 12, color: Colors.white.withValues(alpha: 0.7))),
+                  ],
+                ),
               ),
-            ),
+              const Icon(Icons.headset_mic_rounded, color: Colors.white24, size: 60),
+            ],
           ),
-
-          // 4. Banner Illustration
-          SliverPadding(
-            padding: const EdgeInsets.fromLTRB(20, 12, 20, 100),
-            sliver: SliverToBoxAdapter(
-              child: _buildVisitBanner(context),
-            ),
+          const SizedBox(height: 24),
+          Row(
+            children: [
+              Expanded(child: _buildContactButton('Telepon CS', Icons.phone_rounded, Colors.white, AppColors.primary)),
+              const SizedBox(width: 12),
+              Expanded(child: _buildContactButton('WhatsApp', Icons.chat_rounded, Colors.green, Colors.white)),
+            ],
           ),
         ],
       ),
     );
   }
 
-  Widget _buildActionCard(
-    BuildContext context, {
-    required String title,
-    required String subtitle,
-    required IconData icon,
-    required IconData bgIcon,
-    required Color color,
-  }) {
+  Widget _buildContactButton(String label, IconData icon, Color bg, Color text) {
     return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
-        borderRadius: BorderRadius.circular(AppDimensions.radiusCard),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 10, offset: const Offset(0, 4)),
-        ],
-      ),
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Positioned(
-            right: -25,
-            top: -25,
-            child: Icon(bgIcon, size: 100, color: color.withValues(alpha: 0.05)),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: color.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Icon(icon, color: color, size: 24),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: GoogleFonts.sora(fontSize: 15, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSurface),
-                  ),
-                  Text(
-                    subtitle,
-                    style: GoogleFonts.dmSans(fontSize: 11, fontWeight: FontWeight.w500, color: AppColors.textSecondary),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
-    ).animate().fadeIn(delay: 300.ms).scale(begin: const Offset(0.9, 0.9));
-  }
-
-  Widget _buildTicketCard(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Theme.of(context).cardColor.withValues(alpha: 0.8),
-        borderRadius: BorderRadius.circular(AppDimensions.radiusCard),
-        border: Border.all(color: AppColors.primary.withValues(alpha: 0.1)),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 20, offset: const Offset(0, 8)),
-        ],
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 14),
+      decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(16)),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(color: Theme.of(context).scaffoldBackgroundColor, shape: BoxShape.circle),
-            child: const Icon(Icons.router_rounded, color: AppColors.primary),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Ticket ID', style: GoogleFonts.jetBrainsMono(fontSize: 10, color: Colors.grey, fontWeight: FontWeight.bold)),
-                Text('#JBR-9901', style: GoogleFonts.jetBrainsMono(fontSize: 16, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSurface)),
-              ],
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  color: AppColors.primary.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 6,
-                      height: 6,
-                      decoration: const BoxDecoration(color: AppColors.primary, shape: BoxShape.circle),
-                    ).animate(onPlay: (c) => c.repeat()).scale(begin: const Offset(1, 1), end: const Offset(1.5, 1.5), duration: 1.seconds).fadeOut(),
-                    const SizedBox(width: 6),
-                    Text('DIPROSES', style: GoogleFonts.jetBrainsMono(fontSize: 9, fontWeight: FontWeight.bold, color: AppColors.primary)),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text('Update: 15 Menit lalu', style: GoogleFonts.dmSans(fontSize: 10, color: Colors.grey)),
-            ],
-          ),
+          Icon(icon, color: text, size: 18),
+          const SizedBox(width: 8),
+          Text(label, style: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.bold, color: text)),
         ],
       ),
-    ).animate().fadeIn(delay: 500.ms).slideY(begin: 0.2);
+    );
   }
 
-  Widget _buildVisitBanner(BuildContext context) {
-    return GestureDetector(
-      onTap: () => context.push('/network-status'),
-      child: Container(
-        height: 140,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(32),
-          gradient: const LinearGradient(
-            colors: [Color(0xFF0ea5e9), Color(0xFF2563eb)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.blue.withValues(alpha: 0.2),
-              blurRadius: 20,
-              offset: const Offset(0, 10),
-            ),
-          ],
-        ),
-        child: Stack(
+  Widget _buildFaqSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Pertanyaan Sering Diajukan', style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold)),
+        const SizedBox(height: 16),
+        ...List.generate(_faqs.length, (idx) => _buildFaqItem(idx)),
+      ],
+    );
+  }
+
+  Widget _buildFaqItem(int index) {
+    final faq = _faqs[index];
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
+      child: Theme(
+        data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+        child: ExpansionTile(
+          key: PageStorageKey(index),
+          title: Text(faq['q'], style: GoogleFonts.dmSans(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
+          trailing: Icon(faq['isOpen'] ? Icons.remove_circle_outline_rounded : Icons.add_circle_outline_rounded, color: AppColors.primary),
+          onExpansionChanged: (val) => setState(() => _faqs[index]['isOpen'] = val),
           children: [
-            Positioned(
-              right: -20,
-              bottom: -20,
-              child: Icon(Icons.router_rounded, size: 160, color: Colors.white.withValues(alpha: 0.1)),
-            ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.2),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Text(
-                      'STATUS JARINGAN',
-                      style: GoogleFonts.jetBrainsMono(fontSize: 9, fontWeight: FontWeight.bold, color: Colors.white),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Cek Kondisi Area Kamu',
-                    style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
-                  const SizedBox(height: 4),
-                  SizedBox(
-                    width: 200,
-                    child: Text(
-                      'Pantau status koneksi dan estimasi perbaikan secara real-time.',
-                      style: GoogleFonts.dmSans(fontSize: 13, color: Colors.white.withValues(alpha: 0.8)),
-                    ),
-                  ),
-                ],
-              ),
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
+              child: Text(faq['a'], style: GoogleFonts.dmSans(fontSize: 13, height: 1.5, color: AppColors.textSecondary)),
             ),
           ],
         ),
       ),
-    ).animate().fadeIn(delay: 700.ms);
+    );
   }
 }

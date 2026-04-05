@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
 import 'package:jbr_mimpo/core/theme/app_dimensions.dart';
@@ -12,7 +13,8 @@ class PromoScreen extends StatefulWidget {
   State<PromoScreen> createState() => _PromoScreenState();
 }
 
-class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStateMixin {
+class _PromoScreenState extends State<PromoScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -43,16 +45,26 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
                 controller: _tabController,
                 physics: const BouncingScrollPhysics(),
                 children: [
-                  _buildPromoAktifTab(),
-                  _buildRewardSayaTab(),
-                  _buildUndianTab(),
-                  _buildReferralTab(),
+                  _buildWithRefresh(_buildPromoAktifTab()),
+                  _buildWithRefresh(_buildRewardSayaTab()),
+                  _buildWithRefresh(_buildUndianTab()),
+                  _buildWithRefresh(_buildReferralTab()),
                 ],
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildWithRefresh(Widget child) {
+    return RefreshIndicator(
+      color: AppColors.primary,
+      onRefresh: () async {
+        await Future.delayed(const Duration(seconds: 2));
+      },
+      child: child,
     );
   }
 
@@ -70,7 +82,7 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
                 'Promo & Reward',
                 style: GoogleFonts.sora(
                   fontSize: 22,
-                   fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.w800,
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
@@ -80,47 +92,55 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
                   color: AppColors.primary.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.stars_rounded, color: AppColors.primary, size: 20),
+                child: const Icon(
+                  Icons.stars_rounded,
+                  color: AppColors.primary,
+                  size: 20,
+                ),
               ),
             ],
           ),
           const SizedBox(height: 16),
           // Ultra Premium Search Bar (Modern Solid)
           Container(
-            height: 56,
             decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: Theme.of(context).dividerColor.withValues(alpha: 0.1),
-                width: 1.2,
-              ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.04),
-                  blurRadius: 15,
-                  offset: const Offset(0, 8),
+                  color: AppColors.primary.withValues(alpha: 0.08),
+                  blurRadius: 30,
+                  offset: const Offset(0, 12),
                 ),
               ],
             ),
             child: TextField(
-              style: GoogleFonts.dmSans(
-                color: Theme.of(context).colorScheme.onSurface, 
-                fontWeight: FontWeight.w600,
-                fontSize: 14,
-              ),
+              style: GoogleFonts.dmSans(fontSize: 15, color: AppColors.textPrimary, fontWeight: FontWeight.w600),
               decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
                 hintText: 'Cari promo menarik...',
-                hintStyle: GoogleFonts.dmSans(
-                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.3),
-                  fontSize: 13,
+                hintStyle: GoogleFonts.dmSans(color: Colors.grey.withValues(alpha: 0.4), fontSize: 14),
+                prefixIcon: const Icon(Icons.search_rounded, color: AppColors.primary, size: 22),
+                suffixIcon: Container(
+                  margin: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withValues(alpha: 0.05),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Icon(Icons.tune_rounded, color: AppColors.primary, size: 18),
                 ),
-                prefixIcon: const Icon(Icons.search_rounded, color: AppColors.primary, size: 20),
-                border: InputBorder.none,
-                contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(22),
+                  borderSide: BorderSide(color: AppColors.primary.withValues(alpha: 0.05), width: 1.5),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(22),
+                  borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+                ),
               ),
             ),
-          ).animate().fadeIn(duration: 500.ms).slideY(begin: 0.2, curve: Curves.easeOutCubic),
+          ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.1, end: 0, curve: Curves.easeOutQuad),
           const SizedBox(height: 20),
           TabBar(
             controller: _tabController,
@@ -133,8 +153,14 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
             indicatorWeight: 3,
             labelColor: AppColors.primary,
             unselectedLabelColor: AppColors.textSecondary,
-            labelStyle: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.bold),
-            unselectedLabelStyle: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.w600),
+            labelStyle: GoogleFonts.sora(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+            ),
+            unselectedLabelStyle: GoogleFonts.sora(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
             padding: EdgeInsets.zero,
             labelPadding: const EdgeInsets.only(right: 24),
             tabs: const [
@@ -219,12 +245,21 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
               color: Colors.white.withValues(alpha: 0.2),
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.generating_tokens, size: 48, color: Colors.white),
+            child: const Icon(
+              Icons.generating_tokens,
+              size: 48,
+              color: Colors.white,
+            ),
           ),
           const SizedBox(height: 16),
           Text(
             'TOTAL SALDO KAMU',
-            style: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white.withValues(alpha: 0.8), letterSpacing: 1.5),
+            style: GoogleFonts.sora(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: Colors.white.withValues(alpha: 0.8),
+              letterSpacing: 1.5,
+            ),
           ),
           const SizedBox(height: 4),
           Row(
@@ -232,12 +267,20 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
             children: [
               Text(
                 '2,500',
-                style: GoogleFonts.sora(fontSize: 40, fontWeight: FontWeight.w800, color: Colors.white),
+                style: GoogleFonts.sora(
+                  fontSize: 40,
+                  fontWeight: FontWeight.w800,
+                  color: Colors.white,
+                ),
               ),
               const SizedBox(width: 8),
               Text(
                 'Poin',
-                style: GoogleFonts.sora(fontSize: 20, fontWeight: FontWeight.bold, color: const Color(0xFF6FFBBE)),
+                style: GoogleFonts.sora(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFF6FFBBE),
+                ),
               ),
             ],
           ),
@@ -253,10 +296,21 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
                   backgroundColor: Colors.white.withValues(alpha: 0.9),
                   foregroundColor: AppColors.primary,
                   elevation: 0,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
                 ),
-                child: Text('Riwayat', style: GoogleFonts.sora(fontWeight: FontWeight.bold, fontSize: 14)),
+                child: Text(
+                  'Riwayat',
+                  style: GoogleFonts.sora(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
               ),
               const SizedBox(width: 12),
               ElevatedButton(
@@ -264,17 +318,30 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
                   HapticFeedback.lightImpact();
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF6FFBBE).withValues(alpha: 0.3),
+                  backgroundColor: const Color(
+                    0xFF6FFBBE,
+                  ).withValues(alpha: 0.3),
                   foregroundColor: Colors.white,
                   elevation: 0,
                   side: BorderSide(color: Colors.white.withValues(alpha: 0.3)),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
                 ),
-                child: Text('Cara Dapat', style: GoogleFonts.sora(fontWeight: FontWeight.bold, fontSize: 14)),
+                child: Text(
+                  'Cara Dapat',
+                  style: GoogleFonts.sora(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -287,8 +354,23 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text('Leaderboard Minggu Ini', style: GoogleFonts.sora(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
-            Text('LIHAT SEMUA', style: GoogleFonts.sora(fontSize: 10, fontWeight: FontWeight.bold, color: AppColors.primary, letterSpacing: 1)),
+            Text(
+              'Leaderboard Minggu Ini',
+              style: GoogleFonts.sora(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: AppColors.textPrimary,
+              ),
+            ),
+            Text(
+              'LIHAT SEMUA',
+              style: GoogleFonts.sora(
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+                color: AppColors.primary,
+                letterSpacing: 1,
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 24),
@@ -299,13 +381,31 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               // Rank 2
-              _buildLeaderboardItem(name: 'Andra R.', points: '1,820 pts', rank: 2, image: 'https://i.pravatar.cc/150?img=11', isFirst: false),
+              _buildLeaderboardItem(
+                name: 'Andra R.',
+                points: '1,820 pts',
+                rank: 2,
+                image: 'https://i.pravatar.cc/150?img=11',
+                isFirst: false,
+              ),
               const SizedBox(width: 12),
               // Rank 1
-              _buildLeaderboardItem(name: 'Siska W.', points: '2,150 pts', rank: 1, image: 'https://i.pravatar.cc/150?img=5', isFirst: true),
+              _buildLeaderboardItem(
+                name: 'Siska W.',
+                points: '2,150 pts',
+                rank: 1,
+                image: 'https://i.pravatar.cc/150?img=5',
+                isFirst: true,
+              ),
               const SizedBox(width: 12),
               // Rank 3
-              _buildLeaderboardItem(name: 'Budi T.', points: '1,640 pts', rank: 3, image: 'https://i.pravatar.cc/150?img=15', isFirst: false),
+              _buildLeaderboardItem(
+                name: 'Budi T.',
+                points: '1,640 pts',
+                rank: 3,
+                image: 'https://i.pravatar.cc/150?img=15',
+                isFirst: false,
+              ),
             ],
           ),
         ),
@@ -313,15 +413,37 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
     );
   }
 
-  Widget _buildLeaderboardItem({required String name, required String points, required int rank, required String image, required bool isFirst}) {
+  Widget _buildLeaderboardItem({
+    required String name,
+    required String points,
+    required int rank,
+    required String image,
+    required bool isFirst,
+  }) {
     return Expanded(
       child: Container(
         height: isFirst ? 160 : 130, // To make the middle one taller
         decoration: BoxDecoration(
-          color: isFirst ? Theme.of(context).cardColor : AppColors.primary.withValues(alpha: 0.1),
+          color: isFirst
+              ? Theme.of(context).cardColor
+              : AppColors.primary.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(AppDimensions.radiusCard),
-          border: isFirst ? Border.all(color: AppColors.primary.withValues(alpha: 0.2), width: 2) : null,
-          boxShadow: isFirst ? [BoxShadow(color: AppColors.primary.withValues(alpha: 0.1), blurRadius: 10, spreadRadius: 0, offset: const Offset(0, 4))] : null,
+          border: isFirst
+              ? Border.all(
+                  color: AppColors.primary.withValues(alpha: 0.2),
+                  width: 2,
+                )
+              : null,
+          boxShadow: isFirst
+              ? [
+                  BoxShadow(
+                    color: AppColors.primary.withValues(alpha: 0.1),
+                    blurRadius: 10,
+                    spreadRadius: 0,
+                    offset: const Offset(0, 4),
+                  ),
+                ]
+              : null,
         ),
         child: Stack(
           clipBehavior: Clip.none,
@@ -336,37 +458,77 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
                 decoration: BoxDecoration(
                   color: Theme.of(context).cardColor,
                   shape: BoxShape.circle,
-                  border: isFirst ? Border.all(color: const Color(0xFF6FFBBE), width: 3) : Border.all(color: Theme.of(context).dividerColor.withValues(alpha: 0.1), width: 2),
+                  border: isFirst
+                      ? Border.all(color: const Color(0xFF6FFBBE), width: 3)
+                      : Border.all(
+                          color: Theme.of(
+                            context,
+                          ).dividerColor.withValues(alpha: 0.1),
+                          width: 2,
+                        ),
                 ),
-                child: ClipOval(
-                  child: Image.network(image, fit: BoxFit.cover),
-                ),
+                child: ClipOval(child: Image.network(image, fit: BoxFit.cover)),
               ),
             ),
             if (isFirst)
               Positioned(
                 top: -32,
                 right: 16,
-                child: Icon(Icons.workspace_premium_rounded, color: Colors.amber.shade400, size: 32),
+                child: Icon(
+                  Icons.workspace_premium_rounded,
+                  color: Colors.amber.shade400,
+                  size: 32,
+                ),
               ),
             Padding(
               padding: EdgeInsets.only(top: isFirst ? 48 : 36, bottom: 12),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(name, style: GoogleFonts.sora(fontSize: isFirst ? 14 : 12, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+                  Text(
+                    name,
+                    style: GoogleFonts.sora(
+                      fontSize: isFirst ? 14 : 12,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
                   const SizedBox(height: 2),
-                  Text(points, style: GoogleFonts.jetBrainsMono(fontSize: isFirst ? 12 : 10, fontWeight: FontWeight.bold, color: isFirst ? AppColors.primary : AppColors.textSecondary)),
+                  Text(
+                    points,
+                    style: GoogleFonts.jetBrainsMono(
+                      fontSize: isFirst ? 12 : 10,
+                      fontWeight: FontWeight.bold,
+                      color: isFirst
+                          ? AppColors.primary
+                          : AppColors.textSecondary,
+                    ),
+                  ),
                   const SizedBox(height: 8),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
-                      color: isFirst ? AppColors.primary : (rank == 3 ? Colors.orange.shade100 : Colors.grey.shade200),
+                      color: isFirst
+                          ? AppColors.primary
+                          : (rank == 3
+                                ? Colors.orange.shade100
+                                : Colors.grey.shade200),
                       borderRadius: BorderRadius.circular(100),
                     ),
                     child: Text(
                       isFirst ? 'JUARA 1' : 'RANK $rank',
-                      style: GoogleFonts.sora(fontSize: 8, fontWeight: FontWeight.bold, color: isFirst ? Colors.white : (rank == 3 ? Colors.orange.shade700 : Colors.grey.shade600)),
+                      style: GoogleFonts.sora(
+                        fontSize: 8,
+                        fontWeight: FontWeight.bold,
+                        color: isFirst
+                            ? Colors.white
+                            : (rank == 3
+                                  ? Colors.orange.shade700
+                                  : Colors.grey.shade600),
+                      ),
                     ),
                   ),
                 ],
@@ -388,8 +550,21 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Tukar Poin', style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
-                Text('Gunakan poinmu untuk hadiah eksklusif', style: GoogleFonts.dmSans(fontSize: 12, color: AppColors.textSecondary)),
+                Text(
+                  'Tukar Poin',
+                  style: GoogleFonts.sora(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textPrimary,
+                  ),
+                ),
+                Text(
+                  'Gunakan poinmu untuk hadiah eksklusif',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 12,
+                    color: AppColors.textSecondary,
+                  ),
+                ),
               ],
             ),
             const Icon(Icons.filter_list_rounded, color: AppColors.primary),
@@ -404,23 +579,59 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
           children: [
-            _buildRewardItemCard(title: 'Gratis Internet 1 Bln', points: '500 Pts', icon: Icons.wifi_tethering, color: Colors.teal, isHot: true),
-            _buildRewardItemCard(title: 'Voucher Kopi', points: '150 Pts', icon: Icons.coffee_rounded, color: Colors.orange, isHot: false),
-            _buildRewardItemCard(title: 'Merchandise JBR', points: '800 Pts', icon: Icons.shopping_bag_rounded, color: Colors.blue, isHot: false),
-            _buildRewardItemCard(title: 'Voucher Bioskop', points: '300 Pts', icon: Icons.confirmation_number_rounded, color: Colors.purple, isHot: false),
+            _buildRewardItemCard(
+              title: 'Gratis Internet 1 Bln',
+              points: '500 Pts',
+              icon: Icons.wifi_tethering,
+              color: Colors.teal,
+              isHot: true,
+            ),
+            _buildRewardItemCard(
+              title: 'Voucher Kopi',
+              points: '150 Pts',
+              icon: Icons.coffee_rounded,
+              color: Colors.orange,
+              isHot: false,
+            ),
+            _buildRewardItemCard(
+              title: 'Merchandise JBR',
+              points: '800 Pts',
+              icon: Icons.shopping_bag_rounded,
+              color: Colors.blue,
+              isHot: false,
+            ),
+            _buildRewardItemCard(
+              title: 'Voucher Bioskop',
+              points: '300 Pts',
+              icon: Icons.confirmation_number_rounded,
+              color: Colors.purple,
+              isHot: false,
+            ),
           ],
-        )
+        ),
       ],
     );
   }
 
-  Widget _buildRewardItemCard({required String title, required String points, required IconData icon, required MaterialColor color, required bool isHot}) {
+  Widget _buildRewardItemCard({
+    required String title,
+    required String points,
+    required IconData icon,
+    required MaterialColor color,
+    required bool isHot,
+  }) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: Colors.grey.shade100),
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 8, offset: const Offset(0, 4))],
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.02),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       padding: const EdgeInsets.all(12),
       child: Column(
@@ -442,9 +653,22 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
                       top: 8,
                       right: 8,
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                        decoration: BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.circular(6)),
-                        child: Text('HOT', style: GoogleFonts.sora(fontSize: 8, fontWeight: FontWeight.bold, color: Colors.white)),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6,
+                          vertical: 2,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          'HOT',
+                          style: GoogleFonts.sora(
+                            fontSize: 8,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                 ],
@@ -452,9 +676,25 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
             ),
           ),
           const SizedBox(height: 12),
-          Text(title, style: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.textPrimary), maxLines: 2, overflow: TextOverflow.ellipsis),
+          Text(
+            title,
+            style: GoogleFonts.sora(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: AppColors.textPrimary,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
           const SizedBox(height: 4),
-          Text(points, style: GoogleFonts.jetBrainsMono(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.primary)),
+          Text(
+            points,
+            style: GoogleFonts.jetBrainsMono(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: AppColors.primary,
+            ),
+          ),
           const SizedBox(height: 12),
           ElevatedButton(
             onPressed: () {},
@@ -463,9 +703,17 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
               foregroundColor: Colors.white,
               elevation: 0,
               minimumSize: const Size(double.infinity, 36),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
-            child: Text('Tukar', style: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.bold)),
+            child: Text(
+              'Tukar',
+              style: GoogleFonts.sora(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ],
       ),
@@ -485,9 +733,22 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Daily Check-in', style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+                Text(
+                  'Daily Check-in',
+                  style: GoogleFonts.sora(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textPrimary,
+                  ),
+                ),
                 const SizedBox(height: 4),
-                Text('Dapatkan +10 Poin gratis setiap hari kamu membuka aplikasi.', style: GoogleFonts.dmSans(fontSize: 12, color: AppColors.textSecondary)),
+                Text(
+                  'Dapatkan +10 Poin gratis setiap hari kamu membuka aplikasi.',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 12,
+                    color: AppColors.textSecondary,
+                  ),
+                ),
                 const SizedBox(height: 12),
                 ElevatedButton(
                   onPressed: () {},
@@ -495,10 +756,21 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
                     backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,
                     elevation: 0,
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
-                  child: Text('Ambil Sekarang', style: GoogleFonts.sora(fontSize: 10, fontWeight: FontWeight.bold)),
+                  child: Text(
+                    'Ambil Sekarang',
+                    style: GoogleFonts.sora(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -511,7 +783,11 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
               color: AppColors.primary.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: const Icon(Icons.calendar_today_rounded, size: 40, color: AppColors.primary),
+            child: const Icon(
+              Icons.calendar_today_rounded,
+              size: 40,
+              color: AppColors.primary,
+            ),
           ),
         ],
       ),
@@ -551,10 +827,18 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               boxShadow: [
-                BoxShadow(color: Colors.amber.withValues(alpha: 0.4), blurRadius: 40, spreadRadius: 10),
+                BoxShadow(
+                  color: Colors.amber.withValues(alpha: 0.4),
+                  blurRadius: 40,
+                  spreadRadius: 10,
+                ),
               ],
             ),
-            child: const Icon(Icons.confirmation_number_rounded, size: 100, color: Colors.amber),
+            child: const Icon(
+              Icons.confirmation_number_rounded,
+              size: 100,
+              color: Colors.amber,
+            ),
           ),
           const SizedBox(height: 24),
           Text(
@@ -597,18 +881,43 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('STATUS ANDA', style: GoogleFonts.jetBrainsMono(fontSize: 10, fontWeight: FontWeight.bold, color: AppColors.textSecondary, letterSpacing: 1.5)),
+                  Text(
+                    'STATUS ANDA',
+                    style: GoogleFonts.jetBrainsMono(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textSecondary,
+                      letterSpacing: 1.5,
+                    ),
+                  ),
                   const SizedBox(height: 4),
-                  Text('900 / 1.000 Poin', style: GoogleFonts.sora(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+                  Text(
+                    '900 / 1.000 Poin',
+                    style: GoogleFonts.sora(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
                 ],
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.teal.shade50,
                   borderRadius: BorderRadius.circular(100),
                 ),
-                child: Text('90% Komplit', style: GoogleFonts.sora(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.teal.shade700)),
+                child: Text(
+                  '90% Komplit',
+                  style: GoogleFonts.sora(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.teal.shade700,
+                  ),
+                ),
               ),
             ],
           ),
@@ -628,7 +937,12 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
                 decoration: BoxDecoration(
                   color: const Color(0xFF10B981), // primary-container
                   borderRadius: BorderRadius.circular(100),
-                  boxShadow: [BoxShadow(color: const Color(0xFF10B981).withValues(alpha: 0.5), blurRadius: 10)],
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFF10B981).withValues(alpha: 0.5),
+                      blurRadius: 10,
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -636,15 +950,28 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
           const SizedBox(height: 16),
           Row(
             children: [
-              const Icon(Icons.info_outline_rounded, size: 16, color: AppColors.primary),
+              const Icon(
+                Icons.info_outline_rounded,
+                size: 16,
+                color: AppColors.primary,
+              ),
               const SizedBox(width: 8),
               Expanded(
                 child: RichText(
                   text: TextSpan(
-                    style: GoogleFonts.dmSans(fontSize: 12, color: AppColors.textSecondary),
+                    style: GoogleFonts.dmSans(
+                      fontSize: 12,
+                      color: AppColors.textSecondary,
+                    ),
                     children: [
                       const TextSpan(text: 'Kumpulkan '),
-                      TextSpan(text: '100 Poin', style: GoogleFonts.dmSans(fontWeight: FontWeight.bold, color: AppColors.primary)),
+                      TextSpan(
+                        text: '100 Poin',
+                        style: GoogleFonts.dmSans(
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.primary,
+                        ),
+                      ),
                       const TextSpan(text: ' lagi untuk 1 Kupon'),
                     ],
                   ),
@@ -663,28 +990,71 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Hadiah Utama', style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
-            Text('Lihat Semua', style: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.primary)),
+            Text(
+              'Hadiah Utama',
+              style: GoogleFonts.sora(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: AppColors.textPrimary,
+              ),
+            ),
+            Text(
+              'Lihat Semua',
+              style: GoogleFonts.sora(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: AppColors.primary,
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 16),
-        _buildHadiahItem(title: 'High-End Smartphone', sisa: '02', isTag: 'Gadget', color: Colors.blue, icon: Icons.smartphone_rounded),
+        _buildHadiahItem(
+          title: 'High-End Smartphone',
+          sisa: '02',
+          isTag: 'Gadget',
+          color: Colors.blue,
+          icon: Icons.smartphone_rounded,
+        ),
         const SizedBox(height: 12),
-        _buildHadiahItem(title: 'Premium Ultrabook', sisa: '01', isTag: 'Kerja', color: Colors.teal, icon: Icons.laptop_mac_rounded),
+        _buildHadiahItem(
+          title: 'Premium Ultrabook',
+          sisa: '01',
+          isTag: 'Kerja',
+          color: Colors.teal,
+          icon: Icons.laptop_mac_rounded,
+        ),
         const SizedBox(height: 12),
-        _buildHadiahItem(title: 'Creative Pro Tablet', sisa: '03', isTag: 'Kreatif', color: Colors.teal, icon: Icons.tablet_mac_rounded),
+        _buildHadiahItem(
+          title: 'Creative Pro Tablet',
+          sisa: '03',
+          isTag: 'Kreatif',
+          color: Colors.teal,
+          icon: Icons.tablet_mac_rounded,
+        ),
       ],
     );
   }
 
-  Widget _buildHadiahItem({required String title, required String sisa, required String isTag, required Color color, required IconData icon}) {
+  Widget _buildHadiahItem({
+    required String title,
+    required String sisa,
+    required String isTag,
+    required Color color,
+    required IconData icon,
+  }) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: Colors.grey.withValues(alpha: 0.1)),
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 10)],
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.02),
+            blurRadius: 10,
+          ),
+        ],
       ),
       child: Row(
         children: [
@@ -704,17 +1074,40 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: color.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(100),
                   ),
-                  child: Text(isTag.toUpperCase(), style: GoogleFonts.jetBrainsMono(fontSize: 8, fontWeight: FontWeight.bold, color: color)),
+                  child: Text(
+                    isTag.toUpperCase(),
+                    style: GoogleFonts.jetBrainsMono(
+                      fontSize: 8,
+                      fontWeight: FontWeight.bold,
+                      color: color,
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 6),
-                Text(title, style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+                Text(
+                  title,
+                  style: GoogleFonts.sora(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textPrimary,
+                  ),
+                ),
                 const SizedBox(height: 4),
-                Text('Sisa Unit: $sisa', style: GoogleFonts.jetBrainsMono(fontSize: 10, color: AppColors.textSecondary)),
+                Text(
+                  'Sisa Unit: $sisa',
+                  style: GoogleFonts.jetBrainsMono(
+                    fontSize: 10,
+                    color: AppColors.textSecondary,
+                  ),
+                ),
               ],
             ),
           ),
@@ -733,7 +1126,9 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
             backgroundColor: Colors.amber, // metallic gold equivalent
             foregroundColor: const Color(0xFF064E3B), // emerald-900
             minimumSize: const Size(double.infinity, 56),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
             elevation: 8,
             shadowColor: Colors.amber.withValues(alpha: 0.5),
           ),
@@ -742,12 +1137,25 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
             children: [
               const Icon(Icons.confirmation_number_rounded),
               const SizedBox(width: 8),
-              Text('AMBIL KUPON UNDIAN', style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 1)),
+              Text(
+                'AMBIL KUPON UNDIAN',
+                style: GoogleFonts.sora(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1,
+                ),
+              ),
             ],
           ),
         ),
         const SizedBox(height: 16),
-        Text('S&K Berlaku. 1 Kupon = 1.000 Poin JBR.', style: GoogleFonts.dmSans(fontSize: 10, color: AppColors.textSecondary)),
+        Text(
+          'S&K Berlaku. 1 Kupon = 1.000 Poin JBR.',
+          style: GoogleFonts.dmSans(
+            fontSize: 10,
+            color: AppColors.textSecondary,
+          ),
+        ),
       ],
     );
   }
@@ -782,18 +1190,29 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
             color: Colors.blue.withValues(alpha: 0.1),
             shape: BoxShape.circle,
           ),
-          child: const Icon(Icons.handshake_rounded, size: 80, color: Colors.blue),
+          child: const Icon(
+            Icons.handshake_rounded,
+            size: 80,
+            color: Colors.blue,
+          ),
         ),
         const SizedBox(height: 24),
         Text(
           'Ajak Teman, Raih Bonus!',
-          style: GoogleFonts.sora(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+          style: GoogleFonts.sora(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: AppColors.textPrimary,
+          ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 8),
         Text(
           'Bagikan kode unik Anda dan dapatkan poin setiap kali teman Anda bergabung.',
-          style: GoogleFonts.dmSans(fontSize: 14, color: AppColors.textSecondary),
+          style: GoogleFonts.dmSans(
+            fontSize: 14,
+            color: AppColors.textSecondary,
+          ),
           textAlign: TextAlign.center,
         ),
       ],
@@ -806,20 +1225,42 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.primary.withValues(alpha: 0.3), width: 2, style: BorderStyle.none),
+        border: Border.all(
+          color: AppColors.primary.withValues(alpha: 0.3),
+          width: 2,
+          style: BorderStyle.none,
+        ),
       ),
       child: Column(
         children: [
-          Text('KODE REFERRAL ANDA', style: GoogleFonts.jetBrainsMono(fontSize: 10, fontWeight: FontWeight.bold, color: AppColors.textSecondary, letterSpacing: 1.5)),
+          Text(
+            'KODE REFERRAL ANDA',
+            style: GoogleFonts.jetBrainsMono(
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+              color: AppColors.textSecondary,
+              letterSpacing: 1.5,
+            ),
+          ),
           const SizedBox(height: 16),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             decoration: BoxDecoration(
               color: AppColors.primary.withValues(alpha: 0.05),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: AppColors.primary.withValues(alpha: 0.5), style: BorderStyle.solid), // Dashed normally requires custom painter, using solid for now
+              border: Border.all(
+                color: AppColors.primary.withValues(alpha: 0.5),
+                style: BorderStyle.solid,
+              ), // Dashed normally requires custom painter, using solid for now
             ),
-            child: Text('JBR-BEKASI-2024', style: GoogleFonts.jetBrainsMono(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primary)),
+            child: Text(
+              'JBR-BEKASI-2024',
+              style: GoogleFonts.jetBrainsMono(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: AppColors.primary,
+              ),
+            ),
           ),
           const SizedBox(height: 20),
           ElevatedButton(
@@ -828,7 +1269,9 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
               backgroundColor: const Color(0xFF6FFBBE), // primary-fixed
               foregroundColor: const Color(0xFF002113), // on-primary-fixed
               minimumSize: const Size(double.infinity, 48),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
               elevation: 0,
             ),
             child: Row(
@@ -836,7 +1279,13 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
               children: [
                 const Icon(Icons.copy_rounded, size: 20),
                 const SizedBox(width: 8),
-                Text('Salin', style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.bold)),
+                Text(
+                  'Salin',
+                  style: GoogleFonts.sora(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
           ),
@@ -859,14 +1308,35 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
             child: Column(
               children: [
                 Container(
-                  width: 48, height: 48,
-                  decoration: BoxDecoration(color: const Color(0xFF82F5C1), borderRadius: BorderRadius.circular(16)),
-                  child: const Icon(Icons.group_rounded, color: Color(0xFF00714E)),
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF82F5C1),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: const Icon(
+                    Icons.group_rounded,
+                    color: Color(0xFF00714E),
+                  ),
                 ),
                 const SizedBox(height: 12),
-                Text('TEMAN BERGABUNG', style: GoogleFonts.jetBrainsMono(fontSize: 10, color: AppColors.textSecondary, letterSpacing: 1)),
+                Text(
+                  'TEMAN BERGABUNG',
+                  style: GoogleFonts.jetBrainsMono(
+                    fontSize: 10,
+                    color: AppColors.textSecondary,
+                    letterSpacing: 1,
+                  ),
+                ),
                 const SizedBox(height: 4),
-                Text('12', style: GoogleFonts.jetBrainsMono(fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.primary)),
+                Text(
+                  '12',
+                  style: GoogleFonts.jetBrainsMono(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primary,
+                  ),
+                ),
               ],
             ),
           ),
@@ -883,22 +1353,50 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
             child: Column(
               children: [
                 Container(
-                  width: 48, height: 48,
-                  decoration: BoxDecoration(color: const Color(0xFFD8E2FF), borderRadius: BorderRadius.circular(16)),
-                  child: const Icon(Icons.stars_rounded, color: Color(0xFF00367A)),
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFD8E2FF),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: const Icon(
+                    Icons.stars_rounded,
+                    color: Color(0xFF00367A),
+                  ),
                 ),
                 const SizedBox(height: 12),
-                Text('TOTAL POIN', style: GoogleFonts.jetBrainsMono(fontSize: 10, color: AppColors.textSecondary, letterSpacing: 1)),
+                Text(
+                  'TOTAL POIN',
+                  style: GoogleFonts.jetBrainsMono(
+                    fontSize: 10,
+                    color: AppColors.textSecondary,
+                    letterSpacing: 1,
+                  ),
+                ),
                 const SizedBox(height: 4),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text('1.200', style: GoogleFonts.jetBrainsMono(fontSize: 24, fontWeight: FontWeight.bold, color: const Color(0xFF005AC2))),
+                    Text(
+                      '1.200',
+                      style: GoogleFonts.jetBrainsMono(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xFF005AC2),
+                      ),
+                    ),
                     const SizedBox(width: 4),
-                    Text('Pts', style: GoogleFonts.dmSans(fontSize: 14, fontWeight: FontWeight.w500, color: const Color(0xFF005AC2))),
+                    Text(
+                      'Pts',
+                      style: GoogleFonts.dmSans(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: const Color(0xFF005AC2),
+                      ),
+                    ),
                   ],
-                )
+                ),
               ],
             ),
           ),
@@ -917,13 +1415,29 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Cara Mendapatkan Poin', style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+          Text(
+            'Cara Mendapatkan Poin',
+            style: GoogleFonts.sora(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: AppColors.textPrimary,
+            ),
+          ),
           const SizedBox(height: 16),
-          _buildInstructionStep('1', 'Bagikan kode referral Anda ke teman-teman melalui WhatsApp atau media sosial.'),
+          _buildInstructionStep(
+            '1',
+            'Bagikan kode referral Anda ke teman-teman melalui WhatsApp atau media sosial.',
+          ),
           const SizedBox(height: 16),
-          _buildInstructionStep('2', 'Pastikan teman Anda memasukkan kode saat melakukan pendaftaran layanan.'),
+          _buildInstructionStep(
+            '2',
+            'Pastikan teman Anda memasukkan kode saat melakukan pendaftaran layanan.',
+          ),
           const SizedBox(height: 16),
-          _buildInstructionStep('3', 'Poin otomatis masuk ke akun Anda setelah verifikasi pemasangan berhasil.'),
+          _buildInstructionStep(
+            '3',
+            'Poin otomatis masuk ke akun Anda setelah verifikasi pemasangan berhasil.',
+          ),
         ],
       ),
     );
@@ -936,13 +1450,29 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
         Container(
           width: 24,
           height: 24,
-          decoration: const BoxDecoration(color: AppColors.primary, shape: BoxShape.circle),
+          decoration: const BoxDecoration(
+            color: AppColors.primary,
+            shape: BoxShape.circle,
+          ),
           alignment: Alignment.center,
-          child: Text(step, style: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white)),
+          child: Text(
+            step,
+            style: GoogleFonts.sora(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
         ),
         const SizedBox(width: 16),
         Expanded(
-          child: Text(text, style: GoogleFonts.dmSans(fontSize: 14, color: AppColors.textSecondary)),
+          child: Text(
+            text,
+            style: GoogleFonts.dmSans(
+              fontSize: 14,
+              color: AppColors.textSecondary,
+            ),
+          ),
         ),
       ],
     );
@@ -964,7 +1494,10 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
         children: [
           const Icon(Icons.chat_bubble_rounded), // Simplified WhatsApp icon
           const SizedBox(width: 12),
-          Text('Bagikan ke WhatsApp', style: GoogleFonts.sora(fontSize: 16, fontWeight: FontWeight.bold)),
+          Text(
+            'Bagikan ke WhatsApp',
+            style: GoogleFonts.sora(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
         ],
       ),
     );
@@ -985,7 +1518,11 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 10, offset: const Offset(0, 4)),
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.03),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
         ],
       ),
       child: Column(
@@ -998,16 +1535,27 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
                 height: 160,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-                  gradient: LinearGradient(colors: [color.withValues(alpha: 0.6), color]),
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(24),
+                  ),
+                  gradient: LinearGradient(
+                    colors: [color.withValues(alpha: 0.6), color],
+                  ),
                 ),
-                child: Icon(Icons.flash_on_rounded, color: Colors.white.withValues(alpha: 0.2), size: 80),
+                child: Icon(
+                  Icons.flash_on_rounded,
+                  color: Colors.white.withValues(alpha: 0.2),
+                  size: 80,
+                ),
               ),
               Positioned(
                 top: 16,
                 left: 16,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.white.withValues(alpha: 0.9),
                     borderRadius: BorderRadius.circular(20),
@@ -1016,7 +1564,14 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
                     children: [
                       Icon(Icons.timer_outlined, size: 14, color: color),
                       const SizedBox(width: 4),
-                      Text(timer, style: GoogleFonts.jetBrainsMono(fontSize: 10, fontWeight: FontWeight.bold, color: color)),
+                      Text(
+                        timer,
+                        style: GoogleFonts.jetBrainsMono(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: color,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -1026,9 +1581,22 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
                   bottom: 16,
                   right: 16,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    decoration: BoxDecoration(color: Colors.orange, borderRadius: BorderRadius.circular(8)),
-                    child: Text('FLASH SALE', style: GoogleFonts.sora(fontSize: 9, fontWeight: FontWeight.bold, color: Colors.white)),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.orange,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      'FLASH SALE',
+                      style: GoogleFonts.sora(
+                        fontSize: 9,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
             ],
@@ -1039,9 +1607,21 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: GoogleFonts.sora(fontSize: 16, fontWeight: FontWeight.bold)),
+                Text(
+                  title,
+                  style: GoogleFonts.sora(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 const SizedBox(height: 4),
-                Text(desc, style: GoogleFonts.dmSans(fontSize: 13, color: AppColors.textSecondary)),
+                Text(
+                  desc,
+                  style: GoogleFonts.dmSans(
+                    fontSize: 13,
+                    color: AppColors.textSecondary,
+                  ),
+                ),
                 const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1050,22 +1630,57 @@ class _PromoScreenState extends State<PromoScreen> with SingleTickerProviderStat
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         if (originalPrice != null)
-                          Text('Rp $originalPrice', style: GoogleFonts.dmSans(fontSize: 11, color: Colors.grey, decoration: TextDecoration.lineThrough)),
+                          Text(
+                            'Rp $originalPrice',
+                            style: GoogleFonts.dmSans(
+                              fontSize: 11,
+                              color: Colors.grey,
+                              decoration: TextDecoration.lineThrough,
+                            ),
+                          ),
                         Text(
                           price.startsWith('Potongan') ? price : 'Rp $price',
-                          style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.primary),
+                          style: GoogleFonts.sora(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primary,
+                          ),
                         ),
                       ],
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.push(
+                          '/promo/detail',
+                          extra: {
+                            'title': title,
+                            'desc': desc,
+                            'price': price,
+                            'originalPrice': originalPrice,
+                            'timer': timer,
+                            'isFlashSale': isFlashSale,
+                            'color': color,
+                          },
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
                         foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 12,
+                        ),
                       ),
-                      child: Text('Lihat Detail', style: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.bold)),
+                      child: Text(
+                        'Lihat Detail',
+                        style: GoogleFonts.sora(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ],
                 ),

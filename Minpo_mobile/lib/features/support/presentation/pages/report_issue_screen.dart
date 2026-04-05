@@ -13,6 +13,9 @@ class ReportIssueScreen extends StatefulWidget {
 
 class _ReportIssueScreenState extends State<ReportIssueScreen> {
   String? _selectedIssue;
+  final TextEditingController _descriptionController = TextEditingController();
+  bool _isSubmitting = false;
+
   final List<String> _issueTypes = [
     'Koneksi Terputus Total',
     'Internet Lambat (Lags)',
@@ -20,6 +23,76 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
     'Lampu Indikator Router Merah',
     'Lainnya',
   ];
+
+  @override
+  void dispose() {
+    _descriptionController.dispose();
+    super.dispose();
+  }
+
+  void _submitReport() async {
+    if (_selectedIssue == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Pilih jenis gangguan terlebih dahulu')),
+      );
+      return;
+    }
+
+    setState(() => _isSubmitting = true);
+    
+    // Simulate API Call
+    await Future.delayed(2.seconds);
+    
+    if (!mounted) return;
+    
+    setState(() => _isSubmitting = false);
+    _showSuccessDialog();
+  }
+
+  void _showSuccessDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Center(
+        child: Container(
+          width: 320,
+          padding: const EdgeInsets.all(32),
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(40)),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: const BoxDecoration(color: Color(0xFFE8F5E9), shape: BoxShape.circle),
+                child: const Icon(Icons.send_rounded, color: Colors.green, size: 48),
+              ),
+              const SizedBox(height: 24),
+              Text('Laporan Terkirim!', style: GoogleFonts.sora(fontSize: 22, fontWeight: FontWeight.w900)),
+              const SizedBox(height: 12),
+              Text(
+                'Tiket Anda #TKT-9921 telah dibuat. Pantau status perbaikan di menu Tracking.',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.dmSans(fontSize: 14, color: Colors.grey),
+              ),
+              const SizedBox(height: 32),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context); // Close dialog
+                  context.pushReplacement('/support'); // Go to tracking
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                  minimumSize: const Size(double.infinity, 54),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                ),
+                child: Text('Pantau Tiket', style: GoogleFonts.sora(fontWeight: FontWeight.bold)),
+              ),
+            ],
+          ),
+        ),
+      ).animate().scale(curve: Curves.easeOutBack),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,37 +106,31 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
           icon: const Icon(Icons.arrow_back_rounded, color: AppColors.primary),
         ),
         title: Text(
-          'Support',
+          'Lapor Gangguan',
           style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.primary),
         ),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.contact_support_rounded, color: AppColors.primary)),
-        ],
       ),
       body: Stack(
         children: [
           SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // 1. Progress Indicator
                 _buildProgress(),
                 const SizedBox(height: 32),
-
-                // 2. Header Text
+                
                 Text(
-                  'Lapor Gangguan',
+                  'Ada Kendala Apa?',
                   style: GoogleFonts.sora(fontSize: 24, fontWeight: FontWeight.w800, color: AppColors.textPrimary),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Mohon lengkapi detail gangguan yang Anda alami agar teknisi kami dapat segera membantu.',
+                  'Laporan Anda sangat berharga bagi kami untuk memperbaiki kualitas layanan.',
                   style: GoogleFonts.dmSans(fontSize: 14, color: AppColors.textSecondary),
                 ),
                 const SizedBox(height: 32),
 
-                // 3. Form Fields
                 _buildLabel('Jenis Gangguan'),
                 _buildIssueDropdown(),
                 const SizedBox(height: 24),
@@ -72,7 +139,6 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
                 _buildDescriptionField(),
                 const SizedBox(height: 24),
 
-                // 4. Bento Upload & Map Row
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -80,7 +146,7 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _buildLabel('Foto Bukti (Opsional)'),
+                          _buildLabel('Foto Bukti'),
                           _buildUploadBox(),
                         ],
                       ),
@@ -90,7 +156,7 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _buildLabel('Lokasi Kejadian'),
+                          _buildLabel('Lokasi'),
                           _buildMapPreview(),
                         ],
                       ),
@@ -99,15 +165,18 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
                 ),
                 const SizedBox(height: 32),
 
-                // 5. Info Box
                 _buildInfoBox(),
-                const SizedBox(height: 120), // Padding for sticky button
+                const SizedBox(height: 120),
               ],
             ),
           ),
 
-          // 6. Sticky Send Button
           _buildStickyButton(),
+          if (_isSubmitting)
+            Container(
+              color: Colors.black.withValues(alpha: 0.3),
+              child: const Center(child: CircularProgressIndicator(color: AppColors.primary)),
+            ),
         ],
       ),
     );
@@ -169,14 +238,16 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
       child: TextField(
+        controller: _descriptionController,
         maxLines: 4,
         style: GoogleFonts.dmSans(),
         decoration: InputDecoration(
-          hintText: 'Ceritakan detail kendala yang dialami...',
+          hintText: 'Ceritakan detail kendala...',
           hintStyle: GoogleFonts.dmSans(color: Colors.grey.withValues(alpha: 0.6)),
           border: InputBorder.none,
           isDense: true,
           contentPadding: EdgeInsets.zero,
+          fillColor: Colors.transparent,
         ),
       ),
     );
@@ -188,7 +259,7 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.grey.withValues(alpha: 0.2), style: BorderStyle.solid),
+        border: Border.all(color: Colors.grey.withValues(alpha: 0.1)),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -199,8 +270,7 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
             child: const Icon(Icons.photo_camera_rounded, color: AppColors.primary),
           ),
           const SizedBox(height: 12),
-          Text('Ambil atau Unggah', style: GoogleFonts.sora(fontSize: 11, fontWeight: FontWeight.bold)),
-          Text('MAX 5MB', style: GoogleFonts.jetBrainsMono(fontSize: 9, color: Colors.grey)),
+          Text('Unggah Foto', style: GoogleFonts.sora(fontSize: 11, fontWeight: FontWeight.bold)),
         ],
       ),
     );
@@ -212,49 +282,29 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
         image: const DecorationImage(
-          image: NetworkImage('https://lh3.googleusercontent.com/aida-public/AB6AXuAQ-VYcIK5WcaOHf1PxhWLxWJSz4ddB_6AI4w0kQdpgQOz5fZvMOYRdehoDTh1ldrU-xzgIKHR9EDNLF-ZsWFq6QMIanddxXo1hCoDL9RTXGsUXhwrf7zikHIDxe7WW0s7xBUd41yOG15tUfOH3bQGwV23QgCDEbho74YDnDhG4xuf0WZ1G1cCBBBc86E3M4-YHvDIdV-SsCOKs1lgiftz84EidkDeJKCvQi9LudOsZJ1Y909BUEQSMB1PpGGuAJlJ56etbKkUJWhUR'),
+          image: NetworkImage('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2674&auto=format&fit=crop'),
           fit: BoxFit.cover,
         ),
       ),
-      child: Stack(
-        children: [
-          Positioned(
-            bottom: 8,
-            left: 8,
-            right: 8,
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.8),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Row(
-                children: [
-                  const Icon(Icons.location_on_rounded, size: 14, color: AppColors.primary),
-                  const SizedBox(width: 4),
-                  Expanded(
-                    child: Text(
-                      'Jl. Kebon Jeruk No. 12...',
-                      style: GoogleFonts.jetBrainsMono(fontSize: 9, fontWeight: FontWeight.bold),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.transparent, Colors.black.withValues(alpha: 0.5)],
           ),
-        ],
+        ),
       ),
     );
   }
 
   Widget _buildInfoBox() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.blue.withValues(alpha: 0.1),
+        color: const Color(0xFFE3F2FD),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.blue.withValues(alpha: 0.1)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -263,7 +313,7 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              'Laporan Anda akan diproses dalam waktu maksimal 1x24 jam. Tim teknisi akan menghubungi nomor telepon yang terdaftar.',
+              'Laporan Anda akan diproses dalam waktu maksimal 1x24 jam.',
               style: GoogleFonts.dmSans(fontSize: 12, color: Colors.blue.shade800, height: 1.5),
             ),
           ),
@@ -278,7 +328,7 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
       left: 0,
       right: 0,
       child: Container(
-        padding: const EdgeInsets.fromLTRB(20, 20, 20, 40),
+        padding: const EdgeInsets.fromLTRB(24, 20, 24, 40),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -287,25 +337,21 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
           ),
         ),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: _isSubmitting ? null : _submitReport,
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary,
-            foregroundColor: Colors.white,
             minimumSize: const Size(double.infinity, 56),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-            elevation: 8,
-            shadowColor: AppColors.primary.withValues(alpha: 0.3),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Kirim Laporan', style: GoogleFonts.sora(fontSize: 16, fontWeight: FontWeight.bold)),
+              const Icon(Icons.send_rounded),
               const SizedBox(width: 12),
-              const Icon(Icons.send_rounded, size: 20),
+              Text('Kirim Laporan', style: GoogleFonts.sora(fontSize: 16, fontWeight: FontWeight.bold)),
             ],
           ),
         ),
-      ).animate().slideY(begin: 1),
+      ),
     );
   }
 }

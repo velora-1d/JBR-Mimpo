@@ -1,9 +1,10 @@
+import 'dart:async';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:jbr_mimpo/core/theme/theme_provider.dart';
 
 class AppSettingsScreen extends ConsumerStatefulWidget {
   const AppSettingsScreen({super.key});
@@ -14,91 +15,109 @@ class AppSettingsScreen extends ConsumerStatefulWidget {
 
 class _AppSettingsScreenState extends ConsumerState<AppSettingsScreen> {
   String _selectedLanguage = 'id';
+  ConnectivityResult _connectionStatus = ConnectivityResult.none;
+  late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
+
+  @override
+  void initState() {
+    super.initState();
+    _initConnectivity();
+    _connectivitySubscription = Connectivity().onConnectivityChanged.listen(_updateConnectionStatus);
+  }
+
+  @override
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
+
+  Future<void> _initConnectivity() async {
+    late List<ConnectivityResult> result;
+    try {
+      result = await Connectivity().checkConnectivity();
+    } catch (e) {
+      return;
+    }
+    if (!mounted) return;
+    _updateConnectionStatus(result);
+  }
+
+  void _updateConnectionStatus(List<ConnectivityResult> result) {
+    setState(() {
+      _connectionStatus = result.isEmpty ? ConnectivityResult.none : result.first;
+    });
+  }
+
+  String get _connectionLabel {
+    switch (_connectionStatus) {
+      case ConnectivityResult.wifi: return 'Terhubung (WiFi)';
+      case ConnectivityResult.mobile: return 'Terhubung (Data Seluler)';
+      case ConnectivityResult.none: return 'Offline';
+      default: return 'Terhubung';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgLight,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              // 1. App Bar
-              _buildAppBar(context),
-              
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // 2. Theme Selection
-                    _buildThemeHeader(),
-                    const SizedBox(height: 16),
-                    _buildThemeSelection(context),
-                    const SizedBox(height: 32),
-
-                    // 3. Language Selection
-                    _buildLanguageHeader(),
-                    const SizedBox(height: 16),
-                    _buildLanguageCard(
-                      id: 'id',
-                      label: 'Indonesia',
-                      subtitle: 'Bahasa Default',
-                      flag: '🇮🇩',
-                    ),
-                    _buildLanguageCard(
-                      id: 'en',
-                      label: 'English',
-                      subtitle: 'United States',
-                      flag: '🇺🇸',
-                    ),
-                    
-                    const SizedBox(height: 32),
-                    
-                    // 3. App Info Hub
-                    _buildAppInfoCard(),
-                    
-                    const SizedBox(height: 32),
-                    
-                    // 4. Logout Action
-                    _buildLogoutSection(),
-                    
-                    const SizedBox(height: 120), // Bottom Navi padding
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+      appBar: AppBar(
+        title: const Text('Pengaturan'),
+        centerTitle: true,
       ),
-    );
-  }
-
-  Widget _buildAppBar(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              const CircleAvatar(
-                radius: 18,
-                backgroundImage: NetworkImage('https://lh3.googleusercontent.com/aida-public/AB6AXuC7oy2583cHYIraanpR6r13YE_4XSzi8DPm-E7mLuRvnNnTu0omenETOX9Uq68EMVr6cpEVq5-OBptzOR_OGfJnAv2peorpL73iT3BeGDMLiQHr3Y27WlVjRXb42qd3tUnIztP9RhK91EfzyBloIpv1lyOnig0bRCx1vPwE-jaLeJJiO1glVPrg2dDGJZRZTzo87TmRfi-e4hNodXfiSqv3DTm4t1ejuswerLfum_JIdsjjlZtiGyyH4N5e2p6DgqDxQ2u4rVptk6j5'),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // 1. Language Selection
+            _buildLanguageHeader(),
+            const SizedBox(height: 16),
+            _buildLanguageCard(
+              id: 'id',
+              label: 'Indonesia',
+              subtitle: 'Bahasa Default untuk wilayah Anda',
+              flag: '🇮🇩',
+            ),
+            _buildLanguageCard(
+              id: 'en',
+              label: 'English',
+              subtitle: 'United States / Global',
+              flag: '🇺🇸',
+            ),
+            
+            const SizedBox(height: 32),
+            
+            // 2. App Info Hub
+            _buildAppInfoCard(),
+            
+            const SizedBox(height: 32),
+            
+            // 3. Information Section
+            Text(
+              'Informasi Tambahan',
+              style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+            ),
+            const SizedBox(height: 12),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: AppColors.primary.withValues(alpha: 0.05)),
               ),
-              const SizedBox(width: 12),
-              Text(
-                'JBR Minpo',
-                style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.primary),
+              child: Column(
+                children: [
+                  _buildSimpleMenuItem('Status Jaringan', Icons.wifi_protected_setup_rounded, trailing: _connectionLabel),
+                  _buildSimpleMenuItem('Versi Database', Icons.storage_rounded, trailing: 'v1.0.4-dev'),
+                  _buildSimpleMenuItem('Lisensi Open Source', Icons.library_books_rounded),
+                ],
               ),
-            ],
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.support_agent_rounded, color: AppColors.primary),
-          ),
-        ],
+            ),
+            
+            const SizedBox(height: 120), // Bottom Navi padding
+          ],
+        ),
       ),
     );
   }
@@ -108,73 +127,16 @@ class _AppSettingsScreenState extends ConsumerState<AppSettingsScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Pilih Bahasa',
+          'Bahasa & Wilayah',
           style: GoogleFonts.sora(fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
         ),
         const SizedBox(height: 4),
         Text(
-          'Sesuaikan preferensi bahasa aplikasi Anda.',
+          'Pilih bahasa yang ingin Anda gunakan dalam aplikasi.',
           style: GoogleFonts.dmSans(fontSize: 14, color: Colors.grey),
         ),
       ],
     ).animate().fadeIn().slideX(begin: -0.1);
-  }
-
-  Widget _buildThemeHeader() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Tema Tampilan',
-          style: GoogleFonts.sora(fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          'Pilih mode terang, gelap, atau ikuti sistem.',
-          style: GoogleFonts.dmSans(fontSize: 14, color: Colors.grey),
-        ),
-      ],
-    ).animate().fadeIn().slideX(begin: -0.1);
-  }
-
-  Widget _buildThemeSelection(BuildContext context) {
-    final themeMode = ref.watch(themeModeProvider);
-
-    Widget buildOption(String label, ThemeMode mode) {
-      final isSelected = themeMode == mode;
-      return ListTile(
-        title: Text(label, style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.bold)),
-        trailing: Container(
-          width: 24,
-          height: 24,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: isSelected ? AppColors.primary : Colors.grey.shade300, width: 2),
-          ),
-          child: isSelected
-              ? Center(child: Container(width: 12, height: 12, decoration: const BoxDecoration(color: AppColors.primary, shape: BoxShape.circle)))
-              : null,
-        ),
-        onTap: () => ref.read(themeModeProvider.notifier).setThemeMode(mode),
-      );
-    }
-
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.primary.withValues(alpha: 0.05)),
-      ),
-      child: Column(
-        children: [
-          buildOption('Ikuti Sistem', ThemeMode.system),
-          Divider(height: 1, color: Colors.grey.withValues(alpha: 0.1)),
-          buildOption('Mode Terang', ThemeMode.light),
-          Divider(height: 1, color: Colors.grey.withValues(alpha: 0.1)),
-          buildOption('Mode Gelap', ThemeMode.dark),
-        ],
-      ),
-    ).animate().fadeIn().slideY(begin: 0.1);
   }
 
   Widget _buildLanguageCard({
@@ -282,28 +244,16 @@ class _AppSettingsScreenState extends ConsumerState<AppSettingsScreen> {
                   ],
                 ),
               ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  foregroundColor: Colors.white,
-                  minimumSize: const Size(80, 40),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  elevation: 4,
-                  shadowColor: AppColors.primary.withValues(alpha: 0.3),
-                ),
-                child: Text('Cek Update', style: GoogleFonts.sora(fontSize: 10, fontWeight: FontWeight.bold)),
-              ),
             ],
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 20),
           const Divider(height: 1, color: Colors.black12),
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Dikelola oleh JBR Tech Digital', style: GoogleFonts.dmSans(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.grey)),
-              Text('ENTERPRISE EDITION', style: GoogleFonts.jetBrainsMono(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.primary.withValues(alpha: 0.5), letterSpacing: 1)),
+              Text('© 2026 JBR Tech Digital', style: GoogleFonts.dmSans(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.grey)),
+              Text('ENTERPRISE', style: GoogleFonts.jetBrainsMono(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.primary.withValues(alpha: 0.5), letterSpacing: 1)),
             ],
           ),
         ],
@@ -311,35 +261,13 @@ class _AppSettingsScreenState extends ConsumerState<AppSettingsScreen> {
     ).animate().fadeIn(delay: 400.ms);
   }
 
-  Widget _buildLogoutSection() {
-    return Column(
-      children: [
-        OutlinedButton(
-          onPressed: () {},
-          style: OutlinedButton.styleFrom(
-            foregroundColor: Colors.red,
-            side: const BorderSide(color: Colors.red, width: 2),
-            minimumSize: const Size(double.infinity, 60),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.logout_rounded),
-              const SizedBox(width: 12),
-              Text(
-                'Keluar dari Akun',
-                style: GoogleFonts.sora(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 24),
-        Text(
-          '© 2024 JBR DIGITAL INFRASTRUCTURE',
-          style: GoogleFonts.jetBrainsMono(fontSize: 9, color: Colors.grey, letterSpacing: 2),
-        ),
-      ],
-    ).animate().fadeIn(delay: 600.ms);
+  Widget _buildSimpleMenuItem(String label, IconData icon, {String? trailing}) {
+    return ListTile(
+      leading: Icon(icon, color: AppColors.primary, size: 20),
+      title: Text(label, style: GoogleFonts.dmSans(fontSize: 14, fontWeight: FontWeight.w500)),
+      trailing: trailing != null 
+        ? Text(trailing, style: GoogleFonts.dmSans(fontSize: 12, color: trailing == 'Offline' ? Colors.red : Colors.grey, fontWeight: FontWeight.bold))
+        : const Icon(Icons.arrow_forward_ios_rounded, size: 12, color: Colors.grey),
+    );
   }
 }

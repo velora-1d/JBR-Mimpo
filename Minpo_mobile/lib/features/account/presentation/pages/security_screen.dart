@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
 
@@ -47,6 +48,10 @@ class SecurityScreen extends StatelessWidget {
         children: [
           Row(
             children: [
+              IconButton(
+                onPressed: () => context.pop(),
+                icon: const Icon(Icons.arrow_back_ios_new_rounded, color: AppColors.textPrimary, size: 20),
+              ),
               const CircleAvatar(
                 radius: 20,
                 backgroundImage: NetworkImage('https://lh3.googleusercontent.com/aida-public/AB6AXuBgRX_SoYRKkMkyH5IysWhbBc4uT616_O7AX7siRtbI-ZPQWngYshaoBi_zPnj8sBIm17ip3ChcLdoxyXsLFi099Ib8n3lKPgC-seaTjMbsaEbNf502iuAx1vT5k_3Nae3JLWW4invwi8wOf1KGeZGLb3nuTStpznXM3AfEPmT83-dHBpZwChP6syO3u3I1ZkTDe8BQomhALyDetUKXb7lTgJEoSJZ_rWVB6ORwu4gf4Swweem7zH3lj45bGlBBaQOP8zXPAGz3Dqpk'),
