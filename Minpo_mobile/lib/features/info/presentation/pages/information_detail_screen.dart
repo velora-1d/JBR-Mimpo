@@ -115,7 +115,12 @@ class InformationDetailScreen extends StatelessWidget {
                       // Expert Advice / Tips
                       _buildPremiumTips(),
 
-                      const SizedBox(height: 140), // Space for CS Button
+                      const SizedBox(height: 48),
+
+                      // Dedicated CS Action
+                      _buildBottomCSButton(context),
+
+                      const SizedBox(height: 120), // Height for stable persistent NavigationBar
                     ],
                   ),
                 ),
@@ -123,8 +128,7 @@ class InformationDetailScreen extends StatelessWidget {
             ],
           ),
 
-          // 3. Floating Premium Action Button
-          _buildFloatingCS(context),
+          if (isMaintenance || isGangguan) _buildLoadingOverlay(),
         ],
       ),
     );
@@ -465,49 +469,60 @@ class InformationDetailScreen extends StatelessWidget {
     ).animate().fadeIn(delay: 800.ms).slideY(begin: 0.1);
   }
 
-  Widget _buildFloatingCS(BuildContext context) {
-    return Positioned(
-      bottom: 40,
-      left: 24,
-      right: 24,
-      child: Container(
-        height: 72,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.1),
-              blurRadius: 40,
-              offset: const Offset(0, 20),
+  Widget _buildBottomCSButton(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 72,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.1),
+            blurRadius: 40,
+            offset: const Offset(0, 20),
+          ),
+        ],
+      ),
+      child: ElevatedButton(
+        onPressed: () => context.push('/support/chat-cs'),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.white,
+          foregroundColor: AppColors.primary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+            side: BorderSide(color: AppColors.primary.withValues(alpha: 0.1)),
+          ),
+          elevation: 0,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.support_agent_rounded, size: 32),
+            const SizedBox(width: 16),
+            Text(
+              'Hubungi CS JBR Minpo',
+              style: GoogleFonts.sora(
+                fontWeight: FontWeight.w800,
+                fontSize: 18,
+              ),
             ),
           ],
         ),
-        child: ElevatedButton(
-          onPressed: () => context.push('/support/chat-cs'),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.white,
-            foregroundColor: AppColors.primary,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(24),
-            ),
-            elevation: 0,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.support_agent_rounded, size: 32),
-              const SizedBox(width: 16),
-              Text(
-                'Hubungi CS',
-                style: GoogleFonts.sora(
-                  fontWeight: FontWeight.w800,
-                  fontSize: 18,
-                ),
-              ),
-            ],
+      ),
+    ).animate().fadeIn(delay: 1000.ms).slideY(begin: 0.2);
+  }
+
+  Widget _buildLoadingOverlay() {
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+            child: Container(color: Colors.white.withValues(alpha: 0.5)),
           ),
         ),
-      ),
-    ).animate().slideY(begin: 1.5, delay: 1200.ms, curve: Curves.easeOutBack);
+        const Center(child: CircularProgressIndicator(color: AppColors.primary)),
+      ],
+    );
   }
 }

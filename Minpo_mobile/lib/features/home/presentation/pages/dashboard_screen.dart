@@ -348,7 +348,15 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
   Widget _buildActionIcon(Map<String, dynamic> act) {
     return GestureDetector(
-      onTap: () => context.push(act['route']),
+      onTap: () {
+        final route = act['route'] as String;
+        // If the route belongs to another branch, use .go() to switch the shell index
+        if (route.startsWith('/info') || route.startsWith('/support') || route.startsWith('/promo')) {
+          context.go(route);
+        } else {
+          context.push(route);
+        }
+      },
       child: Column(
         children: [
           Container(
@@ -432,7 +440,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 child: Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () => context.push('/info/detail', extra: item),
+                    onTap: () => context.go('/info/detail', extra: item),
                     borderRadius: BorderRadius.circular(20),
                     child: Container(
                       decoration: BoxDecoration(
@@ -523,7 +531,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
       bottom: 90,
       right: 20,
       child: FloatingActionButton(
-        onPressed: () => context.push('/support/chat-cs'),
+        onPressed: () => context.go('/support/chat-cs'),
         backgroundColor: AppColors.primary,
         child: const Icon(Icons.chat_bubble_rounded, color: Colors.white),
       ).animate().scale(delay: 1.seconds),

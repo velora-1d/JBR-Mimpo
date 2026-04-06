@@ -176,7 +176,9 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
                         const SizedBox(height: 32),
   
                         _buildInfoBanner(),
-                        const SizedBox(height: 140), // Space for sticky button
+                        const SizedBox(height: 48),
+                        _buildActionButton(),
+                        const SizedBox(height: 120), // Extra space for persistent NavigationBar
                       ],
                     ),
                   ),
@@ -184,7 +186,6 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
               ],
             ),
           ),
-          _buildStickyButton(),
           if (_isSubmitting)
             _buildLoadingOverlay(),
         ],
@@ -472,46 +473,40 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
     );
   }
 
-  Widget _buildStickyButton() {
-    return Positioned(
-      bottom: 0,
-      left: 0,
-      right: 0,
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(24, 20, 24, 40),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [AppColors.bgLight.withValues(alpha: 0), AppColors.bgLight.withValues(alpha: 0.9), AppColors.bgLight],
+  Widget _buildActionButton() {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.primary.withValues(alpha: 0.2),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
           ),
+        ],
+      ),
+      child: ElevatedButton(
+        onPressed: _isSubmitting ? null : _submitReport,
+        style: ElevatedButton.styleFrom(
+          minimumSize: const Size(double.infinity, 64),
+          backgroundColor: AppColors.primary,
+          foregroundColor: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+          elevation: 0,
         ),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
-            boxShadow: [BoxShadow(color: AppColors.primary.withValues(alpha: 0.2), blurRadius: 20, offset: const Offset(0, 10))],
-          ),
-          child: ElevatedButton(
-            onPressed: _isSubmitting ? null : _submitReport,
-            style: ElevatedButton.styleFrom(
-              minimumSize: const Size(double.infinity, 64),
-              backgroundColor: AppColors.primary,
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-              elevation: 0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.send_rounded, size: 20),
+            const SizedBox(width: 12),
+            Text(
+              'Kirim Laporan Gangguan',
+              style: GoogleFonts.sora(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.send_rounded, size: 20),
-                const SizedBox(width: 12),
-                Text('Kirim Laporan', style: GoogleFonts.sora(fontSize: 16, fontWeight: FontWeight.bold)),
-              ],
-            ),
-          ),
+          ],
         ),
       ),
-    );
+    ).animate().fadeIn(delay: 500.ms).slideY(begin: 0.1);
   }
 
   Widget _buildLoadingOverlay() {
