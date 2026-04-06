@@ -76,13 +76,20 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
           children: [
             Row(
               children: [
+                IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(Icons.arrow_back_rounded, color: AppColors.primary),
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                ),
+                const SizedBox(width: 16),
                 const CircleAvatar(
-                  radius: 20,
+                  radius: 18,
                   backgroundImage: CachedNetworkImageProvider('https://lh3.googleusercontent.com/aida-public/AB6AXuBWemjxFV6B__HQV4yyQeZQSg-zszgymP3w2vssTlH6-YETvxMrdV-E3xqzWfW0GCv90sP2vOdjxyu13s2cU7UdsxM9wD8q8c4xISCbmnVQyzVjW-SJy4e8RT4zalXoACSYmUXLPjrXzLzVZ_ibIVj1VIk2cIXL3jcN1UqhiRN2GWjpgcdYgFxq3Pj8fm5n4inpAtZKdWkq5OFwGiB6TGP1oZm0YWve6fhGFBhLzfoJ-TahS0WEZKd-aP8Dw5tyjoqWnLCbFZp2oSLQ'),
                 ),
                 const SizedBox(width: 12),
                 Text(
-                  'JBR Minpo',
+                  'Detail Paket',
                   style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.primary),
                 ),
               ],

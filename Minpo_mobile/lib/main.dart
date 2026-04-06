@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jbr_mimpo/core/cache/cache_manager.dart';
 import 'package:flutter/services.dart';
@@ -27,6 +28,7 @@ import 'package:jbr_mimpo/features/account/presentation/pages/app_settings_scree
 import 'package:jbr_mimpo/features/account/presentation/pages/edit_profile_screen.dart';
 import 'package:jbr_mimpo/features/account/presentation/pages/change_password_screen.dart';
 import 'package:jbr_mimpo/features/support/presentation/pages/network_status_screen.dart';
+import 'package:jbr_mimpo/features/promo/presentation/pages/reward_detail_screen.dart';
 import 'package:jbr_mimpo/features/promo/presentation/pages/promo_screen.dart';
 import 'package:jbr_mimpo/features/promo/presentation/pages/promo_detail_screen.dart';
 import 'package:jbr_mimpo/features/account/presentation/pages/notification_settings_screen.dart';
@@ -139,7 +141,6 @@ final _router = GoRouter(
               routes: [
                 GoRoute(
                   path: 'detail',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) {
                     final info = state.extra as Map<String, dynamic>? ?? {};
                     return InformationDetailScreen(info: info);
@@ -147,7 +148,6 @@ final _router = GoRouter(
                 ),
                 GoRoute(
                   path: 'network-status',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const NetworkStatusScreen(),
                 ),
               ],
@@ -164,7 +164,6 @@ final _router = GoRouter(
               routes: [
                 GoRoute(
                   path: 'detail',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) {
                     final promoData = state.extra as Map<String, dynamic>? ?? {};
                     return PromoDetailScreen(promo: promoData);
@@ -172,8 +171,14 @@ final _router = GoRouter(
                 ),
                 GoRoute(
                   path: 'daily-checkin',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const DailyCheckinScreen(),
+                ),
+                GoRoute(
+                  path: 'reward-detail',
+                  builder: (context, state) {
+                    final item = state.extra as Map<String, dynamic>? ?? {};
+                    return RewardDetailScreen(item: item);
+                  },
                 ),
               ],
             ),
@@ -189,17 +194,14 @@ final _router = GoRouter(
               routes: [
                 GoRoute(
                   path: 'report-issue',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const ReportIssueScreen(),
                 ),
                 GoRoute(
                   path: 'ticket-tracking',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const TicketTrackingScreen(),
                 ),
                 GoRoute(
                   path: 'ticket-detail',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) {
                     final ticket = state.extra as Map<String, dynamic>? ?? {};
                     return TicketDetailScreen(ticket: ticket);
@@ -207,17 +209,14 @@ final _router = GoRouter(
                 ),
                 GoRoute(
                   path: 'chat-cs',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const ChatCsScreen(),
                 ),
                 GoRoute(
                   path: 'faq',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const FaqScreen(),
                 ),
                 GoRoute(
                   path: 'installation',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const InstallationRequestScreen(),
                 ),
               ],
@@ -234,67 +233,54 @@ final _router = GoRouter(
               routes: [
                 GoRoute(
                   path: 'edit-profile',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const EditProfileScreen(),
                 ),
                 GoRoute(
                   path: 'security',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const SecurityScreen(),
                 ),
                 GoRoute(
                   path: '2fa',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const SecurityScreen(),
                 ),
                 GoRoute(
                   path: 'platinum-benefits',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const PlatinumBenefitsScreen(),
                 ),
                 GoRoute(
                   path: 'change-password',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const ChangePasswordScreen(),
                 ),
                 GoRoute(
                   path: 'app-settings',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const AppSettingsScreen(),
                 ),
                 GoRoute(
                   path: 'notifications-settings',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const NotificationSettingsScreen(),
                 ),
                 GoRoute(
                   path: 'delete-account',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const DeleteAccountScreen(),
                 ),
                 GoRoute(
                   path: 'address',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const AddressScreen(),
                 ),
                 GoRoute(
                   path: 'about',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const InfoPage(title: 'Tentang JBR Minpo', type: 'about'),
                 ),
                 GoRoute(
                   path: 'tos',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const InfoPage(title: 'Syarat & Ketentuan', type: 'tos'),
                 ),
                 GoRoute(
                   path: 'privacy',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const InfoPage(title: 'Kebijakan Privasi', type: 'privacy'),
                 ),
                 GoRoute(
                   path: 'special-policy',
-                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const InfoPage(title: 'Kebijakan Khusus', type: 'special'),
                 ),
               ],
@@ -379,8 +365,8 @@ class ScaffoldWithBottomNavBar extends StatelessWidget {
       onTap: () => _onTap(index),
       behavior: HitTestBehavior.opaque,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeOutQuint,
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.elasticOut,
         padding: EdgeInsets.symmetric(
           horizontal: isSelected ? 16 : 12,
           vertical: 10,
@@ -388,32 +374,42 @@ class ScaffoldWithBottomNavBar extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: isSelected
               ? const LinearGradient(
-                  colors: [AppColors.primary, AppColors.primaryLight],
+                  colors: [AppColors.primary, Color(0xFF0D9488)], // Sophisticated Emerald/Teal
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 )
               : null,
           color: isSelected ? null : Colors.transparent,
           borderRadius: BorderRadius.circular(20),
+          boxShadow: isSelected ? [
+            BoxShadow(
+              color: AppColors.primary.withValues(alpha: 0.3),
+              blurRadius: 15,
+              offset: const Offset(0, 8),
+            )
+          ] : null,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               isSelected ? activeIcon : inactiveIcon,
-              color: isSelected ? Colors.white : Colors.grey.shade500,
+              color: isSelected ? Colors.white : Colors.grey.shade400,
               size: 24,
-            ),
+            ).animate(target: isSelected ? 1 : 0)
+             .scale(begin: const Offset(1, 1), end: const Offset(1.1, 1.1), duration: 200.ms)
+             .shimmer(duration: 1200.ms, color: Colors.white.withValues(alpha: 0.3)),
             if (isSelected) ...[
-              const SizedBox(width: 6),
+              const SizedBox(width: 8),
               Text(
                 label,
                 style: GoogleFonts.sora(
                   color: Colors.white,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w800,
                   fontSize: 12,
+                  letterSpacing: 0.5,
                 ),
-              ),
+              ).animate().fadeIn(duration: 200.ms).slideX(begin: 0.2, end: 0),
             ]
           ],
         ),

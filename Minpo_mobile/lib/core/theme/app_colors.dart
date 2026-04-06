@@ -29,4 +29,9 @@ class AppColors {
   // Surface colors from Design
   static const Color surfaceContainer = Color(0xFFEAEDFF);
   static const Color primaryFixedDim = Color(0xFF4EDEA3);
+
+  // New Aesthetic Splash Colors
+  static const Color splashWhiteHighlight = Color(0xFFFFFFFF);
+  static const Color splashMintLight = Color(0xFFF0FDF4); // Very light mint
+  static const Color splashMintSoft = Color(0xFFDCFCE7);  // Soft mint glow
 }

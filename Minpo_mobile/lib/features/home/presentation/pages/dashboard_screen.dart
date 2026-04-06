@@ -429,77 +429,86 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               final item = news[index];
               return Container(
                 margin: const EdgeInsets.only(bottom: 16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 15, offset: const Offset(0, 8))
-                  ],
-                  border: Border.all(color: Colors.grey.shade100),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Thumbnail
-                    Container(
-                      width: 100,
-                      height: 100,
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () => context.push('/info/detail', extra: item),
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), bottomLeft: Radius.circular(20)),
-                        color: (item['color'] as Color).withValues(alpha: 0.1),
-                        image: DecorationImage(
-                          image: CachedNetworkImageProvider(item['imageUrl'] as String),
-                          fit: BoxFit.cover,
-                          colorFilter: ColorFilter.mode(
-                            Colors.black.withValues(alpha: 0.3),
-                            BlendMode.darken,
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 15, offset: const Offset(0, 8))
+                        ],
+                        border: Border.all(color: Colors.grey.shade100),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Thumbnail
+                          Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), bottomLeft: Radius.circular(20)),
+                              color: (item['color'] as Color).withValues(alpha: 0.1),
+                              image: DecorationImage(
+                                image: CachedNetworkImageProvider(item['imageUrl'] as String),
+                                fit: BoxFit.cover,
+                                colorFilter: ColorFilter.mode(
+                                  Colors.black.withValues(alpha: 0.3),
+                                  BlendMode.darken,
+                                ),
+                              ),
+                            ),
+                            child: Center(
+                              child: Icon(item['icon'] as IconData, color: Colors.white.withValues(alpha: 0.9), size: 32),
+                            ),
                           ),
-                        ),
-                      ),
-                      child: Center(
-                        child: Icon(item['icon'] as IconData, color: Colors.white.withValues(alpha: 0.9), size: 32),
+                          const SizedBox(width: 16),
+                          // Content
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                        decoration: BoxDecoration(
+                                          color: (item['color'] as Color).withValues(alpha: 0.05),
+                                          borderRadius: BorderRadius.circular(6),
+                                        ),
+                                        child: Text(
+                                          (item['tag'] as String).toUpperCase(),
+                                          style: GoogleFonts.jetBrainsMono(fontSize: 9, fontWeight: FontWeight.bold, color: item['color'] as Color),
+                                        ),
+                                      ),
+                                      Text(
+                                        item['date'] as String,
+                                        style: GoogleFonts.dmSans(fontSize: 10, color: Colors.grey, fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    item['title'] as String,
+                                    style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary, height: 1.2),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(width: 16),
-                    // Content
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                  decoration: BoxDecoration(
-                                    color: (item['color'] as Color).withValues(alpha: 0.05),
-                                    borderRadius: BorderRadius.circular(6),
-                                  ),
-                                  child: Text(
-                                    (item['tag'] as String).toUpperCase(),
-                                    style: GoogleFonts.jetBrainsMono(fontSize: 9, fontWeight: FontWeight.bold, color: item['color'] as Color),
-                                  ),
-                                ),
-                                Text(
-                                  item['date'] as String,
-                                  style: GoogleFonts.dmSans(fontSize: 10, color: Colors.grey, fontWeight: FontWeight.w500),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              item['title'] as String,
-                              style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary, height: 1.2),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ).animate().fadeIn(delay: (index * 100).ms).slideY(begin: 0.1);
             }),

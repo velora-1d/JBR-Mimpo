@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _navigateToNext() {
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(milliseconds: 1500), () {
       if (mounted) {
         context.go('/onboarding');
       }
@@ -29,193 +29,162 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
-          // 1. Deep Emerald Gradient Background
+          // 1. Aesthetic Mint Mesh Gradient Background
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
                 colors: [
-                  AppColors.splashGradStart,
-                  AppColors.splashGradMid,
-                  AppColors.splashGradEnd,
+                  AppColors.splashWhiteHighlight,
+                  AppColors.splashMintLight,
+                  AppColors.splashMintSoft,
                 ],
               ),
             ),
           ),
 
-          // 2. Fiber Optic / Decorative SVG Lines (Simulated with CustomPaint/Container)
-          // For now, we use a subtle overlay or ignore for performance unless SVG is ready
+          // 2. Decorative Floating Orbs (Aesthetic Elements)
+          Positioned(
+            top: -100,
+            right: -50,
+            child: _buildOrb(300, AppColors.primary.withValues(alpha: 0.04)),
+          ).animate(onPlay: (c) => c.repeat(reverse: true))
+           .moveY(begin: 0, end: 50, duration: 4.seconds, curve: Curves.easeInOut),
+          
+          Positioned(
+            bottom: -50,
+            left: -80,
+            child: _buildOrb(250, AppColors.primary.withValues(alpha: 0.03)),
+          ).animate(onPlay: (c) => c.repeat(reverse: true))
+           .moveX(begin: 0, end: 30, duration: 3.seconds, curve: Curves.easeInOut),
 
-          // 3. Main Content
+          // 3. Subtle Abstract Decorative Lines
+          Opacity(
+            opacity: 0.04,
+            child: CustomPaint(
+              size: Size.infinite,
+              painter: GridPatternPainter(),
+            ),
+          ).animate().fadeIn(duration: 1.seconds),
+
+          // 4. Main Content (Centered Logo with Glow)
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Mascot 3D Glow Effect
                 Stack(
                   alignment: Alignment.center,
                   children: [
+                    // Dynamic Soft Glow behind Logo
                     Container(
-                      width: 250,
-                      height: 250,
+                      width: 200,
+                      height: 200,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.primary.withValues(alpha: 0.2),
-                            blurRadius: 80,
+                            color: AppColors.primary.withValues(alpha: 0.15),
+                            blurRadius: 100,
                             spreadRadius: 20,
                           ),
                         ],
                       ),
                     ).animate(onPlay: (controller) => controller.repeat(reverse: true))
-                        .scale(begin: const Offset(1, 1), end: const Offset(1.2, 1.2), duration: 2.seconds),
+                        .scale(begin: const Offset(1, 1), end: const Offset(1.1, 1.1), duration: 2.seconds),
                     
-                    // Mascot Image (Local Logo)
+                    // The Brand New Jabbar23 Logo
                     Image.asset(
-                      'assets/logo/app_logo.png',
-                      width: 280,
-                      height: 280,
+                      'assets/logo/jabbar_logo.png',
+                      width: 320, 
+                      height: 320,
                       fit: BoxFit.contain,
-                    ).animate().fadeIn(duration: 800.ms).slideY(begin: 0.1, end: 0),
-                  ],
-                ),
-                
-                const SizedBox(height: 48),
-
-                // Branding Section
-                Column(
-                  children: [
-                    Text(
-                      'JBR MINPO',
-                      style: GoogleFonts.sora(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        letterSpacing: 8,
-                        shadows: [
-                          Shadow(
-                            color: Colors.white.withValues(alpha: 0.3),
-                            blurRadius: 20,
-                          ),
-                        ],
-                      ),
-                    ).animate().fadeIn(delay: 400.ms).scale(begin: const Offset(0.95, 0.95)),
-                    
-                    const SizedBox(height: 8),
-                    
-                    Text(
-                      'PUSAT INFORMASI',
-                      style: GoogleFonts.jetBrainsMono(
-                        fontSize: 10,
-                        color: AppColors.primaryFixedDim.withValues(alpha: 0.8),
-                        letterSpacing: 5,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ).animate().fadeIn(delay: 600.ms),
-                  ],
-                ),
-
-                const SizedBox(height: 64),
-
-                // Loading System
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: Column(
-                    children: [
-                      // Progress Bar
-                      Container(
-                        height: 2,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(1),
+                      errorBuilder: (context, error, stackTrace) => 
+                        // Fallback indicator if file is missing
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(Icons.image_not_supported_outlined, color: AppColors.primary, size: 48),
+                            const SizedBox(height: 8),
+                            Text('Logo Jabbar23', style: GoogleFonts.sora(color: AppColors.primary)),
+                          ],
                         ),
-                        child: FractionallySizedBox(
-                          alignment: Alignment.centerLeft,
-                          widthFactor: 0.75, // 75% as designed
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: AppColors.primary,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: AppColors.primary.withValues(alpha: 0.6),
-                                  blurRadius: 10,
-                                  spreadRadius: 2,
-                                ),
-                              ],
-                            ),
-                          ).animate().shimmer(duration: 2.seconds, color: Colors.white24),
-                        ),
-                      ),
-                      
-                      const SizedBox(height: 16),
-                      
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'SABAR YA GANTENG / CANTIK...',
-                            style: GoogleFonts.jetBrainsMono(
-                              fontSize: 9,
-                              color: AppColors.primaryFixedDim.withValues(alpha: 0.6),
-                              letterSpacing: 1,
-                            ),
-                          ),
-                          Text(
-                            '75%',
-                            style: GoogleFonts.jetBrainsMono(
-                              fontSize: 10,
-                              color: AppColors.primaryFixedDim,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ).animate().fadeIn(delay: 800.ms),
-                    ],
-                  ),
+                    ).animate()
+                     .fadeIn(duration: 600.ms)
+                     .scale(begin: const Offset(0.9, 0.9), end: const Offset(1, 1), curve: Curves.easeOutBack),
+                  ],
                 ),
               ],
             ),
           ),
 
-          // 4. Bottom Glass Information
+          // 5. Minimalist Footer
           Positioned(
-            bottom: 48,
+            bottom: 60,
             left: 0,
             right: 0,
             child: Center(
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.08),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Icon(Icons.verified_user_outlined, color: AppColors.primaryFixedDim, size: 14),
-                    const SizedBox(width: 8),
-                    Text(
-                      'REWARD MENUNGGUMU..',
-                      style: GoogleFonts.manrope(
-                        color: Colors.white.withValues(alpha: 0.7),
-                        fontSize: 10,
-                        letterSpacing: 2,
-                        fontWeight: FontWeight.w400,
-                      ),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 1.5,
+                      valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
                     ),
-                  ],
-                ),
+                  ).animate().fadeIn(delay: 500.ms),
+                  const SizedBox(height: 20),
+                  Text(
+                    'POWERED BY JABBAR23',
+                    style: GoogleFonts.dmSans(
+                      fontSize: 9,
+                      fontWeight: FontWeight.w800,
+                      color: AppColors.primary.withValues(alpha: 0.3),
+                      letterSpacing: 4,
+                    ),
+                  ).animate().fadeIn(delay: 800.ms),
+                ],
               ),
             ),
-          ).animate().fadeIn(delay: 1.seconds).slideY(begin: 0.3, end: 0),
+          ),
         ],
       ),
     );
   }
+
+  Widget _buildOrb(double size, Color color) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: color,
+      ),
+    );
+  }
+}
+
+// Custom Painter for Aesthetic Subtle Grid
+class GridPatternPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = AppColors.primary.withValues(alpha: 0.1)
+      ..strokeWidth = 0.5;
+
+    const spacing = 50.0;
+    for (double i = 0; i < size.width; i += spacing) {
+      canvas.drawLine(Offset(i, 0), Offset(i, size.height), paint);
+    }
+    for (double i = 0; i < size.height; i += spacing) {
+      canvas.drawLine(Offset(0, i), Offset(size.width, i), paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

@@ -627,6 +627,7 @@ class _PromoScreenState extends ConsumerState<PromoScreen>
           mainAxisSpacing: 16,
           children: [
             _buildRewardItemCard(
+              context: context,
               title: 'Gratis Internet 1 Bln',
               points: '500 Pts',
               icon: Icons.wifi_tethering,
@@ -634,6 +635,7 @@ class _PromoScreenState extends ConsumerState<PromoScreen>
               isHot: true,
             ),
             _buildRewardItemCard(
+              context: context,
               title: 'Voucher Kopi',
               points: '150 Pts',
               icon: Icons.coffee_rounded,
@@ -641,6 +643,7 @@ class _PromoScreenState extends ConsumerState<PromoScreen>
               isHot: false,
             ),
             _buildRewardItemCard(
+              context: context,
               title: 'Merchandise JBR',
               points: '800 Pts',
               icon: Icons.shopping_bag_rounded,
@@ -648,6 +651,7 @@ class _PromoScreenState extends ConsumerState<PromoScreen>
               isHot: false,
             ),
             _buildRewardItemCard(
+              context: context,
               title: 'Voucher Bioskop',
               points: '300 Pts',
               icon: Icons.confirmation_number_rounded,
@@ -661,119 +665,128 @@ class _PromoScreenState extends ConsumerState<PromoScreen>
   }
 
   Widget _buildRewardItemCard({
+    required BuildContext context,
     required String title,
     required String points,
     required IconData icon,
     required MaterialColor color,
     required bool isHot,
   }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.grey.shade100),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.02),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: color.shade50,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Icon(icon, size: 48, color: color),
-                  if (isHot)
-                    Positioned(
-                      top: 8,
-                      right: 8,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 6,
-                          vertical: 2,
-                        ),
-                        decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Text(
-                          'HOT',
-                          style: GoogleFonts.sora(
-                            fontSize: 8,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+    return GestureDetector(
+      onTap: () => context.push('/promo/reward-detail', extra: {
+        'title': title,
+        'points': points,
+        'icon': icon,
+        'color': color,
+      }),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.grey.shade100),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.02),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: color.shade50,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Icon(icon, size: 48, color: color),
+                    if (isHot)
+                      Positioned(
+                        top: 8,
+                        right: 8,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            'HOT',
+                            style: GoogleFonts.sora(
+                              fontSize: 8,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            title,
-            style: GoogleFonts.sora(
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-              color: AppColors.textPrimary,
-            ),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-          const SizedBox(height: 4),
-          Text(
-            points,
-            style: GoogleFonts.jetBrainsMono(
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-              color: AppColors.primary,
-            ),
-          ),
-          const SizedBox(height: 12),
-          ElevatedButton(
-            onPressed: () {
-               AppDialog.showConfirmation(
-                 context: context,
-                 title: 'Konfirmasi',
-                 message: 'Tukar $points poin untuk $title?',
-                 confirmText: 'Tukar',
-                 icon: Icons.track_changes_rounded,
-                 onConfirm: () {
-                   AppFeedback.success(context, 'Berhasil ditukar!');
-                 },
-               );
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              foregroundColor: Colors.white,
-              elevation: 0,
-              minimumSize: const Size(double.infinity, 36),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            child: Text(
-              'Tukar',
+            const SizedBox(height: 12),
+            Text(
+              title,
               style: GoogleFonts.sora(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
+                color: AppColors.textPrimary,
+              ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              points,
+              style: GoogleFonts.jetBrainsMono(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: AppColors.primary,
               ),
             ),
-          ),
-        ],
+            const SizedBox(height: 12),
+            ElevatedButton(
+              onPressed: () {
+                 AppDialog.showConfirmation(
+                   context: context,
+                   title: 'Konfirmasi',
+                   message: 'Tukar $points poin untuk $title?',
+                   confirmText: 'Tukar',
+                   icon: Icons.track_changes_rounded,
+                   onConfirm: () {
+                     AppFeedback.success(context, 'Berhasil ditukar!');
+                   },
+                 );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                foregroundColor: Colors.white,
+                elevation: 0,
+                minimumSize: const Size(double.infinity, 36),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: Text(
+                'Tukar',
+                style: GoogleFonts.sora(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -1058,12 +1071,15 @@ class _PromoScreenState extends ConsumerState<PromoScreen>
                 color: AppColors.textPrimary,
               ),
             ),
-            Text(
-              'Lihat Semua',
-              style: GoogleFonts.sora(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-                color: AppColors.primary,
+            InkWell(
+              onTap: () => AppFeedback.info(context, 'Daftar lengkap hadiah segera hadir!'),
+              child: Text(
+                'Lihat Semua',
+                style: GoogleFonts.sora(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primary,
+                ),
               ),
             ),
           ],
@@ -1104,32 +1120,12 @@ class _PromoScreenState extends ConsumerState<PromoScreen>
     required IconData icon,
   }) {
     return GestureDetector(
-      onTap: () {
-        showModalBottomSheet(
-          context: context,
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-          builder: (context) => Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(icon, size: 64, color: color),
-                const SizedBox(height: 16),
-                Text(title, style: GoogleFonts.sora(fontSize: 20, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 16),
-                Text('Sisa Unit: $sisa', style: GoogleFonts.dmSans(color: Colors.grey)),
-                const SizedBox(height: 16),
-                const Text('Dapatkan kesempatan menang dari undian akhir tahun JBR Minpo!'),
-                const SizedBox(height: 24),
-                ElevatedButton(
-                  onPressed: () => context.pop(),
-                  child: const Text('Tutup'),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
+      onTap: () => context.push('/promo/reward-detail', extra: {
+        'title': title,
+        'sisa': sisa,
+        'icon': icon,
+        'color': color,
+      }),
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(

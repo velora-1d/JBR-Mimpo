@@ -3,7 +3,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
 import 'package:go_router/go_router.dart';
-import 'package:share_plus/share_plus.dart';
 import 'dart:ui';
 
 class InformationDetailScreen extends StatelessWidget {
@@ -41,65 +40,6 @@ class InformationDetailScreen extends StatelessWidget {
                   icon: Icons.arrow_back_rounded,
                   onPressed: () => context.pop(),
                 ),
-                actions: [
-                  _buildHeaderAction(
-                    context,
-                    icon: Icons.share_rounded,
-                    onPressed: () => SharePlus.instance.share(
-                      ShareParams(
-                        text: '${info['title']}\n\nBaca di JBR Minpo!',
-                        subject: info['title'] as String?,
-                      ),
-                    ),
-                  ),
-                  PopupMenuButton<String>(
-                    onSelected: (value) {
-                      // Handle menu selection
-                    },
-                    offset: const Offset(0, 50),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                    child: IgnorePointer(
-                      child: _buildHeaderAction(
-                        context,
-                        icon: Icons.more_vert_rounded,
-                        onPressed: () {},
-                      ),
-                    ),
-                    itemBuilder: (BuildContext context) => [
-                      PopupMenuItem(
-                        value: 'refresh',
-                        child: Row(
-                          children: [
-                            Icon(Icons.refresh_rounded, size: 20, color: AppColors.textPrimary),
-                            const SizedBox(width: 12),
-                            Text('Muat Ulang', style: GoogleFonts.dmSans(fontWeight: FontWeight.w500)),
-                          ],
-                        ),
-                      ),
-                      PopupMenuItem(
-                        value: 'edit',
-                        child: Row(
-                          children: [
-                            Icon(Icons.edit_rounded, size: 20, color: AppColors.textPrimary),
-                            const SizedBox(width: 12),
-                            Text('Edit Info', style: GoogleFonts.dmSans(fontWeight: FontWeight.w500)),
-                          ],
-                        ),
-                      ),
-                      PopupMenuItem(
-                        value: 'delete',
-                        child: Row(
-                          children: [
-                            const Icon(Icons.delete_outline_rounded, color: Colors.red, size: 20),
-                            const SizedBox(width: 12),
-                            Text('Hapus', style: GoogleFonts.dmSans(color: Colors.red, fontWeight: FontWeight.w500)),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: 8),
-                ],
                 flexibleSpace: FlexibleSpaceBar(
                   stretchModes: const [
                     StretchMode.zoomBackground,
@@ -114,12 +54,12 @@ class InformationDetailScreen extends StatelessWidget {
                       // Animated Icon Overlay
                       Center(
                         child:
-                            Icon(icon, color: Colors.white24, size: 140)
+                            Icon(icon, color: Colors.white.withValues(alpha: 0.15), size: 160)
                                 .animate(onPlay: (c) => c.repeat(reverse: true))
-                                .moveY(begin: 0, end: 15, duration: 3.seconds)
+                                .moveY(begin: 0, end: 20, duration: 4.seconds, curve: Curves.easeInOut)
                                 .scale(
                                   begin: const Offset(1, 1),
-                                  end: const Offset(1.1, 1.1),
+                                  end: const Offset(1.15, 1.15),
                                 ),
                       ),
 
@@ -132,10 +72,10 @@ class InformationDetailScreen extends StatelessWidget {
                               end: Alignment.bottomCenter,
                               colors: [
                                 Colors.transparent,
-                                AppColors.bgLight.withValues(alpha: 0.6),
+                                AppColors.bgLight.withValues(alpha: 0.3),
                                 AppColors.bgLight,
                               ],
-                              stops: const [0.4, 0.7, 1.0],
+                              stops: const [0.5, 0.8, 1.0],
                             ),
                           ),
                         ),
@@ -220,27 +160,24 @@ class InformationDetailScreen extends StatelessWidget {
   Widget _buildMeshGradient(Color baseColor) {
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            baseColor,
-            baseColor.withValues(alpha: 0.8),
-            baseColor.withValues(alpha: 0.6),
-          ],
-        ),
+        color: baseColor,
       ),
       child: Stack(
         children: [
           Positioned(
-            top: -50,
-            left: -50,
-            child: _buildGlowSphere(baseColor.withValues(alpha: 0.4), 250),
+            top: -100,
+            left: -100,
+            child: _buildGlowSphere(baseColor.withValues(alpha: 0.8), 400),
           ),
           Positioned(
-            bottom: 50,
-            right: -30,
-            child: _buildGlowSphere(Colors.white.withValues(alpha: 0.2), 200),
+            bottom: 0,
+            right: -50,
+            child: _buildGlowSphere(Colors.white.withValues(alpha: 0.3), 300),
+          ),
+          Positioned(
+            top: 150,
+            right: 100,
+            child: _buildGlowSphere(baseColor.withValues(alpha: 0.5), 200),
           ),
         ],
       ),
@@ -254,16 +191,23 @@ class InformationDetailScreen extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             boxShadow: [
-              BoxShadow(color: color, blurRadius: 100, spreadRadius: 20),
+              BoxShadow(
+                color: color, 
+                blurRadius: 120, 
+                spreadRadius: 40,
+                offset: const Offset(0, 0),
+              ),
             ],
           ),
         )
         .animate(onPlay: (c) => c.repeat(reverse: true))
         .scale(
-          begin: const Offset(1, 1),
+          begin: const Offset(0.8, 0.8),
           end: const Offset(1.2, 1.2),
-          duration: 5.seconds,
-        );
+          duration: 6.seconds,
+          curve: Curves.easeInOut,
+        )
+        .moveY(begin: -20, end: 20, duration: 8.seconds);
   }
 
   Widget _buildPremiumTitle(Map<String, dynamic> info, Color color) {
@@ -324,7 +268,7 @@ class InformationDetailScreen extends StatelessWidget {
             fontSize: 28,
             fontWeight: FontWeight.w900,
             color: AppColors.textPrimary,
-            height: 1.1,
+            height: 1.15,
             letterSpacing: -0.5,
           ),
         ),
@@ -343,46 +287,47 @@ class InformationDetailScreen extends StatelessWidget {
       children: [
         Text(
           'Detail Informasi',
-          style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold),
+          style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
         ),
         const SizedBox(height: 16),
         Container(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(28),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(28),
+            borderRadius: BorderRadius.circular(32),
+            border: Border.all(color: Colors.grey.shade100),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.03),
-                blurRadius: 30,
-                offset: const Offset(0, 10),
+                blurRadius: 40,
+                offset: const Offset(0, 12),
               ),
             ],
           ),
           child: Column(
             children: [
               Text(
-                'Halo Pelanggan Setia JBR Minpo,\n\nKami menginformasikan bahwa saat ini sedang terjadi ${info['category'].toString().toLowerCase()} di wilayah Anda. Tim teknisi kami sedang bekerja keras untuk memastikan layanan kembali optimal secepat mungkin.',
+                'Halo Pelanggan Setia JBR Minpo,\n\nKami menginformasikan bahwa saat ini sedang terjadi ${info['category'].toString().toLowerCase()} di wilayah Anda. Tim teknisi kami sedang bekerja secara intensif untuk memastikan seluruh layanan kembali optimal.\n\nMohon maaf atas ketidaknyamanan yang ditimbulkan.',
                 style: GoogleFonts.dmSans(
                   fontSize: 15,
                   height: 1.8,
                   color: AppColors.textPrimary.withValues(alpha: 0.8),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 24),
               const Divider(height: 1),
-              const SizedBox(height: 20),
+              const SizedBox(height: 24),
               _buildInfoRow(
                 Icons.timer_outlined,
-                'Estimasi Selesai',
+                'Estimasi Pemulihan',
                 'Pukul 18:00 WIB',
                 color,
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 16),
               _buildInfoRow(
                 Icons.sync_problem_rounded,
-                'Status Perbaikan',
-                'In Progress (75%)',
+                'Progress Perbaikan',
+                'Sedang Dikerjakan (80%)',
                 color,
               ),
             ],
@@ -396,26 +341,27 @@ class InformationDetailScreen extends StatelessWidget {
     return Row(
       children: [
         Container(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: color.withValues(alpha: 0.1),
+            color: color.withValues(alpha: 0.08),
             shape: BoxShape.circle,
           ),
-          child: Icon(icon, size: 16, color: color),
+          child: Icon(icon, size: 18, color: color),
         ),
-        const SizedBox(width: 12),
+        const SizedBox(width: 16),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               label,
-              style: GoogleFonts.dmSans(fontSize: 11, color: Colors.grey),
+              style: GoogleFonts.dmSans(fontSize: 11, color: Colors.grey.shade500, fontWeight: FontWeight.w500),
             ),
             Text(
               value,
               style: GoogleFonts.sora(
-                fontSize: 13,
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
+                color: AppColors.textPrimary,
               ),
             ),
           ],
@@ -430,19 +376,19 @@ class InformationDetailScreen extends StatelessWidget {
       children: [
         Text(
           'Wilayah Terdampak',
-          style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold),
+          style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
         ),
         const SizedBox(height: 16),
         GridView.count(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           crossAxisCount: 2,
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
+          mainAxisSpacing: 16,
+          crossAxisSpacing: 16,
           childAspectRatio: 2.2,
           children: [
+            _buildBentoItem('Kebayoran Baru', color),
             _buildBentoItem('Grogol Indah', color),
-            _buildBentoItem('Kebayoran', color),
             _buildBentoItem('Sunter Mall', color),
             _buildBentoItem('Kelapa Gading', color),
           ],
@@ -455,24 +401,27 @@ class InformationDetailScreen extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
         border: Border.all(color: color.withValues(alpha: 0.1)),
+        boxShadow: [
+          BoxShadow(color: color.withValues(alpha: 0.02), blurRadius: 10, offset: const Offset(0, 4)),
+        ],
       ),
       child: Center(
         child: Text(
           title,
-          style: GoogleFonts.dmSans(fontWeight: FontWeight.bold, fontSize: 13),
+          style: GoogleFonts.dmSans(fontWeight: FontWeight.bold, fontSize: 13, color: AppColors.textPrimary),
         ),
       ),
-    ).animate().scale(delay: 600.ms);
+    ).animate().scale(delay: 600.ms, duration: 400.ms, curve: Curves.easeOutBack);
   }
 
   Widget _buildPremiumTips() {
     return Container(
-      padding: const EdgeInsets.all(28),
+      padding: const EdgeInsets.all(32),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [AppColors.primary, AppColors.primary.withValues(alpha: 0.8)],
+          colors: [AppColors.primary, const Color(0xFF064e3b)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -480,34 +429,34 @@ class InformationDetailScreen extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: AppColors.primary.withValues(alpha: 0.3),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
+            blurRadius: 30,
+            offset: const Offset(0, 15),
           ),
         ],
       ),
       child: Column(
         children: [
-          const Icon(
-            Icons.tips_and_updates_rounded,
-            color: Colors.white,
-            size: 40,
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.15), shape: BoxShape.circle),
+            child: const Icon(Icons.tips_and_updates_rounded, color: Colors.white, size: 36),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
           Text(
             'Expert Advice',
             style: GoogleFonts.sora(
               color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
+              fontWeight: FontWeight.w900,
+              fontSize: 22,
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 16),
           Text(
-            'Coba restart router Anda secara berkala (cabut kabel power 10 detik lalu pasang kembali) untuk menyegarkan koneksi.',
+            'Coba sesekali lakukan restart pada router Anda (cabut power 10 detik) untuk mengoptimalkan sinkronisasi setelah perbaikan selesai.',
             textAlign: TextAlign.center,
             style: GoogleFonts.dmSans(
               color: Colors.white.withValues(alpha: 0.9),
-              height: 1.6,
+              height: 1.7,
               fontSize: 14,
             ),
           ),
@@ -522,7 +471,7 @@ class InformationDetailScreen extends StatelessWidget {
       left: 24,
       right: 24,
       child: Container(
-        height: 70,
+        height: 72,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
           boxShadow: [
@@ -534,7 +483,7 @@ class InformationDetailScreen extends StatelessWidget {
           ],
         ),
         child: ElevatedButton(
-          onPressed: () => context.push('/chat-cs'),
+          onPressed: () => context.push('/support/chat-cs'),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.white,
             foregroundColor: AppColors.primary,
@@ -546,19 +495,19 @@ class InformationDetailScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.support_agent_rounded, size: 28),
+              const Icon(Icons.support_agent_rounded, size: 32),
               const SizedBox(width: 16),
               Text(
-                'Hubungi Support Teknisi',
+                'Hubungi CS',
                 style: GoogleFonts.sora(
                   fontWeight: FontWeight.w800,
-                  fontSize: 16,
+                  fontSize: 18,
                 ),
               ),
             ],
           ),
         ),
       ),
-    ).animate().slideY(begin: 1, delay: 1.seconds);
+    ).animate().slideY(begin: 1.5, delay: 1200.ms, curve: Curves.easeOutBack);
   }
 }

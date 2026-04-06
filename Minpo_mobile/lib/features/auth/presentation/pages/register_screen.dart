@@ -256,42 +256,44 @@ class _RegisterScreenState extends State<RegisterScreen> {
       top: 0,
       left: 0,
       right: 0,
-      child: Container(
-        height: 100,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        color: AppColors.bgLight,
-        child: Row(
-          children: [
-            IconButton(
-              icon: const Icon(Icons.arrow_back, color: AppColors.primary),
-              onPressed: () => context.go('/login'),
-            ),
-            const SizedBox(width: 8),
-            Text(
-              'Registrasi',
-              style: GoogleFonts.sora(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: AppColors.primary,
+      child: SafeArea(
+        child: Container(
+          height: 80,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          color: AppColors.bgLight,
+          child: Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.arrow_back, color: AppColors.primary),
+                onPressed: () => context.go('/login'),
               ),
-            ),
-            const Spacer(),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              decoration: BoxDecoration(
-                color: AppColors.primary.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Text(
-                '1 dari 2',
-                style: GoogleFonts.jetBrainsMono(
-                  fontSize: 10,
+              const SizedBox(width: 8),
+              Text(
+                'Registrasi',
+                style: GoogleFonts.sora(
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: AppColors.primary,
                 ),
               ),
-            ),
-          ],
+              const Spacer(),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  '1 dari 2',
+                  style: GoogleFonts.jetBrainsMono(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primary,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -22,6 +22,15 @@ class _SupportScreenState extends State<SupportScreen> {
     {'q': 'Biaya upgrade paket internet?', 'a': 'Biaya bervariasi tergantung kecepatan yang pilih. Cek menu Paket Saya.', 'isOpen': false},
   ];
 
+  // Mock Active Ticket data (could be fetched from a provider/repository)
+  final Map<String, dynamic> _activeTicket = {
+    'id': 'TKT-89123',
+    'status': 'DIPROSES',
+    'title': 'Koneksi Terputus Total',
+    'progress': 0.65,
+    'description': 'Sedang ditangani oleh teknisi Budi Santoso',
+  };
+
   Future<void> _launchUrl(String urlString) async {
     final Uri url = Uri.parse(urlString);
     if (!await launchUrl(url)) {
@@ -49,6 +58,8 @@ class _SupportScreenState extends State<SupportScreen> {
                   children: [
                     _buildActiveTicketCard(),
                     const SizedBox(height: 32),
+                    _buildSectionHeader('Menu Layanan', 'Pilih bantuan sesuai kebutuhan Anda'),
+                    const SizedBox(height: 16),
                     _buildBentoGrid(),
                     const SizedBox(height: 32),
                     _buildQuickContact(),
@@ -66,36 +77,40 @@ class _SupportScreenState extends State<SupportScreen> {
 
   Widget _buildSliverHeader() {
     return SliverAppBar(
-      expandedHeight: 200,
+      expandedHeight: 220,
       pinned: true,
       backgroundColor: AppColors.primary,
       elevation: 0,
       stretch: true,
       flexibleSpace: FlexibleSpaceBar(
         stretchModes: const [StretchMode.zoomBackground, StretchMode.blurBackground],
-        title: Text('Pusat Bantuan', style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
+        title: Text('Pusat Bantuan', style: GoogleFonts.sora(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
         centerTitle: true,
         background: Stack(
           fit: StackFit.expand,
           children: [
              Container(
               decoration: const BoxDecoration(
-                gradient: LinearGradient(colors: [AppColors.primary, Color(0xFF064e3b)], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                gradient: LinearGradient(
+                  colors: [AppColors.primary, Color(0xFF064e3b)], 
+                  begin: Alignment.topLeft, 
+                  end: Alignment.bottomRight
+                ),
               ),
             ),
             Positioned(
-              right: -50,
-              top: -20,
-              child: Icon(Icons.support_agent_rounded, size: 250, color: Colors.white.withValues(alpha: 0.05)),
+              right: -40,
+              top: -30,
+              child: Icon(Icons.support_agent_rounded, size: 280, color: Colors.white.withValues(alpha: 0.05)),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(24, 80, 24, 0),
+              padding: const EdgeInsets.fromLTRB(24, 90, 24, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Ada Kendala, Ahmad?', style: GoogleFonts.sora(fontSize: 24, fontWeight: FontWeight.w900, color: Colors.white)),
-                  const SizedBox(height: 8),
-                  Text('Kami siap membantu 24/7.', style: GoogleFonts.dmSans(fontSize: 14, color: Colors.white70)),
+                  Text('Halo Ahmad,', style: GoogleFonts.sora(fontSize: 24, fontWeight: FontWeight.w900, color: Colors.white)),
+                  const SizedBox(height: 6),
+                  Text('Ada yang bisa kami bantu hari ini?', style: GoogleFonts.dmSans(fontSize: 14, color: Colors.white.withValues(alpha: 0.7))),
                 ],
               ),
             ),
@@ -105,35 +120,92 @@ class _SupportScreenState extends State<SupportScreen> {
     );
   }
 
+  Widget _buildSectionHeader(String title, String subtitle) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+        const SizedBox(height: 4),
+        Text(subtitle, style: GoogleFonts.dmSans(fontSize: 12, color: AppColors.textSecondary)),
+      ],
+    );
+  }
+
   Widget _buildActiveTicketCard() {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.orange.withValues(alpha: 0.3)),
-        boxShadow: [BoxShadow(color: Colors.orange.withValues(alpha: 0.05), blurRadius: 20, offset: const Offset(0, 5))],
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(color: Colors.orange.withValues(alpha: 0.2)),
+        boxShadow: [
+          BoxShadow(color: Colors.orange.withValues(alpha: 0.08), blurRadius: 30, offset: const Offset(0, 10)),
+        ],
       ),
       child: Column(
         children: [
           Row(
             children: [
-              Container(padding: const EdgeInsets.all(10), decoration: BoxDecoration(color: Colors.orange.withValues(alpha: 0.1), shape: BoxShape.circle), child: const Icon(Icons.bolt_rounded, color: Colors.orange, size: 20)),
-              const SizedBox(width: 12),
+              Container(
+                padding: const EdgeInsets.all(12), 
+                decoration: BoxDecoration(color: Colors.orange.withValues(alpha: 0.1), shape: BoxShape.circle), 
+                child: const Icon(Icons.confirmation_num_rounded, color: Colors.orange, size: 24)
+              ).animate(onPlay: (c) => c.repeat(reverse: true)).shimmer(duration: 2.seconds),
+              const SizedBox(width: 16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Tiket Gangguan Aktif', style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.bold)),
-                    Text('ID #89123 • Sedang ditangani teknisi', style: GoogleFonts.dmSans(fontSize: 11, color: Colors.grey)),
+                    Text('Tiket Aktif: ${_activeTicket['title']}', style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.w800, color: AppColors.textPrimary)),
+                    const SizedBox(height: 4),
+                    Text('ID ${_activeTicket['id']} • ${_activeTicket['description']}', style: GoogleFonts.dmSans(fontSize: 11, color: AppColors.textSecondary)),
                   ],
                 ),
               ),
-              Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: Colors.orange, borderRadius: BorderRadius.circular(8)), child: Text('Track', style: GoogleFonts.dmSans(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.white))),
             ],
           ),
-          const SizedBox(height: 16),
-           LinearProgressIndicator(value: 0.6, backgroundColor: Colors.orange.withValues(alpha: 0.1), color: Colors.orange, minHeight: 6, borderRadius: BorderRadius.circular(3)),
+          const SizedBox(height: 24),
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Progress Perbaikan', style: GoogleFonts.dmSans(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.orange)),
+                        Text('${(_activeTicket['progress'] * 100).toInt()}%', style: GoogleFonts.jetBrainsMono(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.orange)),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: LinearProgressIndicator(
+                        value: _activeTicket['progress'], 
+                        backgroundColor: Colors.orange.withValues(alpha: 0.1), 
+                        color: Colors.orange, 
+                        minHeight: 10,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 20),
+              GestureDetector(
+                onTap: () => context.push('/support/ticket-tracking'),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), 
+                  decoration: BoxDecoration(
+                    color: Colors.orange, 
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [BoxShadow(color: Colors.orange.withValues(alpha: 0.3), blurRadius: 10, offset: const Offset(0, 4))],
+                  ), 
+                  child: Text('Track', style: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white))
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     ).animate().fadeIn().slideY(begin: 0.2);
@@ -146,12 +218,12 @@ class _SupportScreenState extends State<SupportScreen> {
       crossAxisCount: 2,
       mainAxisSpacing: 16,
       crossAxisSpacing: 16,
-      childAspectRatio: 1.1,
+      childAspectRatio: 1,
       children: [
-        _buildActionCard('Lapor Gangguan', 'Respon cepat', Icons.feedback_rounded, AppColors.primary, '/support/report-issue'),
+        _buildActionCard('Lapor Gangguan', 'Kendala teknis?', Icons.feedback_rounded, AppColors.primary, '/support/report-issue'),
         _buildActionCard('Cek Jaringan', 'Status koneksi', Icons.sensors_rounded, Colors.blue, '/info/network-status'),
-        _buildActionCard('Live Chat', 'Bicara dengan CS', Icons.chat_bubble_rounded, Colors.green, '/support/chat-cs'),
-        _buildActionCard('Instalasi Baru', 'Tambah titik baru', Icons.add_business_rounded, Colors.purple, '/support/installation'),
+        _buildActionCard('Live Chat CS', 'Tanya agen kami', Icons.chat_bubble_rounded, Colors.green, '/support/chat-cs'),
+        _buildActionCard('Instalasi', 'Pasang baru', Icons.add_business_rounded, Colors.purple, '/support/installation'),
       ],
     );
   }
@@ -160,28 +232,39 @@ class _SupportScreenState extends State<SupportScreen> {
     return GestureDetector(
       onTap: () => context.push(route),
       child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(24), boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 10)]),
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Colors.white, 
+          borderRadius: BorderRadius.circular(28), 
+          border: Border.all(color: Colors.grey.shade100),
+          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 20, offset: const Offset(0, 8))]
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: color, size: 28),
-            const SizedBox(height: 12),
-            Text(title, style: GoogleFonts.sora(fontSize: 13, fontWeight: FontWeight.bold)),
-            Text(sub, style: GoogleFonts.dmSans(fontSize: 10, color: Colors.grey)),
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(color: color.withValues(alpha: 0.08), shape: BoxShape.circle),
+              child: Icon(icon, color: color, size: 24),
+            ),
+            const SizedBox(height: 16),
+            Text(title, style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+            const SizedBox(height: 4),
+            Text(sub, style: GoogleFonts.dmSans(fontSize: 10, color: AppColors.textSecondary)),
           ],
         ),
       ),
-    ).animate().scale(delay: 50.ms);
+    ).animate().fadeIn().scale(delay: 100.ms, duration: 400.ms, curve: Curves.easeOutBack);
   }
 
   Widget _buildQuickContact() {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(32),
       decoration: BoxDecoration(
         color: AppColors.primary,
         borderRadius: BorderRadius.circular(32),
+        boxShadow: [BoxShadow(color: AppColors.primary.withValues(alpha: 0.2), blurRadius: 25, offset: const Offset(0, 10))],
         image: const DecorationImage(image: CachedNetworkImageProvider('https://www.transparenttextures.com/patterns/carbon-fibre.png'), opacity: 0.05),
       ),
       child: Column(
@@ -192,16 +275,16 @@ class _SupportScreenState extends State<SupportScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Butuh Bantuan Langsung?', style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
-                    const SizedBox(height: 4),
-                    Text('Hubungi Call Center kami di 1500-123 atau melalui WhatsApp.', style: GoogleFonts.dmSans(fontSize: 12, color: Colors.white.withValues(alpha: 0.7))),
+                    Text('Bantuan Cepat?', style: GoogleFonts.sora(fontSize: 20, fontWeight: FontWeight.w900, color: Colors.white)),
+                    const SizedBox(height: 8),
+                    Text('Hubungi Call Center atau WhatsApp untuk respon instan.', style: GoogleFonts.dmSans(fontSize: 13, color: Colors.white.withValues(alpha: 0.7), height: 1.5)),
                   ],
                 ),
               ),
-              const Icon(Icons.headset_mic_rounded, color: Colors.white24, size: 60),
+              const Icon(Icons.headset_mic_rounded, color: Colors.white24, size: 64),
             ],
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 32),
           Row(
             children: [
               Expanded(
@@ -213,7 +296,7 @@ class _SupportScreenState extends State<SupportScreen> {
                   onTap: () => _launchUrl('tel:1500123'),
                 ),
               ),
-              const SizedBox(width: 12),
+              const SizedBox(width: 16),
               Expanded(
                 child: _buildContactButton(
                   'WhatsApp',
@@ -234,14 +317,18 @@ class _SupportScreenState extends State<SupportScreen> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 14),
-        decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(16)),
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        decoration: BoxDecoration(
+          color: bg, 
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: bg != Colors.white ? [BoxShadow(color: bg.withValues(alpha: 0.3), blurRadius: 10, offset: const Offset(0, 5))] : null,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: text, size: 18),
-            const SizedBox(width: 8),
-            Text(label, style: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.bold, color: text)),
+            Icon(icon, color: text, size: 20),
+            const SizedBox(width: 12),
+            Text(label, style: GoogleFonts.sora(fontSize: 13, fontWeight: FontWeight.bold, color: text)),
           ],
         ),
       ),
@@ -252,8 +339,8 @@ class _SupportScreenState extends State<SupportScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Pertanyaan Sering Diajukan', style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold)),
-        const SizedBox(height: 16),
+        _buildSectionHeader('FAQ', 'Pertanyaan yang sering ditanyakan'),
+        const SizedBox(height: 20),
         ...List.generate(_faqs.length, (idx) => _buildFaqItem(idx)),
       ],
     );
@@ -261,20 +348,30 @@ class _SupportScreenState extends State<SupportScreen> {
 
   Widget _buildFaqItem(int index) {
     final faq = _faqs[index];
+    bool isOpen = faq['isOpen'] ?? false;
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
+      margin: const EdgeInsets.only(bottom: 16),
+      decoration: BoxDecoration(
+        color: Colors.white, 
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: isOpen ? AppColors.primary.withValues(alpha: 0.1) : Colors.grey.shade100),
+        boxShadow: isOpen ? [BoxShadow(color: AppColors.primary.withValues(alpha: 0.05), blurRadius: 20)] : null,
+      ),
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
           key: PageStorageKey(index),
-          title: Text(faq['q'], style: GoogleFonts.dmSans(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
-          trailing: Icon(faq['isOpen'] ? Icons.remove_circle_outline_rounded : Icons.add_circle_outline_rounded, color: AppColors.primary),
+          title: Text(faq['q'], style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.w700, color: isOpen ? AppColors.primary : AppColors.textPrimary)),
+          trailing: AnimatedRotation(
+            turns: isOpen ? 0.5 : 0,
+            duration: 300.ms,
+            child: Icon(Icons.keyboard_arrow_down_rounded, color: isOpen ? AppColors.primary : Colors.grey),
+          ),
           onExpansionChanged: (val) => setState(() => _faqs[index]['isOpen'] = val),
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
-              child: Text(faq['a'], style: GoogleFonts.dmSans(fontSize: 13, height: 1.5, color: AppColors.textSecondary)),
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+              child: Text(faq['a'], style: GoogleFonts.dmSans(fontSize: 13, height: 1.6, color: AppColors.textSecondary)),
             ),
           ],
         ),
