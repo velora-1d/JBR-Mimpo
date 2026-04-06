@@ -23,14 +23,6 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
   XFile? _imageFile;
   final ImagePicker _picker = ImagePicker();
 
-  final List<String> _issueTypes = [
-    'Koneksi Terputus Total',
-    'Internet Lambat (Lags)',
-    'Wifi Tidak Terdeteksi',
-    'Lampu Indikator Router Merah',
-    'Lainnya',
-  ];
-
   @override
   void dispose() {
     _descriptionController.dispose();
@@ -160,12 +152,12 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
                         const SizedBox(height: 40),
                         
                         _buildHeaderSection(),
-                        const SizedBox(height: 40),
+                        const SizedBox(height: 32),
   
-                        _buildSectionTitle('Detail Gangguan', Icons.error_outline_rounded),
+                        _buildSectionTitle('Kategori Gangguan', Icons.grid_view_rounded),
                         const SizedBox(height: 16),
-                        _buildIssueDropdown(),
-                        const SizedBox(height: 24),
+                        _buildIssueGrid(),
+                        const SizedBox(height: 32),
   
                         _buildSectionTitle('Deskripsi Masalah', Icons.edit_note_rounded),
                         const SizedBox(height: 16),
@@ -226,10 +218,17 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
                 ),
               ),
             ),
+            // Mesh Gradient Overlay
+            Opacity(
+              opacity: 0.4,
+              child: CustomPaint(
+                painter: _MeshPainter(AppColors.primaryLight),
+              ),
+            ),
             Positioned(
-              right: -20,
-              bottom: -20,
-              child: Icon(Icons.rss_feed_rounded, size: 200, color: Colors.white.withValues(alpha: 0.05)),
+              right: -30,
+              bottom: -30,
+              child: Icon(Icons.support_agent_rounded, size: 220, color: Colors.white.withValues(alpha: 0.08)),
             ),
           ],
         ),
@@ -252,20 +251,40 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
 
   Widget _buildStepIndicator() {
     return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20), boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 10)]),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      decoration: BoxDecoration(
+        color: Colors.white, 
+        borderRadius: BorderRadius.circular(32), 
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 20, offset: const Offset(0, 10))]
+      ),
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
           _buildStepCircle('1', isCompleted: true),
-          Expanded(child: Container(height: 2, color: AppColors.primary)),
+          _buildStepLine(true),
           _buildStepCircle('2', isActive: true),
-          Expanded(child: Container(height: 2, color: Colors.grey.shade200)),
+          _buildStepLine(false),
           _buildStepCircle('3'),
           const SizedBox(width: 16),
-          Text('Informasi Detail', style: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.primary)),
+          Text(
+            'Informasi Detail', 
+            style: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.primary, letterSpacing: 0.5)
+          ),
         ],
       ),
-    ).animate().fadeIn(duration: 300.ms).slideY(begin: 0.05, curve: Curves.easeOutQuad);
+    ).animate().fadeIn(duration: 400.ms).slideX(begin: -0.1, curve: Curves.easeOutCirc);
+  }
+
+  Widget _buildStepLine(bool isActive) {
+    return Container(
+      width: 24,
+      height: 3,
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      decoration: BoxDecoration(
+        color: isActive ? AppColors.primary : Colors.grey.shade200,
+        borderRadius: BorderRadius.circular(2),
+      ),
+    );
   }
 
   Widget _buildStepCircle(String label, {bool isCompleted = false, bool isActive = false}) {
@@ -312,30 +331,82 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
     );
   }
 
-  Widget _buildIssueDropdown() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.grey.shade100),
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 10, offset: const Offset(0, 4))],
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
-          value: _selectedIssue,
-          hint: Text('Pilih kategori gangguan', style: GoogleFonts.dmSans(color: Colors.grey.shade400, fontSize: 14)),
-          isExpanded: true,
-          icon: const Icon(Icons.keyboard_arrow_down_rounded, color: AppColors.primary),
-          items: _issueTypes.map((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value, style: GoogleFonts.dmSans(fontWeight: FontWeight.w600, fontSize: 14)),
-            );
-          }).toList(),
-          onChanged: (val) => setState(() => _selectedIssue = val),
-        ),
-      ),
+  Widget _buildIssueGrid() {
+    final issueCards = [
+      {'label': 'Total Mati', 'icon': Icons.power_off_rounded, 'tag': 'URGENT'},
+      {'label': 'Internet Lambat', 'icon': Icons.slow_motion_video_rounded, 'tag': 'REPAIR'},
+      {'label': 'Wifi Error', 'icon': Icons.wifi_off_rounded, 'tag': 'WIFI'},
+      {'label': 'Indikator Merah', 'icon': Icons.nearby_error_rounded, 'tag': 'HARDWARE'},
+      {'label': 'Lainnya', 'icon': Icons.more_horiz_rounded, 'tag': 'CUSTOM'},
+    ];
+
+    return Wrap(
+      spacing: 12,
+      runSpacing: 12,
+      children: issueCards.map((it) {
+        final isSelected = _selectedIssue == it['label'];
+        return GestureDetector(
+          onTap: () {
+            setState(() => _selectedIssue = it['label'] as String);
+            Feedback.forTap(context);
+          },
+          child: AnimatedContainer(
+            duration: 200.ms,
+            width: (MediaQuery.of(context).size.width - 60) / 2,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: isSelected ? AppColors.primary.withValues(alpha: 0.05) : Colors.white,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(
+                color: isSelected ? AppColors.primary : Colors.grey.shade100,
+                width: isSelected ? 2 : 1,
+              ),
+              boxShadow: isSelected 
+                ? [BoxShadow(color: AppColors.primary.withValues(alpha: 0.1), blurRadius: 20, offset: const Offset(0, 8))]
+                : [BoxShadow(color: Colors.black.withValues(alpha: 0.01), blurRadius: 10, offset: const Offset(0, 4))],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: isSelected ? AppColors.primary : Colors.grey.shade50,
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      child: Icon(it['icon'] as IconData, color: isSelected ? Colors.white : Colors.grey, size: 20),
+                    ),
+                    if (isSelected) 
+                      const Icon(Icons.check_circle_rounded, color: AppColors.primary, size: 18)
+                        .animate().scale(duration: 200.ms, curve: Curves.easeOutBack),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  it['label'] as String,
+                  style: GoogleFonts.sora(
+                    fontSize: 13, 
+                    fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
+                    color: isSelected ? AppColors.primary : AppColors.textPrimary
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  it['tag'] as String,
+                  style: GoogleFonts.jetBrainsMono(
+                    fontSize: 9, 
+                    fontWeight: FontWeight.bold,
+                    color: isSelected ? AppColors.primary.withValues(alpha: 0.6) : Colors.grey.shade400
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      }).toList(),
     );
   }
 
@@ -524,4 +595,22 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
       ),
     );
   }
+}
+
+class _MeshPainter extends CustomPainter {
+  final Color color;
+  _MeshPainter(this.color);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color.withValues(alpha: 0.3)
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 50);
+
+    canvas.drawCircle(Offset(size.width * 0.2, size.height * 0.3), 100, paint);
+    canvas.drawCircle(Offset(size.width * 0.8, size.height * 0.7), 120, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
