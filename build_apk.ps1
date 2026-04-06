@@ -5,7 +5,7 @@ $PROJECT_ROOT = "Minpo_mobile"
 
 Write-Host "🚀 Starting Flutter Build APK..." -ForegroundColor Cyan
 
-cd $PROJECT_ROOT
+Set-Location $PROJECT_ROOT
 
 # Clean build
 flutter clean
