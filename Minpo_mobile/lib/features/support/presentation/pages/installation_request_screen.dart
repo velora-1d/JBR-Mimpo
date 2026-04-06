@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
 import 'package:jbr_mimpo/core/utils/app_feedback.dart';
 import 'package:jbr_mimpo/core/widgets/app_dialog.dart';
@@ -278,7 +279,7 @@ class _InstallationRequestScreenState extends State<InstallationRequestScreen> {
             borderRadius: BorderRadius.circular(24),
             border: Border.all(color: Colors.grey.withValues(alpha: 0.2)),
             image: const DecorationImage(
-              image: NetworkImage('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1000'),
+              image: CachedNetworkImageProvider('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1000'),
               fit: BoxFit.cover,
               opacity: 0.4,
             ),

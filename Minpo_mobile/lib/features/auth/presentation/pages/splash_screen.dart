@@ -74,13 +74,12 @@ class _SplashScreenState extends State<SplashScreen> {
                     ).animate(onPlay: (controller) => controller.repeat(reverse: true))
                         .scale(begin: const Offset(1, 1), end: const Offset(1.2, 1.2), duration: 2.seconds),
                     
-                    // Mascot Image
-                    Image.network(
-                      'https://lh3.googleusercontent.com/aida-public/AB6AXuDtO--OCBrj15cMKViLji7kWOu6NWJU3hrp4tHDIstRFEXQJsZQh83ea7qQsErqL6txdCRLeiNvHT-6fkbuCmnBM_v_Xo4UCiNVJ4xSrRkbZSd6oKElveCHwvZ2FBYjXOKtdJ86BXA2sZau-OY5ulKgTsFpLZRR1sKGvUbgcdGHa0TASemAemea8OSyB6C_ZYayho9-0QHtqIZOKbCJVhvk59py31n99Z9x1aGfTzk3zJEmxMifiCKnVBj5b8Bvk3shygjbHXfLd7XO',
+                    // Mascot Image (Local Logo)
+                    Image.asset(
+                      'assets/logo/app_logo.png',
                       width: 280,
                       height: 280,
                       fit: BoxFit.contain,
-                      errorBuilder: (context, error, stackTrace) => const Icon(Icons.smart_toy_outlined, size: 100, color: Colors.white),
                     ).animate().fadeIn(duration: 800.ms).slideY(begin: 0.1, end: 0),
                   ],
                 ),

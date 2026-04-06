@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
+import 'package:jbr_mimpo/core/widgets/animated_status_illustration.dart';
 
 class NetworkStatusScreen extends StatelessWidget {
   const NetworkStatusScreen({super.key});
@@ -207,12 +208,15 @@ class NetworkStatusScreen extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: Colors.white.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: const Icon(Icons.wifi_rounded, color: Colors.white, size: 32),
+              child: const AnimatedStatusIllustration(
+                type: StatusType.success, // Gunakan sukses (normal) sebagai default
+                height: 80,
+              ),
             ),
             const SizedBox(width: 20),
             Expanded(

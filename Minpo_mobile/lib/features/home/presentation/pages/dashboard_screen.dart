@@ -1,19 +1,22 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
 import 'package:jbr_mimpo/core/widgets/shimmer_loader.dart';
 import 'package:go_router/go_router.dart';
+import '../../../promo/presentation/providers/promo_provider.dart';
 
-class DashboardScreen extends StatefulWidget {
+class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({super.key});
 
   @override
-  State<DashboardScreen> createState() => _DashboardScreenState();
+  ConsumerState<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
+class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   bool _isLoading = true;
   late final PageController _pageController;
   int _currentBannerIndex = 0;
@@ -71,8 +74,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return RefreshIndicator(
       color: AppColors.primary,
       onRefresh: () async {
-        await Future.delayed(const Duration(seconds: 1));
-        setState(() {});
+        await ref.read(promoListProvider.notifier).refresh();
+        if (mounted) setState(() {});
       },
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
@@ -152,20 +155,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Widget _buildPromoBanner() {
-    if (_isLoading) {
-      return Padding(
+    final promoAsync = ref.watch(promoListProvider);
+
+    return promoAsync.when(
+      data: (promos) => _buildPromoCarousel(promos),
+      loading: () => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: ShimmerLoader(width: double.infinity, height: 160, borderRadius: 24),
-      );
-    }
-    
-    final promos = [
-      {'title': 'Diskon Paket 50%', 'desc': 'Upgrade kecepatan internetmu hari ini!'},
-      {'title': 'Cashback 20%', 'desc': 'Bayar tagihan lebih hemat bulan ini.'},
-      {'title': 'Gratis Router', 'desc': 'Untuk pelanggan baru paket Ultimate.'},
-      {'title': 'Poin Ganda', 'desc': 'Kumpulkan poin lebih cepat khusus weekend.'},
-      {'title': 'Referral Bonus', 'desc': 'Ajak teman dan dapatkan saldo Rp50.000.'},
-    ];
+        child: const ShimmerLoader(width: double.infinity, height: 160, borderRadius: 24),
+      ),
+      error: (err, stack) => const SizedBox.shrink(),
+    );
+  }
+
+  Widget _buildPromoCarousel(List promos) {
 
     return Column(
       children: [
@@ -183,26 +185,34 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(24),
-                    gradient: const LinearGradient(
-                      colors: [AppColors.primary, Color(0xFF10B981), Color(0xFF34D399)], 
-                      stops: [0.0, 0.6, 1.0],
-                      begin: Alignment.topLeft, 
-                      end: Alignment.bottomRight,
-                    ),
                     boxShadow: [
-                      BoxShadow(color: AppColors.primary.withValues(alpha: 0.3), blurRadius: 20, offset: const Offset(0, 10))
+                      BoxShadow(color: AppColors.primary.withValues(alpha: 0.15), blurRadius: 20, offset: const Offset(0, 10))
                     ],
                   ),
                   child: Stack(
                     children: [
-                      // Background decorative element
-                      Positioned(
-                        right: -20,
-                        bottom: -20,
-                        child: Icon(
-                          Icons.campaign_rounded,
-                          size: 140,
-                          color: Colors.white.withValues(alpha: 0.15),
+                      // Background Image
+                      Positioned.fill(
+                        child: CachedNetworkImage(
+                          imageUrl: (promos[index] as dynamic).imageUrl,
+                          fit: BoxFit.cover,
+                          color: Colors.black.withValues(alpha: 0.4),
+                          colorBlendMode: BlendMode.darken,
+                        ),
+                      ),
+                      // Gradient overlay
+                      Positioned.fill(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [
+                                Colors.black.withValues(alpha: 0.8),
+                                Colors.transparent,
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                       Padding(
@@ -220,9 +230,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               child: Text('PROMO SPESIAL', style: GoogleFonts.jetBrainsMono(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white)),
                             ),
                             const SizedBox(height: 12),
-                            Text(promos[index]['title']!, style: GoogleFonts.sora(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white, height: 1.2)),
+                            Text((promos[index] as dynamic).title, style: GoogleFonts.sora(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white, height: 1.2)),
                             const SizedBox(height: 8),
-                            Text(promos[index]['desc']!, style: GoogleFonts.dmSans(fontSize: 13, color: Colors.white.withValues(alpha: 0.9), height: 1.4)),
+                            Text((promos[index] as dynamic).description, style: GoogleFonts.dmSans(fontSize: 13, color: Colors.white.withValues(alpha: 0.9), height: 1.4), maxLines: 2, overflow: TextOverflow.ellipsis),
                           ],
                         ),
                       ),
@@ -438,7 +448,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), bottomLeft: Radius.circular(20)),
                         color: (item['color'] as Color).withValues(alpha: 0.1),
                         image: DecorationImage(
-                          image: NetworkImage(item['imageUrl'] as String),
+                          image: CachedNetworkImageProvider(item['imageUrl'] as String),
                           fit: BoxFit.cover,
                           colorFilter: ColorFilter.mode(
                             Colors.black.withValues(alpha: 0.3),

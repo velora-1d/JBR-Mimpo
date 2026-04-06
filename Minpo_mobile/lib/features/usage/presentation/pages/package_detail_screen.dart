@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
 import 'package:jbr_mimpo/core/widgets/shimmer_loader.dart';
 import 'dart:math' as math;
@@ -77,7 +78,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
               children: [
                 const CircleAvatar(
                   radius: 20,
-                  backgroundImage: NetworkImage('https://lh3.googleusercontent.com/aida-public/AB6AXuBWemjxFV6B__HQV4yyQeZQSg-zszgymP3w2vssTlH6-YETvxMrdV-E3xqzWfW0GCv90sP2vOdjxyu13s2cU7UdsxM9wD8q8c4xISCbmnVQyzVjW-SJy4e8RT4zalXoACSYmUXLPjrXzLzVZ_ibIVj1VIk2cIXL3jcN1UqhiRN2GWjpgcdYgFxq3Pj8fm5n4inpAtZKdWkq5OFwGiB6TGP1oZm0YWve6fhGFBhLzfoJ-TahS0WEZKd-aP8Dw5tyjoqWnLCbFZp2oSLQ'),
+                  backgroundImage: CachedNetworkImageProvider('https://lh3.googleusercontent.com/aida-public/AB6AXuBWemjxFV6B__HQV4yyQeZQSg-zszgymP3w2vssTlH6-YETvxMrdV-E3xqzWfW0GCv90sP2vOdjxyu13s2cU7UdsxM9wD8q8c4xISCbmnVQyzVjW-SJy4e8RT4zalXoACSYmUXLPjrXzLzVZ_ibIVj1VIk2cIXL3jcN1UqhiRN2GWjpgcdYgFxq3Pj8fm5n4inpAtZKdWkq5OFwGiB6TGP1oZm0YWve6fhGFBhLzfoJ-TahS0WEZKd-aP8Dw5tyjoqWnLCbFZp2oSLQ'),
                 ),
                 const SizedBox(width: 12),
                 Text(

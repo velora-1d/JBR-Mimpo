@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
 import 'package:go_router/go_router.dart';
 
@@ -42,7 +43,7 @@ class PromoDetailScreen extends StatelessWidget {
                     children: [
                       Hero(
                         tag: promo['title'] ?? 'promo_header',
-                        child: _buildMeshPromoHeader(accentColor),
+                        child: _buildMeshPromoHeader(accentColor, promo['imageUrl']),
                       ),
 
                       // Floating Promo Icon
@@ -54,7 +55,7 @@ class PromoDetailScreen extends StatelessWidget {
                                     color: Colors.white.withValues(alpha: 0.1),
                                     shape: BoxShape.circle,
                                   ),
-                                  child: Icon(
+                                  child: promo['imageUrl'] != null ? const SizedBox.shrink() : Icon(
                                     promo['icon'] ?? Icons.loyalty_rounded,
                                     color: Colors.white,
                                     size: 100,
@@ -153,7 +154,7 @@ class PromoDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildMeshPromoHeader(Color color) {
+  Widget _buildMeshPromoHeader(Color color, String? imageUrl) {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -162,19 +163,26 @@ class PromoDetailScreen extends StatelessWidget {
           colors: [color, color.withValues(alpha: 0.7)],
         ),
       ),
-      child: Stack(
-        children: [
-          Positioned(
-            top: -20,
-            right: -20,
-            child: Icon(
-              Icons.stars_rounded,
-              size: 200,
-              color: Colors.white.withValues(alpha: 0.1),
-            ),
+      child: imageUrl != null 
+        ? CachedNetworkImage(
+            imageUrl: imageUrl,
+            fit: BoxFit.cover,
+            color: Colors.black.withValues(alpha: 0.3),
+            colorBlendMode: BlendMode.darken,
+          )
+        : Stack(
+            children: [
+              Positioned(
+                top: -20,
+                right: -20,
+                child: Icon(
+                  Icons.stars_rounded,
+                  size: 200,
+                  color: Colors.white.withValues(alpha: 0.1),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 

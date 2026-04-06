@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
 import 'package:jbr_mimpo/core/utils/app_feedback.dart';
 import 'package:go_router/go_router.dart';
@@ -108,7 +109,7 @@ class ProfileScreen extends ConsumerWidget {
                       shape: BoxShape.circle,
                       border: Border.all(color: Colors.white, width: 3),
                       image: const DecorationImage(
-                        image: NetworkImage('https://i.pravatar.cc/150?u=ahmad'),
+                        image: CachedNetworkImageProvider('https://i.pravatar.cc/150?u=ahmad'),
                         fit: BoxFit.cover,
                       ),
                       boxShadow: [

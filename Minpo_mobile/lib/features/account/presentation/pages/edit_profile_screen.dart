@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:jbr_mimpo/core/utils/app_feedback.dart';
 
 // Assuming AppColors is in core theme, we'll try to find its actual import later
@@ -68,7 +69,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 children: [
                   const CircleAvatar(
                     radius: 50,
-                    backgroundImage: NetworkImage('https://i.pravatar.cc/150?img=11'),
+                    backgroundImage: CachedNetworkImageProvider('https://i.pravatar.cc/150?img=11'),
                   ),
                   Container(
                     padding: const EdgeInsets.all(8),

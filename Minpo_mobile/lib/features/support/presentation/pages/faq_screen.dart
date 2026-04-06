@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
 import 'package:go_router/go_router.dart';
 
@@ -268,7 +269,7 @@ class _FaqScreenState extends State<FaqScreen> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(32),
         image: const DecorationImage(
-          image: NetworkImage('https://lh3.googleusercontent.com/aida-public/AB6AXuAmGboHZSNN_N5N0nj-JvOqBSMYPDmdB-peHJ5FAMFuW9lhYjhG0aWQGUVgWQZTGMJk3tOYisqP9qZhs6RUyH8ZXnz7voyBrHVlQJUA8MyIAr-w6zKK0AkXLpN_THCEiBu4L3JZBtdu7vX3yH7O_2PV1FcxGlCJMl14zPxidwLu_6znS4jIBRYnJqpGuhfW6K8mTCxYD5mJKlmskC4FG2UVrlnnCBint5tz9JICz84eCNmTZbPwEUdDlv5R1LR0oOPqisSoztdoEyFF'),
+          image: CachedNetworkImageProvider('https://lh3.googleusercontent.com/aida-public/AB6AXuAmGboHZSNN_N5N0nj-JvOqBSMYPDmdB-peHJ5FAMFuW9lhYjhG0aWQGUVgWQZTGMJk3tOYisqP9qZhs6RUyH8ZXnz7voyBrHVlQJUA8MyIAr-w6zKK0AkXLpN_THCEiBu4L3JZBtdu7vX3yH7O_2PV1FcxGlCJMl14zPxidwLu_6znS4jIBRYnJqpGuhfW6K8mTCxYD5mJKlmskC4FG2UVrlnnCBint5tz9JICz84eCNmTZbPwEUdDlv5R1LR0oOPqisSoztdoEyFF'),
           fit: BoxFit.cover,
         ),
       ),

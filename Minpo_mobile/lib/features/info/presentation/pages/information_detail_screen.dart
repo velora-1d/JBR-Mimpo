@@ -13,9 +13,13 @@ class InformationDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = info['color'] as Color;
+    final color = info['color'] is int ? Color(info['color'] as int) : info['color'] as Color;
     final isMaintenance = info['category'] == 'Maintenance';
     final isGangguan = info['category'] == 'Gangguan';
+
+    final icon = info['iconCodePoint'] != null 
+      ? IconData(info['iconCodePoint'] as int, fontFamily: info['iconFontFamily'] as String?)
+      : info['icon'] as IconData;
 
     return Scaffold(
       backgroundColor: AppColors.bgLight,
@@ -110,7 +114,7 @@ class InformationDetailScreen extends StatelessWidget {
                       // Animated Icon Overlay
                       Center(
                         child:
-                            Icon(info['icon'], color: Colors.white24, size: 140)
+                            Icon(icon, color: Colors.white24, size: 140)
                                 .animate(onPlay: (c) => c.repeat(reverse: true))
                                 .moveY(begin: 0, end: 15, duration: 3.seconds)
                                 .scale(

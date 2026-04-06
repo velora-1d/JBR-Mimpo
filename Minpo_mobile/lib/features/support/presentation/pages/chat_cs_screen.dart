@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
 import 'package:go_router/go_router.dart';
 
@@ -93,7 +94,7 @@ class _ChatCsScreenState extends State<ChatCsScreen> {
               children: [
                 const CircleAvatar(
                   radius: 18,
-                  backgroundImage: NetworkImage('https://lh3.googleusercontent.com/aida-public/AB6AXuBrAR_C7vUB5u6deg_FwTxbouUNa5SyCG7eeXn58veViH_LFvxbwz9MFSue6VXsDkfP5FGSq9flo7ZYpauKa0GzVwYSMH3RkH3OJ7MelMKN-Cd2-4oZKcnMkXVdLo0pi9GojBD1QRKtP-NoCOSaK6jB0xe31vI-sgMDJFTO3S40PvpuBb5yQtSTY11EbtihcyRaZymP8Z98UvhUieseAoN6hjfS9-jyJFVvKTmcrKf4zOnma51ihbg2tuRZpPF6G9hqy3G9CVuwk5l8'),
+                  backgroundImage: CachedNetworkImageProvider('https://lh3.googleusercontent.com/aida-public/AB6AXuBrAR_C7vUB5u6deg_FwTxbouUNa5SyCG7eeXn58veViH_LFvxbwz9MFSue6VXsDkfP5FGSq9flo7ZYpauKa0GzVwYSMH3RkH3OJ7MelMKN-Cd2-4oZKcnMkXVdLo0pi9GojBD1QRKtP-NoCOSaK6jB0xe31vI-sgMDJFTO3S40PvpuBb5yQtSTY11EbtihcyRaZymP8Z98UvhUieseAoN6hjfS9-jyJFVvKTmcrKf4zOnma51ihbg2tuRZpPF6G9hqy3G9CVuwk5l8'),
                 ),
                 Positioned(
                   right: 0,

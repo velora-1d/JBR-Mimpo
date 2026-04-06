@@ -1,57 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
 import 'package:go_router/go_router.dart';
+import '../providers/information_provider.dart';
+import '../../domain/models/information_model.dart';
 
-class InformationScreen extends StatefulWidget {
+class InformationScreen extends ConsumerStatefulWidget {
   const InformationScreen({super.key});
 
   @override
-  State<InformationScreen> createState() => _InformationScreenState();
+  ConsumerState<InformationScreen> createState() => _InformationScreenState();
 }
 
-class _InformationScreenState extends State<InformationScreen> {
+class _InformationScreenState extends ConsumerState<InformationScreen> {
   String _selectedCategory = 'Semua';
 
-  final List<Map<String, dynamic>> _infoList = [
-    {
-      'title': 'Promo Upgrade Kecepatan',
-      'desc': 'Dapatkan upgrade kecepatan hingga 100Mbps dengan harga spesial.',
-      'category': 'Info Umum',
-      'time': 'SELAMANYA',
-      'isPinned': true,
-      'icon': Icons.card_giftcard_rounded,
-      'color': AppColors.primary,
-    },
-    {
-      'title': 'Pemeliharaan Jaringan Jakarta Selatan',
-      'desc': 'Peningkatan kapasitas backbone untuk stabilitas.',
-      'category': 'Maintenance',
-      'date': 'Kamis, 24 Okt',
-      'time': '00:00 - 04:00 WIB',
-      'isPinned': false,
-      'icon': Icons.build_rounded,
-      'color': Colors.blue,
-    },
-    {
-      'title': 'Gangguan Massal Bekasi',
-      'desc': 'Tim teknis sedang melakukan pengecekan kabel backbone.',
-      'category': 'Gangguan',
-      'status': 'Sedang Ditangani',
-      'updateTime': '5 menit lalu',
-      'isPinned': false,
-      'icon': Icons.warning_amber_rounded,
-      'color': Colors.red,
-    },
-  ];
+
 
   @override
   Widget build(BuildContext context) {
-    final filteredList = _infoList.where((info) {
-      if (_selectedCategory == 'Semua') return true;
-      return info['category'] == _selectedCategory;
-    }).toList();
+    final infoAsync = ref.watch(informationListProvider);
 
     return Scaffold(
       backgroundColor: AppColors.bgLight,
@@ -63,13 +33,35 @@ class _InformationScreenState extends State<InformationScreen> {
         children: [
           _buildSearchAndFilter(),
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 120),
-              itemCount: filteredList.length,
-              itemBuilder: (context, index) {
-                final info = filteredList[index];
-                return _buildInfoCard(info);
+            child: infoAsync.when(
+              data: (infos) {
+                final filteredList = infos.where((info) {
+                  if (_selectedCategory == 'Semua') return true;
+                  return info.category == _selectedCategory;
+                }).toList();
+
+                return RefreshIndicator(
+                  onRefresh: () => ref.read(informationListProvider.notifier).refresh(),
+                  child: ListView.builder(
+                    padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 120),
+                    itemCount: filteredList.length,
+                    itemBuilder: (context, index) {
+                      final info = filteredList[index];
+                      return _buildInfoCard(info);
+                    },
+                  ),
+                );
               },
+              loading: () => ListView.builder(
+                padding: const EdgeInsets.all(20),
+                itemCount: 3,
+                itemBuilder: (context, index) => Container(
+                  height: 120,
+                  margin: const EdgeInsets.only(bottom: 16),
+                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(24)),
+                ),
+              ),
+              error: (err, stack) => Center(child: Text('Gagal: $err')),
             ),
           ),
         ],
@@ -155,9 +147,9 @@ class _InformationScreenState extends State<InformationScreen> {
     );
   }
 
-  Widget _buildInfoCard(Map<String, dynamic> info) {
+  Widget _buildInfoCard(InformationModel info) {
     return GestureDetector(
-      onTap: () => context.push('/info/detail', extra: info),
+      onTap: () => context.push('/info/detail', extra: info.toJson()),
       child: Container(
         margin: const EdgeInsets.only(bottom: 16),
         padding: const EdgeInsets.all(20),
@@ -171,17 +163,17 @@ class _InformationScreenState extends State<InformationScreen> {
             Container(
               width: 50,
               height: 50,
-              decoration: BoxDecoration(color: (info['color'] as Color).withValues(alpha: 0.1), borderRadius: BorderRadius.circular(16)),
-              child: Icon(info['icon'] as IconData, color: info['color'] as Color),
+              decoration: BoxDecoration(color: info.color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(16)),
+              child: Icon(info.icon, color: info.color),
             ),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(info['title'], style: GoogleFonts.sora(fontSize: 15, fontWeight: FontWeight.bold)),
+                  Text(info.title, style: GoogleFonts.sora(fontSize: 15, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 4),
-                  Text(info['desc'], style: GoogleFonts.dmSans(fontSize: 12, color: Colors.grey), maxLines: 2),
+                  Text(info.description, style: GoogleFonts.dmSans(fontSize: 12, color: Colors.grey), maxLines: 2),
                 ],
               ),
             ),

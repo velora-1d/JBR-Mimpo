@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
+import '../../../../core/widgets/shimmer_loader.dart';
 import 'package:jbr_mimpo/core/theme/app_dimensions.dart';
 import 'package:jbr_mimpo/core/utils/app_feedback.dart';
 import 'package:jbr_mimpo/core/widgets/app_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../providers/promo_provider.dart';
+import '../../domain/models/promo_model.dart';
 
-class PromoScreen extends StatefulWidget {
+class PromoScreen extends ConsumerStatefulWidget {
   const PromoScreen({super.key});
 
   @override
-  State<PromoScreen> createState() => _PromoScreenState();
+  ConsumerState<PromoScreen> createState() => _PromoScreenState();
 }
 
-class _PromoScreenState extends State<PromoScreen>
+class _PromoScreenState extends ConsumerState<PromoScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -65,7 +70,7 @@ class _PromoScreenState extends State<PromoScreen>
     return RefreshIndicator(
       color: AppColors.primary,
       onRefresh: () async {
-        await Future.delayed(const Duration(seconds: 2));
+        await ref.read(promoListProvider.notifier).refresh();
       },
       child: child,
     );
@@ -180,28 +185,26 @@ class _PromoScreenState extends State<PromoScreen>
 
   // --- Sub-Tab 1: Promo Aktif (Halaman 12) ---
   Widget _buildPromoAktifTab() {
-    return ListView(
-      padding: const EdgeInsets.all(20),
-      children: [
-        _buildPromoCard(
-          title: 'Turbo Upgrade: Naik ke 100Mbps',
-          desc: 'Nikmati internet tanpa batas dengan diskon 50% untuk 3 bulan!',
-          price: '225.000',
-          originalPrice: '450.000',
-          timer: '02 : 14 : 55',
-          isFlashSale: true,
-          color: Colors.blue,
-        ),
-        _buildPromoCard(
-          title: 'Cashback Tagihan Akhir Bulan',
-          desc: 'Gunakan kode HEMATJBR untuk diskon tagihan sebesar 50rb.',
-          price: 'Potongan s/d 50rb',
-          timer: '08 : 42 : 10',
-          isFlashSale: false,
-          color: AppColors.primary,
-        ),
-        const SizedBox(height: 80),
-      ],
+    final promoAsync = ref.watch(promoListProvider);
+
+    return promoAsync.when(
+      data: (promos) => ListView.builder(
+        padding: const EdgeInsets.all(20),
+        itemCount: promos.length + 1,
+        itemBuilder: (context, index) {
+          if (index == promos.length) return const SizedBox(height: 80);
+          final promo = promos[index];
+          return _buildPromoCard(promo: promo);
+        },
+      ),
+      loading: () => ListView(
+        padding: const EdgeInsets.all(20),
+        children: List.generate(3, (index) => const Padding(
+          padding: EdgeInsets.only(bottom: 20),
+          child: ShimmerLoader(width: double.infinity, height: 320, borderRadius: 24),
+        )),
+      ),
+      error: (err, stack) => Center(child: Text('Gagal memuat promo: $err')),
     );
   }
 
@@ -500,7 +503,18 @@ class _PromoScreenState extends State<PromoScreen>
                           width: 2,
                         ),
                 ),
-                child: ClipOval(child: Image.network(image, fit: BoxFit.cover)),
+                child: ClipOval(
+                  child: CachedNetworkImage(
+                    imageUrl: image,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const ShimmerLoader(
+                      width: 40,
+                      height: 40,
+                      borderRadius: 20,
+                    ),
+                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                  ),
+                ),
               ),
             ),
             if (isFirst)
@@ -1600,15 +1614,14 @@ class _PromoScreenState extends State<PromoScreen>
     );
   }
 
-  Widget _buildPromoCard({
-    required String title,
-    required String desc,
-    required String price,
-    String? originalPrice,
-    required String timer,
-    required bool isFlashSale,
-    required Color color,
-  }) {
+  Widget _buildPromoCard({required PromoModel promo}) {
+    final title = promo.title;
+    final desc = promo.description;
+    final price = promo.price;
+    final originalPrice = promo.originalPrice;
+    final timer = promo.timer ?? '00:00:00';
+    final isFlashSale = promo.isFlashSale;
+    final color = promo.color;
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
@@ -1641,10 +1654,15 @@ class _PromoScreenState extends State<PromoScreen>
                       colors: [color.withValues(alpha: 0.6), color],
                     ),
                   ),
-                  child: Icon(
-                    Icons.flash_on_rounded,
-                    color: Colors.white.withValues(alpha: 0.2),
-                    size: 80,
+                  child: CachedNetworkImage(
+                    imageUrl: promo.imageUrl,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const ShimmerLoader(width: double.infinity, height: 160),
+                    errorWidget: (context, url, error) => const Icon(
+                      Icons.image_outlined,
+                      color: Colors.white,
+                      size: 40,
+                    ),
                   ),
                 ),
               ),

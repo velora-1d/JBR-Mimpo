@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
 import 'package:jbr_mimpo/features/support/presentation/widgets/horizontal_stepper.dart';
 import 'package:go_router/go_router.dart';
@@ -131,7 +132,7 @@ class _TicketDetailScreenState extends State<TicketDetailScreen> {
               children: [
                 const CircleAvatar(
                   radius: 24,
-                  backgroundImage: NetworkImage('https://lh3.googleusercontent.com/aida-public/AB6AXuDJwyeH3EZSv12EUu9a40D-l1sSkmfjlv571NuARf8rrgkaeTdpLRQWiW0v6vy46TojEBBKSRXxAcwNJg-_WGHzA8x8BIiRMBOcjVvWpSj5bxxavaz05XWHdguQX_E4rcrWZmjE5-bxTi2X7OcZepXcwJ4nn1H8uEWvc0-5sYDut33WXvkz3khDMNqkhDRkEigFmV_UoAFlY5NhpHCUJjFRnknvyN92VhNV7ba6LlD7wuAz1C5uWItzpzoEZPX_kMoIGA86n5_Si5QG'),
+                  backgroundImage: CachedNetworkImageProvider('https://lh3.googleusercontent.com/aida-public/AB6AXuDJwyeH3EZSv12EUu9a40D-l1sSkmfjlv571NuARf8rrgkaeTdpLRQWiW0v6vy46TojEBBKSRXxAcwNJg-_WGHzA8x8BIiRMBOcjVvWpSj5bxxavaz05XWHdguQX_E4rcrWZmjE5-bxTi2X7OcZepXcwJ4nn1H8uEWvc0-5sYDut33WXvkz3khDMNqkhDRkEigFmV_UoAFlY5NhpHCUJjFRnknvyN92VhNV7ba6LlD7wuAz1C5uWItzpzoEZPX_kMoIGA86n5_Si5QG'),
                 ),
                 const SizedBox(width: 16),
                 Expanded(

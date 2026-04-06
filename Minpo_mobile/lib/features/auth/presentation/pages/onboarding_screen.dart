@@ -33,19 +33,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     OnboardingContent(
       title: 'Info Gangguan Real-Time',
       description: 'Pantau status jaringan di area kamu secara akurat',
-      imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB9eHUmBwJfa5Pxr_C4980Oytp_3dimWnvsKrUdCFJMRGKPq8Km3G5iPSZBuf8eHCiVJQfcR9E3FvdimmUAEEMpCm_97I1Igih1gwqO4UUsPcy3CJY8a7MDtleEYeEE5VfkLPITYuuV3G0SB9mPxX6hKX3tnpIizAuzCt2HskdrEaW7G55hZXJ0dDHwENW-pi2CDRGWS_Ucw0cAUSLIBFaNuFH9woHoxWsCvWAnLC09zcKJ3JvmNWDcF7XAkm5gkB-JT3P4CmX5T4sB',
+      imageUrl: 'assets/icons/3d/wifi.png',
       technicalHint: 'Precision Protocol v6.2',
     ),
     OnboardingContent(
       title: 'Promo & Reward Eksklusif',
       description: 'Kumpulkan poin setiap bulan dan tukar dengan hadiah menarik',
-      imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDPR2sIbcpjt2NNfUUznCBJl2R2YZn8dAUwKqlQBDUCSgwVD6JU6jbW8yBasuR_PMAnuJbP1FPGVtoPcClDF-uKQkN6DBLsAMH4Qn9o8hGDJpAGNaW4pTbmnlD83VXUX1QAI4I016DwrRj-L52G1rWluidD3AdJYoalfKuHD2I90XgolTwAfUEsGXFIJBWJc5lkspU3OT-9MFaLGPy4gqqgrSB2z47WYbsi1CSH6iCQryLw__0coIgSgPxgW92_UnC5p0G80WySix1O',
+      imageUrl: 'assets/icons/3d/money.png',
       technicalHint: 'LOYALTY PROGRAM V2.0',
     ),
     OnboardingContent(
       title: 'CS Online 24 Jam',
       description: 'Bantuan teknis kapan saja, solusi cepat langsung dari genggaman',
-      imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAKuutV0gZJkjfP0ZOxposERZbZ9QENqm0SPEEyehBnGe2tql5X2swqlwZm46QTHfcNOccFppS8nmeHtGDGm04WVwB-RJ4syxR3PwK8EWhaLuFDO3yi0TOcagEm18UTLq6WnUyA6psXwtDAMeQ2evkLn__eoqHQQIVHYcXz5IS5_euEo8aBy6ICdtKTWymqqqOgUKrdKirXnfGvSh_-ZPVUTr-aEiSKDiomiOzg3lyySxoj7gFpdrjUwHu8R2FJNWfGi95D-NTcAmfK',
+      imageUrl: 'assets/icons/3d/mobile.png',
       technicalHint: 'Uptime Guarantee 99.9%',
     ),
   ];
@@ -211,12 +211,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       child: Center(
         child: Padding(
           padding: const EdgeInsets.all(40.0),
-          child: Image.network(
+          child: Image.asset(
             content.imageUrl,
+            height: 300,
             fit: BoxFit.contain,
           ).animate(key: ValueKey(content.title))
            .fadeIn(duration: 800.ms)
-           .slideY(begin: 0.2, end: 0, curve: Curves.easeOutBack),
+           .slideY(begin: 0.2, end: 0, curve: Curves.easeOutBack)
+           .then() // Tunggu animasi masuk selesai
+           .animate(onPlay: (controller) => controller.repeat(reverse: true))
+           .moveY(begin: -15, end: 15, duration: 2.seconds, curve: Curves.easeInOut),
         ),
       ),
     );

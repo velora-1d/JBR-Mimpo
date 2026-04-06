@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
 import 'package:jbr_mimpo/core/utils/app_feedback.dart';
 import 'package:go_router/go_router.dart';
@@ -181,7 +182,7 @@ class _SupportScreenState extends State<SupportScreen> {
       decoration: BoxDecoration(
         color: AppColors.primary,
         borderRadius: BorderRadius.circular(32),
-        image: const DecorationImage(image: NetworkImage('https://www.transparenttextures.com/patterns/carbon-fibre.png'), opacity: 0.05),
+        image: const DecorationImage(image: CachedNetworkImageProvider('https://www.transparenttextures.com/patterns/carbon-fibre.png'), opacity: 0.05),
       ),
       child: Column(
         children: [
