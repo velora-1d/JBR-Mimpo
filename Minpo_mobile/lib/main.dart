@@ -23,6 +23,7 @@ import 'package:jbr_mimpo/features/account/presentation/pages/profile_screen.dar
 import 'package:jbr_mimpo/features/usage/presentation/pages/package_detail_screen.dart';
 import 'package:jbr_mimpo/features/usage/presentation/pages/upgrade_package_screen.dart';
 import 'package:jbr_mimpo/features/support/presentation/pages/notification_screen.dart';
+import 'package:jbr_mimpo/features/support/presentation/pages/notification_detail_screen.dart';
 import 'package:jbr_mimpo/features/account/presentation/pages/security_screen.dart';
 import 'package:jbr_mimpo/features/account/presentation/pages/app_settings_screen.dart';
 import 'package:jbr_mimpo/features/account/presentation/pages/edit_profile_screen.dart';
@@ -64,6 +65,25 @@ final _shellNavigatorPromoKey = GlobalKey<NavigatorState>(debugLabel: 'promo');
 final _shellNavigatorSupportKey = GlobalKey<NavigatorState>(debugLabel: 'support');
 final _shellNavigatorProfileKey = GlobalKey<NavigatorState>(debugLabel: 'profile');
 
+// Helper for Smooth Page Transitions
+Page<dynamic> _smoothPageTransition({required Widget child, required GoRouterState state}) {
+  return CustomTransitionPage(
+    key: state.pageKey,
+    child: child,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return FadeTransition(
+        opacity: CurveTween(curve: Curves.easeInCubic).animate(animation),
+        child: ScaleTransition(
+          scale: Tween<double>(begin: 0.98, end: 1.0).animate(
+            CurvedAnimation(parent: animation, curve: Curves.easeOutCubic),
+          ),
+          child: child,
+        ),
+      );
+    },
+  );
+}
+
 // Global Router Configuration
 final _router = GoRouter(
   initialLocation: '/splash',
@@ -73,32 +93,32 @@ final _router = GoRouter(
     GoRoute(
       path: '/splash',
       parentNavigatorKey: _rootNavigatorKey,
-      builder: (context, state) => const SplashScreen(),
+      pageBuilder: (context, state) => _smoothPageTransition(child: const SplashScreen(), state: state),
     ),
     GoRoute(
       path: '/onboarding',
       parentNavigatorKey: _rootNavigatorKey,
-      builder: (context, state) => const OnboardingScreen(),
+      pageBuilder: (context, state) => _smoothPageTransition(child: const OnboardingScreen(), state: state),
     ),
     GoRoute(
       path: '/login',
       parentNavigatorKey: _rootNavigatorKey,
-      builder: (context, state) => const LoginScreen(),
+      pageBuilder: (context, state) => _smoothPageTransition(child: const LoginScreen(), state: state),
     ),
     GoRoute(
       path: '/register',
       parentNavigatorKey: _rootNavigatorKey,
-      builder: (context, state) => const RegisterScreen(),
+      pageBuilder: (context, state) => _smoothPageTransition(child: const RegisterScreen(), state: state),
     ),
     GoRoute(
       path: '/otp',
       parentNavigatorKey: _rootNavigatorKey,
-      builder: (context, state) => const OtpScreen(),
+      pageBuilder: (context, state) => _smoothPageTransition(child: const OtpScreen(), state: state),
     ),
     GoRoute(
       path: '/forgot-password',
       parentNavigatorKey: _rootNavigatorKey,
-      builder: (context, state) => const ForgotPasswordScreen(),
+      pageBuilder: (context, state) => _smoothPageTransition(child: const ForgotPasswordScreen(), state: state),
     ),
 
     // 2. Main Application Shell
@@ -113,19 +133,28 @@ final _router = GoRouter(
           routes: [
             GoRoute(
               path: '/home',
-              builder: (context, state) => const DashboardScreen(),
+              pageBuilder: (context, state) => _smoothPageTransition(child: const DashboardScreen(), state: state),
               routes: [
                 GoRoute(
                   path: 'package-detail',
-                  builder: (context, state) => const PackageDetailScreen(),
+                  pageBuilder: (context, state) => _smoothPageTransition(child: const PackageDetailScreen(), state: state),
                 ),
                 GoRoute(
                   path: 'upgrade-package',
-                  builder: (context, state) => const UpgradePackageScreen(),
+                  pageBuilder: (context, state) => _smoothPageTransition(child: const UpgradePackageScreen(), state: state),
                 ),
                 GoRoute(
                   path: 'notifications',
-                  builder: (context, state) => const NotificationScreen(),
+                  pageBuilder: (context, state) => _smoothPageTransition(child: const NotificationScreen(), state: state),
+                  routes: [
+                    GoRoute(
+                      path: 'detail',
+                      pageBuilder: (context, state) {
+                        final data = state.extra as Map<String, dynamic>? ?? {};
+                        return _smoothPageTransition(child: NotificationDetailScreen(data: data), state: state);
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -137,18 +166,18 @@ final _router = GoRouter(
           routes: [
             GoRoute(
               path: '/info',
-              builder: (context, state) => const InformationScreen(),
+              pageBuilder: (context, state) => _smoothPageTransition(child: const InformationScreen(), state: state),
               routes: [
                 GoRoute(
                   path: 'detail',
-                  builder: (context, state) {
+                  pageBuilder: (context, state) {
                     final info = state.extra as Map<String, dynamic>? ?? {};
-                    return InformationDetailScreen(info: info);
+                    return _smoothPageTransition(child: InformationDetailScreen(info: info), state: state);
                   },
                 ),
                 GoRoute(
                   path: 'network-status',
-                  builder: (context, state) => const NetworkStatusScreen(),
+                  pageBuilder: (context, state) => _smoothPageTransition(child: const NetworkStatusScreen(), state: state),
                 ),
               ],
             ),
@@ -160,24 +189,24 @@ final _router = GoRouter(
           routes: [
             GoRoute(
               path: '/promo',
-              builder: (context, state) => const PromoScreen(),
+              pageBuilder: (context, state) => _smoothPageTransition(child: const PromoScreen(), state: state),
               routes: [
                 GoRoute(
                   path: 'detail',
-                  builder: (context, state) {
+                  pageBuilder: (context, state) {
                     final promoData = state.extra as Map<String, dynamic>? ?? {};
-                    return PromoDetailScreen(promo: promoData);
+                    return _smoothPageTransition(child: PromoDetailScreen(promo: promoData), state: state);
                   },
                 ),
                 GoRoute(
                   path: 'daily-checkin',
-                  builder: (context, state) => const DailyCheckinScreen(),
+                  pageBuilder: (context, state) => _smoothPageTransition(child: const DailyCheckinScreen(), state: state),
                 ),
                 GoRoute(
                   path: 'reward-detail',
-                  builder: (context, state) {
+                  pageBuilder: (context, state) {
                     final item = state.extra as Map<String, dynamic>? ?? {};
-                    return RewardDetailScreen(item: item);
+                    return _smoothPageTransition(child: RewardDetailScreen(item: item), state: state);
                   },
                 ),
               ],
@@ -190,34 +219,34 @@ final _router = GoRouter(
           routes: [
             GoRoute(
               path: '/support',
-              builder: (context, state) => const SupportScreen(),
+              pageBuilder: (context, state) => _smoothPageTransition(child: const SupportScreen(), state: state),
               routes: [
                 GoRoute(
                   path: 'report-issue',
-                  builder: (context, state) => const ReportIssueScreen(),
+                  pageBuilder: (context, state) => _smoothPageTransition(child: const ReportIssueScreen(), state: state),
                 ),
                 GoRoute(
                   path: 'ticket-tracking',
-                  builder: (context, state) => const TicketTrackingScreen(),
+                  pageBuilder: (context, state) => _smoothPageTransition(child: const TicketTrackingScreen(), state: state),
                 ),
                 GoRoute(
                   path: 'ticket-detail',
-                  builder: (context, state) {
+                  pageBuilder: (context, state) {
                     final ticket = state.extra as Map<String, dynamic>? ?? {};
-                    return TicketDetailScreen(ticket: ticket);
+                    return _smoothPageTransition(child: TicketDetailScreen(ticket: ticket), state: state);
                   },
                 ),
                 GoRoute(
                   path: 'chat-cs',
-                  builder: (context, state) => const ChatCsScreen(),
+                  pageBuilder: (context, state) => _smoothPageTransition(child: const ChatCsScreen(), state: state),
                 ),
                 GoRoute(
                   path: 'faq',
-                  builder: (context, state) => const FaqScreen(),
+                  pageBuilder: (context, state) => _smoothPageTransition(child: const FaqScreen(), state: state),
                 ),
                 GoRoute(
                   path: 'installation',
-                  builder: (context, state) => const InstallationRequestScreen(),
+                  pageBuilder: (context, state) => _smoothPageTransition(child: const InstallationRequestScreen(), state: state),
                 ),
               ],
             ),
@@ -229,27 +258,27 @@ final _router = GoRouter(
           routes: [
             GoRoute(
               path: '/profile',
-              builder: (context, state) => const ProfileScreen(),
+              pageBuilder: (context, state) => _smoothPageTransition(child: const ProfileScreen(), state: state),
               routes: [
                 GoRoute(
                   path: 'edit-profile',
-                  builder: (context, state) => const EditProfileScreen(),
+                  pageBuilder: (context, state) => _smoothPageTransition(child: const EditProfileScreen(), state: state),
                 ),
                 GoRoute(
                   path: 'security',
-                  builder: (context, state) => const SecurityScreen(),
+                  pageBuilder: (context, state) => _smoothPageTransition(child: const SecurityScreen(), state: state),
                 ),
                 GoRoute(
                   path: '2fa',
-                  builder: (context, state) => const SecurityScreen(),
+                  pageBuilder: (context, state) => _smoothPageTransition(child: const SecurityScreen(), state: state),
                 ),
                 GoRoute(
                   path: 'platinum-benefits',
-                  builder: (context, state) => const PlatinumBenefitsScreen(),
+                  pageBuilder: (context, state) => _smoothPageTransition(child: const PlatinumBenefitsScreen(), state: state),
                 ),
                 GoRoute(
                   path: 'change-password',
-                  builder: (context, state) => const ChangePasswordScreen(),
+                  pageBuilder: (context, state) => _smoothPageTransition(child: const ChangePasswordScreen(), state: state),
                 ),
                 GoRoute(
                   path: 'app-settings',
@@ -365,8 +394,8 @@ class ScaffoldWithBottomNavBar extends StatelessWidget {
       onTap: () => _onTap(index),
       behavior: HitTestBehavior.opaque,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 400),
-        curve: Curves.elasticOut,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeOutCubic,
         padding: EdgeInsets.symmetric(
           horizontal: isSelected ? 16 : 12,
           vertical: 10,
@@ -397,8 +426,7 @@ class ScaffoldWithBottomNavBar extends StatelessWidget {
               color: isSelected ? Colors.white : Colors.grey.shade400,
               size: 24,
             ).animate(target: isSelected ? 1 : 0)
-             .scale(begin: const Offset(1, 1), end: const Offset(1.1, 1.1), duration: 200.ms)
-             .shimmer(duration: 1200.ms, color: Colors.white.withValues(alpha: 0.3)),
+             .scale(begin: const Offset(1, 1), end: const Offset(1.05, 1.05), duration: 200.ms),
             if (isSelected) ...[
               const SizedBox(width: 8),
               Text(
@@ -409,7 +437,7 @@ class ScaffoldWithBottomNavBar extends StatelessWidget {
                   fontSize: 12,
                   letterSpacing: 0.5,
                 ),
-              ).animate().fadeIn(duration: 200.ms).slideX(begin: 0.2, end: 0),
+              ).animate().fadeIn(duration: 250.ms),
             ]
           ],
         ),

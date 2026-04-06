@@ -261,7 +261,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           ),
         ),
       ],
-    );
+    ).animate().fadeIn(duration: 300.ms, delay: 100.ms).slideY(begin: 0.05, curve: Curves.easeOutQuad);
   }
 
   Widget _buildStatusSection() {
@@ -313,7 +313,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 ],
               ),
             ),
-          ),
+          ).animate().fadeIn(duration: 300.ms, delay: 200.ms).slideY(begin: 0.05, curve: Curves.easeOutQuad),
         ],
       ),
     );

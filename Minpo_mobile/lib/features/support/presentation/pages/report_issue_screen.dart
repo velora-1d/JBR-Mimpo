@@ -1,7 +1,9 @@
 import 'dart:ui';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
 import 'package:jbr_mimpo/core/utils/app_feedback.dart';
@@ -18,6 +20,8 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
   String? _selectedIssue;
   final TextEditingController _descriptionController = TextEditingController();
   bool _isSubmitting = false;
+  XFile? _imageFile;
+  final ImagePicker _picker = ImagePicker();
 
   final List<String> _issueTypes = [
     'Koneksi Terputus Total',
@@ -48,6 +52,22 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
     
     setState(() => _isSubmitting = false);
     _showSuccessDialog();
+  }
+
+  Future<void> _pickImage() async {
+    try {
+      final XFile? image = await _picker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 70,
+      );
+      if (image != null) {
+        setState(() => _imageFile = image);
+      }
+    } catch (e) {
+      if (mounted) {
+        AppFeedback.error(context, 'Gagal mengambil gambar: $e');
+      }
+    }
   }
 
   void _showSuccessDialog() {
@@ -123,44 +143,47 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
       backgroundColor: AppColors.bgLight,
       body: Stack(
         children: [
-          CustomScrollView(
-            physics: const BouncingScrollPhysics(),
-            slivers: [
-              _buildSliverHeader(),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildStepIndicator(),
-                      const SizedBox(height: 40),
-                      
-                      _buildHeaderSection(),
-                      const SizedBox(height: 40),
-
-                      _buildSectionTitle('Detail Gangguan', Icons.error_outline_rounded),
-                      const SizedBox(height: 16),
-                      _buildIssueDropdown(),
-                      const SizedBox(height: 24),
-
-                      _buildSectionTitle('Deskripsi Masalah', Icons.edit_note_rounded),
-                      const SizedBox(height: 16),
-                      _buildDescriptionField(),
-                      const SizedBox(height: 32),
-
-                      _buildEvidenceSection(),
-                      const SizedBox(height: 32),
-
-                      _buildInfoBanner(),
-                      const SizedBox(height: 140), // Space for sticky button
-                    ],
+          RefreshIndicator(
+            onRefresh: () async => await Future.delayed(2.seconds),
+            color: AppColors.primary,
+            child: CustomScrollView(
+              physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+              slivers: [
+                _buildSliverHeader(),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildStepIndicator(),
+                        const SizedBox(height: 40),
+                        
+                        _buildHeaderSection(),
+                        const SizedBox(height: 40),
+  
+                        _buildSectionTitle('Detail Gangguan', Icons.error_outline_rounded),
+                        const SizedBox(height: 16),
+                        _buildIssueDropdown(),
+                        const SizedBox(height: 24),
+  
+                        _buildSectionTitle('Deskripsi Masalah', Icons.edit_note_rounded),
+                        const SizedBox(height: 16),
+                        _buildDescriptionField(),
+                        const SizedBox(height: 32),
+  
+                        _buildEvidenceSection(),
+                        const SizedBox(height: 32),
+  
+                        _buildInfoBanner(),
+                        const SizedBox(height: 140), // Space for sticky button
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-
           _buildStickyButton(),
           if (_isSubmitting)
             _buildLoadingOverlay(),
@@ -241,7 +264,7 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
           Text('Informasi Detail', style: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.primary)),
         ],
       ),
-    ).animate().fadeIn().slideY(begin: 0.1);
+    ).animate().fadeIn(duration: 300.ms).slideY(begin: 0.05, curve: Curves.easeOutQuad);
   }
 
   Widget _buildStepCircle(String label, {bool isCompleted = false, bool isActive = false}) {
@@ -275,7 +298,7 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
           style: GoogleFonts.dmSans(fontSize: 14, color: AppColors.textSecondary, height: 1.5),
         ),
       ],
-    ).animate().fadeIn(delay: 200.ms);
+    ).animate().fadeIn(duration: 300.ms, delay: 100.ms).slideY(begin: 0.05, curve: Curves.easeOutQuad);
   }
 
   Widget _buildSectionTitle(String title, IconData icon) {
@@ -368,24 +391,39 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
   }
 
   Widget _buildUploadCard() {
-    return Container(
-      height: 140,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.primary.withValues(alpha: 0.1), style: BorderStyle.solid),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(color: AppColors.primary.withValues(alpha: 0.05), shape: BoxShape.circle),
-            child: const Icon(Icons.add_a_photo_rounded, color: AppColors.primary, size: 24),
-          ),
-          const SizedBox(height: 12),
-          Text('Ambil Foto', style: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.bold)),
-        ],
+    return GestureDetector(
+      onTap: _pickImage,
+      child: Container(
+        height: 140,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: AppColors.primary.withValues(alpha: 0.1), style: BorderStyle.solid),
+          image: _imageFile != null 
+            ? DecorationImage(image: FileImage(File(_imageFile!.path)), fit: BoxFit.cover)
+            : null,
+        ),
+        child: _imageFile != null
+          ? Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(24),
+                color: Colors.black.withValues(alpha: 0.3),
+              ),
+              child: const Center(child: Icon(Icons.edit_rounded, color: Colors.white, size: 28)),
+            )
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(color: AppColors.primary.withValues(alpha: 0.05), shape: BoxShape.circle),
+                  child: const Icon(Icons.add_a_photo_rounded, color: AppColors.primary, size: 24),
+                ),
+                const SizedBox(height: 12),
+                Text('Ambil Foto', style: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.bold)),
+              ],
+            ),
       ),
     );
   }

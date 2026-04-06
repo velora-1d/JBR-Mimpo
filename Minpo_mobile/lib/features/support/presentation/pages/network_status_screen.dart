@@ -12,8 +12,11 @@ class NetworkStatusScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.bgLight,
       body: SafeArea(
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
+        child: RefreshIndicator(
+          onRefresh: () async => await Future.delayed(const Duration(seconds: 1)),
+          color: AppColors.primary,
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
           child: Column(
             children: [
               // 1. App Bar
@@ -108,14 +111,15 @@ class NetworkStatusScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-              ).animate().fadeIn(delay: 600.ms),
+              ).animate().fadeIn(duration: 300.ms),
 
               const SizedBox(height: 40),
             ],
           ),
         ),
       ),
-    );
+    ),
+   );
   }
 
   Widget _buildAppBar(BuildContext context) {
@@ -182,7 +186,7 @@ class NetworkStatusScreen extends StatelessWidget {
           ),
         ],
       ),
-    ).animate().fadeIn().slideX(begin: -0.1);
+    ).animate().fadeIn(duration: 300.ms).slideX(begin: -0.05);
   }
 
   Widget _buildOverallStatus() {
@@ -243,7 +247,7 @@ class NetworkStatusScreen extends StatelessWidget {
           ],
         ),
       ),
-    ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.1);
+    ).animate().fadeIn(duration: 300.ms).slideY(begin: 0.05);
   }
 
   Widget _buildAreaCard({
@@ -380,7 +384,7 @@ class NetworkStatusScreen extends StatelessWidget {
           ],
         ],
       ),
-    ).animate().fadeIn(delay: 300.ms).slideX(begin: 0.05);
+    ).animate().fadeIn(duration: 300.ms).slideX(begin: 0.03);
   }
 
   Widget _buildStatChip(IconData icon, String label, String value, Color color) {

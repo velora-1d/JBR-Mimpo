@@ -47,154 +47,158 @@ class _FaqScreenState extends State<FaqScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgLight,
-      body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          // 1. Custom Header with Search
-          SliverAppBar(
-            expandedHeight: 180,
-            floating: false,
-            pinned: true,
-            backgroundColor: AppColors.bgLight,
-            elevation: 0,
-            leading: IconButton(
-              onPressed: () => context.pop(),
-              icon: const Icon(Icons.arrow_back_rounded, color: AppColors.primary),
-            ),
-            flexibleSpace: FlexibleSpaceBar(
-              background: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 60, 20, 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Pusat Bantuan',
-                      style: GoogleFonts.sora(fontSize: 28, fontWeight: FontWeight.w800, color: AppColors.textPrimary),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      'Temukan jawaban cepat untuk kendala internet Anda.',
-                      style: GoogleFonts.dmSans(fontSize: 13, color: AppColors.textSecondary),
-                    ),
-                  ],
-                ),
+      body: RefreshIndicator(
+        onRefresh: () async => await Future.delayed(const Duration(seconds: 1)),
+        color: AppColors.primary,
+        child: CustomScrollView(
+          physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+          slivers: [
+            // 1. Custom Header with Search
+            SliverAppBar(
+              expandedHeight: 180,
+              floating: false,
+              pinned: true,
+              backgroundColor: AppColors.bgLight,
+              elevation: 0,
+              leading: IconButton(
+                onPressed: () => context.pop(),
+                icon: const Icon(Icons.arrow_back_rounded, color: AppColors.primary),
               ),
-            ),
-          ),
-
-          // 2. Ultra Premium Search Bar (Modern Solid)
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.primary.withValues(alpha: 0.08),
-                    blurRadius: 30,
-                    offset: const Offset(0, 12),
-                  ),
-                ],
-              ),
-              child: TextField(
-                style: GoogleFonts.dmSans(fontSize: 15, color: AppColors.textPrimary, fontWeight: FontWeight.w600),
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  hintText: 'Cari solusi...',
-                  hintStyle: GoogleFonts.dmSans(color: Colors.grey.withValues(alpha: 0.4), fontSize: 14),
-                  prefixIcon: const Icon(Icons.search_rounded, color: AppColors.primary, size: 22),
-                  suffixIcon: Container(
-                    margin: const EdgeInsets.all(10),
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      color: AppColors.primary.withValues(alpha: 0.05),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Icon(Icons.tune_rounded, color: AppColors.primary, size: 18),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(22),
-                    borderSide: BorderSide(color: AppColors.primary.withValues(alpha: 0.05), width: 1.5),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(22),
-                    borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
-                  ),
-                ),
-              ),
-            ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.1, end: 0, curve: Curves.easeOutQuad),
-          ),
-        ),
-
-          // 3. Categories
-          SliverToBoxAdapter(
-            child: Container(
-              height: 45,
-              margin: const EdgeInsets.symmetric(vertical: 20),
-              child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                scrollDirection: Axis.horizontal,
-                itemCount: _categories.length,
-                itemBuilder: (context, index) {
-                  final cat = _categories[index];
-                  final isSelected = _selectedCategory == cat;
-                  return GestureDetector(
-                    onTap: () => setState(() => _selectedCategory = cat),
-                    child: Container(
-                      margin: const EdgeInsets.only(right: 12),
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      decoration: BoxDecoration(
-                        color: isSelected ? AppColors.primary : Colors.white,
-                        borderRadius: BorderRadius.circular(25),
-                        boxShadow: isSelected 
-                          ? [BoxShadow(color: AppColors.primary.withValues(alpha: 0.2), blurRadius: 10, offset: const Offset(0, 4))]
-                          : null,
+              flexibleSpace: FlexibleSpaceBar(
+                background: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 60, 20, 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        'Pusat Bantuan',
+                        style: GoogleFonts.sora(fontSize: 28, fontWeight: FontWeight.w800, color: AppColors.textPrimary),
                       ),
-                      child: Center(
-                        child: Text(
-                          cat,
-                          style: GoogleFonts.sora(
-                            fontSize: 13, 
-                            fontWeight: FontWeight.bold, 
-                            color: isSelected ? Colors.white : AppColors.textSecondary
+                      const SizedBox(height: 4),
+                      Text(
+                        'Temukan jawaban cepat untuk kendala internet Anda.',
+                        style: GoogleFonts.dmSans(fontSize: 13, color: AppColors.textSecondary),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            // 2. Ultra Premium Search Bar (Modern Solid)
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.primary.withValues(alpha: 0.08),
+                        blurRadius: 30,
+                        offset: const Offset(0, 12),
+                      ),
+                    ],
+                  ),
+                  child: TextField(
+                    style: GoogleFonts.dmSans(fontSize: 15, color: AppColors.textPrimary, fontWeight: FontWeight.w600),
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      hintText: 'Cari solusi...',
+                      hintStyle: GoogleFonts.dmSans(color: Colors.grey.withValues(alpha: 0.4), fontSize: 14),
+                      prefixIcon: const Icon(Icons.search_rounded, color: AppColors.primary, size: 22),
+                      suffixIcon: Container(
+                        margin: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                          color: AppColors.primary.withValues(alpha: 0.05),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Icon(Icons.tune_rounded, color: AppColors.primary, size: 18),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(22),
+                        borderSide: BorderSide(color: AppColors.primary.withValues(alpha: 0.05), width: 1.5),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(22),
+                        borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+                      ),
+                    ),
+                  ),
+                ).animate().fadeIn(duration: 300.ms).slideY(begin: 0.05, end: 0, curve: Curves.easeOutQuad),
+              ),
+            ),
+
+            // 3. Categories
+            SliverToBoxAdapter(
+              child: Container(
+                height: 45,
+                margin: const EdgeInsets.symmetric(vertical: 20),
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: _categories.length,
+                  itemBuilder: (context, index) {
+                    final cat = _categories[index];
+                    final isSelected = _selectedCategory == cat;
+                    return GestureDetector(
+                      onTap: () => setState(() => _selectedCategory = cat),
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        decoration: BoxDecoration(
+                          color: isSelected ? AppColors.primary : Colors.white,
+                          borderRadius: BorderRadius.circular(25),
+                          boxShadow: isSelected 
+                            ? [BoxShadow(color: AppColors.primary.withValues(alpha: 0.2), blurRadius: 10, offset: const Offset(0, 4))]
+                            : null,
+                        ),
+                        child: Center(
+                          child: Text(
+                            cat,
+                            style: GoogleFonts.sora(
+                              fontSize: 13, 
+                              fontWeight: FontWeight.bold, 
+                              color: isSelected ? Colors.white : AppColors.textSecondary
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  );
-                },
-              ),
-            ).animate().fadeIn(delay: 300.ms),
-          ),
+                    );
+                  },
+                ),
+              ).animate().fadeIn(duration: 300.ms),
+            ),
 
-          // 4. FAQ List
-          SliverPadding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-            sliver: SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final faq = _faqData[index];
-                  if (_selectedCategory != 'Semua' && faq['category'] != _selectedCategory) {
-                    return const SizedBox.shrink();
-                  }
-                  return _buildFaqItem(faq);
-                },
-                childCount: _faqData.length,
+            // 4. FAQ List
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+              sliver: SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    final faq = _faqData[index];
+                    if (_selectedCategory != 'Semua' && faq['category'] != _selectedCategory) {
+                      return const SizedBox.shrink();
+                    }
+                    return _buildFaqItem(faq);
+                  },
+                  childCount: _faqData.length,
+                ),
               ),
             ),
-          ),
 
-          // 5. Help Banner
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 100),
-              child: _buildHelpBanner(),
+            // 5. Help Banner
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 100),
+                child: _buildHelpBanner(),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -260,7 +264,7 @@ class _FaqScreenState extends State<FaqScreen> {
           ],
         ),
       ),
-    ).animate().fadeIn(delay: 400.ms).slideX(begin: 0.1);
+    ).animate().fadeIn(duration: 300.ms, delay: 100.ms).slideX(begin: 0.05);
   }
 
   Widget _buildHelpBanner() {
@@ -320,6 +324,6 @@ class _FaqScreenState extends State<FaqScreen> {
           ),
         ],
       ),
-    ).animate().fadeIn(delay: 600.ms);
+    ).animate().fadeIn(duration: 300.ms, delay: 200.ms);
   }
 }

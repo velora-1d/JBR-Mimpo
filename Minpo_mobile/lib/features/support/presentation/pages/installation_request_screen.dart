@@ -135,7 +135,7 @@ class _InstallationRequestScreenState extends State<InstallationRequestScreen> {
           ),
         ],
       ),
-    ).animate().fadeIn().slideY(begin: 0.2);
+    ).animate().fadeIn(duration: 300.ms).slideY(begin: 0.05, curve: Curves.easeOutQuad);
   }
 
   Widget _buildFormSection() {
@@ -172,7 +172,7 @@ class _InstallationRequestScreenState extends State<InstallationRequestScreen> {
           validator: (val) => val == null || val.isEmpty ? 'Alamat wajib diisi' : null,
         ),
       ],
-    ).animate().fadeIn(delay: 200.ms);
+    ).animate().fadeIn(duration: 300.ms, delay: 100.ms).slideY(begin: 0.05, curve: Curves.easeOutQuad);
   }
 
   Widget _buildSectionTitle(String title) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -159,7 +160,7 @@ class _NotificationScreenState extends State<NotificationScreen> with SingleTick
            .moveY(begin: 0, end: 10, duration: 2.seconds, curve: Curves.easeInOut),
         ],
       ),
-    ).animate().fadeIn().slideX(begin: -0.1);
+    ).animate().fadeIn(duration: 300.ms).slideX(begin: -0.05);
   }
 
   Widget _buildTabSwitcher() {
@@ -191,41 +192,45 @@ class _NotificationScreenState extends State<NotificationScreen> with SingleTick
           Tab(text: 'Pengaturan'),
         ],
       ),
-    ).animate().fadeIn(delay: 200.ms);
+    ).animate().fadeIn(duration: 300.ms);
   }
 
   Widget _buildHistoryTab() {
-    return ListView(
-      physics: const BouncingScrollPhysics(),
-      padding: const EdgeInsets.all(20),
-      children: [
-        _buildNotificationCard(
-          icon: Icons.payments_rounded,
-          title: 'Pembayaran Berhasil',
-          time: '09:41',
-          category: 'BILLING',
-          categoryColor: AppColors.primary,
-          content: 'Tagihan bulan Oktober sebesar Rp450.000 telah terverifikasi.',
-        ),
-        _buildNotificationCard(
-          icon: Icons.card_giftcard_rounded,
-          title: 'Promo Akhir Pekan',
-          time: 'Yesterday',
-          category: 'PROMO',
-          categoryColor: Colors.orange,
-          content: 'Dapatkan diskon 20% untuk upgrade speed ke 100Mbps khusus hari ini!',
-        ),
-        _buildNotificationCard(
-          icon: Icons.build_circle_rounded,
-          title: 'Pemeliharaan Jaringan',
-          time: '2d ago',
-          category: 'MAINTENANCE',
-          categoryColor: const Color(0xFF005ac2),
-          content: 'Informasi pemeliharaan rutin di wilayah Jakarta Selatan pada pukul 01:00 WIB.',
-          isMaintenance: true,
-        ),
-      ],
-    ).animate().fadeIn(delay: 400.ms);
+    return RefreshIndicator(
+      onRefresh: () async => await Future.delayed(const Duration(seconds: 1)),
+      color: AppColors.primary,
+      child: ListView(
+        physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+        padding: const EdgeInsets.all(20),
+        children: [
+          _buildNotificationCard(
+            icon: Icons.payments_rounded,
+            title: 'Pembayaran Berhasil',
+            time: '09:41',
+            category: 'BILLING',
+            categoryColor: AppColors.primary,
+            content: 'Tagihan bulan Oktober sebesar Rp450.000 telah terverifikasi.',
+          ),
+          _buildNotificationCard(
+            icon: Icons.card_giftcard_rounded,
+            title: 'Promo Akhir Pekan',
+            time: 'Yesterday',
+            category: 'PROMO',
+            categoryColor: Colors.orange,
+            content: 'Dapatkan diskon 20% untuk upgrade speed ke 100Mbps khusus hari ini!',
+          ),
+          _buildNotificationCard(
+            icon: Icons.build_circle_rounded,
+            title: 'Pemeliharaan Jaringan',
+            time: '2d ago',
+            category: 'MAINTENANCE',
+            categoryColor: const Color(0xFF005ac2),
+            content: 'Informasi pemeliharaan rutin di wilayah Jakarta Selatan pada pukul 01:00 WIB.',
+            isMaintenance: true,
+          ),
+        ],
+      ),
+    ).animate().fadeIn(duration: 300.ms);
   }
 
   Widget _buildNotificationCard({
@@ -256,7 +261,17 @@ class _NotificationScreenState extends State<NotificationScreen> with SingleTick
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            context.push('/home/notifications/detail', extra: {
+              'icon': icon,
+              'title': title,
+              'time': time,
+              'category': category,
+              'categoryColor': categoryColor,
+              'content': content,
+              'isMaintenance': isMaintenance,
+            });
+          },
           borderRadius: BorderRadius.circular(24),
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -404,7 +419,7 @@ class _NotificationScreenState extends State<NotificationScreen> with SingleTick
           ),
         ),
       ],
-    ).animate().fadeIn(delay: 400.ms);
+    ).animate().fadeIn(duration: 300.ms);
   }
 
   Widget _buildSettingItem({

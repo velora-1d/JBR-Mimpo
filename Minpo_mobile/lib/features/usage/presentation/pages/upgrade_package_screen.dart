@@ -270,7 +270,7 @@ class _UpgradePackageScreenState extends State<UpgradePackageScreen> {
           ),
         ],
       ),
-    ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.2);
+    ).animate().fadeIn(duration: 300.ms).slideY(begin: 0.05);
   }
 
   void _showConfirmation() {
@@ -345,7 +345,7 @@ class _UpgradePackageScreenState extends State<UpgradePackageScreen> {
             ],
           ),
         ),
-      ).animate().scale(curve: Curves.easeOutBack),
+      ).animate().fadeIn(duration: 200.ms).scale(begin: const Offset(0.95, 0.95), curve: Curves.easeOutCubic),
     );
   }
 }

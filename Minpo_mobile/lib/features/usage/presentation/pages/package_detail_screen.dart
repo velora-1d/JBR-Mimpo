@@ -31,10 +31,13 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgLight,
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
+      body: RefreshIndicator(
+        onRefresh: _loadData,
+        color: AppColors.primary,
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+          child: Column(
+            children: [
             // 1. Custom Top Bar
             _buildAppBar(context),
             
@@ -64,6 +67,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
           ],
         ),
       ),
+    ),
     );
   }
 
@@ -199,7 +203,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
           ),
         ],
       ),
-    ).animate().fadeIn().scale(curve: Curves.easeOutBack);
+    ).animate().fadeIn(duration: 300.ms).slideY(begin: 0.05, curve: Curves.easeOutQuad);
   }
 
   Widget _buildUsageGaugeGrid() {
@@ -225,7 +229,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
           ),
         ),
       ],
-    ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.1);
+    ).animate().fadeIn(duration: 300.ms, delay: 100.ms).slideY(begin: 0.05, curve: Curves.easeOutQuad);
   }
 
   Widget _buildGaugeCard({
@@ -310,7 +314,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
           _buildSpecRow('Tipe Router', 'ZTE F670L Dual Band', last: true),
         ],
       ),
-    ).animate().fadeIn(delay: 400.ms);
+    ).animate().fadeIn(duration: 300.ms, delay: 200.ms).slideY(begin: 0.05, curve: Curves.easeOutQuad);
   }
 
   Widget _buildSpecRow(String label, String value, {bool last = false}) {
@@ -379,7 +383,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
           ],
         ),
       ],
-    ).animate().fadeIn(delay: 600.ms);
+    ).animate().fadeIn(duration: 300.ms, delay: 300.ms).slideY(begin: 0.05, curve: Curves.easeOutQuad);
   }
 }
 

@@ -1,11 +1,12 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:jbr_mimpo/core/utils/app_feedback.dart';
 
-// Assuming AppColors is in core theme, we'll try to find its actual import later
-// Using raw colors matching project to be safe.
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
 
@@ -15,8 +16,10 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController(text: 'Anjay Mabar');
+  final _nameController = TextEditingController(text: 'Ahmad Syarif');
   String _selectedArea = 'Jakarta Selatan';
+  File? _imageFile;
+  final ImagePicker _picker = ImagePicker();
 
   final List<String> _areas = [
     'Jakarta Selatan',
@@ -33,6 +36,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   void dispose() {
     _nameController.dispose();
     super.dispose();
+  }
+
+  Future<void> _pickImage() async {
+    try {
+      final XFile? pickedFile = await _picker.pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 800,
+        maxHeight: 800,
+        imageQuality: 85,
+      );
+      if (pickedFile != null) {
+        setState(() => _imageFile = File(pickedFile.path));
+        if (mounted) AppFeedback.success(context, 'Foto berhasil dipilih');
+      }
+    } catch (e) {
+      if (mounted) AppFeedback.error(context, 'Gagal mengambil gambar: $e');
+    }
   }
 
   void _saveProfile() {
@@ -64,23 +84,30 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Avatar Section
-              Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  const CircleAvatar(
-                    radius: 50,
-                    backgroundImage: CachedNetworkImageProvider('https://i.pravatar.cc/150?img=11'),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: const BoxDecoration(
-                      color: primaryColor,
-                      shape: BoxShape.circle,
+              GestureDetector(
+                onTap: _pickImage,
+                child: Stack(
+                  alignment: Alignment.bottomRight,
+                  children: [
+                    CircleAvatar(
+                      radius: 50,
+                      backgroundColor: Colors.grey.shade200,
+                      backgroundImage: _imageFile != null 
+                        ? FileImage(_imageFile!) as ImageProvider
+                        : const CachedNetworkImageProvider('https://i.pravatar.cc/150?u=ahmad'),
                     ),
-                    child: const Icon(Icons.camera_alt_rounded, color: Colors.white, size: 20),
-                  ),
-                ],
-              ),
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: primaryColor,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.white, width: 2),
+                      ),
+                      child: const Icon(Icons.camera_alt_rounded, color: Colors.white, size: 16),
+                    ),
+                  ],
+                ),
+              ).animate().fadeIn(duration: 300.ms).scale(duration: 300.ms, curve: Curves.easeOutCubic),
               const SizedBox(height: 32),
 
               // Name Input
@@ -115,7 +142,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     },
                   ),
                 ],
-              ),
+              ).animate().fadeIn(duration: 300.ms, delay: 100.ms).slideY(begin: 0.05),
               const SizedBox(height: 24),
 
               // Area Dropdown
@@ -156,7 +183,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     },
                   ),
                 ],
-              ),
+              ).animate().fadeIn(duration: 300.ms, delay: 200.ms).slideY(begin: 0.1),
               const SizedBox(height: 48),
 
               // Save Button
@@ -173,7 +200,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   'Simpan Perubahan',
                   style: GoogleFonts.sora(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-              ),
+              ).animate().fadeIn(duration: 300.ms, delay: 300.ms),
             ],
           ),
         ),

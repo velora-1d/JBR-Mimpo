@@ -47,7 +47,7 @@ class _InformationScreenState extends ConsumerState<InformationScreen> {
                     itemCount: filteredList.length,
                     itemBuilder: (context, index) {
                       final info = filteredList[index];
-                      return _buildInfoCard(info);
+                      return _buildInfoCard(info).animate().fadeIn(duration: 300.ms, delay: (index * 100).ms).slideY(begin: 0.05, curve: Curves.easeOutQuad);
                     },
                   ),
                 );

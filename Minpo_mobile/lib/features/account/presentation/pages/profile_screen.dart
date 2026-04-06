@@ -116,7 +116,7 @@ class ProfileScreen extends ConsumerWidget {
                         BoxShadow(color: Colors.black.withValues(alpha: 0.1), blurRadius: 20)
                       ],
                     ),
-                  ).animate().scale(duration: 500.ms),
+                  ).animate().fadeIn(duration: 300.ms).scale(duration: 300.ms, curve: Curves.easeOutCubic),
                   const SizedBox(width: 20),
                   Column(
                     mainAxisSize: MainAxisSize.min,

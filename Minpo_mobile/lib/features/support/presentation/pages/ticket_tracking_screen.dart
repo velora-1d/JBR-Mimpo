@@ -85,7 +85,7 @@ class _TicketTrackingScreenState extends State<TicketTrackingScreen> with Single
         backgroundColor: AppColors.primary,
         icon: const Icon(Icons.add_rounded, color: Colors.white),
         label: Text('Buat Tiket', style: GoogleFonts.sora(fontWeight: FontWeight.bold, color: Colors.white)),
-      ).animate().scale(delay: 500.ms),
+      ).animate().scale(delay: 200.ms, duration: 400.ms, curve: Curves.easeOutBack),
     );
   }
 
@@ -95,27 +95,36 @@ class _TicketTrackingScreenState extends State<TicketTrackingScreen> with Single
       return t['status'] == 'Resolved';
     }).toList();
 
-    if (filteredTickets.isEmpty) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.confirmation_num_outlined, size: 80, color: Colors.grey.withValues(alpha: 0.2)),
-            const SizedBox(height: 16),
-            Text('Tidak ada tiket ${isActive ? 'aktif' : 'riwayat'}', style: GoogleFonts.dmSans(color: Colors.grey)),
-          ],
-        ),
-      );
-    }
-
-    return ListView.separated(
-      padding: const EdgeInsets.all(24),
-      itemCount: filteredTickets.length,
-      separatorBuilder: (context, index) => const SizedBox(height: 16),
-      itemBuilder: (context, index) {
-        final ticket = filteredTickets[index];
-        return _buildTicketCard(ticket);
-      },
+    return RefreshIndicator(
+      onRefresh: () async => await Future.delayed(const Duration(seconds: 1)),
+      color: AppColors.primary,
+      child: filteredTickets.isEmpty
+          ? SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.7,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.confirmation_num_outlined, size: 80, color: Colors.grey.withValues(alpha: 0.2)),
+                      const SizedBox(height: 16),
+                      Text('Tidak ada tiket ${isActive ? 'aktif' : 'riwayat'}', style: GoogleFonts.dmSans(color: Colors.grey)),
+                    ],
+                  ),
+                ),
+              ),
+            )
+          : ListView.separated(
+              physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+              padding: const EdgeInsets.all(24),
+              itemCount: filteredTickets.length,
+              separatorBuilder: (context, index) => const SizedBox(height: 16),
+              itemBuilder: (context, index) {
+                final ticket = filteredTickets[index];
+                return _buildTicketCard(ticket).animate().fadeIn(duration: 300.ms, delay: (index * 100).ms).slideY(begin: 0.05, curve: Curves.easeOutQuad);
+              },
+            ),
     );
   }
 

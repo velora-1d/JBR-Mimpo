@@ -208,7 +208,7 @@ class _SupportScreenState extends State<SupportScreen> {
           ),
         ],
       ),
-    ).animate().fadeIn().slideY(begin: 0.2);
+    ).animate().fadeIn(duration: 300.ms).slideY(begin: 0.05, curve: Curves.easeOutQuad);
   }
 
   Widget _buildBentoGrid() {
@@ -220,15 +220,15 @@ class _SupportScreenState extends State<SupportScreen> {
       crossAxisSpacing: 16,
       childAspectRatio: 1,
       children: [
-        _buildActionCard('Lapor Gangguan', 'Kendala teknis?', Icons.feedback_rounded, AppColors.primary, '/support/report-issue'),
-        _buildActionCard('Cek Jaringan', 'Status koneksi', Icons.sensors_rounded, Colors.blue, '/info/network-status'),
-        _buildActionCard('Live Chat CS', 'Tanya agen kami', Icons.chat_bubble_rounded, Colors.green, '/support/chat-cs'),
-        _buildActionCard('Instalasi', 'Pasang baru', Icons.add_business_rounded, Colors.purple, '/support/installation'),
+        _buildActionCard('Lapor Gangguan', 'Kendala teknis?', Icons.feedback_rounded, AppColors.primary, '/support/report-issue', 100),
+        _buildActionCard('Cek Jaringan', 'Status koneksi', Icons.sensors_rounded, Colors.blue, '/info/network-status', 200),
+        _buildActionCard('Live Chat CS', 'Tanya agen kami', Icons.chat_bubble_rounded, Colors.green, '/support/chat-cs', 300),
+        _buildActionCard('Instalasi', 'Pasang baru', Icons.add_business_rounded, Colors.purple, '/support/installation', 400),
       ],
     );
   }
 
-  Widget _buildActionCard(String title, String sub, IconData icon, Color color, String route) {
+  Widget _buildActionCard(String title, String sub, IconData icon, Color color, String route, int delay) {
     return GestureDetector(
       onTap: () => context.push(route),
       child: Container(
@@ -255,7 +255,7 @@ class _SupportScreenState extends State<SupportScreen> {
           ],
         ),
       ),
-    ).animate().fadeIn().scale(delay: 100.ms, duration: 400.ms, curve: Curves.easeOutBack);
+    ).animate().fadeIn(duration: 300.ms, delay: delay.ms).slideY(begin: 0.05, curve: Curves.easeOutQuad);
   }
 
   Widget _buildQuickContact() {

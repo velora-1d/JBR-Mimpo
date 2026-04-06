@@ -1,8 +1,11 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
+import 'package:jbr_mimpo/core/utils/app_feedback.dart';
 import 'package:go_router/go_router.dart';
 
 class ChatCsScreen extends StatefulWidget {
@@ -15,6 +18,7 @@ class ChatCsScreen extends StatefulWidget {
 class _ChatCsScreenState extends State<ChatCsScreen> {
   final TextEditingController _messageController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
+  final ImagePicker _picker = ImagePicker();
   bool _isAgentTyping = false;
 
   final List<Map<String, dynamic>> _messages = [
@@ -34,6 +38,33 @@ class _ChatCsScreenState extends State<ChatCsScreen> {
       'time': '09:42 AM',
     },
   ];
+
+  @override
+  void dispose() {
+    _messageController.dispose();
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _pickAttachment() async {
+    try {
+      final XFile? image = await _picker.pickImage(source: ImageSource.gallery, imageQuality: 70);
+      if (image != null && mounted) {
+        setState(() {
+          _messages.add({
+            'isMe': true,
+            'text': '[Gambar Terlampir]',
+            'imagePath': image.path,
+            'time': 'Just now',
+          });
+        });
+        _scrollToBottom();
+        AppFeedback.success(context, 'Gambar berhasil dilampirkan');
+      }
+    } catch (e) {
+      if (mounted) AppFeedback.error(context, 'Gagal memilih gambar');
+    }
+  }
 
   void _sendMessage() {
     if (_messageController.text.trim().isEmpty) return;
@@ -94,7 +125,7 @@ class _ChatCsScreenState extends State<ChatCsScreen> {
               children: [
                 const CircleAvatar(
                   radius: 18,
-                  backgroundImage: CachedNetworkImageProvider('https://lh3.googleusercontent.com/aida-public/AB6AXuBrAR_C7vUB5u6deg_FwTxbouUNa5SyCG7eeXn58veViH_LFvxbwz9MFSue6VXsDkfP5FGSq9flo7ZYpauKa0GzVwYSMH3RkH3OJ7MelMKN-Cd2-4oZKcnMkXVdLo0pi9GojBD1QRKtP-NoCOSaK6jB0xe31vI-sgMDJFTO3S40PvpuBb5yQtSTY11EbtihcyRaZymP8Z98UvhUieseAoN6hjfS9-jyJFVvKTmcrKf4zOnma51ihbg2tuRZpPF6G9hqy3G9CVuwk5l8'),
+                  backgroundImage: CachedNetworkImageProvider('https://i.pravatar.cc/150?u=minpo'),
                 ),
                 Positioned(
                   right: 0,
@@ -153,7 +184,7 @@ class _ChatCsScreenState extends State<ChatCsScreen> {
 
                 if (index <= _messages.length) {
                   final msg = _messages[index - 1]; // Fix index offset
-                  return _buildChatBubble(msg['isMe'], msg['text'], msg['time']);
+                  return _buildChatBubble(msg);
                 }
 
                 // After messages
@@ -162,11 +193,11 @@ class _ChatCsScreenState extends State<ChatCsScreen> {
                 }
 
                 if (!_isAgentTyping && index == _messages.length + 1) {
-                  return _buildQuickReplyChips();
+                   return _buildQuickReplyChips();
                 }
 
                 if (_isAgentTyping && index == _messages.length + 2) {
-                   return _buildQuickReplyChips();
+                    return _buildQuickReplyChips();
                 }
                 
                 return const SizedBox.shrink();
@@ -181,7 +212,12 @@ class _ChatCsScreenState extends State<ChatCsScreen> {
     );
   }
 
-  Widget _buildChatBubble(bool isMe, String text, String time) {
+  Widget _buildChatBubble(Map<String, dynamic> msg) {
+    final bool isMe = msg['isMe'] ?? false;
+    final String text = msg['text'] ?? '';
+    final String time = msg['time'] ?? '';
+    final String? imagePath = msg['imagePath'];
+
     return Align(
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
@@ -204,9 +240,21 @@ class _ChatCsScreenState extends State<ChatCsScreen> {
                   BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 10, offset: const Offset(0, 4)),
                 ],
               ),
-              child: Text(
-                text,
-                style: GoogleFonts.dmSans(fontSize: 14, color: isMe ? Colors.white : AppColors.textPrimary, height: 1.5),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (imagePath != null) ...[
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.file(File(imagePath), fit: BoxFit.cover),
+                    ),
+                    const SizedBox(height: 8),
+                  ],
+                  Text(
+                    text,
+                    style: GoogleFonts.dmSans(fontSize: 14, color: isMe ? Colors.white : AppColors.textPrimary, height: 1.5),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 6),
@@ -214,7 +262,7 @@ class _ChatCsScreenState extends State<ChatCsScreen> {
           ],
         ),
       ),
-    ).animate().fadeIn(duration: 300.ms).slideY(begin: 0.1);
+    ).animate().fadeIn(duration: 300.ms).slideY(begin: 0.05);
   }
 
   Widget _buildTypingIndicator() {
@@ -287,7 +335,7 @@ class _ChatCsScreenState extends State<ChatCsScreen> {
           );
         }).toList(),
       ),
-    ).animate().fadeIn(delay: 500.ms);
+    ).animate().fadeIn(duration: 300.ms);
   }
 
   Widget _buildInputBar() {
@@ -307,7 +355,7 @@ class _ChatCsScreenState extends State<ChatCsScreen> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.add_circle_outline_rounded, color: Colors.grey)),
+                  IconButton(onPressed: _pickAttachment, icon: const Icon(Icons.add_circle_outline_rounded, color: Colors.grey)),
                   Expanded(
                     child: TextField(
                       controller: _messageController,
@@ -341,7 +389,7 @@ class _ChatCsScreenState extends State<ChatCsScreen> {
               ),
               child: const Center(child: Icon(Icons.send_rounded, color: Colors.white, size: 20)),
             ),
-          ).animate(onPlay: (c) => c.repeat(reverse: true)).shimmer(duration: 3.seconds),
+          ).animate(onPlay: (c) => c.repeat(reverse: true, period: 5.seconds)).shimmer(duration: 3.seconds),
         ],
       ),
     );

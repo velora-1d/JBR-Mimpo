@@ -62,7 +62,7 @@ class _TicketDetailScreenState extends State<TicketDetailScreen> {
                 ],
               ),
               child: HorizontalStepper(currentStatus: _currentStatus),
-            ).animate().fadeIn().slideY(begin: 0.1),
+            ).animate().fadeIn(duration: 300.ms, delay: 100.ms).slideY(begin: 0.05, curve: Curves.easeOutQuad),
             const SizedBox(height: 32),
 
             // 3. Timeline Section
@@ -156,7 +156,7 @@ class _TicketDetailScreenState extends State<TicketDetailScreen> {
           ),
         ],
       ),
-    ).animate().fadeIn().slideY(begin: 0.1);
+    ).animate().fadeIn(duration: 300.ms).slideY(begin: 0.05, curve: Curves.easeOutQuad);
   }
 
   Widget _buildQuickAction(IconData icon, Color color) {
@@ -172,6 +172,7 @@ class _TicketDetailScreenState extends State<TicketDetailScreen> {
     return Column(
       children: [
         _buildTimelineStep(
+          index: 0,
           icon: Icons.check_rounded,
           title: 'Tiket Diterima',
           desc: 'Laporan Anda #TKT-8829 telah diverifikasi oleh sistem.',
@@ -179,6 +180,7 @@ class _TicketDetailScreenState extends State<TicketDetailScreen> {
           isCompleted: true,
         ),
         _buildTimelineStep(
+          index: 1,
           icon: Icons.check_rounded,
           title: 'Alokasi Teknisi',
           desc: 'Teknisi ahli telah ditugaskan untuk menangani kendala Anda.',
@@ -186,6 +188,7 @@ class _TicketDetailScreenState extends State<TicketDetailScreen> {
           isCompleted: true,
         ),
         _buildTimelineStep(
+          index: 2,
           icon: Icons.directions_car_rounded,
           title: 'Sedang Menuju Lokasi',
           desc: 'Budi sedang dalam perjalanan melalui Jl. Sudirman.',
@@ -193,12 +196,14 @@ class _TicketDetailScreenState extends State<TicketDetailScreen> {
           isActive: true,
         ),
         _buildTimelineStep(
+          index: 3,
           icon: Icons.build_rounded,
           title: 'Proses Perbaikan',
           desc: 'Estimasi pengerjaan memakan waktu sekitar 30-45 menit.',
           isPending: true,
         ),
         _buildTimelineStep(
+          index: 3,
           icon: Icons.verified_rounded,
           title: 'Selesai & Konfirmasi',
           desc: 'Verifikasi koneksi setelah perbaikan selesai dilakukan.',
@@ -210,6 +215,7 @@ class _TicketDetailScreenState extends State<TicketDetailScreen> {
   }
 
   Widget _buildTimelineStep({
+    required int index,
     required IconData icon,
     required String title,
     required String desc,
@@ -270,7 +276,7 @@ class _TicketDetailScreenState extends State<TicketDetailScreen> {
           ),
         ),
       ],
-    );
+    ).animate().fadeIn(duration: 300.ms, delay: (200 + index * 100).ms).slideY(begin: 0.05, curve: Curves.easeOutQuad);
   }
 
   Widget _buildRatingSection() {
@@ -357,6 +363,6 @@ class _TicketDetailScreenState extends State<TicketDetailScreen> {
           ),
         ],
       ),
-    ).animate().fadeIn(delay: 500.ms);
+    ).animate().fadeIn(duration: 300.ms, delay: 200.ms).slideY(begin: 0.05, curve: Curves.easeOutQuad);
   }
 }

@@ -148,7 +148,7 @@ class _PromoScreenState extends ConsumerState<PromoScreen>
                 ),
               ),
             ),
-          ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.1, end: 0, curve: Curves.easeOutQuad),
+          ).animate().fadeIn(duration: 300.ms).slideY(begin: 0.05, curve: Curves.easeOutQuad),
           const SizedBox(height: 20),
           TabBar(
             controller: _tabController,
@@ -194,7 +194,7 @@ class _PromoScreenState extends ConsumerState<PromoScreen>
         itemBuilder: (context, index) {
           if (index == promos.length) return const SizedBox(height: 80);
           final promo = promos[index];
-          return _buildPromoCard(promo: promo);
+          return _buildPromoCard(promo: promo).animate().fadeIn(duration: 300.ms, delay: (index * 100).ms).slideY(begin: 0.05, curve: Curves.easeOutQuad);
         },
       ),
       loading: () => ListView(
@@ -222,7 +222,7 @@ class _PromoScreenState extends ConsumerState<PromoScreen>
         _buildDailyCheckInCard(),
         const SizedBox(height: 80),
       ],
-    ).animate().fadeIn().slideY(begin: 0.05);
+    ).animate().fadeIn(duration: 300.ms).slideY(begin: 0.05, curve: Curves.easeOutQuad);
   }
 
   Widget _buildSaldoPoinCard() {
