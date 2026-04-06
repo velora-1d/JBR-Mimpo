@@ -78,6 +78,9 @@ class _DailyCheckinScreenState extends State<DailyCheckinScreen> {
                       _buildCalendarGrid(),
                       const SizedBox(height: 32),
                       _buildInfoReset(),
+                      const SizedBox(height: 48),
+                      _buildBottomAction(),
+                      const SizedBox(height: 120), // Extra space for persistent NavigationBar
                     ],
                   ),
                 ),
@@ -96,13 +99,6 @@ class _DailyCheckinScreenState extends State<DailyCheckinScreen> {
                     .callback(callback: (_) {}),
               ),
             ),
-
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: _buildBottomAction(),
-          ),
         ],
       ),
     );
@@ -369,33 +365,39 @@ class _DailyCheckinScreenState extends State<DailyCheckinScreen> {
 
   Widget _buildBottomAction() {
     return Container(
-      padding: const EdgeInsets.fromLTRB(24, 24, 24, 40),
-      decoration: BoxDecoration(
-        color: AppColors.bgLight.withValues(alpha: 0.8),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 40, offset: const Offset(0, -10)),
-        ],
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(24),
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: ElevatedButton(
-            onPressed: hasCheckedInToday ? null : _doCheckIn,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              disabledBackgroundColor: Colors.grey.shade200,
-              minimumSize: const Size(double.infinity, 64),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-              elevation: 0,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.primary.withValues(alpha: 0.2),
+                  blurRadius: 30,
+                  offset: const Offset(0, 15),
+                ),
+              ],
             ),
-            child: Text(
-              hasCheckedInToday ? 'ANDA SUDAH CHECK-IN' : 'AMBIL POIN HARI INI',
-              style: GoogleFonts.sora(
-                fontSize: 16, 
-                fontWeight: FontWeight.w900, 
-                letterSpacing: 1,
-                color: hasCheckedInToday ? Colors.grey : Colors.white,
+            child: ElevatedButton(
+              onPressed: hasCheckedInToday ? null : _doCheckIn,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                disabledBackgroundColor: Colors.grey.shade200,
+                minimumSize: const Size(double.infinity, 72),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                elevation: 0,
+              ),
+              child: Text(
+                hasCheckedInToday ? 'ANDA SUDAH CHECK-IN' : 'AMBIL POIN HARI INI',
+                style: GoogleFonts.sora(
+                  fontSize: 16, 
+                  fontWeight: FontWeight.w900, 
+                  letterSpacing: 1,
+                  color: hasCheckedInToday ? Colors.grey : Colors.white,
+                ),
               ),
             ),
           ),
