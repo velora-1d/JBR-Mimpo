@@ -5,6 +5,9 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
 import 'package:jbr_mimpo/core/theme/app_dimensions.dart';
+import 'package:jbr_mimpo/core/utils/app_feedback.dart';
+import 'package:jbr_mimpo/core/widgets/app_dialog.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PromoScreen extends StatefulWidget {
   const PromoScreen({super.key});
@@ -291,6 +294,7 @@ class _PromoScreenState extends State<PromoScreen>
               ElevatedButton(
                 onPressed: () {
                   HapticFeedback.lightImpact();
+                  AppFeedback.info(context, 'Fitur riwayat segera hadir');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white.withValues(alpha: 0.9),
@@ -316,6 +320,35 @@ class _PromoScreenState extends State<PromoScreen>
               ElevatedButton(
                 onPressed: () {
                   HapticFeedback.lightImpact();
+                  showModalBottomSheet(
+                    context: context,
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+                    builder: (context) => Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('Cara Dapat Poin', style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold)),
+                          const SizedBox(height: 16),
+                          ListTile(
+                            leading: const Icon(Icons.calendar_today, color: AppColors.primary),
+                            title: const Text('Daily Check-in'),
+                            subtitle: const Text('+10 Poin per hari'),
+                          ),
+                          ListTile(
+                            leading: const Icon(Icons.people, color: AppColors.primary),
+                            title: const Text('Undang Teman'),
+                            subtitle: const Text('+500 Poin per referal berhasil'),
+                          ),
+                          const SizedBox(height: 16),
+                          ElevatedButton(
+                            onPressed: () => context.pop(),
+                            child: const Text('Tutup'),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(
@@ -697,7 +730,18 @@ class _PromoScreenState extends State<PromoScreen>
           ),
           const SizedBox(height: 12),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+               AppDialog.showConfirmation(
+                 context: context,
+                 title: 'Konfirmasi',
+                 message: 'Tukar $points poin untuk $title?',
+                 confirmText: 'Tukar',
+                 icon: Icons.track_changes_rounded,
+                 onConfirm: () {
+                   AppFeedback.success(context, 'Berhasil ditukar!');
+                 },
+               );
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
               foregroundColor: Colors.white,
@@ -751,7 +795,9 @@ class _PromoScreenState extends State<PromoScreen>
                 ),
                 const SizedBox(height: 12),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.push('/promo/daily-checkin');
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,
@@ -1043,76 +1089,104 @@ class _PromoScreenState extends State<PromoScreen>
     required Color color,
     required IconData icon,
   }) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.grey.withValues(alpha: 0.1)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.02),
-            blurRadius: 10,
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade50,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.grey.shade100),
-            ),
-            child: Icon(icon, size: 32, color: color),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
+    return GestureDetector(
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+          builder: (context) => Padding(
+            padding: const EdgeInsets.all(24),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 2,
-                  ),
-                  decoration: BoxDecoration(
-                    color: color.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: Text(
-                    isTag.toUpperCase(),
-                    style: GoogleFonts.jetBrainsMono(
-                      fontSize: 8,
-                      fontWeight: FontWeight.bold,
-                      color: color,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  title,
-                  style: GoogleFonts.sora(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.textPrimary,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Sisa Unit: $sisa',
-                  style: GoogleFonts.jetBrainsMono(
-                    fontSize: 10,
-                    color: AppColors.textSecondary,
-                  ),
+                Icon(icon, size: 64, color: color),
+                const SizedBox(height: 16),
+                Text(title, style: GoogleFonts.sora(fontSize: 20, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 16),
+                Text('Sisa Unit: $sisa', style: GoogleFonts.dmSans(color: Colors.grey)),
+                const SizedBox(height: 16),
+                const Text('Dapatkan kesempatan menang dari undian akhir tahun JBR Minpo!'),
+                const SizedBox(height: 24),
+                ElevatedButton(
+                  onPressed: () => context.pop(),
+                  child: const Text('Tutup'),
                 ),
               ],
             ),
           ),
-          Icon(Icons.chevron_right_rounded, color: Colors.grey.shade400),
-        ],
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.grey.withValues(alpha: 0.1)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.02),
+              blurRadius: 10,
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade50,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.grey.shade100),
+              ),
+              child: Icon(icon, size: 32, color: color),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: color.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: Text(
+                      isTag.toUpperCase(),
+                      style: GoogleFonts.jetBrainsMono(
+                        fontSize: 8,
+                        fontWeight: FontWeight.bold,
+                        color: color,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    title,
+                    style: GoogleFonts.sora(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'Sisa Unit: $sisa',
+                    style: GoogleFonts.jetBrainsMono(
+                      fontSize: 10,
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Icon(Icons.chevron_right_rounded, color: Colors.grey.shade400),
+          ],
+        ),
       ),
     );
   }
@@ -1121,7 +1195,19 @@ class _PromoScreenState extends State<PromoScreen>
     return Column(
       children: [
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+             AppDialog.showConfirmation(
+               context: context,
+               title: 'Tukar Kupon',
+               message: 'Tukar 1.000 Poin untuk 1 Kupon Undian?',
+               confirmText: 'Tukar',
+               icon: Icons.confirmation_num_rounded,
+               iconColor: Colors.amber,
+               onConfirm: () {
+                 AppFeedback.success(context, 'Berhasil menukar kupon!');
+               },
+             );
+          },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.amber, // metallic gold equivalent
             foregroundColor: const Color(0xFF064E3B), // emerald-900
@@ -1264,7 +1350,10 @@ class _PromoScreenState extends State<PromoScreen>
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Clipboard.setData(const ClipboardData(text: 'JBR-BEKASI-2024'));
+              AppFeedback.copied(context, 'Kode Referral disalin!');
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF6FFBBE), // primary-fixed
               foregroundColor: const Color(0xFF002113), // on-primary-fixed
@@ -1480,7 +1569,15 @@ class _PromoScreenState extends State<PromoScreen>
 
   Widget _buildReferralCta() {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () async {
+        final url = Uri.parse('https://wa.me/?text=Gunakan+kode+referral+saya+JBR-BEKASI-2024');
+        if (await canLaunchUrl(url)) {
+          await launchUrl(url);
+        } else {
+          // ignore: use_build_context_synchronously
+          AppFeedback.error(context, 'Gagal membuka WhatsApp');
+        }
+      },
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xFF25D366), // WhatsApp color
         foregroundColor: Colors.white,
@@ -1531,21 +1628,24 @@ class _PromoScreenState extends State<PromoScreen>
           // Banner Area
           Stack(
             children: [
-              Container(
-                height: 160,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(24),
+              Hero(
+                tag: title,
+                child: Container(
+                  height: 160,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(24),
+                    ),
+                    gradient: LinearGradient(
+                      colors: [color.withValues(alpha: 0.6), color],
+                    ),
                   ),
-                  gradient: LinearGradient(
-                    colors: [color.withValues(alpha: 0.6), color],
+                  child: Icon(
+                    Icons.flash_on_rounded,
+                    color: Colors.white.withValues(alpha: 0.2),
+                    size: 80,
                   ),
-                ),
-                child: Icon(
-                  Icons.flash_on_rounded,
-                  color: Colors.white.withValues(alpha: 0.2),
-                  size: 80,
                 ),
               ),
               Positioned(

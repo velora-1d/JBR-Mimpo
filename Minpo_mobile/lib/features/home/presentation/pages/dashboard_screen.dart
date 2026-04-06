@@ -76,7 +76,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       },
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 80, bottom: 40),
+        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 80, bottom: 120),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -170,7 +170,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Column(
       children: [
         SizedBox(
-          height: 160,
+          height: 180,
           child: PageView.builder(
             controller: _pageController,
             onPageChanged: (index) => setState(() => _currentBannerIndex = index),
@@ -180,31 +180,60 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 onTap: () => StatefulNavigationShell.of(context).goBranch(2), // Go to Promo Tab
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 20),
+                  clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(24),
-                    gradient: const LinearGradient(colors: [AppColors.primary, Color(0xFF059669)], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                    gradient: const LinearGradient(
+                      colors: [AppColors.primary, Color(0xFF10B981), Color(0xFF34D399)], 
+                      stops: [0.0, 0.6, 1.0],
+                      begin: Alignment.topLeft, 
+                      end: Alignment.bottomRight,
+                    ),
                     boxShadow: [
                       BoxShadow(color: AppColors.primary.withValues(alpha: 0.3), blurRadius: 20, offset: const Offset(0, 10))
                     ],
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(promos[index]['title']!, style: GoogleFonts.sora(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
-                        const SizedBox(height: 4),
-                        Text(promos[index]['desc']!, style: GoogleFonts.dmSans(fontSize: 12, color: Colors.white70)),
-                      ],
-                    ),
+                  child: Stack(
+                    children: [
+                      // Background decorative element
+                      Positioned(
+                        right: -20,
+                        bottom: -20,
+                        child: Icon(
+                          Icons.campaign_rounded,
+                          size: 140,
+                          color: Colors.white.withValues(alpha: 0.15),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(24),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withValues(alpha: 0.2),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text('PROMO SPESIAL', style: GoogleFonts.jetBrainsMono(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white)),
+                            ),
+                            const SizedBox(height: 12),
+                            Text(promos[index]['title']!, style: GoogleFonts.sora(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white, height: 1.2)),
+                            const SizedBox(height: 8),
+                            Text(promos[index]['desc']!, style: GoogleFonts.dmSans(fontSize: 13, color: Colors.white.withValues(alpha: 0.9), height: 1.4)),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               );
             },
           ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 16),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(
@@ -214,7 +243,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
               margin: const EdgeInsets.symmetric(horizontal: 4),
               height: 6,
               width: _currentBannerIndex == index ? 24 : 6,
-              decoration: BoxDecoration(color: _currentBannerIndex == index ? AppColors.primary : Colors.grey.shade300, borderRadius: BorderRadius.circular(3)),
+              decoration: BoxDecoration(
+                color: _currentBannerIndex == index ? AppColors.primary : Colors.grey.shade300, 
+                borderRadius: BorderRadius.circular(3),
+              ),
             ),
           ),
         ),
@@ -323,20 +355,31 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Widget _buildNewsSlider() {
+    if (_isLoading) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: ShimmerLoader(width: double.infinity, height: 150, borderRadius: 24),
+      );
+    }
+    
     final news = [
       {
-        'title': 'Gangguan Massal Bekasi',
-        'desc': 'Tim teknis sedang melakukan pengecekan backbone.',
+        'title': 'Kabel Laut Terputus di Area Jawa',
+        'desc': 'Estimasi perbaikan memakan waktu 2x24 jam. Kami mohon maaf atas ketidaknyamanan ini.',
         'tag': 'Gangguan',
         'color': Colors.red,
         'icon': Icons.warning_amber_rounded,
+        'date': '24 Okt 2026',
+        'imageUrl': 'https://images.unsplash.com/photo-1620288627223-53302f4e8c74?q=80&w=600&auto=format&fit=crop',
       },
       {
         'title': 'Maintenance JKT Selatan',
-        'desc': 'Peningkatan kapasitas untuk stabilitas koneksi.',
+        'desc': 'Peningkatan kapasitas untuk stabilitas koneksi jaringan.',
         'tag': 'Maintenance',
         'color': Colors.blue,
         'icon': Icons.build_rounded,
+        'date': '22 Okt 2026',
+        'imageUrl': 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=600&auto=format&fit=crop',
       },
       {
         'title': 'Promo Upgrade 100Mbps',
@@ -344,6 +387,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
         'tag': 'Promo',
         'color': AppColors.primary,
         'icon': Icons.speed_rounded,
+        'date': '20 Okt 2026',
+        'imageUrl': 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop',
       },
     ];
 
@@ -369,76 +414,85 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ],
           ),
           const SizedBox(height: 8),
-          SizedBox(
-            height: 150,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              physics: const BouncingScrollPhysics(),
-              itemCount: news.length,
-              itemBuilder: (context, index) {
-                final item = news[index];
-                return Container(
-                  width: 280,
-                  margin: const EdgeInsets.only(right: 16, bottom: 10),
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(24),
-                    boxShadow: [
-                      BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 15, offset: const Offset(0, 8))
-                    ],
-                    border: Border.all(color: Colors.grey.shade100),
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 48,
-                        height: 48,
-                        decoration: BoxDecoration(
-                          color: (item['color'] as Color).withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(14),
+          Column(
+            children: List.generate(news.length, (index) {
+              final item = news[index];
+              return Container(
+                margin: const EdgeInsets.only(bottom: 16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 15, offset: const Offset(0, 8))
+                  ],
+                  border: Border.all(color: Colors.grey.shade100),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Thumbnail
+                    Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), bottomLeft: Radius.circular(20)),
+                        color: (item['color'] as Color).withValues(alpha: 0.1),
+                        image: DecorationImage(
+                          image: NetworkImage(item['imageUrl'] as String),
+                          fit: BoxFit.cover,
+                          colorFilter: ColorFilter.mode(
+                            Colors.black.withValues(alpha: 0.3),
+                            BlendMode.darken,
+                          ),
                         ),
-                        child: Icon(item['icon'] as IconData, color: item['color'] as Color, size: 24),
                       ),
-                      const SizedBox(width: 16),
-                      Expanded(
+                      child: Center(
+                        child: Icon(item['icon'] as IconData, color: Colors.white.withValues(alpha: 0.9), size: 32),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    // Content
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: (item['color'] as Color).withValues(alpha: 0.05),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Text(
-                                (item['tag'] as String).toUpperCase(),
-                                style: GoogleFonts.jetBrainsMono(fontSize: 9, fontWeight: FontWeight.bold, color: item['color'] as Color),
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                  decoration: BoxDecoration(
+                                    color: (item['color'] as Color).withValues(alpha: 0.05),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Text(
+                                    (item['tag'] as String).toUpperCase(),
+                                    style: GoogleFonts.jetBrainsMono(fontSize: 9, fontWeight: FontWeight.bold, color: item['color'] as Color),
+                                  ),
+                                ),
+                                Text(
+                                  item['date'] as String,
+                                  style: GoogleFonts.dmSans(fontSize: 10, color: Colors.grey, fontWeight: FontWeight.w500),
+                                ),
+                              ],
                             ),
                             const SizedBox(height: 8),
                             Text(
                               item['title'] as String,
-                              style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              item['desc'] as String,
-                              style: GoogleFonts.dmSans(fontSize: 12, color: AppColors.textSecondary),
+                              style: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary, height: 1.2),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
-                ).animate().fadeIn(delay: (index * 100).ms).slideX(begin: 0.1);
-              },
-            ),
+                    ),
+                  ],
+                ),
+              ).animate().fadeIn(delay: (index * 100).ms).slideY(begin: 0.1);
+            }),
           ),
         ],
       ),
@@ -447,7 +501,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget _buildFloatingChatButton() {
     return Positioned(
-      bottom: 20,
+      bottom: 90,
       right: 20,
       child: FloatingActionButton(
         onPressed: () => context.push('/support/chat-cs'),

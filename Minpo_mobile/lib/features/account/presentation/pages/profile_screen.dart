@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
+import 'package:jbr_mimpo/core/utils/app_feedback.dart';
 import 'package:go_router/go_router.dart';
 import 'dart:ui';
+import 'package:jbr_mimpo/features/account/domain/models/membership_tier.dart';
+import 'package:jbr_mimpo/features/account/presentation/providers/membership_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tier = ref.watch(membershipProvider);
     return Scaffold(
       backgroundColor: AppColors.bgLight,
       body: RefreshIndicator(
@@ -18,13 +23,13 @@ class ProfileScreen extends StatelessWidget {
         child: CustomScrollView(
           physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
           slivers: [
-            _buildHeader(context),
+            _buildHeader(context, tier),
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
                 child: Column(
                   children: [
-                    _buildMembershipCard(),
+                    _buildMembershipCard(context, tier),
                     const SizedBox(height: 32),
                     _buildStatsGrid(),
                     const SizedBox(height: 32),
@@ -62,7 +67,7 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader(BuildContext context) {
+  Widget _buildHeader(BuildContext context, MembershipTier tier) {
     return SliverAppBar(
       expandedHeight: 220,
       pinned: true,
@@ -77,9 +82,9 @@ class ProfileScreen extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [AppColors.primary, Color(0xFF065f46)],
+                  colors: [AppColors.primary, tier.color],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -124,17 +129,17 @@ class ProfileScreen extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
-                          color: Colors.amber.withValues(alpha: 0.2),
+                          color: tier.bgColor,
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: Colors.amber.withValues(alpha: 0.3)),
+                          border: Border.all(color: tier.color.withValues(alpha: 0.3)),
                         ),
                         child: Row(
                           children: [
-                            const Icon(Icons.workspace_premium_rounded, color: Colors.amber, size: 12),
+                            Icon(Icons.workspace_premium_rounded, color: tier.color, size: 12),
                             const SizedBox(width: 4),
                             Text(
-                              'PLATINUM MEMBER',
-                              style: GoogleFonts.jetBrainsMono(fontSize: 9, fontWeight: FontWeight.bold, color: Colors.amber),
+                              tier.label,
+                              style: GoogleFonts.jetBrainsMono(fontSize: 9, fontWeight: FontWeight.bold, color: tier.color),
                             ),
                           ],
                         ),
@@ -150,7 +155,7 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildMembershipCard() {
+  Widget _buildMembershipCard(BuildContext context, MembershipTier tier) {
     return Container(
       width: double.infinity,
       height: 100,
@@ -177,15 +182,15 @@ class ProfileScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('KEUNTUNGAN PLATINUM', style: GoogleFonts.jetBrainsMono(fontSize: 10, fontWeight: FontWeight.bold, color: AppColors.primary)),
+                      Text(tier.benefitTitle, style: GoogleFonts.jetBrainsMono(fontSize: 10, fontWeight: FontWeight.bold, color: tier.color)),
                       const SizedBox(height: 4),
-                      Text('Dapatkan cashback 5% untuk setiap pembayaran.', style: GoogleFonts.sora(fontSize: 13, color: AppColors.textPrimary)),
+                      Text(tier.benefitDescription, style: GoogleFonts.sora(fontSize: 13, color: AppColors.textPrimary)),
                     ],
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
-                  child: Text('LIHAT', style: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.primary)),
+                  onPressed: () => context.push('/profile/platinum-benefits'),
+                  child: Text('LIHAT', style: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.bold, color: tier.color)),
                 ),
               ],
             ),
@@ -272,16 +277,73 @@ class ProfileScreen extends StatelessWidget {
       children: [
         _buildLogoutButton(
           label: 'Keluar dari Akun',
-          onTap: () {},
+          onTap: () => _showLogoutDialog(context, isMass: false),
           isMass: false,
         ),
         const SizedBox(height: 12),
         _buildLogoutButton(
           label: 'Logout dari Semua Perangkat',
-          onTap: () => context.push('/profile/security'),
+          onTap: () => _showLogoutDialog(context, isMass: true),
           isMass: true,
         ),
       ],
+    );
+  }
+
+  void _showLogoutDialog(BuildContext context, {required bool isMass}) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.transparent,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+        contentPadding: const EdgeInsets.all(24),
+        title: Row(
+          children: [
+            Icon(
+              isMass ? Icons.devices_other_rounded : Icons.logout_rounded,
+              color: isMass ? Colors.orange : Colors.red,
+            ),
+            const SizedBox(width: 12),
+            Text(
+              isMass ? 'Logout Semua?' : 'Keluar Akun?',
+              style: GoogleFonts.sora(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+        content: Text(
+          isMass
+              ? 'Anda akan dikeluarkan dari semua perangkat aktif saat ini. Lanjutkan?'
+              : 'Anda yakin ingin keluar dari akun JBR Minpo di perangkat ini?',
+          style: GoogleFonts.dmSans(fontSize: 14, color: AppColors.textSecondary),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              'Batal',
+              style: GoogleFonts.sora(color: Colors.grey, fontWeight: FontWeight.bold),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              if (isMass) {
+                AppFeedback.success(context, 'Berhasil logout dari semua perangkat');
+              } else {
+                context.go('/login');
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: isMass ? Colors.orange : Colors.red,
+              foregroundColor: Colors.white,
+              elevation: 0,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
+            child: const Text('Keluar'),
+          ),
+        ],
+      ),
     );
   }
 

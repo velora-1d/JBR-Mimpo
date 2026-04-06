@@ -48,6 +48,52 @@ class InformationDetailScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  PopupMenuButton<String>(
+                    onSelected: (value) {
+                      // Handle menu selection
+                    },
+                    offset: const Offset(0, 50),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    child: IgnorePointer(
+                      child: _buildHeaderAction(
+                        context,
+                        icon: Icons.more_vert_rounded,
+                        onPressed: () {},
+                      ),
+                    ),
+                    itemBuilder: (BuildContext context) => [
+                      PopupMenuItem(
+                        value: 'refresh',
+                        child: Row(
+                          children: [
+                            Icon(Icons.refresh_rounded, size: 20, color: AppColors.textPrimary),
+                            const SizedBox(width: 12),
+                            Text('Muat Ulang', style: GoogleFonts.dmSans(fontWeight: FontWeight.w500)),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        value: 'edit',
+                        child: Row(
+                          children: [
+                            Icon(Icons.edit_rounded, size: 20, color: AppColors.textPrimary),
+                            const SizedBox(width: 12),
+                            Text('Edit Info', style: GoogleFonts.dmSans(fontWeight: FontWeight.w500)),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        value: 'delete',
+                        child: Row(
+                          children: [
+                            const Icon(Icons.delete_outline_rounded, color: Colors.red, size: 20),
+                            const SizedBox(width: 12),
+                            Text('Hapus', style: GoogleFonts.dmSans(color: Colors.red, fontWeight: FontWeight.w500)),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                   const SizedBox(width: 8),
                 ],
                 flexibleSpace: FlexibleSpaceBar(

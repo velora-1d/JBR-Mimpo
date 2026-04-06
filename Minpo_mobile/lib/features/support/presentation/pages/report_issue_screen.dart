@@ -1,7 +1,9 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
+import 'package:jbr_mimpo/core/utils/app_feedback.dart';
 import 'package:go_router/go_router.dart';
 
 class ReportIssueScreen extends StatefulWidget {
@@ -32,9 +34,7 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
 
   void _submitReport() async {
     if (_selectedIssue == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Pilih jenis gangguan terlebih dahulu')),
-      );
+      AppFeedback.warning(context, 'Pilih jenis gangguan terlebih dahulu');
       return;
     }
 
@@ -53,44 +53,59 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => Center(
-        child: Container(
-          width: 320,
-          padding: const EdgeInsets.all(32),
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(40)),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(20),
-                decoration: const BoxDecoration(color: Color(0xFFE8F5E9), shape: BoxShape.circle),
-                child: const Icon(Icons.send_rounded, color: Colors.green, size: 48),
+      barrierColor: Colors.black.withValues(alpha: 0.5),
+      builder: (context) => BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+        child: Center(
+          child: Container(
+            width: 320,
+            padding: const EdgeInsets.all(32),
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.95),
+              borderRadius: BorderRadius.circular(40),
+            ),
+            child: Material(
+              color: Colors.transparent,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: const BoxDecoration(color: Color(0xFFE8F5E9), shape: BoxShape.circle),
+                    child: const Icon(Icons.send_rounded, color: Colors.green, size: 48),
+                  ).animate().scale(duration: 500.ms, curve: Curves.easeOutBack),
+                  const SizedBox(height: 24),
+                  Text('Laporan Terkirim!', style: GoogleFonts.sora(fontSize: 22, fontWeight: FontWeight.w900)),
+                  const SizedBox(height: 12),
+                  Text(
+                    'Terima kasih atas laporannya. Tim kami akan segera menindaklanjuti masalah ini.',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.dmSans(color: Colors.grey.shade600, height: 1.5),
+                  ),
+                  const SizedBox(height: 32),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 56,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF10B981),
+                        foregroundColor: Colors.white,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      ),
+                      child: Text('Siap, Mengerti', style: GoogleFonts.sora(fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 24),
-              Text('Laporan Terkirim!', style: GoogleFonts.sora(fontSize: 22, fontWeight: FontWeight.w900)),
-              const SizedBox(height: 12),
-              Text(
-                'Tiket Anda #TKT-9921 telah dibuat. Pantau status perbaikan di menu Tracking.',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.dmSans(fontSize: 14, color: Colors.grey),
-              ),
-              const SizedBox(height: 32),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context); // Close dialog
-                  context.pushReplacement('/support'); // Go to tracking
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  minimumSize: const Size(double.infinity, 54),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                ),
-                child: Text('Pantau Tiket', style: GoogleFonts.sora(fontWeight: FontWeight.bold)),
-              ),
-            ],
+            ),
           ),
         ),
-      ).animate().scale(curve: Curves.easeOutBack),
+      ),
     );
   }
 

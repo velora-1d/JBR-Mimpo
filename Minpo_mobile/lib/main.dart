@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jbr_mimpo/core/cache/cache_manager.dart';
-
+import 'package:flutter/services.dart';
+import 'dart:ui';
 import 'package:go_router/go_router.dart';
 import 'package:jbr_mimpo/features/auth/presentation/pages/forgot_password_screen.dart';
 import 'package:jbr_mimpo/features/auth/presentation/pages/login_screen.dart';
@@ -33,6 +34,9 @@ import 'package:jbr_mimpo/features/account/presentation/pages/delete_account_scr
 import 'package:jbr_mimpo/features/account/presentation/pages/info_pages.dart';
 import 'package:jbr_mimpo/features/account/presentation/pages/address_screen.dart';
 import 'package:jbr_mimpo/features/support/presentation/pages/support_screen.dart';
+import 'package:jbr_mimpo/features/support/presentation/pages/installation_request_screen.dart';
+import 'package:jbr_mimpo/features/promo/presentation/pages/daily_checkin_screen.dart';
+import 'package:jbr_mimpo/features/account/presentation/pages/membership/platinum_benefits_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
 import 'package:jbr_mimpo/core/theme/app_dimensions.dart';
@@ -166,6 +170,11 @@ final _router = GoRouter(
                     return PromoDetailScreen(promo: promoData);
                   },
                 ),
+                GoRoute(
+                  path: 'daily-checkin',
+                  parentNavigatorKey: _rootNavigatorKey,
+                  builder: (context, state) => const DailyCheckinScreen(),
+                ),
               ],
             ),
           ],
@@ -206,6 +215,11 @@ final _router = GoRouter(
                   parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const FaqScreen(),
                 ),
+                GoRoute(
+                  path: 'installation',
+                  parentNavigatorKey: _rootNavigatorKey,
+                  builder: (context, state) => const InstallationRequestScreen(),
+                ),
               ],
             ),
           ],
@@ -232,6 +246,11 @@ final _router = GoRouter(
                   path: '2fa',
                   parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const SecurityScreen(),
+                ),
+                GoRoute(
+                  path: 'platinum-benefits',
+                  parentNavigatorKey: _rootNavigatorKey,
+                  builder: (context, state) => const PlatinumBenefitsScreen(),
                 ),
                 GoRoute(
                   path: 'change-password',
@@ -297,6 +316,7 @@ class ScaffoldWithBottomNavBar extends StatelessWidget {
   });
 
   void _onTap(int index) {
+    HapticFeedback.lightImpact();
     navigationShell.goBranch(
       index,
       initialLocation: index == navigationShell.currentIndex,
@@ -306,33 +326,95 @@ class ScaffoldWithBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true, // Allow body to flow under the navbar
       body: navigationShell,
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.1),
-              blurRadius: 20,
-              offset: const Offset(0, -5),
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(28),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+              child: Container(
+                height: 72,
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.85),
+                  borderRadius: BorderRadius.circular(28),
+                  border: Border.all(color: Colors.white.withValues(alpha: 0.5), width: 1.5),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.primary.withValues(alpha: 0.1),
+                      blurRadius: 30,
+                      offset: const Offset(0, 10),
+                    ),
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.05),
+                      blurRadius: 10,
+                      offset: const Offset(0, 5),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _buildNavItem(0, 'Home', Icons.home_rounded, Icons.home_outlined),
+                    _buildNavItem(1, 'Info', Icons.info_rounded, Icons.info_outline_rounded),
+                    _buildNavItem(2, 'Promo', Icons.confirmation_num_rounded, Icons.confirmation_num_outlined),
+                    _buildNavItem(3, 'Support', Icons.support_agent_rounded, Icons.support_agent_outlined),
+                    _buildNavItem(4, 'Profil', Icons.person_rounded, Icons.person_outline_rounded),
+                  ],
+                ),
+              ),
             ),
-          ],
+          ),
         ),
-        child: BottomNavigationBar(
-          currentIndex: navigationShell.currentIndex,
-          onTap: _onTap,
-          selectedItemColor: AppColors.primary,
-          unselectedItemColor: Colors.grey.shade400,
-          showUnselectedLabels: true,
-          type: BottomNavigationBarType.fixed,
-          selectedLabelStyle: GoogleFonts.sora(fontSize: 10, fontWeight: FontWeight.bold),
-          unselectedLabelStyle: GoogleFonts.sora(fontSize: 10),
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.info_outline_rounded), label: 'Info'),
-            BottomNavigationBarItem(icon: Icon(Icons.confirmation_num_rounded), label: 'Promo'),
-            BottomNavigationBarItem(icon: Icon(Icons.support_agent_rounded), label: 'Support'),
-            BottomNavigationBarItem(icon: Icon(Icons.person_rounded), label: 'Profil'),
+      ),
+    );
+  }
+
+  Widget _buildNavItem(int index, String label, IconData activeIcon, IconData inactiveIcon) {
+    final isSelected = index == navigationShell.currentIndex;
+    
+    return GestureDetector(
+      onTap: () => _onTap(index),
+      behavior: HitTestBehavior.opaque,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOutQuint,
+        padding: EdgeInsets.symmetric(
+          horizontal: isSelected ? 16 : 12,
+          vertical: 10,
+        ),
+        decoration: BoxDecoration(
+          gradient: isSelected
+              ? const LinearGradient(
+                  colors: [AppColors.primary, AppColors.primaryLight],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                )
+              : null,
+          color: isSelected ? null : Colors.transparent,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              isSelected ? activeIcon : inactiveIcon,
+              color: isSelected ? Colors.white : Colors.grey.shade500,
+              size: 24,
+            ),
+            if (isSelected) ...[
+              const SizedBox(width: 6),
+              Text(
+                label,
+                style: GoogleFonts.sora(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                ),
+              ),
+            ]
           ],
         ),
       ),

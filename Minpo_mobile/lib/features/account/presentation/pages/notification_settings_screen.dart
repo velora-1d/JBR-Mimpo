@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
+import 'package:jbr_mimpo/core/utils/app_feedback.dart';
 
 class NotificationSettingsScreen extends StatefulWidget {
   const NotificationSettingsScreen({super.key});
@@ -163,9 +164,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
       height: 60,
       child: ElevatedButton(
         onPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Preferensi notifikasi berhasil disimpan!')),
-          );
+          AppFeedback.success(context, 'Preferensi notifikasi berhasil disimpan!');
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,

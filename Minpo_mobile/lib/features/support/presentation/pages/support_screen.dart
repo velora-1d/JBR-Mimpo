@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
+import 'package:jbr_mimpo/core/utils/app_feedback.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SupportScreen extends StatefulWidget {
   const SupportScreen({super.key});
@@ -19,6 +21,15 @@ class _SupportScreenState extends State<SupportScreen> {
     {'q': 'Biaya upgrade paket internet?', 'a': 'Biaya bervariasi tergantung kecepatan yang pilih. Cek menu Paket Saya.', 'isOpen': false},
   ];
 
+  Future<void> _launchUrl(String urlString) async {
+    final Uri url = Uri.parse(urlString);
+    if (!await launchUrl(url)) {
+      if (mounted) {
+        AppFeedback.error(context, 'Tidak dapat membuka: $urlString');
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +42,7 @@ class _SupportScreenState extends State<SupportScreen> {
             _buildSliverHeader(),
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.all(24.0),
+                padding: const EdgeInsets.only(left: 24, right: 24, top: 24, bottom: 120),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -137,7 +148,7 @@ class _SupportScreenState extends State<SupportScreen> {
       childAspectRatio: 1.1,
       children: [
         _buildActionCard('Lapor Gangguan', 'Respon cepat', Icons.feedback_rounded, AppColors.primary, '/support/report-issue'),
-        _buildActionCard('Cek Jaringan', 'Status koneksi', Icons.sensors_rounded, Colors.blue, '/support/check-connection'),
+        _buildActionCard('Cek Jaringan', 'Status koneksi', Icons.sensors_rounded, Colors.blue, '/info/network-status'),
         _buildActionCard('Live Chat', 'Bicara dengan CS', Icons.chat_bubble_rounded, Colors.green, '/support/chat-cs'),
         _buildActionCard('Instalasi Baru', 'Tambah titik baru', Icons.add_business_rounded, Colors.purple, '/support/installation'),
       ],
@@ -192,9 +203,25 @@ class _SupportScreenState extends State<SupportScreen> {
           const SizedBox(height: 24),
           Row(
             children: [
-              Expanded(child: _buildContactButton('Telepon CS', Icons.phone_rounded, Colors.white, AppColors.primary)),
+              Expanded(
+                child: _buildContactButton(
+                  'Telepon CS',
+                  Icons.phone_rounded,
+                  Colors.white,
+                  AppColors.primary,
+                  onTap: () => _launchUrl('tel:1500123'),
+                ),
+              ),
               const SizedBox(width: 12),
-              Expanded(child: _buildContactButton('WhatsApp', Icons.chat_rounded, Colors.green, Colors.white)),
+              Expanded(
+                child: _buildContactButton(
+                  'WhatsApp',
+                  Icons.chat_rounded,
+                  const Color(0xFF25D366),
+                  Colors.white,
+                  onTap: () => _launchUrl('https://wa.me/628123456789'),
+                ),
+              ),
             ],
           ),
         ],
@@ -202,17 +229,20 @@ class _SupportScreenState extends State<SupportScreen> {
     );
   }
 
-  Widget _buildContactButton(String label, IconData icon, Color bg, Color text) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 14),
-      decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(16)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, color: text, size: 18),
-          const SizedBox(width: 8),
-          Text(label, style: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.bold, color: text)),
-        ],
+  Widget _buildContactButton(String label, IconData icon, Color bg, Color text, {required VoidCallback onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 14),
+        decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(16)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, color: text, size: 18),
+            const SizedBox(width: 8),
+            Text(label, style: GoogleFonts.sora(fontSize: 12, fontWeight: FontWeight.bold, color: text)),
+          ],
+        ),
       ),
     );
   }

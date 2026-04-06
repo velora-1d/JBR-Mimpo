@@ -110,7 +110,6 @@ class _AppSettingsScreenState extends ConsumerState<AppSettingsScreen> {
                 children: [
                   _buildSimpleMenuItem('Status Jaringan', Icons.wifi_protected_setup_rounded, trailing: _connectionLabel),
                   _buildSimpleMenuItem('Versi Database', Icons.storage_rounded, trailing: 'v1.0.4-dev'),
-                  _buildSimpleMenuItem('Lisensi Open Source', Icons.library_books_rounded),
                 ],
               ),
             ),

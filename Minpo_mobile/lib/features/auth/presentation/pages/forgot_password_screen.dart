@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
+import 'package:jbr_mimpo/core/widgets/app_dialog.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -283,48 +284,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   }
 
   void _showSuccessDialog() {
-    showDialog(
+    AppDialog.showSuccess(
       context: context,
-      barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-        content: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(Icons.check_circle_rounded, color: AppColors.primary, size: 80).animate().scale(duration: 500.ms, curve: Curves.easeOutBack),
-              const SizedBox(height: 24),
-              Text(
-                'Instruksi Terkirim!',
-                style: GoogleFonts.sora(fontSize: 20, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 12),
-              Text(
-                'Tautan pemulihan kata sandi telah dikirim ke nomor WhatsApp Anda.',
-                style: GoogleFonts.dmSans(color: AppColors.textSecondary),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 32),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    context.pop(); // Tutup dialog
-                    context.pop(); // Kembali ke Login
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  ),
-                  child: const Text('Kembali ke Login', style: TextStyle(color: Colors.white)),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      title: 'Instruksi Terkirim!',
+      message: 'Tautan pemulihan kata sandi telah dikirim ke nomor WhatsApp Anda.',
+      buttonText: 'Kembali ke Login',
+      onClose: () {
+        context.pop(); // Kembali ke Login
+      },
     );
   }
 }

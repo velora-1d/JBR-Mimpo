@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
+import 'dart:ui';
 
 class SecurityScreen extends StatelessWidget {
   const SecurityScreen({super.key});
@@ -30,7 +31,7 @@ class SecurityScreen extends StatelessWidget {
               const SizedBox(height: 32),
               
               // 4. Logout All Button
-              _buildMassLogoutSection(),
+              _buildMassLogoutSection(context),
               
               const SizedBox(height: 120), // Bottom Navi padding
             ],
@@ -153,11 +154,16 @@ class SecurityScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(color: const Color(0xFF82f5c1).withValues(alpha: 0.2), borderRadius: BorderRadius.circular(20)),
                 child: Text(
-                  '3 AKTIF',
+                  '3 / 4 AKTIF',
                   style: GoogleFonts.sora(fontSize: 10, fontWeight: FontWeight.w800, color: const Color(0xFF00714e)),
                 ),
               ),
             ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Batas maksimal perangkat terhubung adalah 4 perangkat.',
+            style: GoogleFonts.dmSans(fontSize: 11, color: Colors.grey),
           ),
           const SizedBox(height: 16),
           _buildDeviceCard(
@@ -254,18 +260,24 @@ class SecurityScreen extends StatelessWidget {
               ],
             ),
           ),
+          if (!isActive)
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.close_rounded, color: Colors.red.withValues(alpha: 0.5), size: 18),
+              tooltip: 'Hapus Akses',
+            ),
         ],
       ),
     );
   }
 
-  Widget _buildMassLogoutSection() {
+  Widget _buildMassLogoutSection(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         children: [
           OutlinedButton(
-            onPressed: () {},
+            onPressed: () => _showMassLogoutDialog(context),
             style: OutlinedButton.styleFrom(
               foregroundColor: Colors.red,
               side: const BorderSide(color: Colors.red, width: 2),
@@ -296,5 +308,78 @@ class SecurityScreen extends StatelessWidget {
         ],
       ),
     ).animate().fadeIn(delay: 700.ms);
+  }
+
+  void _showMassLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+        child: Dialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+          child: Padding(
+            padding: const EdgeInsets.all(32),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Colors.orange.withValues(alpha: 0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(Icons.devices_other_rounded, color: Colors.orange, size: 40),
+                ),
+                const SizedBox(height: 24),
+                Text(
+                  'Logout Massal?',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.sora(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  'Semua sesi di perangkat lain akan diakhiri. Anda perlu login ulang di perangkat tersebut.',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.dmSans(fontSize: 14, color: AppColors.textSecondary, height: 1.5),
+                ),
+                const SizedBox(height: 32),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        ),
+                        child: Text('Batal', style: GoogleFonts.sora(color: Colors.grey, fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          context.go('/login');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.orange,
+                          foregroundColor: Colors.white,
+                          elevation: 0,
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        ),
+                        child: Text('Ya, Logout', style: GoogleFonts.sora(fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

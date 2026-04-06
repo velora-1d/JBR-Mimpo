@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jbr_mimpo/core/theme/app_colors.dart';
+import 'package:jbr_mimpo/core/utils/app_feedback.dart';
 
 class DeleteAccountScreen extends StatefulWidget {
   const DeleteAccountScreen({super.key});
@@ -111,9 +112,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
           child: ElevatedButton(
             onPressed: _isConfirmed ? () {
               // Implementation of account deletion
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Permintaan penghapusan akun sedang diproses.')),
-              );
+              AppFeedback.success(context, 'Permintaan penghapusan akun sedang diproses.');
             } : null,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red,

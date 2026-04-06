@@ -17,7 +17,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _whatsappController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   bool _isPasswordVisible = false;
   double _passwordStrength = 0;
@@ -77,141 +78,170 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
           // 2. Main Form Content
           SafeArea(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(24, 80, 24, 24),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Title
-                    Text(
-                      'Buat Akun Baru',
-                      style: GoogleFonts.sora(
-                        fontSize: 28,
-                        fontWeight: FontWeight.w800,
-                        color: AppColors.textPrimary,
-                        letterSpacing: -0.5,
-                      ),
-                    ).animate().fadeIn().slideX(begin: -0.1),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Silakan lengkapi data diri Anda untuk memulai pengalaman internet terbaik.',
-                      style: GoogleFonts.dmSans(
-                        fontSize: 14,
-                        color: AppColors.textSecondary,
-                        height: 1.5,
-                      ),
-                    ).animate().fadeIn(delay: 200.ms),
-
-                    const SizedBox(height: 40),
-
-                    // Inputs
-                    _buildLabel('Nama Lengkap'),
-                    const SizedBox(height: 8),
-                    _buildTextField(
-                      controller: _nameController,
-                      hint: 'Masukkan nama sesuai KTP',
-                      keyboardType: TextInputType.name,
-                    ),
-
-                    const SizedBox(height: 20),
-
-                    _buildLabel('No WhatsApp'),
-                    const SizedBox(height: 8),
-                    _buildWhatsAppField(),
-
-                    const SizedBox(height: 20),
-
-                    _buildLabel('Area / Alamat'),
-                    const SizedBox(height: 8),
-                    _buildTextField(
-                      controller: _addressController,
-                      hint: 'Cari area atau alamat Anda',
-                      suffixIcon: const Icon(Icons.location_on, color: AppColors.primary),
-                    ),
-
-                    const SizedBox(height: 20),
-
-                    _buildLabel('Kata Sandi'),
-                    const SizedBox(height: 8),
-                    _buildTextField(
-                      controller: _passwordController,
-                      hint: '••••••••',
-                      obscureText: !_isPasswordVisible,
-                      suffixIcon: IconButton(
-                        icon: Icon(_isPasswordVisible ? Icons.visibility : Icons.visibility_off, size: 20),
-                        onPressed: () => setState(() => _isPasswordVisible = !_isPasswordVisible),
-                      ),
-                    ),
-
-                    // Password Strength
-                    if (_passwordController.text.isNotEmpty) _buildStrengthMeter(),
-
-                    const SizedBox(height: 20),
-
-                    _buildLabel('Konfirmasi Sandi'),
-                    const SizedBox(height: 8),
-                    _buildTextField(
-                      controller: _confirmPasswordController,
-                      hint: '••••••••',
-                      obscureText: true,
-                    ),
-
-                    const SizedBox(height: 40),
-
-                    // Submit Button
-                    _buildSubmitButton(),
-
-                    const SizedBox(height: 32),
-
-                    // Terms
-                    Center(
-                      child: Text.rich(
-                        TextSpan(
-                          style: GoogleFonts.dmSans(fontSize: 12, color: AppColors.textSecondary, height: 1.5),
-                          children: [
-                            const TextSpan(text: 'Dengan mendaftar, Anda menyetujui '),
-                            TextSpan(
-                              text: 'Syarat & Ketentuan',
-                              style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold),
-                            ),
-                            const TextSpan(text: ' serta '),
-                            TextSpan(
-                              text: 'Kebijakan Privasi',
-                              style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold),
-                            ),
-                            const TextSpan(text: ' JBR Minpo.'),
-                          ],
+            child: Center(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.fromLTRB(24, 32, 24, 24),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Title
+                      Text(
+                        'Buat Akun Baru',
+                        style: GoogleFonts.sora(
+                          fontSize: 28,
+                          fontWeight: FontWeight.w800,
+                          color: AppColors.textPrimary,
+                          letterSpacing: -0.5,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-
-                    const SizedBox(height: 32),
-
-                    // Footer
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Sudah punya akun?',
-                          style: GoogleFonts.dmSans(fontSize: 14, color: AppColors.textSecondary),
+                      ).animate().fadeIn().slideX(begin: -0.1),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Silakan lengkapi data diri Anda untuk memulai pengalaman internet terbaik.',
+                        style: GoogleFonts.dmSans(
+                          fontSize: 14,
+                          color: AppColors.textSecondary,
+                          height: 1.5,
                         ),
-                        TextButton(
-                          onPressed: () => context.go('/login'),
-                          child: Text(
-                            'Masuk Sekarang',
-                            style: GoogleFonts.dmSans(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.primary,
-                            ),
+                      ).animate().fadeIn(delay: 200.ms),
+
+                      const SizedBox(height: 40),
+
+                      // Inputs
+                      _buildLabel('Nama Lengkap'),
+                      const SizedBox(height: 8),
+                      _buildTextField(
+                        controller: _nameController,
+                        hint: 'Masukkan nama sesuai KTP',
+                        keyboardType: TextInputType.name,
+                      ),
+
+                      const SizedBox(height: 20),
+
+                      _buildLabel('No WhatsApp'),
+                      const SizedBox(height: 8),
+                      _buildWhatsAppField(),
+
+                      const SizedBox(height: 20),
+
+                      _buildLabel('Area / Alamat'),
+                      const SizedBox(height: 8),
+                      _buildTextField(
+                        controller: _addressController,
+                        hint: 'Cari area atau alamat Anda',
+                        suffixIcon: const Icon(
+                          Icons.location_on,
+                          color: AppColors.primary,
+                        ),
+                      ),
+
+                      const SizedBox(height: 20),
+
+                      _buildLabel('Kata Sandi'),
+                      const SizedBox(height: 8),
+                      _buildTextField(
+                        controller: _passwordController,
+                        hint: '••••••••',
+                        obscureText: !_isPasswordVisible,
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _isPasswordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            size: 20,
+                          ),
+                          onPressed: () => setState(
+                            () => _isPasswordVisible = !_isPasswordVisible,
                           ),
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+
+                      // Password Strength
+                      if (_passwordController.text.isNotEmpty)
+                        _buildStrengthMeter(),
+
+                      const SizedBox(height: 20),
+
+                      _buildLabel('Konfirmasi Sandi'),
+                      const SizedBox(height: 8),
+                      _buildTextField(
+                        controller: _confirmPasswordController,
+                        hint: '••••••••',
+                        obscureText: true,
+                      ),
+
+                      const SizedBox(height: 40),
+
+                      // Submit Button
+                      _buildSubmitButton(),
+
+                      const SizedBox(height: 32),
+
+                      // Terms
+                      Center(
+                        child: Text.rich(
+                          TextSpan(
+                            style: GoogleFonts.dmSans(
+                              fontSize: 12,
+                              color: AppColors.textSecondary,
+                              height: 1.5,
+                            ),
+                            children: [
+                              const TextSpan(
+                                text: 'Dengan mendaftar, Anda menyetujui ',
+                              ),
+                              TextSpan(
+                                text: 'Syarat & Ketentuan',
+                                style: TextStyle(
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const TextSpan(text: ' serta '),
+                              TextSpan(
+                                text: 'Kebijakan Privasi',
+                                style: TextStyle(
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const TextSpan(text: ' JBR Minpo.'),
+                            ],
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+
+                      const SizedBox(height: 32),
+
+                      // Footer
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Sudah punya akun?',
+                            style: GoogleFonts.dmSans(
+                              fontSize: 14,
+                              color: AppColors.textSecondary,
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () => context.go('/login'),
+                            child: Text(
+                              'Masuk Sekarang',
+                              style: GoogleFonts.dmSans(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.primary,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -292,16 +322,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
       style: GoogleFonts.dmSans(fontSize: 14),
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: TextStyle(color: AppColors.textSecondary.withValues(alpha: 0.5)),
+        hintStyle: TextStyle(
+          color: AppColors.textSecondary.withValues(alpha: 0.5),
+        ),
         suffixIcon: suffixIcon,
         filled: true,
         fillColor: Colors.grey.shade100.withValues(alpha: 0.8),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide.none,
+        ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 18,
+        ),
       ),
     );
   }
@@ -317,11 +355,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
-              border: Border(right: BorderSide(color: Colors.grey.shade300, width: 1)),
+              border: Border(
+                right: BorderSide(color: Colors.grey.shade300, width: 1),
+              ),
             ),
             child: Text(
               '+62',
-              style: GoogleFonts.jetBrainsMono(fontSize: 14, fontWeight: FontWeight.bold),
+              style: GoogleFonts.jetBrainsMono(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           Expanded(
@@ -390,11 +433,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
           backgroundColor: AppColors.primary,
           shadowColor: AppColors.primary.withValues(alpha: 0.4),
           elevation: 8,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
         ),
         child: Text(
           'Daftar & Kirim OTP',
-          style: GoogleFonts.sora(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+          style: GoogleFonts.sora(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
       ),
     );

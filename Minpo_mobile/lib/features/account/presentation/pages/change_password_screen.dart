@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jbr_mimpo/core/utils/app_feedback.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});
@@ -70,9 +71,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   void _savePassword() {
     if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Sandi berhasil diperbarui')),
-      );
+      AppFeedback.success(context, 'Sandi berhasil diperbarui');
       context.pop();
     }
   }

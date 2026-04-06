@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jbr_mimpo/core/utils/app_feedback.dart';
 
 // Assuming AppColors is in core theme, we'll try to find its actual import later
 // Using raw colors matching project to be safe.
@@ -36,9 +37,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   void _saveProfile() {
     if (_formKey.currentState!.validate()) {
       // Simulate save
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Profil berhasil diperbarui')),
-      );
+      AppFeedback.success(context, 'Profil berhasil diperbarui');
       context.pop();
     }
   }

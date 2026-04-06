@@ -64,7 +64,7 @@ class _InformationScreenState extends State<InformationScreen> {
           _buildSearchAndFilter(),
           Expanded(
             child: ListView.builder(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 120),
               itemCount: filteredList.length,
               itemBuilder: (context, index) {
                 final info = filteredList[index];
@@ -122,9 +122,11 @@ class _InformationScreenState extends State<InformationScreen> {
             ),
           ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.1, end: 0, curve: Curves.easeOutQuad),
           const SizedBox(height: 16),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
+          SizedBox(
+            width: double.infinity,
+            child: Wrap(
+              spacing: 8,
+              runSpacing: 8,
               children: ['Semua', 'Gangguan', 'Maintenance', 'Info Umum'].map((cat) => _buildCategoryChip(cat)).toList(),
             ),
           ),
