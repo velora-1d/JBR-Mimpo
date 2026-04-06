@@ -36,8 +36,8 @@ jobs:
       - name: Build APK & AppBundle
         working-directory: Minpo_mobile
         run: |
-          flutter build apk --split-per-abi
-          flutter build appbundle
+          flutter build apk --split-per-abi --no-tree-shake-icons
+          flutter build appbundle --no-tree-shake-icons
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
